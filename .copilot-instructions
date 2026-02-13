@@ -1,0 +1,66 @@
+# Copilot Instructions for TypeScript Vite Project
+
+## Project Overview
+This is a **TypeScript + Vite** project scaffolded with the vanilla-ts template, following a **laminar data flow architecture** for predictable, unidirectional data management.
+
+## Tech Stack
+- **Build Tool**: Vite 7.3.1
+- **Language**: TypeScript 5.9.3
+- **Package Manager**: pnpm
+- **Template**: Vanilla TypeScript
+
+## Key Configuration Files
+- `tsconfig.json` - TypeScript configuration
+- `vite.config.ts` - Vite configuration (if it exists)
+- `package.json` - Project metadata and scripts
+- `index.html` - Entry HTML file
+
+## Development Workflow
+- **Dev Server**: `pnpm run dev` (runs on http://localhost:5173 or next available port)
+- **Build**: `pnpm run build` (creates production build)
+- **Preview**: `pnpm run preview` (preview production build locally)
+
+## Code Standards
+- Use TypeScript strict mode for all code
+- Follow ES2020+ modern JavaScript conventions
+- Use proper type annotations (avoid `any` when possible)
+- Organize code into modules in the `src/` directory
+- Keep components and utilities properly separated
+- **Follow the laminar data flow architecture** (see `ARCHITECTURE.md`)
+- **Follow the coding conventions** (see `CODING_CONVENTIONS.md`)
+
+## Project Structure
+```
+src/
+├── components/      # Reusable UI controls (no business logic)
+├── containers/      # Orchestration layer
+├── views/           # Page templates for routes
+├── stores/          # Actions, thunks, slices, selectors
+├── api/             # Client API methods
+├── hooks/           # Reusable non-domain hooks
+├── domain/          # (optional) Project-specific concepts/types
+├── main.ts          # Entry point
+└── style.css        # Global styles
+```
+
+For detailed folder conventions, see `CODING_CONVENTIONS.md`.
+
+## When Making Changes
+1. Prefer modifying TypeScript files in `src/`
+2. Update styles in `style.css` or create scoped CSS modules
+3. Always validate changes don't break the build
+4. Use `pnpm` for package management (not npm)
+5. When adding dependencies, use `pnpm add` for runtime deps or `pnpm add -D` for dev deps
+6. **Maintain laminar data flow** - keep business logic in the store layer, components and containers separate
+7. **Follow the development workflow** (see `DEVELOPMENT_WORKFLOW.md` for change policy and code generation patterns)
+
+## Important Notes
+- This is a fresh vanilla TypeScript project, not a framework-based one
+- No JSX/React setup by default (can be added if needed)
+- Vite provides Hot Module Replacement (HMR) for fast development
+- Build output goes to `dist/` directory
+- **This project follows laminar data flow and strict coding conventions**
+  - See `ARCHITECTURE.md` for architectural patterns
+  - See `CODING_CONVENTIONS.md` for folder structure and layer rules
+  - See `DEVELOPMENT_WORKFLOW.md` for change policy and code generation guidance
+

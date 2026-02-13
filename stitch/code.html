@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Flower Catalogue List</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen pb-24">
+<!-- Header Section -->
+<header class="sticky top-0 z-30 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 pt-6 pb-4">
+<div class="flex items-center justify-between mb-4">
+<h1 class="text-3xl font-bold tracking-tight">Catalogue</h1>
+<div class="flex gap-2">
+<button class="p-2 bg-primary/10 text-primary rounded-full">
+<span class="material-icons">notifications_none</span>
+</button>
+<button class="p-2 bg-primary/10 text-primary rounded-full">
+<span class="material-icons">account_circle</span>
+</button>
+</div>
+</div>
+<!-- Search and Filter Bar -->
+<div class="flex gap-2 items-center">
+<div class="relative flex-1">
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full bg-white dark:bg-slate-800 border-none rounded-xl py-2.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary shadow-sm" placeholder="Search flowers..." type="text"/>
+</div>
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2.5 rounded-xl font-medium text-sm shadow-lg shadow-primary/20">
+<span class="material-icons text-lg">tune</span>
+<span>Filter</span>
+</button>
+</div>
+<!-- Grouping Chips -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar mt-4 pb-1">
+<div class="flex-shrink-0 bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold">
+                All Flowers
+            </div>
+<div class="flex-shrink-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">
+                Spring
+            </div>
+<div class="flex-shrink-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">
+                In Stock
+            </div>
+<div class="flex-shrink-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">
+                Red Flowers
+            </div>
+<div class="flex-shrink-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 px-4 py-1.5 rounded-full text-xs font-medium text-slate-600 dark:text-slate-300">
+                Wholesale
+            </div>
+</div>
+</header>
+<!-- Flower Grid -->
+<main class="px-4 mt-2">
+<div class="grid grid-cols-2 gap-4">
+<!-- Flower Card 1 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="relative aspect-square">
+<img class="w-full h-full object-cover" data-alt="Pink Sarah Bernhardt Peony bouquet" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBM1ityoGuIiAqesYlhyYeOYWj-3u1F3wwr32LU9PkcIyqCFroAb_zWqbkDoYWXKzM5IrAwCQRehHTXSyViTjaW732_-tpUaF-yBR-V5Y4rN66dIlGc1-lDF7C5XWOeFRngUvUqTXgtF7C4VzR5NFUaBS0HSiz6sedRd6KfvzXZ6c7CiQx1sRXLwRAAYxck8p2d_ZbwmhBjKC3_CqWjYPvEMv8ovBw_9UzLp-nFSMsSgr4R08o-7TUcAK_3qo0fbbc5qV3xLL_TrU"/>
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded-full text-[10px] font-bold text-primary">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                        STOCK: 45
+                    </div>
+</div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-sm leading-tight text-slate-800 dark:text-slate-100">Peony Sarah Bernhardt</h3>
+<div class="w-3 h-3 rounded-full bg-pink-400 ring-1 ring-slate-200 dark:ring-slate-600"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Spring Season</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-bold">$4.50<span class="text-[10px] font-normal text-slate-400 ml-0.5">/stem</span></span>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-icons text-lg">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Flower Card 2 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="relative aspect-square">
+<img class="w-full h-full object-cover" data-alt="Deep red explorer rose macro" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBk9xXXQugLLgAap8ll_1QDc38phNlXF6a0z7WXtAlMGTtmlAg7q_5cR1qRQDkCifHpc-H63eMtrg70AVb9uxwm0tEXcj_jD9P-rK5SdQp_LXEMSx6i778sSLkLn_gf02YeMZLF-3ZhbHKKPALbboyxzgAU2nbeP4NbMF5lmx2JY3lt6uuF84HfRl9sRjFI3dSteg3I4ZQnUzhxOTCt0LxnDawUGLz7wglW2T8Pxw6-FynPwR6qEPj7M19wkCnrEV0tDygIgTz3MgM"/>
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded-full text-[10px] font-bold text-primary">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                        STOCK: 120
+                    </div>
+</div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-sm leading-tight text-slate-800 dark:text-slate-100">Explorer Red Rose</h3>
+<div class="w-3 h-3 rounded-full bg-red-600 ring-1 ring-slate-200 dark:ring-slate-600"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Year-round</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-bold">$2.25<span class="text-[10px] font-normal text-slate-400 ml-0.5">/stem</span></span>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-icons text-lg">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Flower Card 3 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="relative aspect-square">
+<img class="w-full h-full object-cover" data-alt="Blue hydrangea close up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0sWvtcfXubabE-fqV_p8lk6iZ08xdHmirtI3XUAu2LN6rf7aIOwui2CuSguWyufbsRy0BxbB-1MAGrasP84Zm9sM1VvE24VjLRfN6w--1DsQg3KrMuxx8HfA9HZYZjkoqfU22fxh39xEbv0w5hpyfMTXRMfk2eSvNU3lB4XbGSiwzqtcZS3rKp5kX5NMFYtWafZF5iqrOiRt-YgweYdcocVBfuOcFYabZaQKbxO2RCRLaflSvPwhu5Ko75J4TsFH2lj-qbh9l8ns"/>
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded-full text-[10px] font-bold text-primary">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                        STOCK: 12
+                    </div>
+</div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-sm leading-tight text-slate-800 dark:text-slate-100">Blue Hydrangea</h3>
+<div class="w-3 h-3 rounded-full bg-blue-400 ring-1 ring-slate-200 dark:ring-slate-600"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Summer Season</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-bold">$8.90<span class="text-[10px] font-normal text-slate-400 ml-0.5">/stem</span></span>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-icons text-lg">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Flower Card 4 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700 opacity-60">
+<div class="relative aspect-square grayscale">
+<img class="w-full h-full object-cover" data-alt="White calla lilies arrangement" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDn1tPGlYU_uSvt94zJxUY0gtI8jiDYkPXLpP_BqDdqIHR2Xchiu9ghF1iMOFxzk_EwzM2zvL8ML0KuIsuJ1XIiJS81t9UbJnPVhjSbBGkMpCgUHXxlC_E_06D7sXtu9pFEvrKZ42kv5ZRoZuL29D-7x-nPGtpqO9RUWLq2cZYAJLV7SBQa3zBjvIeTIBAcS8X9U3Nm2T99iU_bN8dc3J4UtgVT-RX0LlO9z3lIYtWi3k2cWxPdpjcvVvns_pIm32gISpqLJrmxzIU"/>
+<div class="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px]">
+<span class="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded">OUT OF STOCK</span>
+</div>
+</div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-sm leading-tight text-slate-800 dark:text-slate-100">White Calla Lily</h3>
+<div class="w-3 h-3 rounded-full bg-white ring-1 ring-slate-200 dark:ring-slate-600"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Winter Season</p>
+<div class="flex items-center justify-between">
+<span class="text-slate-400 font-bold">$3.75<span class="text-[10px] font-normal text-slate-400 ml-0.5">/stem</span></span>
+<button class="text-slate-300">
+<span class="material-icons text-lg">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Flower Card 5 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="relative aspect-square">
+<img class="w-full h-full object-cover" data-alt="Bright yellow sunflowers in sun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJR9zOaLh5Zpor7CPFQ_rUnxp08naS1CZTEfZlHtCYFLYAsNdrQfsbxnsAxeuNmGTMwcpL-54OUbNx0sjguolPZAM3vGqQcUl8T9zatgBXx3trAZS9Oz82O16M8gz-W9r6GYNTr1B-X83XCqu7TX1cq2_QV8lO1hmZh5TfldZyNLLCxHARGRGVuTiWkE5VtJHwp3A9ljE25ufARgtJ_Bk6G3NdYuK8xCUJ6FSUG70JFGWG8RCOUNHAABgbSE6CG5sZHMlOUJG3Ds0"/>
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded-full text-[10px] font-bold text-primary">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                        STOCK: 88
+                    </div>
+</div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-sm leading-tight text-slate-800 dark:text-slate-100">Sunbeam Sunflower</h3>
+<div class="w-3 h-3 rounded-full bg-yellow-400 ring-1 ring-slate-200 dark:ring-slate-600"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Summer Season</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-bold">$1.50<span class="text-[10px] font-normal text-slate-400 ml-0.5">/stem</span></span>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-icons text-lg">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Flower Card 6 -->
+<div class="bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
+<div class="relative aspect-square">
+<img class="w-full h-full object-cover" data-alt="Purple lavender field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8bmFL9RH4KzlY28iyBIrDKXgaIaF-iLN-qNPCobHhYm8FZXh_OCy887KGBk1ZnLuOt8Z22-OwZVzfGt8qoJsl9zyR6xA7MxJn2AUHorWsTFbOGILK8Qi5LbeiZ2jAzDqyj0CnRd9jR297hvhNGoGUMKnBMR_cf5kR2Hm6GB2SJ3Wi4Wmzn5cJJebpredJS91Oadwusjmwg2w61anDGy0S0nhyKpKHxGCwUSprTWJ_Y-Ciiyw7m6IBdf7mm8nfGuYVWh10YMnLrSA"/>
+<div class="absolute top-2 right-2 flex items-center gap-1 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded-full text-[10px] font-bold text-primary">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                        STOCK: 300
+                    </div>
+</div>
+<div class="p-3">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-bold text-sm leading-tight text-slate-800 dark:text-slate-100">English Lavender</h3>
+<div class="w-3 h-3 rounded-full bg-purple-400 ring-1 ring-slate-200 dark:ring-slate-600"></div>
+</div>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-2">Spring Season</p>
+<div class="flex items-center justify-between">
+<span class="text-primary font-bold">$0.85<span class="text-[10px] font-normal text-slate-400 ml-0.5">/stem</span></span>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-icons text-lg">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-2xl shadow-primary/40 active:scale-95 transition-transform z-40">
+<span class="material-icons text-3xl">add</span>
+</button>
+<!-- Navigation Bar (iOS Style) -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-40">
+<div class="flex flex-col items-center gap-1 text-primary">
+<span class="material-icons">local_florist</span>
+<span class="text-[10px] font-medium">Catalogue</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">inventory_2</span>
+<span class="text-[10px] font-medium">Inventory</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">analytics</span>
+<span class="text-[10px] font-medium">Stats</span>
+</div>
+<div class="flex flex-col items-center gap-1 text-slate-400">
+<span class="material-icons">settings</span>
+<span class="text-[10px] font-medium">Settings</span>
+</div>
+</nav>
+<style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</body></html>
