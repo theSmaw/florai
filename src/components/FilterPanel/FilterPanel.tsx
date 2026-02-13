@@ -1,6 +1,7 @@
 // Filter panel component
 // Pure UI - handles filter display and events, no store access
-import type { FlowerFilter } from '../domain/Flower';
+import type { FlowerFilter } from '../../domain/Flower';
+import styles from './FilterPanel.module.css';
 
 interface FilterPanelProps {
   availableColors: string[];
@@ -22,14 +23,14 @@ export function FilterPanel({
   onApplyFilters,
 }: FilterPanelProps) {
   return (
-    <div className="space-y-4">
+    <div className={styles.root}>
       {/* Search */}
       <div>
-        <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">
+        <label className={styles.label}>
           Search
         </label>
-        <div className="relative">
-          <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+        <div className={styles.searchWrapper}>
+          <span className={`material-icons ${styles.searchIcon}`}>
             search
           </span>
           <input
@@ -37,26 +38,22 @@ export function FilterPanel({
             placeholder="Search flowers..."
             value={currentFilter.searchTerm || ''}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-white dark:bg-slate-800 border-none rounded-xl py-2.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-emerald-500 shadow-sm"
+            className={styles.searchInput}
           />
         </div>
       </div>
 
       {/* Colors */}
       <div>
-        <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">
+        <label className={styles.label}>
           Colors
         </label>
-        <div className="flex flex-wrap gap-2">
+        <div className={styles.chips}>
           {availableColors.map((color) => (
             <button
               key={color}
               onClick={() => onColorToggle(color)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                currentFilter.colors.includes(color)
-                  ? 'bg-emerald-500 text-white'
-                  : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300'
-              }`}
+              className={`${styles.chip} ${currentFilter.colors.includes(color) ? styles.chipSelected : ''}`}
             >
               {color}
             </button>
@@ -66,14 +63,14 @@ export function FilterPanel({
 
       {/* Availability */}
       <div>
-        <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">
+        <label className={styles.label}>
           Availability
         </label>
-        <div className="space-y-2">
+        <div className={styles.stack}>
           {['always', 'seasonal', 'limited'].map((avail) => (
             <label
               key={avail}
-              className="flex items-center gap-2 cursor-pointer text-sm text-slate-600 dark:text-slate-400"
+              className={styles.radioRow}
             >
               <input
                 type="radio"
@@ -81,18 +78,18 @@ export function FilterPanel({
                 value={avail}
                 checked={currentFilter.availability === (avail as any)}
                 onChange={() => onAvailabilityChange(avail as any)}
-                className="w-4 h-4"
+                className={styles.radioInput}
               />
               <span className="capitalize">{avail}</span>
             </label>
           ))}
-          <label className="flex items-center gap-2 cursor-pointer text-sm text-slate-600 dark:text-slate-400">
+          <label className={styles.radioRow}>
             <input
               type="radio"
               name="availability"
               checked={!currentFilter.availability}
               onChange={() => onAvailabilityChange(undefined)}
-              className="w-4 h-4"
+              className={styles.radioInput}
             />
             <span>All</span>
           </label>

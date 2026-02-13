@@ -1,6 +1,6 @@
 // Catalogue container
 // Orchestrates communication between UI, Redux store, and actions
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CatalogueView } from '../views/CatalogueView';
 import {
@@ -8,10 +8,16 @@ import {
   selectGroupedFlowers,
   selectFlowersFilter,
   selectFlowersIsLoading,
+} from '../stores/flowers/selectors';
+import {
   filterApplied,
   flowerSelected,
-} from '../stores/flowers';
-import type { AppDispatch } from '../stores';
+  loadingStarted,
+  flowersLoaded,
+  loadingFailed,
+} from '../stores/flowers/slice';
+import type { AppDispatch } from '../stores/store';
+import { fetchFlowers } from '../services/flowersApi';
 
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,6 +27,20 @@ export function CatalogueContainer() {
   const isLoading = useSelector(selectFlowersIsLoading);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    dispatch(loadingStarted());
+    fetchFlowers(controller.signal)
+      .then((data) => dispatch(flowersLoaded(data)))
+      .catch((err: any) => {
+        if (err && err.name === 'AbortError') return;
+        dispatch(loadingFailed(err?.message || 'Failed to load flowers'));
+        console.error('Failed to fetch flowers', err);
+      });
+
+    return () => controller.abort();
+  }, [dispatch]);
 
   const handleSearchChange = (searchTerm: string) => {
     const newFilter = {

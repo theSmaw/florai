@@ -210,3 +210,30 @@ pnpm tsc
 
 The catalogue page is now fully functional and ready for testing! 🌸
 
+
+
+## Backend-driven Catalogue (development setup)
+
+The catalogue list is now driven by a backend API during development.
+
+- Backend: json-server using db.json at the repo root (acts as our database).
+- Frontend: Vite dev server proxies /api to the backend (vite.config.ts).
+- Data flow: CatalogueContainer fetches /api/flowers on mount and dispatches results into the Redux store.
+
+How to run locally
+- Install deps (once): pnpm install
+- Start the backend (API): pnpm run dev:api
+  - Serves: http://localhost:3001
+  - Endpoint: http://localhost:3001/flowers
+- Start the frontend (in a separate terminal): pnpm run dev
+  - The app fetches from /api/flowers which is proxied to http://localhost:3001/flowers
+
+Verifying the API
+- With the backend running, verify data:
+  - curl http://localhost:3001/flowers
+  - or open http://localhost:3001/flowers in the browser
+
+Notes
+- If the backend isn’t running, the app will show an empty catalogue (and logs an error in the console). Start pnpm run dev:api to load data.
+- db.json is the current source of truth. Update it to change the catalogue data.
+- For production, replace json-server with a real backend and keep the same /api/flowers contract.

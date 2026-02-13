@@ -40,3 +40,25 @@ Use these standard top-level groupings (naming can be adapted, intent must remai
 - Avoid "smart hooks" that become mini-stores.
 - Keep the cycle obvious and traceable.
 
+
+
+## No barrel files (index.ts re-exports)
+
+We do not use barrel files (index.ts that re-export from sibling modules). Always import from the concrete module you need.
+
+Rationale:
+- Improves clarity and discoverability; imports show the real source file.
+- Reduces risk of circular dependencies and weird tree-shaking side effects.
+- Speeds up IDE navigation and refactoring.
+
+Do this:
+- import { flowersSlice } from '../stores/flowers/slice'
+- import { selectFilteredFlowers } from '../stores/flowers/selectors'
+
+Do NOT do this:
+- import { selectFilteredFlowers, flowersSlice } from '../stores/flowers' // via index.ts
+- Create index.ts files whose sole purpose is to re-export other files.
+
+Enforcement:
+- Code review: reject PRs that introduce index.ts barrels.
+- Prefer explicit, file-level imports throughout the codebase.
