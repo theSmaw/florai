@@ -1,0 +1,76 @@
+Title,Description,Project,Status,Priority,Estimate,Labels
+Setup repository and initialise project,Create Git repo and initialise React project,Flor.ai MVP,Backlog,2,2,Foundation
+Install React framework,Install Next.js or Vite and confirm dev server runs,Flor.ai MVP,Backlog,2,2,Foundation
+Configure TypeScript,Ensure strict TS config and type checking enabled,Flor.ai MVP,Backlog,2,1,Foundation
+Install Tailwind CSS,Install and configure Tailwind styling system,Flor.ai MVP,Backlog,2,2,Foundation
+Create base layout,Create sidebar + main layout component,Flor.ai MVP,Backlog,2,3,Foundation
+Add placeholder routes,Create /dashboard /weddings /catalogue routes,Flor.ai MVP,Backlog,2,2,Foundation
+
+Install ORM,Install Prisma or equivalent ORM,Flor.ai MVP,Backlog,2,2,Backend
+Configure database connection,Set up DB and test connection,Flor.ai MVP,Backlog,2,2,Backend
+Define User model,Create user schema in ORM,Flor.ai MVP,Backlog,2,2,Backend
+Define Wedding model,Create wedding schema in ORM,Flor.ai MVP,Backlog,2,2,Backend
+Define Arrangement model,Create arrangement schema,Flor.ai MVP,Backlog,2,2,Backend
+Define Flower model,Create flower schema,Flor.ai MVP,Backlog,2,2,Backend
+Define StemSelection model,Create stem selection schema with relations,Flor.ai MVP,Backlog,2,2,Backend
+Run database migration,Execute migration and verify tables,Flor.ai MVP,Backlog,2,2,Backend
+Test basic DB query,Write script to confirm models query correctly,Flor.ai MVP,Backlog,2,1,Backend
+
+Install authentication provider,Install Clerk/Supabase/Auth0,Flor.ai MVP,Backlog,2,2,Auth
+Configure login page,Create login screen,Flor.ai MVP,Backlog,2,2,Auth
+Protect routes,Add authenticated route wrapper,Flor.ai MVP,Backlog,2,2,Auth
+Link user model to auth ID,Connect external auth to internal user table,Flor.ai MVP,Backlog,2,2,Auth
+Test login and logout,Verify session lifecycle works,Flor.ai MVP,Backlog,2,1,Auth
+
+Create flower seed script,Write seed script file,Flor.ai MVP,Backlog,2,2,Catalogue
+Add focal flowers to seed,Add 10 focal flower records,Flor.ai MVP,Backlog,2,3,Catalogue
+Add filler flowers to seed,Add 10 filler flower records,Flor.ai MVP,Backlog,2,3,Catalogue
+Add foliage to seed,Add 10 foliage records,Flor.ai MVP,Backlog,2,3,Catalogue
+Run and verify seed,Execute seed and verify in DB,Flor.ai MVP,Backlog,2,1,Catalogue
+
+Create FlowerCard component,Build reusable flower card UI,Flor.ai MVP,Backlog,2,3,Frontend
+Build catalogue grid layout,Implement responsive grid,Flor.ai MVP,Backlog,2,2,Frontend
+Fetch flower data,Connect API to fetch flowers,Flor.ai MVP,Backlog,2,2,Frontend
+Implement category filter,Add filtering by flower category,Flor.ai MVP,Backlog,2,3,Frontend
+Implement color filter,Add filtering by colour family,Flor.ai MVP,Backlog,2,3,Frontend
+Add loading and empty states,Improve UX for data states,Flor.ai MVP,Backlog,2,2,Frontend
+
+Create Wedding form component,Build create wedding form,Flor.ai MVP,Backlog,2,3,Weddings
+Implement createWedding API route,Add backend route,Flor.ai MVP,Backlog,2,2,Weddings
+Add wedding list page,List all user weddings,Flor.ai MVP,Backlog,2,3,Weddings
+Implement delete wedding action,Allow deletion,Flor.ai MVP,Backlog,2,2,Weddings
+Create Wedding detail page,Build wedding detail layout,Flor.ai MVP,Backlog,2,3,Weddings
+
+Add createArrangement API,Backend endpoint for arrangements,Flor.ai MVP,Backlog,2,2,Arrangements
+Create arrangement form modal,UI modal to create arrangement,Flor.ai MVP,Backlog,2,3,Arrangements
+List arrangements in wedding,Render arrangement cards,Flor.ai MVP,Backlog,2,3,Arrangements
+Add delete arrangement,Allow removal of arrangement,Flor.ai MVP,Backlog,2,2,Arrangements
+
+Add flower to arrangement modal,Modal to select flower + stem count,Flor.ai MVP,Backlog,2,3,Arrangements
+Persist StemSelection,Save flower selections to DB,Flor.ai MVP,Backlog,2,2,Arrangements
+Render selected flowers list,Display chosen stems in arrangement view,Flor.ai MVP,Backlog,2,3,Arrangements
+
+Implement stem cost calculation,Calculate wholesale cost,Flor.ai MVP,Backlog,1,3,Costing
+Add labour cost input,Add manual labour field,Flor.ai MVP,Backlog,1,2,Costing
+Add markup slider,Allow markup adjustment,Flor.ai MVP,Backlog,1,2,Costing
+Calculate retail price,Compute final retail cost,Flor.ai MVP,Backlog,1,2,Costing
+Calculate margin percent,Display margin %,Flor.ai MVP,Backlog,1,2,Costing
+Aggregate wedding totals,Sum arrangement totals to wedding level,Flor.ai MVP,Backlog,1,3,Costing
+
+Create arrangement preview component,Render bouquet preview box,Flor.ai MVP,Backlog,2,3,Preview
+Render flower images in preview,Display selected flower images,Flor.ai MVP,Backlog,2,3,Preview
+Overlay stem counts,Show count badges in preview,Flor.ai MVP,Backlog,2,2,Preview
+
+Create proposal view page,Build read-only proposal layout,Flor.ai MVP,Backlog,1,3,Proposal
+Render pricing summary in proposal,Display totals and breakdown,Flor.ai MVP,Backlog,1,2,Proposal
+Integrate PDF export,Generate PDF file,Flor.ai MVP,Backlog,1,4,Proposal
+
+Add subscription status field,Extend user model,Flor.ai MVP,Backlog,1,2,Monetisation
+Implement feature gating,Restrict weddings in free tier,Flor.ai MVP,Backlog,1,3,Monetisation
+Create Stripe product,Set up subscription product in Stripe,Flor.ai MVP,Backlog,1,2,Monetisation
+Add Stripe checkout session,Backend route for checkout,Flor.ai MVP,Backlog,1,3,Monetisation
+Handle Stripe webhook,Update subscription status on payment,Flor.ai MVP,Backlog,1,3,Monetisation
+
+Implement budget optimiser logic,Create optimisation function,Flor.ai MVP,Backlog,3,4,AI
+Create AI arrangement prompt template,Define structured prompt for LLM,Flor.ai MVP,Backlog,3,3,AI
+Parse AI response into StemSelections,Convert AI output into internal data,Flor.ai MVP,Backlog,3,3,AI

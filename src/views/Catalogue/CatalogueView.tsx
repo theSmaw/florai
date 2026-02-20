@@ -6,8 +6,9 @@
  * - ARCHITECTURE.md (laminar flow and app structure)
  * - CODING_CONVENTIONS.md (naming and UI patterns)
  */
-import type { Flower, FlowerFilter } from '../domain/Flower';
-import { FlowerList } from '../components/FlowerList/FlowerList.tsx';
+import type { Flower, FlowerFilter } from '../../domain/Flower';
+import { FlowerList } from '../../components/FlowerList/FlowerList.tsx';
+import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu.tsx';
 
 interface CatalogueViewProps {
   flowers: Flower[];
@@ -43,6 +44,7 @@ export function CatalogueView({
             Catalogue
           </h1>
           <div className={styles.iconButtons}>
+            <HeaderMenu />
             <button className={styles.iconButton}>
               <span className="material-icons">notifications_none</span>
             </button>
@@ -51,6 +53,7 @@ export function CatalogueView({
             </button>
           </div>
         </div>
+
 
         {/* Search and Filter Bar */}
         <div className={styles.searchBar}>
@@ -105,9 +108,9 @@ export function CatalogueView({
       {/* Main Content */}
       <FlowerList
         flowers={flowers}
-        groupedFlowers={groupedFlowers}
         onCardClick={onCardClick}
-        isLoading={isLoading}
+        {...(groupedFlowers ? { groupedFlowers } : {})}
+        {...(isLoading !== undefined ? { isLoading } : {})}
       />
 
       {/* Floating Action Button */}
@@ -118,26 +121,6 @@ export function CatalogueView({
         <span className="material-icons" style={{ fontSize: '28px' }}>add</span>
       </button>
 
-      {/* Navigation Bar (iOS Style) */}
-      <nav className={styles.navBar}>
-        <div className={`${styles.navItem} ${styles.navItemActive}`}>
-          <span className="material-icons">local_florist</span>
-          <span className={styles.navItemLabel}>Catalogue</span>
-        </div>
-        <div className={styles.navItem}>
-          <span className="material-icons">inventory_2</span>
-          <span className={styles.navItemLabel}>Inventory</span>
-        </div>
-        <div className={styles.navItem}>
-          <span className="material-icons">analytics</span>
-          <span className={styles.navItemLabel}>Stats</span>
-        </div>
-        <div className={styles.navItem}>
-          <span className="material-icons">settings</span>
-          <span className={styles.navItemLabel}>Settings</span>
-        </div>
-      </nav>
     </div>
   );
 }
-

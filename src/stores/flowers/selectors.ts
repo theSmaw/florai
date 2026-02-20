@@ -83,10 +83,11 @@ export const selectGroupedFlowers = (state: RootState): Record<string, Flower[]>
   if (groupBy === 'type') {
     const grouped: Record<string, Flower[]> = {};
     filtered.forEach((flower: Flower) => {
-      if (!grouped[flower.type]) {
-        grouped[flower.type] = [];
+      const key = flower.type;
+      if (!grouped[key]) {
+        grouped[key] = [];
       }
-      grouped[flower.type].push(flower);
+      grouped[key]!.push(flower);
     });
     return grouped;
   }

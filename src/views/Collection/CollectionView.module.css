@@ -1,4 +1,4 @@
-/* CSS Modules for CatalogueView */
+/* CSS Modules for CollectionView (copied from CatalogueView) */
 .root {
   background: #f8fafc; /* slate-50 */
   min-height: 100vh;

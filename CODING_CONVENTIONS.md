@@ -62,3 +62,20 @@ Do NOT do this:
 Enforcement:
 - Code review: reject PRs that introduce index.ts barrels.
 - Prefer explicit, file-level imports throughout the codebase.
+
+Specific to Views and Containers:
+- Do NOT create index.ts files inside src/views/* or src/containers/* directories.
+- Each view/container should be imported directly from its concrete file (e.g., src/views/Root/RootView.tsx, src/containers/Catalogue/CatalogueContainer.tsx).
+
+
+---
+
+## API layer placement and naming (2026-02-13)
+- All API calls must live in `src/api/`.
+- Do NOT place HTTP/API code in `src/services/`.
+- Each API function resides in its own file named exactly after the function (camelCase):
+  - Example: `fetchFlowers.ts` exports `fetchFlowers`.
+- Prefer one function per file. If multiple functions are truly related, reconsider and split; only keep them together with a clear justification.
+- Import directly from the specific file; avoid barrels:
+  - `import { fetchFlowers } from '../api/fetchFlowers'`
+- When touching older code, migrate any `services/...` imports to `api/...` and align filenames with function names.

@@ -33,9 +33,20 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
     >
       <div className={styles.media}>
         <img
-          src="https://via.placeholder.com/300"
+          src={flower.imageUrl || '/images/placeholder.svg'}
           alt={flower.name}
           className={`${styles.img} ${isOutOfStock ? styles.grayscale : ''}`}
+          width={400}
+          height={400}
+          loading="lazy"
+          decoding="async"
+          onError={(e) => {
+            const img = e.currentTarget;
+            const fallback = '/images/placeholder.svg';
+            if (!img.src.endsWith(fallback)) {
+              img.src = fallback;
+            }
+          }}
         />
         {isOutOfStock ? (
           <div className={styles.overlay}>

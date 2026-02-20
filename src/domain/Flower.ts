@@ -6,6 +6,9 @@ export interface Flower {
   color: string[]; // Multiple colors (e.g., "red", "pink", "coral")
   type: string; // Rose, Tulip, etc.
 
+  // Media
+  imageUrl?: string; // Relative path to an image in /public (e.g., "/images/flowers/1.jpg")
+
   // Pricing
   wholesalePrice: number;
   retailPrice: number;

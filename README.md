@@ -40,3 +40,22 @@ If you are exploring or modifying features in `src/`, consult the relevant docum
 ---
 
 If you find documentation gaps, please update the relevant `.md` file and link it here to keep this index accurate.
+
+## Images
+
+- Where to put files: Place images under `public/images/flowers/` and reference them via the `imageUrl` field in `db.json` (e.g., `/images/flowers/<id>.jpg`).
+- Fallback: If an image fails to load or is missing, the UI falls back to `/images/placeholder.svg`.
+
+Recommended dimensions and format
+- Aspect ratio: Square (1:1). The FlowerCard enforces a square media area on desktop and uses `object-fit: cover`, so square sources avoid unwanted cropping.
+- Source size (recommended): 800 × 800 px. Balanced for catalogue thumbnails and high‑DPI screens without excessive weight.
+- Minimum size: 400 × 400 px. Matches the intrinsic width/height hints used by the `<img>` tag; smaller images may look soft on retina displays.
+- File format: WebP or JPEG preferred (for photos). PNG is acceptable but typically larger.
+- File size target: Aim for ≤ 150 KB per image (ideally ≤ 100 KB) after compression.
+
+Behavior and tips
+- Catalogue lists may render many thumbnails; prefer compressed WebP and keep dimensions small to reduce payload.
+- Mobile/tablet: The media area height is clamped and uses `object-fit: cover`, so non‑square images may be cropped. Keep the subject centered.
+- Desktop: A strict 1:1 aspect ratio is applied to the card media area.
+- Naming: Use the flower id in the filename to match `db.json` (e.g., `1.jpg`, `2.webp`).
+- Paths: Use a leading slash path from `public/` (e.g., `/images/flowers/5.jpg`).

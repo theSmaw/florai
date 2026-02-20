@@ -2,22 +2,22 @@
 // Orchestrates communication between UI, Redux store, and actions
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { CatalogueView } from '../views/CatalogueView';
+import { CatalogueView } from '../../views/Catalogue/CatalogueView';
 import {
   selectFilteredFlowers,
   selectGroupedFlowers,
   selectFlowersFilter,
   selectFlowersIsLoading,
-} from '../stores/flowers/selectors';
+} from '../../stores/flowers/selectors';
 import {
   filterApplied,
   flowerSelected,
   loadingStarted,
   flowersLoaded,
   loadingFailed,
-} from '../stores/flowers/slice';
-import type { AppDispatch } from '../stores/store';
-import { fetchFlowers } from '../services/flowersApi';
+} from '../../stores/flowers/slice';
+import type { AppDispatch } from '../../stores/store';
+import { fetchFlowers } from '../../api/fetchFlowers';
 
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
@@ -43,11 +43,13 @@ export function CatalogueContainer() {
   }, [dispatch]);
 
   const handleSearchChange = (searchTerm: string) => {
-    const newFilter = {
-      ...currentFilter,
-      searchTerm: searchTerm || undefined,
-    };
-    dispatch(filterApplied(newFilter));
+    if (searchTerm) {
+      const newFilter = { ...currentFilter, searchTerm };
+      dispatch(filterApplied(newFilter));
+    } else {
+      const { searchTerm: _omit, ...rest } = currentFilter;
+      dispatch(filterApplied(rest));
+    }
   };
 
   const handleCardClick = (flowerId: string) => {
@@ -76,4 +78,3 @@ export function CatalogueContainer() {
     />
   );
 }
-
