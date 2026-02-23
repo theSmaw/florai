@@ -139,6 +139,85 @@ pnpm tsc
 2. Implement async thunks for fetch/save
 3. Connect to backend
 
+### Install Prisma or equivalent ORM
+When you move from local mock data (e.g., `db.json`) to a real database, "Install Prisma or equivalent ORM" means:
+- Introduce a data access layer for a real database (SQLite locally; PostgreSQL/MySQL in staging/prod).
+- Use an ORM to define the schema, run migrations, and query the DB from a backend service.
+- Expose data to this React app via a clean API (REST/GraphQL/tRPC) consumed by `api/flowerApi.ts` and async thunks.
+
+Why now
+- During early UI work, `db.json` or in-memory mocks are fine.
+- Once you need persistence across sessions, multi-user editing, or server-side rules, install an ORM and wire up a backend.
+
+Recommended minimal local setup (Prisma + SQLite)
+1) Install dependencies
+   - pnpm add -D prisma
+   - pnpm add @prisma/client
+2) Initialize Prisma
+   - pnpm prisma init --datasource-provider sqlite
+   - This creates `prisma/schema.prisma` and `.env` with `DATABASE_URL="file:./dev.db"`.
+3) Model your data (example)
+   - In `prisma/schema.prisma`, define a `Flower` model reflecting the domain:
+     model Flower {
+       id                  String   @id @default(cuid())
+       name                String
+       color               String[]
+       type                String
+       wholesalePrice      Float
+       retailPrice         Float
+       supplier            String?
+       origin              String?
+       season              String[]
+       availability        Boolean  @default(true)
+       quantityOnHand      Int      @default(0)
+       vaseLife            Int?
+       careInstructions    String?
+       notes               String?
+       complementaryFlowerIds String[]
+       createdAt           DateTime @default(now())
+       updatedAt           DateTime @updatedAt
+     }
+4) Create and apply the first migration
+   - pnpm prisma migrate dev --name init
+   - This also generates the Prisma Client used by your backend code.
+5) Seed data (optional)
+   - Add a `prisma/seed.ts` and run with `pnpm prisma db seed` to import from `db.json` if useful.
+6) Build a minimal backend
+   - Choose a server (e.g., Express, Fastify, NestJS, or Next.js API routes).
+   - Example (Express pseudo-code):
+     import { PrismaClient } from '@prisma/client';
+     const prisma = new PrismaClient();
+     app.get('/api/flowers', async (req, res) => {
+       const flowers = await prisma.flower.findMany();
+       res.json(flowers);
+     });
+     app.post('/api/flowers', async (req, res) => {
+       const flower = await prisma.flower.create({ data: req.body });
+       res.status(201).json(flower);
+     });
+7) Connect the frontend API layer
+   - Implement `api/flowerApi.ts` to call your backend endpoints.
+   - Update async thunks in the flowers slice to use these API calls instead of local mocks.
+
+Environments and configuration
+- Local dev (recommended): SQLite (`DATABASE_URL="file:./dev.db"`).
+- Staging/Production: Postgres (e.g., `DATABASE_URL="postgresql://user:pass@host:5432/db?schema=public"`).
+- Store secrets in `.env` and never commit actual credentials.
+
+Alternatives to Prisma (choose based on team preference)
+- Drizzle ORM: Lightweight, schema-as-code, great with Postgres/SQLite.
+- TypeORM: Mature, decorators, works with many SQL engines.
+- Sequelize: Widely used, JavaScript-first, good docs.
+- Kysely/Objection.js: Query builders with optional model patterns.
+
+Selection guidance
+- Prefer Prisma for strong TypeScript DX, migrations, and tooling.
+- Prefer Drizzle if you want ultra-lightweight, SQL-first ergonomics.
+- Prefer TypeORM if you like entity decorators and Active Record patterns.
+
+What this DOES NOT do
+- It does not change React code directly. The React app continues to use `api/flowerApi.ts` and async thunks; only their implementation switches from mock data to HTTP calls backed by a DB.
+
 ## Architecture References
 
 - **Laminar Flow**: See `ARCHITECTURE.md`

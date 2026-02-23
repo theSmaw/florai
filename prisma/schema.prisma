@@ -1,0 +1,33 @@
+// Prisma schema for Florai (SQLite)
+// To generate client: pnpm prisma generate
+// To create DB schema: pnpm prisma db push (or migrate dev)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Flower {
+  id                     String   @id // coming from db.json; not auto-generated
+  name                   String
+  imageUrl               String?
+  color                  Json     // array of strings in db.json
+  type                   String
+  wholesalePrice         Float
+  retailPrice            Float
+  supplier               String?
+  origin                 String?
+  season                 Json     // array of strings in db.json
+  availability           String   // "seasonal" | "always" (string in db.json)
+  quantityOnHand         Int      @default(0)
+  vaseLife               String?  // string in db.json (e.g., "7-10 days")
+  careInstructions       String?
+  notes                  String?
+  complementaryFlowerIds Json     // array of string IDs in db.json
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}

@@ -122,6 +122,12 @@ If you add data fetching or state storage inside components/hooks directly, you 
 
 ---
 
+## Data Persistence and ORM
+
+The front-end communicates only with an API layer; it does not access databases directly.
+- When moving from mocks to a real backend, use an ORM (e.g., Prisma, Drizzle, TypeORM) in the server to manage schema, migrations, and queries.
+- See FLORAI_SETUP.md → “Install Prisma or equivalent ORM” for a minimal, step-by-step setup and selection guidance.
+
 ## Testing Guidance
 
 - Primary unit tests should focus on:

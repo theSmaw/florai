@@ -1,0 +1,74 @@
+name: Claude Code
+
+on:
+  # Respond to @claude mentions in issue and PR comments
+  issue_comment:
+    types: [created]
+  # Respond to @claude mentions in PR review line comments
+  pull_request_review_comment:
+    types: [created]
+  # Respond to @claude mentions in PR review summaries
+  pull_request_review:
+    types: [submitted]
+  # Auto-review PRs when opened or marked ready
+  pull_request:
+    types: [opened, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  # ─── Interactive: respond when @claude is mentioned ───────────────────────
+  claude-respond:
+    name: Claude — handle @claude mention
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude'))
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+
+  # ─── Auto-review: review every non-draft PR when it's opened ──────────────
+  claude-review:
+    name: Claude — auto PR review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          track_progress: true
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Review this pull request. The project is a React + TypeScript + Tailwind CSS flower
+            catalogue with a Prisma ORM backend. Focus on:
+
+            - Code quality and consistency with existing patterns
+            - Potential bugs or unhandled edge cases
+            - Security issues (XSS, SQL injection, exposed secrets, etc.)
+            - Missing test coverage for new logic
+            - Anything that should be addressed before merge
+
+            Post overall feedback using `gh pr comment`.
+            Use inline comments for line-specific issues.
+
+          claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Read,Glob,Grep"
