@@ -97,3 +97,33 @@ Notes
 ## Automation
 - New: When you push any non-main branch, a GitHub Action (.github/workflows/auto-pr.yml) will automatically open a Pull Request to `main` if one does not already exist for that branch.
 - You can still run `pnpm pr:create` locally to push and open a PR immediately with a custom title/body.
+
+
+## Claude Code GitHub Action Setup
+This repository includes a workflow to let Claude read, review, and act on Pull Requests and comments.
+
+Files added:
+- .github/workflows/claude.yml
+
+What it does:
+- Auto-reviews every non-draft PR when it is opened or marked ready, posting inline and summary comments.
+- Responds to @claude mentions in any PR comment, review comment, or issue — Claude will act on the request (fix code, answer questions, create PRs, etc.).
+
+Prerequisites:
+- Add your Anthropic API key as a repository secret named ANTHROPIC_API_KEY:
+  Settings → Secrets and variables → Actions → New repository secret
+
+Usage:
+- Mention @claude anywhere in a PR or issue comment to trigger a response.
+  Examples:
+    "@claude fix the TypeScript error on line 42"
+    "@claude review the security of this change"
+    "@claude implement the requested changes and push"
+- Every new non-draft PR will receive an automatic code review without any manual trigger.
+
+Troubleshooting:
+- If Claude does not respond, check the Actions tab for the "Claude Code" workflow run logs.
+- Confirm ANTHROPIC_API_KEY is set correctly under Settings → Secrets → Actions.
+- Ensure the workflow has pull-requests: write and issues: write permissions (already configured).
+
+For full documentation see: https://github.com/anthropics/claude-code-action
