@@ -2,10 +2,10 @@ import { PrismaClient } from '@prisma/client'
 
 // Allow running without a .env by overriding the datasource URL.
 const prisma = new PrismaClient({
-  datasources: { db: { url: process.env.DATABASE_URL || 'file:./dev.db' } }
+  datasources: { db: { url: process.env['DATABASE_URL'] ?? 'file:./dev.db' } },
 })
 
-async function main() {
+async function main(): Promise<void> {
   const count = await prisma.flower.count()
   const first = await prisma.flower.findFirst()
   console.log(`Flowers in DB: ${count}`)
