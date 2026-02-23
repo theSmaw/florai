@@ -25,6 +25,8 @@
 
 ## Task Workflow (Branches, Push, and Merge Request / Pull Request)
 
+All changes MUST go through a Pull Request (PR) into main. Direct pushes to main are prohibited. This includes infrastructure/configuration updates such as adding Prisma ORM or modifying database schemas.
+
 For every new task, follow this exact flow. You can use the provided scripts or the manual commands.
 
 ### Option A — Using helper scripts (recommended)

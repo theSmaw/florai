@@ -12,7 +12,14 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "task:start": "bash scripts/start-task.sh",
-    "task:publish": "bash scripts/publish-branch.sh"
+    "task:publish": "bash scripts/publish-branch.sh",
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:studio": "prisma studio",
+    "prisma:seed": "prisma db seed",
+    "prisma:test": "node scripts/list-flowers.mjs",
+    "pr:create": "bash scripts/publish-branch.sh 'chore(prisma): add Prisma ORM setup'"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^8.6.15",
@@ -29,7 +36,8 @@
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "vite": "^7.3.1",
-    "json-server": "^0.17.4"
+    "json-server": "^0.17.4",
+    "prisma": "^5.16.1"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.11.2",
@@ -39,6 +47,11 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-redux": "^9.2.0",
-    "redux": "^5.0.1"
-  }
+    "redux": "^5.0.1",
+    "@prisma/client": "^5.16.1"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.mjs"
+  },
+  "pr:create": "bash scripts/publish-branch.sh 'chore(prisma): add Prisma ORM setup'"
 }

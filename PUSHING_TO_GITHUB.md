@@ -68,3 +68,32 @@ Troubleshooting
 Notes
 - This project uses pnpm by default; adjust commands for npm/yarn if preferred.
 - The .gitignore is configured to avoid pushing build artifacts, environment files, and editor detritus.
+
+6) Create a Pull Request (required)
+- Direct PRs page for this repo: https://github.com/theSmaw/florai/pulls
+- One‑command PR (from your current feature branch):
+  - pnpm pr:create
+All changes — including infrastructure changes like adding Prisma ORM — must go through a Pull Request into main.
+
+Option A — Using GitHub CLI (recommended)
+- Ensure you have a feature branch and your commits:
+  - git checkout -b feat/prisma-setup
+  - git add -A && git commit -m "chore(prisma): add Prisma ORM setup, seed, and docs"
+  - git push -u origin feat/prisma-setup
+- Create the PR targeting main:
+  - gh pr create --base main --head feat/prisma-setup \
+      --title "chore(prisma): add Prisma ORM setup" \
+      --body "Adds Prisma deps, scripts, seed from db.json, .env.example, and README/PUSHING_TO_GITHUB docs."
+
+Option B — Manual (without CLI)
+- Open https://github.com/theSmaw/florai/compare/main...feat/prisma-setup in your browser
+- Fill in the title and description, then open the PR to main
+
+Notes
+- See DEVELOPMENT_WORKFLOW.md for our standard branch/PR process and helper scripts (pnpm task:start, pnpm task:publish).
+- If you just completed the steps in README’s Prisma Quick Start, open the PR now following the commands above.
+
+
+## Automation
+- New: When you push any non-main branch, a GitHub Action (.github/workflows/auto-pr.yml) will automatically open a Pull Request to `main` if one does not already exist for that branch.
+- You can still run `pnpm pr:create` locally to push and open a PR immediately with a custom title/body.

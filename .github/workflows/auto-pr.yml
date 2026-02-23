@@ -1,0 +1,65 @@
+name: Auto PR on branch push
+
+on:
+  push:
+    branches-ignore:
+      - main
+      - master
+
+jobs:
+  auto-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Create PR if missing
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branchRef = context.payload.ref || '';
+            const branch = branchRef.replace('refs/heads/', '');
+            if (!branch || branch === 'main' || branch === 'master') {
+              core.info(`Skipping for branch: ${branch}`);
+              return;
+            }
+
+            const base = 'main';
+
+            // Check if an open PR already exists from this head to base
+            const { data: prs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: `${context.repo.owner}:${branch}`,
+              base,
+              per_page: 100
+            });
+
+            if (prs.length > 0) {
+              core.info(`Open PR already exists for ${branch} -> ${base}: #${prs[0].number}`);
+              return;
+            }
+
+            const title = `chore: open PR for ${branch}`;
+            const body = [
+              `This Pull Request was automatically created for branch '${branch}'.`,
+              '',
+              'If this branch relates to the Prisma setup work, it includes:',
+              '- Prisma dependencies and client generation scripts',
+              '- Seed script importing flowers from db.json',
+              '- .env.example and docs updates',
+              '',
+              'Please review and update the title/description as needed.'
+            ].join('\n');
+
+            const { data: pr } = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              base,
+              head: branch,
+              title,
+              body
+            });
+
+            core.info(`Created PR #${pr.number}: ${pr.html_url}`);

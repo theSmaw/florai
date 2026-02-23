@@ -69,3 +69,45 @@ Behavior and tips
 - Desktop: A strict 1:1 aspect ratio is applied to the card media area.
 - Naming: Use the flower id in the filename to match `db.json` (e.g., `1.jpg`, `2.webp`).
 - Paths: Use a leading slash path from `public/` (e.g., `/images/flowers/5.jpg`).
+
+
+## Prisma (ORM) Quick Start
+
+This repo includes a ready-to-use Prisma setup targeting SQLite for easy local development.
+
+Prereqs: ensure dependencies are installed (pnpm install) so prisma and @prisma/client are available.
+
+1) Environment
+- Copy .env.example to .env
+- Default uses SQLite at file:./dev.db
+
+2) Generate client and create DB schema
+- pnpm prisma:generate
+- pnpm prisma:push  # creates dev.db based on prisma/schema.prisma
+
+3) Seed database (from db.json)
+- pnpm prisma:seed
+
+4) Test a simple query
+- pnpm prisma:test  # prints count and first Flower
+
+5) Explore data visually (optional)
+- pnpm prisma:studio
+
+6) Create a GitHub Pull Request (mandatory)
+- Direct PRs page for this repo: https://github.com/theSmaw/florai/pulls
+- One‑command PR (from your current feature branch):
+  - pnpm pr:create
+- Create/switch to a feature branch, push it, and open a PR to main:
+  - git checkout -b feat/prisma-setup
+  - git add -A && git commit -m "chore(prisma): add Prisma ORM setup, seed, and docs"
+  - git push -u origin feat/prisma-setup
+  - Using GitHub CLI (recommended):
+    - gh pr create --base main --head feat/prisma-setup --title "chore(prisma): add Prisma ORM setup" --body "Adds Prisma deps, scripts, seed from db.json, .env.example, and README docs."
+  - Or open your repo on GitHub and create the PR from branch feat/prisma-setup into main.
+  - Direct compare link for this branch name: https://github.com/theSmaw/florai/compare/main...feat/prisma-setup
+- See DEVELOPMENT_WORKFLOW.md and PUSHING_TO_GITHUB.md for full PR workflow details.
+
+Notes
+- Schema lives at prisma/schema.prisma (model: Flower). Seed script is prisma/seed.mjs, importing flowers from db.json.
+- For Postgres later, update datasource in prisma/schema.prisma and DATABASE_URL in .env, then run pnpm prisma:migrate.
