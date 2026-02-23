@@ -30,6 +30,16 @@ If you are exploring or modifying features in `src/`, consult the relevant docum
 - Build: `pnpm build`
 - Preview: `pnpm preview`
 [FlowerList.module.css](src/components/FlowerList.module.css)
+
+## Pushing to GitHub
+
+See PUSHING_TO_GITHUB.md for step-by-step instructions (HTTPS/SSH/GitHub CLI) and troubleshooting.
+Quick commands (replace <OWNER>/<REPO>):
+- git init -b main  # if not already a git repo
+- git add . && git commit -m "chore: initial push"
+- git remote add origin https://github.com/<OWNER>/<REPO>.git
+- git push -u origin main
+
 ## Repository Structure (high level)
 
 - `src/` — Application source code (components, containers, stores, domain)

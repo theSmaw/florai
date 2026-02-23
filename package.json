@@ -10,7 +10,9 @@
     "build": "pnpm run type-check && vite build",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "task:start": "bash scripts/start-task.sh",
+    "task:publish": "bash scripts/publish-branch.sh"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^8.6.15",
