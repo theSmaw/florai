@@ -20,7 +20,7 @@ export function FlowerList({
   if (isLoading) {
     return (
       <div className={styles.center}>
-        <p className={styles.mutedText}>Loading flowers...</p>
+        <p data-cy="loading-indicator" className={styles.mutedText}>Loading flowers...</p>
       </div>
     );
   }
@@ -28,10 +28,10 @@ export function FlowerList({
   // If grouped, show groups; otherwise show flat list
   if (groupedFlowers) {
     return (
-      <main className={styles.main}>
+      <main data-cy="flower-list" className={styles.main}>
         {Object.entries(groupedFlowers).map(([groupName, groupFlowers]) => (
-          <div key={groupName} className={styles.group}>
-            <h2 className={styles.groupTitle}>
+          <div data-cy="flower-group" key={groupName} className={styles.group}>
+            <h2 data-cy="group-title" className={styles.groupTitle}>
               {groupName}
             </h2>
             <div className={styles.grid}>
@@ -62,7 +62,7 @@ export function FlowerList({
   }
 
   return (
-    <main className={styles.main}>
+    <main data-cy="flower-list" className={styles.main}>
       <div className={styles.grid}>
         {flowers.map((flower) => (
           <FlowerCard key={flower.id} flower={flower} onCardClick={onCardClick} />

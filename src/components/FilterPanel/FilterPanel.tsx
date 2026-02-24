@@ -23,7 +23,7 @@ export function FilterPanel({
   onApplyFilters,
 }: FilterPanelProps) {
   return (
-    <div className={styles.root}>
+    <div data-cy="filter-panel" className={styles.root}>
       {/* Search */}
       <div>
         <label className={styles.label}>
@@ -34,6 +34,7 @@ export function FilterPanel({
             search
           </span>
           <input
+            data-cy="filter-panel-search"
             type="text"
             placeholder="Search flowers..."
             value={currentFilter.searchTerm || ''}
@@ -52,6 +53,8 @@ export function FilterPanel({
           {availableColors.map((color) => (
             <button
               key={color}
+              data-cy="color-chip"
+              data-cy-color={color}
               onClick={() => onColorToggle(color)}
               className={`${styles.chip} ${currentFilter.colors.includes(color) ? styles.chipSelected : ''}`}
             >
@@ -73,6 +76,7 @@ export function FilterPanel({
               className={styles.radioRow}
             >
               <input
+                data-cy="availability-radio"
                 type="radio"
                 name="availability"
                 value={avail}
@@ -108,6 +112,7 @@ export function FilterPanel({
               className="flex items-center gap-2 cursor-pointer text-sm text-slate-600 dark:text-slate-400"
             >
               <input
+                data-cy="groupby-radio"
                 type="radio"
                 name="groupBy"
                 value={group}
@@ -123,6 +128,7 @@ export function FilterPanel({
 
       {/* Apply Button */}
       <button
+        data-cy="apply-filters-button"
         onClick={onApplyFilters}
         className="w-full bg-emerald-500 text-white px-4 py-2.5 rounded-xl font-medium text-sm shadow-lg shadow-emerald-500/20 hover:bg-emerald-600 transition-colors"
       >

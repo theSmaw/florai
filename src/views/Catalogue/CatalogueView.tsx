@@ -9,6 +9,7 @@
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import { FlowerList } from '../../components/FlowerList/FlowerList.tsx';
 import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu.tsx';
+import { FilterPanel } from '../../components/FilterPanel/FilterPanel.tsx';
 
 interface CatalogueViewProps {
   flowers: Flower[];
@@ -19,6 +20,10 @@ interface CatalogueViewProps {
   isFilterOpen?: boolean;
   onSearchChange: (searchTerm: string) => void;
   onFilterClick: () => void;
+  onColorToggle: (color: string) => void;
+  onAvailabilityChange: (availability?: 'always' | 'seasonal' | 'limited') => void;
+  onGroupByChange: (groupBy?: 'color' | 'type' | 'none') => void;
+  onApplyFilters: () => void;
   onCardClick: (flowerId: string) => void;
   onAddFlowerClick: () => void;
 }
@@ -28,15 +33,21 @@ import styles from './CatalogueView.module.css';
 export function CatalogueView({
   flowers,
   groupedFlowers,
+  availableColors,
   currentFilter,
   isLoading,
+  isFilterOpen,
   onSearchChange,
   onFilterClick,
+  onColorToggle,
+  onAvailabilityChange,
+  onGroupByChange,
+  onApplyFilters,
   onCardClick,
   onAddFlowerClick,
 }: CatalogueViewProps) {
   return (
-    <div className={styles.root}>
+    <div data-cy="catalogue-view" className={styles.root}>
       {/* Header Section */}
       <header className={styles.header}>
         <div className={styles.headerRow}>
@@ -62,6 +73,7 @@ export function CatalogueView({
               search
             </span>
             <input
+              data-cy="search-input"
               type="text"
               value={currentFilter.searchTerm || ''}
               onChange={(e) => onSearchChange(e.target.value)}
@@ -70,6 +82,7 @@ export function CatalogueView({
             />
           </div>
           <button
+            data-cy="filter-toggle-button"
             onClick={onFilterClick}
             className={styles.filterButton}
           >
@@ -82,28 +95,42 @@ export function CatalogueView({
         {(currentFilter.colors.length > 0 ||
           currentFilter.availability ||
           currentFilter.searchTerm) && (
-          <div className={styles.activeFilters}>
+          <div data-cy="active-filters" className={styles.activeFilters}>
             {currentFilter.colors.map((color: string) => (
               <div
                 key={color}
+                data-cy="filter-pill"
                 className={styles.pill}
               >
                 {color}
               </div>
             ))}
             {currentFilter.availability && (
-              <div className={styles.pill}>
+              <div data-cy="filter-pill" className={styles.pill}>
                 {currentFilter.availability}
               </div>
             )}
             {currentFilter.searchTerm && (
-              <div className={styles.pill}>
+              <div data-cy="filter-pill" className={styles.pill}>
                 {currentFilter.searchTerm}
               </div>
             )}
           </div>
         )}
       </header>
+
+      {/* Filter Panel */}
+      {isFilterOpen && (
+        <FilterPanel
+          availableColors={availableColors}
+          currentFilter={currentFilter}
+          onSearchChange={onSearchChange}
+          onColorToggle={onColorToggle}
+          onAvailabilityChange={onAvailabilityChange}
+          onGroupByChange={onGroupByChange}
+          onApplyFilters={onApplyFilters}
+        />
+      )}
 
       {/* Main Content */}
       <FlowerList
@@ -115,6 +142,7 @@ export function CatalogueView({
 
       {/* Floating Action Button */}
       <button
+        data-cy="add-flower-button"
         onClick={onAddFlowerClick}
         className={styles.fab}
       >
