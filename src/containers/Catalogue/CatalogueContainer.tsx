@@ -46,8 +46,7 @@ export function CatalogueContainer() {
 
   const handleSearchChange = (searchTerm: string) => {
     if (searchTerm) {
-      const newFilter = { ...currentFilter, searchTerm };
-      dispatch(filterApplied(newFilter));
+      dispatch(filterApplied({ ...currentFilter, searchTerm }));
     } else {
       const { searchTerm: _omit, ...rest } = currentFilter;
       dispatch(filterApplied(rest));
@@ -81,13 +80,11 @@ export function CatalogueContainer() {
 
   const handleCardClick = (flowerId: string) => {
     dispatch(flowerSelected(flowerId));
-    // In a full app, this would navigate to the detail page
     console.log('Selected flower:', flowerId);
   };
 
   const handleAddFlowerClick = () => {
     console.log('Add flower clicked');
-    // In a full app, this would navigate to the add/edit page
   };
 
   return (
@@ -98,12 +95,11 @@ export function CatalogueContainer() {
       currentFilter={currentFilter}
       isLoading={isLoading}
       isFilterOpen={isFilterOpen}
+      onFilterOpenChange={setIsFilterOpen}
       onSearchChange={handleSearchChange}
-      onFilterClick={() => setIsFilterOpen(!isFilterOpen)}
       onColorToggle={handleColorToggle}
       onAvailabilityChange={handleAvailabilityChange}
       onGroupByChange={handleGroupByChange}
-      onApplyFilters={() => setIsFilterOpen(false)}
       onCardClick={handleCardClick}
       onAddFlowerClick={handleAddFlowerClick}
     />

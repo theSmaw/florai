@@ -6,135 +6,125 @@ import styles from './FilterPanel.module.css';
 interface FilterPanelProps {
   availableColors: string[];
   currentFilter: FlowerFilter;
-  onSearchChange: (searchTerm: string) => void;
   onColorToggle: (color: string) => void;
   onAvailabilityChange: (availability?: 'always' | 'seasonal' | 'limited') => void;
   onGroupByChange: (groupBy?: 'color' | 'type' | 'none') => void;
   onApplyFilters: () => void;
 }
 
+const COLOR_SWATCHES: Record<string, string> = {
+  pink: '#f9a8d4',
+  red: '#dc2626',
+  blue: '#60a5fa',
+  yellow: '#facc15',
+  purple: '#c084fc',
+  white: '#f1f5f9',
+  orange: '#fb923c',
+  green: '#4ade80',
+};
+
+const AVAILABILITY_OPTIONS: { value: 'always' | 'seasonal' | 'limited' | undefined; label: string }[] = [
+  { value: undefined, label: 'All' },
+  { value: 'always', label: 'Always' },
+  { value: 'seasonal', label: 'Seasonal' },
+  { value: 'limited', label: 'Limited' },
+];
+
+const GROUPBY_OPTIONS: { value: 'none' | 'color' | 'type'; label: string }[] = [
+  { value: 'none', label: 'None' },
+  { value: 'color', label: 'Color' },
+  { value: 'type', label: 'Type' },
+];
+
 export function FilterPanel({
   availableColors,
   currentFilter,
-  onSearchChange,
   onColorToggle,
   onAvailabilityChange,
   onGroupByChange,
   onApplyFilters,
 }: FilterPanelProps) {
   return (
-    <div data-cy="filter-panel" className={styles.root}>
-      {/* Search */}
-      <div>
-        <label className={styles.label}>
-          Search
-        </label>
-        <div className={styles.searchWrapper}>
-          <span className={`material-icons ${styles.searchIcon}`}>
-            search
-          </span>
-          <input
-            data-cy="filter-panel-search"
-            type="text"
-            placeholder="Search flowers..."
-            value={currentFilter.searchTerm || ''}
-            onChange={(e) => onSearchChange(e.target.value)}
-            className={styles.searchInput}
-          />
-        </div>
-      </div>
+    <div data-cy="filter-panel" className={styles.body}>
 
       {/* Colors */}
-      <div>
-        <label className={styles.label}>
-          Colors
-        </label>
-        <div className={styles.chips}>
-          {availableColors.map((color) => (
-            <button
-              key={color}
-              data-cy="color-chip"
-              data-cy-color={color}
-              onClick={() => onColorToggle(color)}
-              className={`${styles.chip} ${currentFilter.colors.includes(color) ? styles.chipSelected : ''}`}
-            >
-              {color}
-            </button>
-          ))}
-        </div>
-      </div>
+      {availableColors.length > 0 && (
+        <section className={styles.section}>
+          <h3 className={styles.sectionTitle}>Colors</h3>
+          <div className={styles.chips}>
+            {availableColors.map((color) => {
+              const selected = currentFilter.colors.includes(color);
+              return (
+                <button
+                  key={color}
+                  data-cy="color-chip"
+                  data-cy-color={color}
+                  onClick={() => onColorToggle(color)}
+                  className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
+                >
+                  <span
+                    className={styles.colorDot}
+                    style={{ background: COLOR_SWATCHES[color] ?? color }}
+                  />
+                  <span className={styles.chipLabel}>{color}</span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      )}
 
       {/* Availability */}
-      <div>
-        <label className={styles.label}>
-          Availability
-        </label>
-        <div className={styles.stack}>
-          {['always', 'seasonal', 'limited'].map((avail) => (
-            <label
-              key={avail}
-              className={styles.radioRow}
-            >
-              <input
-                data-cy="availability-radio"
-                type="radio"
-                name="availability"
-                value={avail}
-                checked={currentFilter.availability === (avail as any)}
-                onChange={() => onAvailabilityChange(avail as any)}
-                className={styles.radioInput}
-              />
-              <span className="capitalize">{avail}</span>
-            </label>
-          ))}
-          <label className={styles.radioRow}>
-            <input
-              type="radio"
-              name="availability"
-              checked={!currentFilter.availability}
-              onChange={() => onAvailabilityChange(undefined)}
-              className={styles.radioInput}
-            />
-            <span>All</span>
-          </label>
+      <section className={styles.section}>
+        <h3 className={styles.sectionTitle}>Availability</h3>
+        <div className={styles.chips}>
+          {AVAILABILITY_OPTIONS.map(({ value, label }) => {
+            const selected = currentFilter.availability === value;
+            return (
+              <button
+                key={label}
+                data-cy="availability-chip"
+                data-cy-value={value ?? 'all'}
+                onClick={() => onAvailabilityChange(value)}
+                className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
+              >
+                <span className={styles.chipLabel}>{label}</span>
+              </button>
+            );
+          })}
         </div>
-      </div>
+      </section>
 
       {/* Group By */}
-      <div>
-        <label className="text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 block">
-          Group By
-        </label>
-        <div className="space-y-2">
-          {['none', 'color', 'type'].map((group) => (
-            <label
-              key={group}
-              className="flex items-center gap-2 cursor-pointer text-sm text-slate-600 dark:text-slate-400"
-            >
-              <input
-                data-cy="groupby-radio"
-                type="radio"
-                name="groupBy"
-                value={group}
-                checked={(currentFilter.groupBy || 'none') === group}
-                onChange={() => onGroupByChange(group as any)}
-                className="w-4 h-4"
-              />
-              <span className="capitalize">{group}</span>
-            </label>
-          ))}
+      <section className={styles.section}>
+        <h3 className={styles.sectionTitle}>Group By</h3>
+        <div className={styles.chips}>
+          {GROUPBY_OPTIONS.map(({ value, label }) => {
+            const selected = (currentFilter.groupBy ?? 'none') === value;
+            return (
+              <button
+                key={value}
+                data-cy="groupby-chip"
+                data-cy-value={value}
+                onClick={() => onGroupByChange(value)}
+                className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
+              >
+                <span className={styles.chipLabel}>{label}</span>
+              </button>
+            );
+          })}
         </div>
-      </div>
+      </section>
 
-      {/* Apply Button */}
+      {/* Apply */}
       <button
         data-cy="apply-filters-button"
         onClick={onApplyFilters}
-        className="w-full bg-emerald-500 text-white px-4 py-2.5 rounded-xl font-medium text-sm shadow-lg shadow-emerald-500/20 hover:bg-emerald-600 transition-colors"
+        className={styles.applyButton}
       >
         Apply Filters
       </button>
+
     </div>
   );
 }
-

@@ -26,11 +26,10 @@ function FilterPanelWrapper(props: {
   const availableColors = props.availableColors ?? COLORS;
 
   return (
-    <div style={{ maxWidth: 420 }}>
+    <div style={{ maxWidth: 420, background: '#fff', borderRadius: 20, boxShadow: '0 8px 40px rgba(15,23,42,0.14)' }}>
       <FilterPanel
         availableColors={availableColors}
         currentFilter={filter}
-        onSearchChange={(searchTerm) => setFilter((f) => ({ ...f, searchTerm }))}
         onColorToggle={(color) =>
           setFilter((f) => ({
             ...f,
@@ -55,13 +54,6 @@ export const WithSelectedColors: Story = {
   name: 'With selected colors',
   render: () => (
     <FilterPanelWrapper initialFilter={{ colors: ['red', 'white'], groupBy: 'none' }} />
-  ),
-};
-
-export const WithSearchTerm: Story = {
-  name: 'With search term',
-  render: () => (
-    <FilterPanelWrapper initialFilter={{ colors: [], searchTerm: 'rose', groupBy: 'none' }} />
   ),
 };
 
