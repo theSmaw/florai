@@ -15,19 +15,19 @@ model Flower {
   id                     String   @id // coming from db.json; not auto-generated
   name                   String
   imageUrl               String?
-  color                  Json     // array of strings in db.json
+  colors                 String   // JSON-serialised string[] (SQLite has no Json type)
   type                   String
   wholesalePrice         Float
   retailPrice            Float
   supplier               String?
   origin                 String?
-  season                 Json     // array of strings in db.json
+  season                 String   // JSON-serialised string[] (SQLite has no Json type)
   availability           String   // "seasonal" | "always" (string in db.json)
   quantityOnHand         Int      @default(0)
   vaseLife               String?  // string in db.json (e.g., "7-10 days")
   careInstructions       String?
   notes                  String?
-  complementaryFlowerIds Json     // array of string IDs in db.json
+  complementaryFlowerIds String   // JSON-serialised string[] (SQLite has no Json type)
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 }

@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "Peony Sarah Bernhardt",
-      "color": ["pink"],
+      "colors": ["pink"],
       "type": "Peony",
       "imageUrl": "/images/flowers/peony.png",
       "wholesalePrice": 4.5,
@@ -21,7 +21,7 @@
     {
       "id": "2",
       "name": "Explorer Red Rose",
-      "color": ["red"],
+      "colors": ["red"],
       "type": "Rose",
       "imageUrl": "/images/flowers/explorer-red-rose.png",
       "wholesalePrice": 2.25,
@@ -39,7 +39,7 @@
     {
       "id": "3",
       "name": "Blue Hydrangea",
-      "color": ["blue"],
+      "colors": ["blue"],
       "type": "Hydrangea",
       "imageUrl": "/images/flowers/blue-hydrangea.png",
       "wholesalePrice": 8.9,
@@ -57,7 +57,7 @@
     {
       "id": "4",
       "name": "White Calla Lily",
-      "color": ["white"],
+      "colors": ["white"],
       "type": "Calla Lily",
       "imageUrl": "/images/flowers/lush-calla-lilly.png",
       "wholesalePrice": 3.75,
@@ -75,7 +75,7 @@
     {
       "id": "5",
       "name": "Sunbeam Sunflower",
-      "color": ["yellow"],
+      "colors": ["yellow"],
       "type": "Sunflower",
       "imageUrl": "/images/flowers/sunbeam-sunflower.png",
       "wholesalePrice": 1.5,
@@ -93,7 +93,7 @@
     {
       "id": "6",
       "name": "English Lavender",
-      "color": ["purple"],
+      "colors": ["purple"],
       "type": "Lavender",
       "imageUrl": "/images/flowers/english-lavender.png",
       "wholesalePrice": 0.85,
