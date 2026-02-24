@@ -33,3 +33,7 @@ coverage
 
 # Storybook build output
 storybook-static
+
+# Prisma local database
+*.db
+*.db-journal

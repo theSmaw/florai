@@ -41,19 +41,19 @@ async function main(): Promise<void> {
     const flowerData = {
       name: f.name,
       imageUrl: f.imageUrl ?? null,
-      color: f.color ?? [],
+      color: JSON.stringify(f.color ?? []),
       type: f.type,
       wholesalePrice: Number(f.wholesalePrice),
       retailPrice: Number(f.retailPrice),
       supplier: f.supplier ?? null,
       origin: f.origin ?? null,
-      season: f.season ?? [],
+      season: JSON.stringify(f.season ?? []),
       availability: f.availability,
       quantityOnHand: qty,
       vaseLife: f.vaseLife ?? null,
       careInstructions: f.careInstructions ?? null,
       notes: f.notes ?? null,
-      complementaryFlowerIds: f.complementaryFlowerIds ?? [],
+      complementaryFlowerIds: JSON.stringify(f.complementaryFlowerIds ?? []),
     }
     await prisma.flower.upsert({
       where: { id },
