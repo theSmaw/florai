@@ -9,10 +9,10 @@ import styles from './WeddingsView.module.css';
 export function WeddingsView() {
 
   return (
-    <div className={styles.root}>
+    <div data-cy="weddings-view" className={styles.root}>
       <header className={styles.header}>
         <div className={styles.headerRow}>
-          <h1 className={styles.title}>Weddings</h1>
+          <h1 data-cy="page-title" className={styles.title}>Weddings</h1>
           <div className={styles.iconButtons}>
             <HeaderMenu />
             <button className={styles.iconButton}>

@@ -8,6 +8,7 @@ import {
   selectGroupedFlowers,
   selectFlowersFilter,
   selectFlowersIsLoading,
+  selectAllColors,
 } from '../../stores/flowers/selectors';
 import {
   filterApplied,
@@ -25,6 +26,7 @@ export function CatalogueContainer() {
   const groupedFlowers = useSelector(selectGroupedFlowers);
   const currentFilter = useSelector(selectFlowersFilter);
   const isLoading = useSelector(selectFlowersIsLoading);
+  const availableColors = useSelector(selectAllColors);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -52,6 +54,31 @@ export function CatalogueContainer() {
     }
   };
 
+  const handleColorToggle = (color: string) => {
+    const colors = currentFilter.colors.includes(color)
+      ? currentFilter.colors.filter((c) => c !== color)
+      : [...currentFilter.colors, color];
+    dispatch(filterApplied({ ...currentFilter, colors }));
+  };
+
+  const handleAvailabilityChange = (availability?: 'always' | 'seasonal' | 'limited') => {
+    const { availability: _omit, ...rest } = currentFilter;
+    if (availability) {
+      dispatch(filterApplied({ ...rest, availability }));
+    } else {
+      dispatch(filterApplied(rest));
+    }
+  };
+
+  const handleGroupByChange = (groupBy?: 'color' | 'type' | 'none') => {
+    const { groupBy: _omit, ...rest } = currentFilter;
+    if (groupBy) {
+      dispatch(filterApplied({ ...rest, groupBy }));
+    } else {
+      dispatch(filterApplied(rest));
+    }
+  };
+
   const handleCardClick = (flowerId: string) => {
     dispatch(flowerSelected(flowerId));
     // In a full app, this would navigate to the detail page
@@ -67,12 +94,16 @@ export function CatalogueContainer() {
     <CatalogueView
       flowers={filteredFlowers}
       groupedFlowers={groupedFlowers}
-      availableColors={[]}
+      availableColors={availableColors}
       currentFilter={currentFilter}
       isLoading={isLoading}
       isFilterOpen={isFilterOpen}
       onSearchChange={handleSearchChange}
       onFilterClick={() => setIsFilterOpen(!isFilterOpen)}
+      onColorToggle={handleColorToggle}
+      onAvailabilityChange={handleAvailabilityChange}
+      onGroupByChange={handleGroupByChange}
+      onApplyFilters={() => setIsFilterOpen(false)}
       onCardClick={handleCardClick}
       onAddFlowerClick={handleAddFlowerClick}
     />

@@ -17,6 +17,7 @@ export function HeaderMenu() {
       <DropdownMenu.Root>
         <DropdownMenu.Trigger asChild>
           <button
+            data-cy="hamburger-menu-trigger"
             className={styles.iconButton}
             aria-haspopup="true"
             aria-label="Open main menu"
@@ -34,19 +35,19 @@ export function HeaderMenu() {
             aria-label="Main menu"
           >
             <DropdownMenu.Item asChild onSelect={() => navigate('/catalogue')}>
-              <button type="button" className={styles.menuItem} role="menuitem">
+              <button data-cy="nav-catalogue" type="button" className={styles.menuItem} role="menuitem">
                 <GridIcon className={styles.menuIcon} aria-hidden="true" />
                 <span>Catalogue</span>
               </button>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild onSelect={() => navigate('/collection')}>
-              <button type="button" className={styles.menuItem} role="menuitem">
+              <button data-cy="nav-collection" type="button" className={styles.menuItem} role="menuitem">
                 <BookmarkFilledIcon className={styles.menuIcon} aria-hidden="true" />
                 <span>Collection</span>
               </button>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild onSelect={() => navigate('/weddings')}>
-              <button type="button" className={styles.menuItem} role="menuitem">
+              <button data-cy="nav-weddings" type="button" className={styles.menuItem} role="menuitem">
                 <HeartFilledIcon className={styles.menuIcon} aria-hidden="true" />
                 <span>Weddings</span>
               </button>

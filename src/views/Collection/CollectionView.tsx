@@ -9,10 +9,10 @@ import styles from './CollectionView.module.css';
 export function CollectionView() {
 
   return (
-    <div className={styles.root}>
+    <div data-cy="collection-view" className={styles.root}>
       <header className={styles.header}>
         <div className={styles.headerRow}>
-          <h1 className={styles.title}>Collection</h1>
+          <h1 data-cy="page-title" className={styles.title}>Collection</h1>
           <div className={styles.iconButtons}>
             <HeaderMenu />
             <button className={styles.iconButton}>

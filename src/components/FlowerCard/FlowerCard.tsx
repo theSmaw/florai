@@ -28,6 +28,7 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
 
   return (
     <button
+      data-cy="flower-card"
       onClick={() => onCardClick(flower.id)}
       className={`${styles.card} ${isOutOfStock ? styles.outOfStock : ''}`}
     >
@@ -49,13 +50,13 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
           }}
         />
         {isOutOfStock ? (
-          <div className={styles.overlay}>
-            <span className={styles.outBadge}>
+          <div data-cy="stock-badge" className={styles.overlay}>
+            <span data-cy="out-of-stock-badge" className={styles.outBadge}>
               OUT OF STOCK
             </span>
           </div>
         ) : (
-          <div className={styles.stockBadge}>
+          <div data-cy="stock-badge" className={styles.stockBadge}>
             <span className={styles.stockDot}></span>
             STOCK: {flower.quantityOnHand}
           </div>
@@ -63,7 +64,7 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
       </div>
       <div className={styles.content}>
         <div className={styles.titleRow}>
-          <h3 className={styles.title}>
+          <h3 data-cy="flower-card-name" className={styles.title}>
             {flower.name}
           </h3>
           <div className={`${styles.colorDot} ${colorClass}`}></div>
@@ -77,6 +78,7 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
             <span className={styles.perStem}>/stem</span>
           </span>
           <button
+            data-cy="flower-card-more-btn"
             className={styles.moreBtn}
             onClick={(e) => {
               e.stopPropagation();
