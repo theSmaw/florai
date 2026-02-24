@@ -3,7 +3,7 @@
 export interface Flower {
   id: string;
   name: string;
-  color: string[]; // Multiple colors (e.g., "red", "pink", "coral")
+  colors: string[]; // Multiple colors (e.g., "red", "pink", "coral")
   type: string; // Rose, Tulip, etc.
 
   // Media

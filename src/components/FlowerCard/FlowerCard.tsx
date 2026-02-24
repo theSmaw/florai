@@ -10,7 +10,7 @@ interface FlowerCardProps {
 
 export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
   const isOutOfStock = flower.quantityOnHand === 0;
-  const colorDot = flower.color[0] || 'gray';
+  const colorDot = flower.colors[0] || 'gray';
 
   // Map color names to utility classes for dynamic color dot background
   const colorClasses: Record<string, string> = {

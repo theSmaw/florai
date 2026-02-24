@@ -9,7 +9,7 @@ interface RawFlower {
   id: string | number
   name: string
   imageUrl?: string | null
-  color?: string[]
+  colors?: string[]
   type: string
   wholesalePrice: number | string
   retailPrice: number | string
@@ -41,7 +41,7 @@ async function main(): Promise<void> {
     const flowerData = {
       name: f.name,
       imageUrl: f.imageUrl ?? null,
-      color: JSON.stringify(f.color ?? []),
+      colors: JSON.stringify(f.colors ?? []),
       type: f.type,
       wholesalePrice: Number(f.wholesalePrice),
       retailPrice: Number(f.retailPrice),

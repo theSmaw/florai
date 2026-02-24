@@ -15,7 +15,7 @@ model Flower {
   id                     String   @id // coming from db.json; not auto-generated
   name                   String
   imageUrl               String?
-  color                  String   // JSON-serialised string[] (SQLite has no Json type)
+  colors                 String   // JSON-serialised string[] (SQLite has no Json type)
   type                   String
   wholesalePrice         Float
   retailPrice            Float

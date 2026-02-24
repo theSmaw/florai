@@ -24,7 +24,7 @@ export const selectSelectedFlower = (state: RootState): Flower | null => {
 export const selectAllColors = (state: RootState): string[] => {
   const colorSet = new Set<string>();
   state.flowers.flowers.forEach((flower: Flower) => {
-    flower.color.forEach((c: string) => colorSet.add(c));
+    flower.colors.forEach((c: string) => colorSet.add(c));
   });
   return Array.from(colorSet).sort();
 };
@@ -36,7 +36,7 @@ export const selectFilteredFlowers = (state: RootState): Flower[] => {
   // Filter by colors
   if (filter.colors.length > 0) {
     filtered = filtered.filter((flower: Flower) =>
-      filter.colors.some((color: string) => flower.color.includes(color))
+      filter.colors.some((color: string) => flower.colors.includes(color))
     );
   }
 
@@ -70,7 +70,7 @@ export const selectGroupedFlowers = (state: RootState): Record<string, Flower[]>
   if (groupBy === 'color') {
     const grouped: Record<string, Flower[]> = {};
     filtered.forEach((flower: Flower) => {
-      flower.color.forEach((color: string) => {
+      flower.colors.forEach((color: string) => {
         if (!grouped[color]) {
           grouped[color] = [];
         }
