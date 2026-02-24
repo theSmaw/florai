@@ -3,17 +3,23 @@ describe('Catalogue loads', () => {
     cy.stubFlowers();
   });
 
-  it('shows the flower list after load', () => {
-    cy.visitCatalogue();
-    cy.get('[data-cy="flower-list"]').should('be.visible');
-  });
+  describe('after flowers have loaded', () => {
+    beforeEach(() => {
+      cy.visitCatalogue();
+    });
 
-  it('renders 6 flower cards', () => {
-    cy.visitCatalogue();
-    cy.get('[data-cy="flower-card"]').should('have.length', 6);
+    it('shows the flower list', () => {
+      cy.get('[data-cy="flower-list"]').should('be.visible');
+    });
+
+    it('renders 6 flower cards', () => {
+      cy.get('[data-cy="flower-card"]').should('have.length', 6);
+    });
   });
 
   it('shows a loading indicator while fetching', () => {
+    // Cannot use cy.visitCatalogue() here — that command waits for the loading
+    // indicator to disappear, which would defeat the purpose of this test.
     cy.intercept('GET', '/api/flowers', (req) => {
       req.reply((res) => {
         res.setDelay(500);
