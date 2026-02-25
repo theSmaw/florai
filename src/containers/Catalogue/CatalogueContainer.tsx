@@ -35,9 +35,9 @@ export function CatalogueContainer() {
     dispatch(loadingStarted());
     fetchFlowers(controller.signal)
       .then((data) => dispatch(flowersLoaded(data)))
-      .catch((err: any) => {
-        if (err && err.name === 'AbortError') return;
-        dispatch(loadingFailed(err?.message || 'Failed to load flowers'));
+      .catch((err: unknown) => {
+        if (err instanceof Error && err.name === 'AbortError') return;
+        dispatch(loadingFailed(err instanceof Error ? err.message : 'Failed to load flowers'));
         console.error('Failed to fetch flowers', err);
       });
 
@@ -80,12 +80,9 @@ export function CatalogueContainer() {
 
   const handleCardClick = (flowerId: string) => {
     dispatch(flowerSelected(flowerId));
-    console.log('Selected flower:', flowerId);
   };
 
-  const handleAddFlowerClick = () => {
-    console.log('Add flower clicked');
-  };
+  const handleAddFlowerClick = () => {};
 
   return (
     <CatalogueView

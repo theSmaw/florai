@@ -92,9 +92,7 @@ export function CatalogueView({
                   <Dialog.Title className={styles.sheetTitle}>Filters</Dialog.Title>
                   <Dialog.Close asChild>
                     <button className={styles.closeButton} aria-label="Close filters">
-                      <span className="material-icons" style={{ fontSize: 20 }}>
-                        close
-                      </span>
+                      <span className={`material-icons ${styles.closeIcon}`}>close</span>
                     </button>
                   </Dialog.Close>
                 </div>
@@ -144,9 +142,7 @@ export function CatalogueView({
 
       {/* FAB */}
       <button data-cy="add-flower-button" onClick={onAddFlowerClick} className={styles.fab}>
-        <span className="material-icons" style={{ fontSize: 28 }}>
-          add
-        </span>
+        <span className={`material-icons ${styles.fabIcon}`}>add</span>
       </button>
     </div>
   );

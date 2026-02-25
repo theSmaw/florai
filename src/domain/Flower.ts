@@ -45,14 +45,3 @@ export interface FlowerListState {
   isLoading: boolean;
   error: string | null;
 }
-
-export const initialFlowerListState: FlowerListState = {
-  flowers: [],
-  filter: {
-    colors: [],
-    groupBy: 'none',
-  },
-  selectedFlowerId: null,
-  isLoading: false,
-  error: null,
-};

@@ -26,8 +26,8 @@ export function WeddingsView() {
         </div>
       </header>
 
-      <main style={{ padding: '1rem' }}>
-        <p style={{ color: '#334155' }}>This is a placeholder for the Weddings page.</p>
+      <main className={styles.main}>
+        <p className={styles.placeholderText}>This is a placeholder for the Weddings page.</p>
       </main>
     </div>
   );
