@@ -17,11 +17,10 @@ describe('Filter panel', () => {
     cy.get('[data-cy="filter-panel"]').should('not.exist');
   });
 
-  it('closes when the overlay is clicked', () => {
+  it('closes when Escape is pressed', () => {
     cy.get('[data-cy="filter-toggle-button"]').click();
     cy.get('[data-cy="filter-panel"]').should('be.visible');
-    // Click the overlay (outside the sheet)
-    cy.get('body').click(5, 100);
+    cy.get('body').type('{esc}');
     cy.get('[data-cy="filter-panel"]').should('not.exist');
   });
 
