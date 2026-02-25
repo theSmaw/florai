@@ -34,9 +34,5 @@
     "noUncheckedSideEffectImports": true
   },
   "include": ["src"],
-  "exclude": [
-    ".storybook",
-    "src/**/*.stories.*",
-    "src/**/*.mdx"
-  ]
+  "exclude": [".storybook", "src/**/*.stories.*", "src/**/*.mdx"]
 }

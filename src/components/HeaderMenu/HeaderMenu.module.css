@@ -4,16 +4,16 @@
 
 .iconButton {
   padding: 0.5rem;
-  background: rgba(16, 185, 129, 0.1); /* emerald-500/10 */
-  color: var(--color-brand);
+  background: transparent;
+  color: var(--color-text-subtle);
   border: none;
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: background-color 150ms ease-in-out;
+  transition: color 150ms ease-in-out;
 }
 
 .iconButton:hover {
-  background: rgba(16, 185, 129, 0.2);
+  color: var(--color-text-primary);
 }
 
 .menuPanel {
@@ -52,11 +52,11 @@
 .triggerIcon {
   width: 20px;
   height: 20px;
-  color: var(--color-brand);
+  color: var(--color-text-secondary);
 }
 
 .menuIcon {
   width: 20px;
   height: 20px;
-  color: var(--color-brand);
+  color: var(--color-text-secondary);
 }
