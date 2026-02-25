@@ -175,32 +175,23 @@
 
 .sheet {
   position: fixed;
-  bottom: 0;
-  left: 0;
+  top: 0;
   right: 0;
+  bottom: 0;
+  width: min(340px, 88vw);
   background: #ffffff;
-  border-radius: 20px 20px 0 0;
-  max-height: 82vh;
+  border-radius: 20px 0 0 20px;
   overflow-y: auto;
   z-index: 51;
-  box-shadow: 0 -8px 40px rgba(15, 23, 42, 0.14);
-  animation: sheetSlideUp 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -8px 0 40px rgba(15, 23, 42, 0.14);
+  animation: sheetSlideIn 260ms cubic-bezier(0.16, 1, 0.3, 1);
   /* Remove browser-default focus ring; a11y handled by Radix */
   outline: none;
 }
 
-@keyframes sheetSlideUp {
-  from { transform: translateY(100%); }
-  to   { transform: translateY(0); }
-}
-
-.dragHandle {
-  width: 36px;
-  height: 4px;
-  background: #cbd5e1; /* slate-300 */
-  border-radius: 9999px;
-  margin: 12px auto 0;
-  flex-shrink: 0;
+@keyframes sheetSlideIn {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
 }
 
 .sheetHeader {

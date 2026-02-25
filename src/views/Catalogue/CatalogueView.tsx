@@ -90,9 +90,6 @@ export function CatalogueView({
             <Dialog.Portal>
               <Dialog.Overlay className={styles.overlay} />
               <Dialog.Content className={styles.sheet} aria-describedby={undefined}>
-                {/* Drag handle */}
-                <div className={styles.dragHandle} />
-
                 {/* Sheet header */}
                 <div className={styles.sheetHeader}>
                   <Dialog.Title className={styles.sheetTitle}>Filters</Dialog.Title>
