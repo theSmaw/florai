@@ -1,5 +1,6 @@
 // Reusable flower card component
 // Pure UI - no business logic or store access
+import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import type { Flower } from '../../domain/Flower';
 import styles from './FlowerCard.module.css';
 
@@ -71,7 +72,7 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
               e.stopPropagation();
             }}
           >
-            <span className={`material-icons ${styles.moreBtnIcon}`}>more_vert</span>
+            <DotsVerticalIcon width={18} height={18} />
           </button>
         </div>
       </div>

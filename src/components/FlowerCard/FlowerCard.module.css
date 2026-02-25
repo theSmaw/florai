@@ -61,4 +61,3 @@
 .perStem { font-size: var(--font-size-2xs); font-weight: var(--font-weight-normal); color: var(--color-text-subtle); margin-left: 0.125rem; }
 .moreBtn { color: #cbd5e1; background: transparent; border: none; cursor: pointer; }
 .moreBtn:hover { color: var(--color-brand); }
-.moreBtnIcon { font-size: 1.125rem; }
