@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
 }
-.mutedText { color: #64748b; }
+.mutedText { color: var(--color-text-muted); }
 
 .main {
   padding-left: 1rem;
@@ -19,8 +19,8 @@
 .group { margin-bottom: 1.5rem; }
 .groupTitle {
   font-size: 0.875rem;
-  font-weight: 600;
-  color: #475569;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
   margin-bottom: 0.75rem;
   padding-left: 0.25rem;
 }
