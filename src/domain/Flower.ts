@@ -37,11 +37,3 @@ export interface FlowerFilter {
   searchTerm?: string;
   groupBy?: 'color' | 'type' | 'none';
 }
-
-export interface FlowerListState {
-  flowers: Flower[];
-  filter: FlowerFilter;
-  selectedFlowerId: string | null;
-  isLoading: boolean;
-  error: string | null;
-}

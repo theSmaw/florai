@@ -1,26 +1,22 @@
 // Flowers slice using Redux Toolkit
-import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { fetchFlowers } from '../../api/fetchFlowers';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { loadFlowers } from './asyncActions/loadFlowers';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
+import type { AsyncAction } from '../AsyncAction';
 
-export const loadFlowers = createAsyncThunk('flowers/load', (_arg, thunkAPI) =>
-  fetchFlowers(thunkAPI.signal),
-);
-
-const initialFlowerListState = {
+const initialState = {
   flowers: [] as Flower[],
   filter: {
     colors: [] as string[],
     groupBy: undefined as 'color' | 'type' | 'none' | undefined,
   } as FlowerFilter,
   selectedFlowerId: null as string | null,
-  isLoading: false,
-  error: null as string | null,
+  loadFlowersStatus: { status: 'idle' } as AsyncAction,
 };
 
 export const flowersSlice = createSlice({
   name: 'flowers',
-  initialState: initialFlowerListState,
+  initialState,
   reducers: {
     filterApplied(state, action: PayloadAction<FlowerFilter>) {
       state.filter = action.payload;
@@ -47,18 +43,18 @@ export const flowersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loadFlowers.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
+        state.loadFlowersStatus = { status: 'pending' };
       })
       .addCase(loadFlowers.fulfilled, (state, action) => {
         state.flowers = action.payload;
-        state.isLoading = false;
-        state.error = null;
+        state.loadFlowersStatus = { status: 'fulfilled' };
       })
       .addCase(loadFlowers.rejected, (state, action) => {
         if (action.meta.aborted) return;
-        state.isLoading = false;
-        state.error = action.error.message ?? 'Failed to load flowers';
+        state.loadFlowersStatus = {
+          status: 'rejected',
+          errorMessage: action.error.message ?? 'Failed to load flowers',
+        };
       });
   },
 });

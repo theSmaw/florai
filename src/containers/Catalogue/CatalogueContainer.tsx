@@ -7,10 +7,11 @@ import {
   selectFilteredFlowers,
   selectGroupedFlowers,
   selectFlowersFilter,
-  selectFlowersIsLoading,
+  selectLoadFlowersStatus,
   selectAllColors,
 } from '../../stores/flowers/selectors';
-import { filterApplied, flowerSelected, loadFlowers } from '../../stores/flowers/slice';
+import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
+import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch } from '../../stores/store';
 
 export function CatalogueContainer() {
@@ -18,7 +19,8 @@ export function CatalogueContainer() {
   const filteredFlowers = useSelector(selectFilteredFlowers);
   const groupedFlowers = useSelector(selectGroupedFlowers);
   const currentFilter = useSelector(selectFlowersFilter);
-  const isLoading = useSelector(selectFlowersIsLoading);
+  const loadFlowersStatus = useSelector(selectLoadFlowersStatus);
+  const isLoading = loadFlowersStatus.status === 'pending';
   const availableColors = useSelector(selectAllColors);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
