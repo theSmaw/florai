@@ -1,15 +1,13 @@
 /**
  * Catalogue view component
  * Pure UI - displays the catalogue header, search, filters, and flower list
- * Documentation:
- * - CATALOGUE_IMPLEMENTATION.md (feature design and behaviour)
- * - ARCHITECTURE.md (laminar flow and app structure)
- * - CODING_CONVENTIONS.md (naming and UI patterns)
  */
+import * as Dialog from '@radix-ui/react-dialog';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import { FlowerList } from '../../components/FlowerList/FlowerList.tsx';
 import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu.tsx';
 import { FilterPanel } from '../../components/FilterPanel/FilterPanel.tsx';
+import styles from './CatalogueView.module.css';
 
 interface CatalogueViewProps {
   flowers: Flower[];
@@ -17,18 +15,15 @@ interface CatalogueViewProps {
   availableColors: string[];
   currentFilter: FlowerFilter;
   isLoading?: boolean;
-  isFilterOpen?: boolean;
+  isFilterOpen: boolean;
+  onFilterOpenChange: (open: boolean) => void;
   onSearchChange: (searchTerm: string) => void;
-  onFilterClick: () => void;
   onColorToggle: (color: string) => void;
   onAvailabilityChange: (availability?: 'always' | 'seasonal' | 'limited') => void;
   onGroupByChange: (groupBy?: 'color' | 'type' | 'none') => void;
-  onApplyFilters: () => void;
   onCardClick: (flowerId: string) => void;
   onAddFlowerClick: () => void;
 }
-
-import styles from './CatalogueView.module.css';
 
 export function CatalogueView({
   flowers,
@@ -37,23 +32,26 @@ export function CatalogueView({
   currentFilter,
   isLoading,
   isFilterOpen,
+  onFilterOpenChange,
   onSearchChange,
-  onFilterClick,
   onColorToggle,
   onAvailabilityChange,
   onGroupByChange,
-  onApplyFilters,
   onCardClick,
   onAddFlowerClick,
 }: CatalogueViewProps) {
+  const hasActiveFilters =
+    currentFilter.colors.length > 0 ||
+    !!currentFilter.availability ||
+    !!currentFilter.searchTerm;
+
   return (
     <div data-cy="catalogue-view" className={styles.root}>
-      {/* Header Section */}
+
+      {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerRow}>
-          <h1 className={styles.title}>
-            Catalogue
-          </h1>
+          <h1 className={styles.title}>Catalogue</h1>
           <div className={styles.iconButtons}>
             <HeaderMenu />
             <button className={styles.iconButton}>
@@ -65,13 +63,10 @@ export function CatalogueView({
           </div>
         </div>
 
-
-        {/* Search and Filter Bar */}
+        {/* Search + Filter trigger */}
         <div className={styles.searchBar}>
           <div className={styles.searchWrapper}>
-            <span className={`material-icons ${styles.searchIcon}`}>
-              search
-            </span>
+            <span className={`material-icons ${styles.searchIcon}`}>search</span>
             <input
               data-cy="search-input"
               type="text"
@@ -81,58 +76,60 @@ export function CatalogueView({
               placeholder="Search flowers..."
             />
           </div>
-          <button
-            data-cy="filter-toggle-button"
-            onClick={onFilterClick}
-            className={styles.filterButton}
-          >
-            <span className="material-icons">tune</span>
-            <span>Filter</span>
-          </button>
+
+          {/* Filter button doubles as Dialog trigger */}
+          <Dialog.Root open={isFilterOpen} onOpenChange={onFilterOpenChange}>
+            <Dialog.Trigger asChild>
+              <button data-cy="filter-toggle-button" className={styles.filterButton}>
+                <span className="material-icons">tune</span>
+                <span>Filter</span>
+                {hasActiveFilters && <span className={styles.filterBadge} />}
+              </button>
+            </Dialog.Trigger>
+
+            <Dialog.Portal>
+              <Dialog.Overlay className={styles.overlay} />
+              <Dialog.Content className={styles.sheet} aria-describedby={undefined}>
+                {/* Sheet header */}
+                <div className={styles.sheetHeader}>
+                  <Dialog.Title className={styles.sheetTitle}>Filters</Dialog.Title>
+                  <Dialog.Close asChild>
+                    <button className={styles.closeButton} aria-label="Close filters">
+                      <span className="material-icons" style={{ fontSize: 20 }}>close</span>
+                    </button>
+                  </Dialog.Close>
+                </div>
+
+                <FilterPanel
+                  availableColors={availableColors}
+                  currentFilter={currentFilter}
+                  onColorToggle={onColorToggle}
+                  onAvailabilityChange={onAvailabilityChange}
+                  onGroupByChange={onGroupByChange}
+                  onApplyFilters={() => onFilterOpenChange(false)}
+                />
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
         </div>
 
-        {/* Active Filters Display */}
-        {(currentFilter.colors.length > 0 ||
-          currentFilter.availability ||
-          currentFilter.searchTerm) && (
+        {/* Active filter pills */}
+        {hasActiveFilters && (
           <div data-cy="active-filters" className={styles.activeFilters}>
-            {currentFilter.colors.map((color: string) => (
-              <div
-                key={color}
-                data-cy="filter-pill"
-                className={styles.pill}
-              >
-                {color}
-              </div>
+            {currentFilter.colors.map((color) => (
+              <div key={color} data-cy="filter-pill" className={styles.pill}>{color}</div>
             ))}
             {currentFilter.availability && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.availability}
-              </div>
+              <div data-cy="filter-pill" className={styles.pill}>{currentFilter.availability}</div>
             )}
             {currentFilter.searchTerm && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.searchTerm}
-              </div>
+              <div data-cy="filter-pill" className={styles.pill}>{currentFilter.searchTerm}</div>
             )}
           </div>
         )}
       </header>
 
-      {/* Filter Panel */}
-      {isFilterOpen && (
-        <FilterPanel
-          availableColors={availableColors}
-          currentFilter={currentFilter}
-          onSearchChange={onSearchChange}
-          onColorToggle={onColorToggle}
-          onAvailabilityChange={onAvailabilityChange}
-          onGroupByChange={onGroupByChange}
-          onApplyFilters={onApplyFilters}
-        />
-      )}
-
-      {/* Main Content */}
+      {/* Flower list */}
       <FlowerList
         flowers={flowers}
         onCardClick={onCardClick}
@@ -140,13 +137,13 @@ export function CatalogueView({
         {...(isLoading !== undefined ? { isLoading } : {})}
       />
 
-      {/* Floating Action Button */}
+      {/* FAB */}
       <button
         data-cy="add-flower-button"
         onClick={onAddFlowerClick}
         className={styles.fab}
       >
-        <span className="material-icons" style={{ fontSize: '28px' }}>add</span>
+        <span className="material-icons" style={{ fontSize: 28 }}>add</span>
       </button>
 
     </div>

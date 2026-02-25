@@ -157,6 +157,87 @@
 .navItemActive { color: #10b981; }
 .navItemLabel { font-size: 10px; font-weight: 600; }
 
+/* ── Filter bottom sheet ─────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+  z-index: 50;
+  animation: overlayShow 180ms ease;
+}
+
+@keyframes overlayShow {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.sheet {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(340px, 88vw);
+  background: #ffffff;
+  border-radius: 20px 0 0 20px;
+  overflow-y: auto;
+  z-index: 51;
+  box-shadow: -8px 0 40px rgba(15, 23, 42, 0.14);
+  animation: sheetSlideIn 260ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Remove browser-default focus ring; a11y handled by Radix */
+  outline: none;
+}
+
+@keyframes sheetSlideIn {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+.sheetHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 14px;
+  border-bottom: 1px solid #f1f5f9; /* slate-100 */
+}
+
+.sheetTitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a; /* slate-900 */
+  margin: 0;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: #f1f5f9; /* slate-100 */
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  color: #64748b; /* slate-500 */
+  transition: background 120ms;
+}
+
+.closeButton:hover { background: #e2e8f0; }
+
+/* Badge dot on the filter button when filters are active */
+.filterBadge {
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
+  border-radius: 9999px;
+  margin-left: -4px;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1.5px #10b981;
+}
+
+/* ── Top hamburger menu panel ────────────────────────── */
+
 /* Top hamburger menu panel */
 .menuPanel {
   position: absolute;
