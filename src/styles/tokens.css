@@ -15,6 +15,7 @@
 
   /* Borders */
   --color-border: #e2e8f0; /* slate-200 */
+  --color-border-input: #cbd5e1; /* slate-300 — input default border */
   --color-border-focus: #10b981;
 
   /* Text */

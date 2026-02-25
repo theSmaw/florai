@@ -1,4 +1,5 @@
 // Flowers selectors
+import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 
@@ -21,79 +22,80 @@ export const selectSelectedFlower = (state: RootState): Flower | null => {
   return state.flowers.flowers.find((f: Flower) => f.id === selectedId) ?? null;
 };
 
-export const selectAllColors = (state: RootState): string[] => {
-  const colorSet = new Set<string>();
-  state.flowers.flowers.forEach((flower: Flower) => {
-    flower.colors.forEach((c: string) => colorSet.add(c));
-  });
-  return Array.from(colorSet).sort();
-};
+export const selectAllColors = createSelector(
+  (state: RootState) => state.flowers.flowers,
+  (flowers: Flower[]): string[] => {
+    const colorSet = new Set<string>();
+    flowers.forEach((flower) => flower.colors.forEach((c) => colorSet.add(c)));
+    return Array.from(colorSet).sort();
+  },
+);
 
-export const selectFilteredFlowers = (state: RootState): Flower[] => {
-  const { flowers, filter } = state.flowers;
-  let filtered = flowers;
+export const selectFilteredFlowers = createSelector(
+  (state: RootState) => state.flowers.flowers,
+  (state: RootState) => state.flowers.filter,
+  (flowers: Flower[], filter: FlowerFilter): Flower[] => {
+    let filtered = flowers;
 
-  // Filter by colors
-  if (filter.colors.length > 0) {
-    filtered = filtered.filter((flower: Flower) =>
-      filter.colors.some((color: string) => flower.colors.includes(color)),
-    );
-  }
+    // Filter by colors
+    if (filter.colors.length > 0) {
+      filtered = filtered.filter((flower) =>
+        filter.colors.some((color) => flower.colors.includes(color)),
+      );
+    }
 
-  // Filter by availability
-  if (filter.availability) {
-    filtered = filtered.filter((flower: Flower) => flower.availability === filter.availability);
-  }
+    // Filter by availability
+    if (filter.availability) {
+      filtered = filtered.filter((flower) => flower.availability === filter.availability);
+    }
 
-  // Filter by search term
-  if (filter.searchTerm) {
-    const term = filter.searchTerm.toLowerCase();
-    filtered = filtered.filter(
-      (flower: Flower) =>
-        flower.name.toLowerCase().includes(term) ||
-        flower.type.toLowerCase().includes(term) ||
-        flower.notes.toLowerCase().includes(term),
-    );
-  }
+    // Filter by search term
+    if (filter.searchTerm) {
+      const term = filter.searchTerm.toLowerCase();
+      filtered = filtered.filter(
+        (flower) =>
+          flower.name.toLowerCase().includes(term) ||
+          flower.type.toLowerCase().includes(term) ||
+          flower.notes.toLowerCase().includes(term),
+      );
+    }
 
-  return filtered;
-};
+    return filtered;
+  },
+);
 
-export const selectGroupedFlowers = (state: RootState): Record<string, Flower[]> => {
-  const filtered = selectFilteredFlowers(state);
-  const groupBy = state.flowers.filter.groupBy || 'none';
+export const selectGroupedFlowers = createSelector(
+  selectFilteredFlowers,
+  (state: RootState) => state.flowers.filter.groupBy,
+  (filtered: Flower[], groupBy = 'none'): Record<string, Flower[]> => {
+    if (groupBy === 'none') {
+      return { 'All Flowers': filtered };
+    }
 
-  if (groupBy === 'none') {
-    return { 'All Flowers': filtered };
-  }
-
-  if (groupBy === 'color') {
-    const grouped: Record<string, Flower[]> = {};
-    filtered.forEach((flower: Flower) => {
-      flower.colors.forEach((color: string) => {
-        if (!grouped[color]) {
-          grouped[color] = [];
-        }
-        grouped[color].push(flower);
+    if (groupBy === 'color') {
+      const grouped: Record<string, Flower[]> = {};
+      filtered.forEach((flower) => {
+        flower.colors.forEach((color) => {
+          if (!grouped[color]) grouped[color] = [];
+          grouped[color].push(flower);
+        });
       });
-    });
-    return grouped;
-  }
+      return grouped;
+    }
 
-  if (groupBy === 'type') {
-    const grouped: Record<string, Flower[]> = {};
-    filtered.forEach((flower: Flower) => {
-      const key = flower.type;
-      if (!grouped[key]) {
-        grouped[key] = [];
-      }
-      grouped[key]!.push(flower);
-    });
-    return grouped;
-  }
+    if (groupBy === 'type') {
+      const grouped: Record<string, Flower[]> = {};
+      filtered.forEach((flower) => {
+        const key = flower.type;
+        if (!grouped[key]) grouped[key] = [];
+        grouped[key]!.push(flower);
+      });
+      return grouped;
+    }
 
-  return { 'All Flowers': filtered };
-};
+    return { 'All Flowers': filtered };
+  },
+);
 
 export const selectComplementaryFlowers = (state: RootState): Flower[] => {
   const selected = selectSelectedFlower(state);

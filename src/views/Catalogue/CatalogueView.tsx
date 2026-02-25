@@ -3,6 +3,14 @@
  * Pure UI - displays the catalogue header, search, filters, and flower list
  */
 import * as Dialog from '@radix-ui/react-dialog';
+import {
+  BellIcon,
+  PersonIcon,
+  MagnifyingGlassIcon,
+  MixerVerticalIcon,
+  Cross2Icon,
+  PlusIcon,
+} from '@radix-ui/react-icons';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import { FlowerList } from '../../components/FlowerList/FlowerList.tsx';
 import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu.tsx';
@@ -51,11 +59,11 @@ export function CatalogueView({
           <h1 className={styles.title}>Catalogue</h1>
           <div className={styles.iconButtons}>
             <HeaderMenu />
-            <button className={styles.iconButton}>
-              <span className="material-icons">notifications_none</span>
+            <button className={styles.iconButton} aria-label="Notifications">
+              <BellIcon width={20} height={20} aria-hidden="true" />
             </button>
-            <button className={styles.iconButton}>
-              <span className="material-icons">account_circle</span>
+            <button className={styles.iconButton} aria-label="Account">
+              <PersonIcon width={20} height={20} aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -63,7 +71,12 @@ export function CatalogueView({
         {/* Search + Filter trigger */}
         <div className={styles.searchBar}>
           <div className={styles.searchWrapper}>
-            <span className={`material-icons ${styles.searchIcon}`}>search</span>
+            <MagnifyingGlassIcon
+              className={styles.searchIcon}
+              width={18}
+              height={18}
+              aria-hidden="true"
+            />
             <input
               data-cy="search-input"
               type="text"
@@ -78,7 +91,7 @@ export function CatalogueView({
           <Dialog.Root open={isFilterOpen} onOpenChange={onFilterOpenChange}>
             <Dialog.Trigger asChild>
               <button data-cy="filter-toggle-button" className={styles.filterButton}>
-                <span className="material-icons">tune</span>
+                <MixerVerticalIcon width={16} height={16} aria-hidden="true" />
                 <span>Filter</span>
                 {hasActiveFilters && <span className={styles.filterBadge} />}
               </button>
@@ -92,9 +105,7 @@ export function CatalogueView({
                   <Dialog.Title className={styles.sheetTitle}>Filters</Dialog.Title>
                   <Dialog.Close asChild>
                     <button className={styles.closeButton} aria-label="Close filters">
-                      <span className="material-icons" style={{ fontSize: 20 }}>
-                        close
-                      </span>
+                      <Cross2Icon width={15} height={15} aria-hidden="true" />
                     </button>
                   </Dialog.Close>
                 </div>
@@ -144,9 +155,7 @@ export function CatalogueView({
 
       {/* FAB */}
       <button data-cy="add-flower-button" onClick={onAddFlowerClick} className={styles.fab}>
-        <span className="material-icons" style={{ fontSize: 28 }}>
-          add
-        </span>
+        <PlusIcon width={24} height={24} aria-hidden="true" />
       </button>
     </div>
   );
