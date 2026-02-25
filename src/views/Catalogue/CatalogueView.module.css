@@ -24,8 +24,8 @@
 
 .title {
   font-family: var(--font-family-display);
-  font-size: 2.25rem;
-  font-weight: 300;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-light);
   letter-spacing: var(--letter-spacing-display);
   text-transform: uppercase;
   color: var(--color-text-primary);
@@ -34,11 +34,11 @@
 
 .iconButtons {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
 .iconButton {
-  padding: 0.5rem;
+  padding: var(--space-2);
   background: transparent;
   color: var(--color-text-subtle);
   border: none;
@@ -54,7 +54,7 @@
 
 .searchBar {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--space-2);
   align-items: center;
   width: 100%;
 }
@@ -68,7 +68,7 @@
 
 .searchIcon {
   position: absolute;
-  left: 0.75rem;
+  left: var(--space-3);
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-text-subtle);
@@ -82,7 +82,7 @@
   border: 1px solid var(--color-border-input);
   border-radius: var(--radius-sm);
   padding: 0.625rem 1rem 0.625rem 2.5rem; /* py-2.5 pl-10 pr-4 */
-  font-size: 0.875rem;
+  font-size: var(--font-size-md);
   outline: none;
   box-shadow: none;
 }
@@ -95,14 +95,14 @@
 .filterButton {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--space-2);
   background: transparent;
   color: var(--color-text-primary);
   padding: 0.625rem 1rem;
   border-radius: var(--radius-sm);
   border: 1.5px solid var(--color-text-primary);
   font-weight: var(--font-weight-semibold);
-  font-size: 0.875rem;
+  font-size: var(--font-size-md);
   cursor: pointer;
   transition:
     background-color 150ms ease-in-out,
@@ -112,14 +112,14 @@
 
 .filterButton:hover {
   background: var(--color-text-primary);
-  color: #fff;
+  color: var(--color-text-on-brand);
 }
 
 .activeFilters {
   display: flex;
-  gap: 0.5rem;
+  gap: var(--space-2);
   overflow-x: auto;
-  margin-top: 1rem;
+  margin-top: var(--space-4);
   padding-bottom: 0.25rem;
 }
 
@@ -136,12 +136,12 @@
 
 .fab {
   position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
+  right: var(--space-6);
+  bottom: var(--space-6);
   width: 3.5rem;
   height: 3.5rem;
   background: var(--color-text-primary);
-  color: #ffffff;
+  color: var(--color-text-on-brand);
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
@@ -160,7 +160,7 @@
 }
 
 .fab:hover {
-  background: #333;
+  background: var(--color-surface-inverse-hover);
 }
 
 /* ── Filter bottom sheet ─────────────────────────────── */
@@ -168,7 +168,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.45);
+  background: var(--color-overlay);
   backdrop-filter: blur(3px);
   z-index: var(--z-overlay);
   animation: overlayShow 180ms ease;
@@ -212,14 +212,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px var(--space-5) 14px;
-  border-bottom: 1px solid #f1f5f9; /* slate-100 */
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-bg-subtle);
 }
 
 .sheetTitle {
   font-family: var(--font-family-display);
-  font-size: 1.1rem;
-  font-weight: 400;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-normal);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-text-primary);
@@ -232,7 +232,7 @@
   justify-content: center;
   width: 30px;
   height: 30px;
-  background: #f1f5f9; /* slate-100 */
+  background: var(--color-bg-subtle);
   border: none;
   border-radius: var(--radius-full);
   cursor: pointer;

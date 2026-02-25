@@ -12,6 +12,9 @@
   --color-bg-app: #faf9f7; /* warm off-white */
   --color-bg-page: #faf9f7; /* warm off-white */
   --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f1f5f9; /* slate-100 — subtle backgrounds and separators */
+  --color-brand-surface: rgba(16, 185, 129, 0.08); /* emerald tint — hover/active on light bg */
+  --color-surface-inverse-hover: #334155; /* slate-700 — hover for dark/inverse surfaces */
 
   /* Borders */
   --color-border: #e2e8f0; /* slate-200 */
@@ -42,7 +45,9 @@
   --font-size-xl: 18px;
   --font-size-2xl: 22px;
   --font-size-3xl: 28px;
+  --font-size-4xl: 2.25rem;
 
+  --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
