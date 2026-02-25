@@ -1,3 +1,4 @@
+import { BellIcon, PersonIcon } from '@radix-ui/react-icons';
 import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu.tsx';
 import styles from './WeddingsView.module.css';
 
@@ -16,11 +17,11 @@ export function WeddingsView() {
           </h1>
           <div className={styles.iconButtons}>
             <HeaderMenu />
-            <button className={styles.iconButton}>
-              <span className="material-icons">notifications_none</span>
+            <button className={styles.iconButton} aria-label="Notifications">
+              <BellIcon width={20} height={20} aria-hidden="true" />
             </button>
-            <button className={styles.iconButton}>
-              <span className="material-icons">account_circle</span>
+            <button className={styles.iconButton} aria-label="Account">
+              <PersonIcon width={20} height={20} aria-hidden="true" />
             </button>
           </div>
         </div>

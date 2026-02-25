@@ -69,7 +69,6 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--color-text-subtle);
-  font-size: 1.125rem;
 }
 
 .searchInput {
@@ -252,12 +251,4 @@
   margin-left: -4px;
   flex-shrink: 0;
   box-shadow: 0 0 0 1.5px var(--color-brand);
-}
-
-.closeIcon {
-  font-size: 20px;
-}
-
-.fabIcon {
-  font-size: var(--font-size-3xl);
 }
