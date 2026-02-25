@@ -1,6 +1,11 @@
 // Flowers slice using Redux Toolkit
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { fetchFlowers } from '../../api/fetchFlowers';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
+
+export const loadFlowers = createAsyncThunk('flowers/load', (_arg, thunkAPI) =>
+  fetchFlowers(thunkAPI.signal),
+);
 
 const initialFlowerListState = {
   flowers: [] as Flower[],
@@ -17,12 +22,6 @@ export const flowersSlice = createSlice({
   name: 'flowers',
   initialState: initialFlowerListState,
   reducers: {
-    // ...existing code...
-    flowersLoaded(state, action: PayloadAction<Flower[]>) {
-      state.flowers = action.payload;
-      state.isLoading = false;
-      state.error = null;
-    },
     filterApplied(state, action: PayloadAction<FlowerFilter>) {
       state.filter = action.payload;
     },
@@ -44,29 +43,34 @@ export const flowersSlice = createSlice({
     flowerRemoved(state, action: PayloadAction<string>) {
       state.flowers = state.flowers.filter((f: Flower) => f.id !== action.payload);
     },
-    loadingStarted(state) {
-      state.isLoading = true;
-      state.error = null;
-    },
-    loadingFailed(state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-    // ...existing code...
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(loadFlowers.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(loadFlowers.fulfilled, (state, action) => {
+        state.flowers = action.payload;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(loadFlowers.rejected, (state, action) => {
+        if (action.meta.aborted) return;
+        state.isLoading = false;
+        state.error = action.error.message ?? 'Failed to load flowers';
+      });
   },
 });
 
 // Action creators are generated automatically
 export const {
-  flowersLoaded,
   filterApplied,
   flowerSelected,
   flowerDeselected,
   flowerUpdated,
   flowerAdded,
   flowerRemoved,
-  loadingStarted,
-  loadingFailed,
 } = flowersSlice.actions;
 
 // Reducer is exported as default
