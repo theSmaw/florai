@@ -1,5 +1,6 @@
 // Reusable flower card component
 // Pure UI - no business logic or store access
+import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import type { Flower } from '../../domain/Flower';
 import styles from './FlowerCard.module.css';
 
@@ -12,19 +13,6 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
   const isOutOfStock = flower.quantityOnHand === 0;
   const colorDot = flower.colors[0] || 'gray';
 
-  // Map color names to utility classes for dynamic color dot background
-  const colorClasses: Record<string, string> = {
-    pink: 'bg-pink-400',
-    red: 'bg-red-600',
-    blue: 'bg-blue-400',
-    yellow: 'bg-yellow-400',
-    purple: 'bg-purple-400',
-    white: 'bg-white',
-    orange: 'bg-orange-400',
-    green: 'bg-green-400',
-  };
-
-  const colorClass = colorClasses[colorDot.toLowerCase()] || 'bg-gray-400';
 
   return (
     <button
@@ -67,7 +55,7 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
           <h3 data-cy="flower-card-name" className={styles.title}>
             {flower.name}
           </h3>
-          <div className={`${styles.colorDot} ${colorClass}`}></div>
+          <div className={styles.colorDot} style={{ backgroundColor: colorDot.toLowerCase() }}></div>
         </div>
         <p className={styles.meta}>
           {flower.season.length > 0 ? flower.season[0] : 'Year-round'}
@@ -84,7 +72,7 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
               e.stopPropagation();
             }}
           >
-            <span className="material-icons text-lg">more_vert</span>
+            <DotsVerticalIcon width={18} height={18} />
           </button>
         </div>
       </div>
