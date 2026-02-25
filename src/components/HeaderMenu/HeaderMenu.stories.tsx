@@ -16,9 +16,7 @@ type Story = StoryObj<typeof meta>;
 function Shell(props: { children: React.ReactNode }) {
   // Provide some space so the popover is visible and not clipped
   return (
-    <div style={{ padding: 24, display: 'flex', justifyContent: 'flex-end' }}>
-      {props.children}
-    </div>
+    <div style={{ padding: 24, display: 'flex', justifyContent: 'flex-end' }}>{props.children}</div>
   );
 }
 
@@ -54,8 +52,9 @@ function AutoNavigateCatalogue() {
     btn?.click();
     // Slight delay to ensure the panel is in the DOM
     setTimeout(() => {
-      const catBtn = Array.from(document.querySelectorAll('button'))
-        .find((b) => b.textContent?.toLowerCase().includes('catalogue')) as HTMLButtonElement | undefined;
+      const catBtn = Array.from(document.querySelectorAll('button')).find((b) =>
+        b.textContent?.toLowerCase().includes('catalogue'),
+      ) as HTMLButtonElement | undefined;
       if (catBtn) {
         catBtn.click();
         action('navigated')('hash set to ' + window.location.hash);

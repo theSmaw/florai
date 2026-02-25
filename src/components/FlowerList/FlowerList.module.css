@@ -8,7 +8,9 @@
   align-items: center;
   justify-content: center;
 }
-.mutedText { color: var(--color-text-muted); }
+.mutedText {
+  color: var(--color-text-muted);
+}
 
 .main {
   padding-left: 1rem;
@@ -16,7 +18,9 @@
   margin-top: 0.5rem;
   padding-bottom: 6rem; /* space for bottom nav */
 }
-.group { margin-bottom: 1.5rem; }
+.group {
+  margin-bottom: 1.5rem;
+}
 .groupTitle {
   font-size: 0.875rem;
   font-weight: var(--font-weight-semibold);
@@ -30,10 +34,14 @@
   gap: 1rem;
 }
 @media (min-width: 640px) {
-  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 @media (min-width: 1024px) {
-  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 .empty {
   text-align: center;

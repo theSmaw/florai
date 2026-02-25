@@ -13,7 +13,6 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
   const isOutOfStock = flower.quantityOnHand === 0;
   const colorDot = flower.colors[0] || 'gray';
 
-
   return (
     <button
       data-cy="flower-card"
@@ -55,11 +54,12 @@ export function FlowerCard({ flower, onCardClick }: FlowerCardProps) {
           <h3 data-cy="flower-card-name" className={styles.title}>
             {flower.name}
           </h3>
-          <div className={styles.colorDot} style={{ backgroundColor: colorDot.toLowerCase() }}></div>
+          <div
+            className={styles.colorDot}
+            style={{ backgroundColor: colorDot.toLowerCase() }}
+          ></div>
         </div>
-        <p className={styles.meta}>
-          {flower.season.length > 0 ? flower.season[0] : 'Year-round'}
-        </p>
+        <p className={styles.meta}>{flower.season.length > 0 ? flower.season[0] : 'Year-round'}</p>
         <div className={styles.footerRow}>
           <span className={isOutOfStock ? styles.priceMuted : styles.price}>
             ${flower.wholesalePrice.toFixed(2)}

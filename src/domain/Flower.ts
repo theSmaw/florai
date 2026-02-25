@@ -56,4 +56,3 @@ export const initialFlowerListState: FlowerListState = {
   isLoading: false,
   error: null,
 };
-

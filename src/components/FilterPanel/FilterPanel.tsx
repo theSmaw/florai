@@ -23,7 +23,10 @@ const COLOR_SWATCHES: Record<string, string> = {
   green: '#4ade80',
 };
 
-const AVAILABILITY_OPTIONS: { value: 'always' | 'seasonal' | 'limited' | undefined; label: string }[] = [
+const AVAILABILITY_OPTIONS: {
+  value: 'always' | 'seasonal' | 'limited' | undefined;
+  label: string;
+}[] = [
   { value: undefined, label: 'All' },
   { value: 'always', label: 'Always' },
   { value: 'seasonal', label: 'Seasonal' },
@@ -46,7 +49,6 @@ export function FilterPanel({
 }: FilterPanelProps) {
   return (
     <div data-cy="filter-panel" className={styles.body}>
-
       {/* Colors */}
       {availableColors.length > 0 && (
         <section className={styles.section}>
@@ -124,7 +126,6 @@ export function FilterPanel({
       >
         Apply Filters
       </button>
-
     </div>
   );
 }

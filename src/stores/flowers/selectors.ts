@@ -36,7 +36,7 @@ export const selectFilteredFlowers = (state: RootState): Flower[] => {
   // Filter by colors
   if (filter.colors.length > 0) {
     filtered = filtered.filter((flower: Flower) =>
-      filter.colors.some((color: string) => flower.colors.includes(color))
+      filter.colors.some((color: string) => flower.colors.includes(color)),
     );
   }
 
@@ -52,7 +52,7 @@ export const selectFilteredFlowers = (state: RootState): Flower[] => {
       (flower: Flower) =>
         flower.name.toLowerCase().includes(term) ||
         flower.type.toLowerCase().includes(term) ||
-        flower.notes.toLowerCase().includes(term)
+        flower.notes.toLowerCase().includes(term),
     );
   }
 
@@ -100,7 +100,6 @@ export const selectComplementaryFlowers = (state: RootState): Flower[] => {
   if (!selected) return [];
 
   return state.flowers.flowers.filter((f: Flower) =>
-    selected.complementaryFlowerIds.includes(f.id)
+    selected.complementaryFlowerIds.includes(f.id),
   );
 };
-

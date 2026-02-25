@@ -1,5 +1,10 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { HamburgerMenuIcon, GridIcon, BookmarkFilledIcon, HeartFilledIcon } from '@radix-ui/react-icons';
+import {
+  HamburgerMenuIcon,
+  GridIcon,
+  BookmarkFilledIcon,
+  HeartFilledIcon,
+} from '@radix-ui/react-icons';
 import styles from './HeaderMenu.module.css';
 
 /**
@@ -35,19 +40,34 @@ export function HeaderMenu() {
             aria-label="Main menu"
           >
             <DropdownMenu.Item asChild onSelect={() => navigate('/catalogue')}>
-              <button data-cy="nav-catalogue" type="button" className={styles.menuItem} role="menuitem">
+              <button
+                data-cy="nav-catalogue"
+                type="button"
+                className={styles.menuItem}
+                role="menuitem"
+              >
                 <GridIcon className={styles.menuIcon} aria-hidden="true" />
                 <span>Catalogue</span>
               </button>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild onSelect={() => navigate('/collection')}>
-              <button data-cy="nav-collection" type="button" className={styles.menuItem} role="menuitem">
+              <button
+                data-cy="nav-collection"
+                type="button"
+                className={styles.menuItem}
+                role="menuitem"
+              >
                 <BookmarkFilledIcon className={styles.menuIcon} aria-hidden="true" />
                 <span>Collection</span>
               </button>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild onSelect={() => navigate('/weddings')}>
-              <button data-cy="nav-weddings" type="button" className={styles.menuItem} role="menuitem">
+              <button
+                data-cy="nav-weddings"
+                type="button"
+                className={styles.menuItem}
+                role="menuitem"
+              >
                 <HeartFilledIcon className={styles.menuIcon} aria-hidden="true" />
                 <span>Weddings</span>
               </button>

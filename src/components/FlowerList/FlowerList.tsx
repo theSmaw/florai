@@ -11,16 +11,13 @@ interface FlowerListProps {
   isLoading?: boolean;
 }
 
-export function FlowerList({
-  flowers,
-  groupedFlowers,
-  onCardClick,
-  isLoading,
-}: FlowerListProps) {
+export function FlowerList({ flowers, groupedFlowers, onCardClick, isLoading }: FlowerListProps) {
   if (isLoading) {
     return (
       <div className={styles.center}>
-        <p data-cy="loading-indicator" className={styles.mutedText}>Loading flowers...</p>
+        <p data-cy="loading-indicator" className={styles.mutedText}>
+          Loading flowers...
+        </p>
       </div>
     );
   }

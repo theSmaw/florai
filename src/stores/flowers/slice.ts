@@ -2,7 +2,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 
-
 const initialFlowerListState = {
   flowers: [] as Flower[],
   filter: {
@@ -72,4 +71,3 @@ export const {
 
 // Reducer is exported as default
 export default flowersSlice.reducer;
-
