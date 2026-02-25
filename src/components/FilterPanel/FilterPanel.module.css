@@ -89,9 +89,15 @@
   font-weight: var(--font-weight-bold);
   cursor: pointer;
   box-shadow: var(--shadow-filter-badge);
-  transition: background 150ms, transform 120ms;
+  transition:
+    background 150ms,
+    transform 120ms;
   margin-top: var(--space-1);
 }
 
-.applyButton:hover { background: var(--color-brand-dark); }
-.applyButton:active { transform: scale(0.98); }
+.applyButton:hover {
+  background: var(--color-brand-dark);
+}
+.applyButton:active {
+  transform: scale(0.98);
+}

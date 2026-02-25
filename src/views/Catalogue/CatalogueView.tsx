@@ -41,13 +41,10 @@ export function CatalogueView({
   onAddFlowerClick,
 }: CatalogueViewProps) {
   const hasActiveFilters =
-    currentFilter.colors.length > 0 ||
-    !!currentFilter.availability ||
-    !!currentFilter.searchTerm;
+    currentFilter.colors.length > 0 || !!currentFilter.availability || !!currentFilter.searchTerm;
 
   return (
     <div data-cy="catalogue-view" className={styles.root}>
-
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerRow}>
@@ -95,7 +92,9 @@ export function CatalogueView({
                   <Dialog.Title className={styles.sheetTitle}>Filters</Dialog.Title>
                   <Dialog.Close asChild>
                     <button className={styles.closeButton} aria-label="Close filters">
-                      <span className="material-icons" style={{ fontSize: 20 }}>close</span>
+                      <span className="material-icons" style={{ fontSize: 20 }}>
+                        close
+                      </span>
                     </button>
                   </Dialog.Close>
                 </div>
@@ -117,13 +116,19 @@ export function CatalogueView({
         {hasActiveFilters && (
           <div data-cy="active-filters" className={styles.activeFilters}>
             {currentFilter.colors.map((color) => (
-              <div key={color} data-cy="filter-pill" className={styles.pill}>{color}</div>
+              <div key={color} data-cy="filter-pill" className={styles.pill}>
+                {color}
+              </div>
             ))}
             {currentFilter.availability && (
-              <div data-cy="filter-pill" className={styles.pill}>{currentFilter.availability}</div>
+              <div data-cy="filter-pill" className={styles.pill}>
+                {currentFilter.availability}
+              </div>
             )}
             {currentFilter.searchTerm && (
-              <div data-cy="filter-pill" className={styles.pill}>{currentFilter.searchTerm}</div>
+              <div data-cy="filter-pill" className={styles.pill}>
+                {currentFilter.searchTerm}
+              </div>
             )}
           </div>
         )}
@@ -138,14 +143,11 @@ export function CatalogueView({
       />
 
       {/* FAB */}
-      <button
-        data-cy="add-flower-button"
-        onClick={onAddFlowerClick}
-        className={styles.fab}
-      >
-        <span className="material-icons" style={{ fontSize: 28 }}>add</span>
+      <button data-cy="add-flower-button" onClick={onAddFlowerClick} className={styles.fab}>
+        <span className="material-icons" style={{ fontSize: 28 }}>
+          add
+        </span>
       </button>
-
     </div>
   );
 }

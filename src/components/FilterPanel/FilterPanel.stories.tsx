@@ -16,17 +16,21 @@ type Story = StoryObj<typeof meta>;
 
 const COLORS = ['red', 'pink', 'white', 'yellow', 'purple', 'blue', 'orange', 'green'];
 
-function FilterPanelWrapper(props: {
-  initialFilter?: FlowerFilter;
-  availableColors?: string[];
-}) {
+function FilterPanelWrapper(props: { initialFilter?: FlowerFilter; availableColors?: string[] }) {
   const [filter, setFilter] = useState<FlowerFilter>(
-    props.initialFilter ?? { colors: [], groupBy: 'none' }
+    props.initialFilter ?? { colors: [], groupBy: 'none' },
   );
   const availableColors = props.availableColors ?? COLORS;
 
   return (
-    <div style={{ maxWidth: 420, background: '#fff', borderRadius: 20, boxShadow: '0 8px 40px rgba(15,23,42,0.14)' }}>
+    <div
+      style={{
+        maxWidth: 420,
+        background: '#fff',
+        borderRadius: 20,
+        boxShadow: '0 8px 40px rgba(15,23,42,0.14)',
+      }}
+    >
       <FilterPanel
         availableColors={availableColors}
         currentFilter={filter}
@@ -66,7 +70,5 @@ export const AvailabilitySeasonal: Story = {
 
 export const GroupByColor: Story = {
   name: 'Group by: color',
-  render: () => (
-    <FilterPanelWrapper initialFilter={{ colors: [], groupBy: 'color' }} />
-  ),
+  render: () => <FilterPanelWrapper initialFilter={{ colors: [], groupBy: 'color' }} />,
 };

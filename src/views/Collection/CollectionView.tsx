@@ -7,12 +7,13 @@ import styles from './CollectionView.module.css';
  * - Reuses Catalogue styles for consistent look
  */
 export function CollectionView() {
-
   return (
     <div data-cy="collection-view" className={styles.root}>
       <header className={styles.header}>
         <div className={styles.headerRow}>
-          <h1 data-cy="page-title" className={styles.title}>Collection</h1>
+          <h1 data-cy="page-title" className={styles.title}>
+            Collection
+          </h1>
           <div className={styles.iconButtons}>
             <HeaderMenu />
             <button className={styles.iconButton}>
@@ -23,7 +24,6 @@ export function CollectionView() {
             </button>
           </div>
         </div>
-
       </header>
 
       <main style={{ padding: '1rem' }}>

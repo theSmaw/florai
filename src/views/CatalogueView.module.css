@@ -1,8 +1,10 @@
 /* CSS Modules for CatalogueView */
+
 .root {
   background: var(--color-bg-page);
   min-height: 100vh;
 }
+
 .header {
   position: sticky;
   top: 0;
@@ -12,12 +14,14 @@
   padding: 1.5rem 1rem 1rem;
   border-bottom: 1px solid var(--color-border);
 }
+
 .headerRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
 }
+
 .title {
   font-size: 1.875rem; /* ~text-3xl */
   font-weight: var(--font-weight-bold);
@@ -25,10 +29,12 @@
   color: var(--color-text-primary);
   margin: 0;
 }
+
 .iconButtons {
   display: flex;
   gap: 0.5rem;
 }
+
 .iconButton {
   padding: 0.5rem;
   background: rgba(16, 185, 129, 0.1); /* emerald-500/10 */
@@ -38,7 +44,10 @@
   cursor: pointer;
   transition: background-color 150ms ease-in-out;
 }
-.iconButton:hover { background: rgba(16, 185, 129, 0.2); }
+
+.iconButton:hover {
+  background: rgba(16, 185, 129, 0.2);
+}
 
 .searchBar {
   display: flex;
@@ -46,12 +55,14 @@
   align-items: center;
   width: 100%;
 }
+
 .searchWrapper {
   position: relative;
   flex: 1 1 0%;
   min-width: 0; /* allow input to shrink and avoid overlapping filter button */
   overflow: hidden; /* clip any spillover from input */
 }
+
 .searchIcon {
   position: absolute;
   left: 0.75rem;
@@ -60,6 +71,7 @@
   color: var(--color-text-subtle);
   font-size: 1.125rem;
 }
+
 .searchInput {
   width: 100%;
   max-width: 100%;
@@ -71,13 +83,20 @@
   font-size: 0.875rem;
   outline: none;
   /* Soft, layered drop shadow for elevated look */
-  box-shadow: 0 4px 6px -1px rgba(2, 6, 23, 0.08), 0 2px 4px -2px rgba(2, 6, 23, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(2, 6, 23, 0.08),
+    0 2px 4px -2px rgba(2, 6, 23, 0.06);
 }
+
 .searchInput:focus {
   /* Keep emerald focus ring and increase depth subtly */
-  box-shadow: 0 0 0 2px var(--color-brand-shadow-strong), 0 8px 16px -4px rgba(2, 6, 23, 0.12), 0 4px 6px -2px rgba(2, 6, 23, 0.08);
+  box-shadow:
+    0 0 0 2px var(--color-brand-shadow-strong),
+    0 8px 16px -4px rgba(2, 6, 23, 0.12),
+    0 4px 6px -2px rgba(2, 6, 23, 0.08);
   border-color: var(--color-brand);
 }
+
 .filterButton {
   display: inline-flex;
   align-items: center;
@@ -90,11 +109,14 @@
   font-weight: var(--font-weight-semibold);
   font-size: 0.875rem;
   cursor: pointer;
-  box-shadow: 0 10px 15px -3px rgba(16,185,129,0.2);
+  box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2);
   transition: background-color 150ms ease-in-out;
   flex-shrink: 0; /* keep button size, prevent overlap */
 }
-.filterButton:hover { background: var(--color-brand-dark); }
+
+.filterButton:hover {
+  background: var(--color-brand-dark);
+}
 
 .activeFilters {
   display: flex;
@@ -103,6 +125,7 @@
   margin-top: 1rem;
   padding-bottom: 0.25rem;
 }
+
 .pill {
   flex-shrink: 0;
   background: var(--color-brand);
@@ -128,16 +151,26 @@
   border: none;
   cursor: pointer;
   box-shadow: var(--shadow-fab);
-  transition: transform 120ms ease-in-out, background-color 150ms ease-in-out;
+  transition:
+    transform 120ms ease-in-out,
+    background-color 150ms ease-in-out;
   z-index: var(--z-fixed);
 }
-.fab:active { transform: scale(0.96); }
-.fab:hover { background: var(--color-brand-dark); }
+
+.fab:active {
+  transform: scale(0.96);
+}
+
+.fab:hover {
+  background: var(--color-brand-dark);
+}
 
 .navBar {
   position: fixed;
-  left: 0; right: 0; bottom: 0;
-  background: rgba(255,255,255,0.9);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(8px);
   border-top: 1px solid var(--color-border);
   padding: 0.75rem 1.5rem;
@@ -146,6 +179,7 @@
   align-items: center;
   z-index: var(--z-fixed);
 }
+
 .navItem {
   display: flex;
   flex-direction: column;
@@ -154,10 +188,18 @@
   color: var(--color-text-subtle);
   cursor: pointer;
 }
-.navItemActive { color: var(--color-brand); }
-.navItemLabel { font-size: var(--font-size-2xs); font-weight: var(--font-weight-semibold); }
+
+.navItemActive {
+  color: var(--color-brand);
+}
+
+.navItemLabel {
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-semibold);
+}
 
 /* Top hamburger menu panel */
+
 .menuPanel {
   position: absolute;
   top: calc(100% + 0.5rem);
@@ -169,9 +211,12 @@
   background: var(--color-bg-surface);
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
-  box-shadow: 0 10px 15px -3px rgba(2, 6, 23, 0.08), 0 4px 6px -2px rgba(2, 6, 23, 0.06);
+  box-shadow:
+    0 10px 15px -3px rgba(2, 6, 23, 0.08),
+    0 4px 6px -2px rgba(2, 6, 23, 0.06);
   z-index: var(--z-overlay);
 }
+
 .menuItem {
   display: flex;
   align-items: center;
@@ -186,9 +231,11 @@
   text-align: left;
   cursor: pointer;
 }
+
 .menuItem:hover {
   background: rgba(16, 185, 129, 0.08); /* emerald-500/10 */
 }
+
 .menuItem .material-icons {
   font-size: 20px;
   color: var(--color-brand);
