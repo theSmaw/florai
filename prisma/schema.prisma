@@ -11,6 +11,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // stores a bcrypt hash — hashing is handled in application code
+  name      String?
+  flowers   Flower[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Flower {
   id                     String   @id // coming from db.json; not auto-generated
   name                   String
@@ -28,6 +38,8 @@ model Flower {
   careInstructions       String?
   notes                  String?
   complementaryFlowerIds String   // JSON-serialised string[] (SQLite has no Json type)
+  userId                 String?
+  user                   User?    @relation(fields: [userId], references: [id])
   createdAt              DateTime @default(now())
   updatedAt              DateTime @updatedAt
 }
