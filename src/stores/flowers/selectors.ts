@@ -3,6 +3,8 @@ import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 
+import type { AsyncAction } from '../AsyncAction';
+
 // Basic state access
 export const selectFlowersList = (state: RootState): Flower[] => state.flowers.flowers;
 
@@ -11,9 +13,8 @@ export const selectFlowersFilter = (state: RootState): FlowerFilter => state.flo
 export const selectSelectedFlowerId = (state: RootState): string | null =>
   state.flowers.selectedFlowerId;
 
-export const selectFlowersIsLoading = (state: RootState): boolean => state.flowers.isLoading;
-
-export const selectFlowersError = (state: RootState): string | null => state.flowers.error;
+export const selectLoadFlowersStatus = (state: RootState): AsyncAction =>
+  state.flowers.loadFlowersStatus;
 
 // Derived selectors
 export const selectSelectedFlower = (state: RootState): Flower | null => {

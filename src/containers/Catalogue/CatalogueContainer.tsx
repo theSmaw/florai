@@ -7,41 +7,27 @@ import {
   selectFilteredFlowers,
   selectGroupedFlowers,
   selectFlowersFilter,
-  selectFlowersIsLoading,
+  selectLoadFlowersStatus,
   selectAllColors,
 } from '../../stores/flowers/selectors';
-import {
-  filterApplied,
-  flowerSelected,
-  loadingStarted,
-  flowersLoaded,
-  loadingFailed,
-} from '../../stores/flowers/slice';
+import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
+import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch } from '../../stores/store';
-import { fetchFlowers } from '../../api/fetchFlowers';
 
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
   const filteredFlowers = useSelector(selectFilteredFlowers);
   const groupedFlowers = useSelector(selectGroupedFlowers);
   const currentFilter = useSelector(selectFlowersFilter);
-  const isLoading = useSelector(selectFlowersIsLoading);
+  const loadFlowersStatus = useSelector(selectLoadFlowersStatus);
+  const isLoading = loadFlowersStatus.status === 'pending';
   const availableColors = useSelector(selectAllColors);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   useEffect(() => {
-    const controller = new AbortController();
-    dispatch(loadingStarted());
-    fetchFlowers(controller.signal)
-      .then((data) => dispatch(flowersLoaded(data)))
-      .catch((err: unknown) => {
-        if (err instanceof Error && err.name === 'AbortError') return;
-        dispatch(loadingFailed(err instanceof Error ? err.message : 'Failed to load flowers'));
-        console.error('Failed to fetch flowers', err);
-      });
-
-    return () => controller.abort();
+    const promise = dispatch(loadFlowers());
+    return () => promise.abort();
   }, [dispatch]);
 
   const handleSearchChange = (searchTerm: string) => {

@@ -9,9 +9,12 @@
   --color-error: #ef4444;
 
   /* Backgrounds */
-  --color-bg-app: #f6f8f6; /* outer app shell */
-  --color-bg-page: #f8fafc; /* slate-50 — main content area */
+  --color-bg-app: #faf9f7; /* warm off-white */
+  --color-bg-page: #faf9f7; /* warm off-white */
   --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f1f5f9; /* slate-100 — subtle backgrounds and separators */
+  --color-brand-surface: rgba(16, 185, 129, 0.08); /* emerald tint — hover/active on light bg */
+  --color-surface-inverse-hover: #334155; /* slate-700 — hover for dark/inverse surfaces */
 
   /* Borders */
   --color-border: #e2e8f0; /* slate-200 */
@@ -30,6 +33,8 @@
 
   /* Typography */
   --font-family: 'Work Sans', system-ui, sans-serif;
+  --font-family-display: 'Cormorant Garamond', Georgia, serif;
+  --letter-spacing-display: 0.16em;
 
   --font-size-2xs: 10px;
   --font-size-xs: 11px;
@@ -40,7 +45,9 @@
   --font-size-xl: 18px;
   --font-size-2xl: 22px;
   --font-size-3xl: 28px;
+  --font-size-4xl: 36px;
 
+  --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
@@ -66,16 +73,15 @@
   --space-14: 56px;
 
   /* Border radius */
-  --radius-xs: 6px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 14px;
-  --radius-xl: 16px;
-  --radius-2xl: 20px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-2xl: 12px;
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-card: 0 2px 12px rgba(15, 23, 42, 0.08);
   --shadow-input: 0 1px 3px rgba(15, 23, 42, 0.06);
   --shadow-panel: 0 8px 40px rgba(15, 23, 42, 0.14);
   --shadow-sheet: -8px 0 40px rgba(15, 23, 42, 0.14);
