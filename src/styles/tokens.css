@@ -45,7 +45,7 @@
   --font-size-xl: 18px;
   --font-size-2xl: 22px;
   --font-size-3xl: 28px;
-  --font-size-4xl: 2.25rem;
+  --font-size-4xl: 36px;
 
   --font-weight-light: 300;
   --font-weight-normal: 400;
@@ -74,15 +74,14 @@
 
   /* Border radius */
   --radius-xs: 2px;
-  --radius-sm: 2px;
-  --radius-md: 3px;
-  --radius-lg: 4px;
-  --radius-xl: 4px;
-  --radius-2xl: 6px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-2xl: 12px;
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-card: none;
   --shadow-input: 0 1px 3px rgba(15, 23, 42, 0.06);
   --shadow-panel: 0 8px 40px rgba(15, 23, 42, 0.14);
   --shadow-sheet: -8px 0 40px rgba(15, 23, 42, 0.14);
