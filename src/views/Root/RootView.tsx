@@ -6,7 +6,7 @@ import { CatalogueContainer } from '../../containers/Catalogue/CatalogueContaine
 import { CollectionView } from '../Collection/CollectionView';
 import { WeddingsView } from '../Weddings/WeddingsView';
 import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu';
-import { UserMenu } from '../../components/UserMenu/UserMenu';
+import { UserMenuContainer } from '../../containers/UserMenu/UserMenuContainer';
 import styles from './RootView.module.css';
 
 function getRoute(): 'catalogue' | 'collection' | 'weddings' {
@@ -36,7 +36,7 @@ export function RootView() {
         <button className={styles.iconButton} aria-label="Notifications">
           <BellIcon width={20} height={20} aria-hidden="true" />
         </button>
-        <UserMenu />
+        <UserMenuContainer />
       </div>
       {route === 'collection' && <CollectionView />}
       {route === 'weddings' && <WeddingsView />}

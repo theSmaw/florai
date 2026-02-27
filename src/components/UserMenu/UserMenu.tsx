@@ -1,20 +1,13 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { PersonIcon } from '@radix-ui/react-icons';
-import type { AppDispatch, RootState } from '../../stores/store';
-import { loadUser } from '../../stores/user/asyncActions/loadUser';
+import type { User } from '../../domain/User';
 import styles from './UserMenu.module.css';
 
-export function UserMenu() {
-  const dispatch = useDispatch<AppDispatch>();
-  const user = useSelector((state: RootState) => state.user.user);
+interface UserMenuProps {
+  user: User | null;
+}
 
-  useEffect(() => {
-    const promise = dispatch(loadUser());
-    return () => promise.abort();
-  }, [dispatch]);
-
+export function UserMenu({ user }: UserMenuProps) {
   return (
     <div className={styles.wrapper}>
       <DropdownMenu.Root modal={false}>
@@ -54,7 +47,7 @@ export function UserMenu() {
                 disabled
               >
                 <PersonIcon className={styles.menuIcon} aria-hidden="true" />
-                <span>View Profile</span>
+                <span>View profile</span>
               </button>
             </DropdownMenu.Item>
           </DropdownMenu.Content>

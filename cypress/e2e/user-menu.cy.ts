@@ -18,7 +18,7 @@ describe('User Menu', () => {
 
   it('shows a View Profile menu item', () => {
     cy.get('[data-cy="user-menu-trigger"]').click();
-    cy.get('[data-cy="user-menu-profile"]').should('contain.text', 'View Profile');
+    cy.get('[data-cy="user-menu-profile"]').should('contain.text', 'View profile');
   });
 
   it('closes the menu on Escape', () => {
