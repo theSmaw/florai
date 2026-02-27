@@ -1,6 +1,5 @@
 import { BellIcon } from '@radix-ui/react-icons';
 import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu.tsx';
-import { UserMenu } from '../../components/UserMenu/UserMenu.tsx';
 import styles from './WeddingsView.module.css';
 
 /**
@@ -21,7 +20,6 @@ export function WeddingsView() {
             <button className={styles.iconButton} aria-label="Notifications">
               <BellIcon width={20} height={20} aria-hidden="true" />
             </button>
-            <UserMenu />
           </div>
         </div>
       </header>

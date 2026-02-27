@@ -1,0 +1,6 @@
+.userMenuAnchor {
+  position: fixed;
+  top: 1.125rem;
+  right: 1rem;
+  z-index: var(--z-fixed);
+}

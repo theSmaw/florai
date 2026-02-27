@@ -1,4 +1,5 @@
 {
+  "user": { "name": "Demo Florist", "email": "demo@florai.com" },
   "flowers": [
     {
       "id": "1",

@@ -13,7 +13,6 @@ import {
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import { FlowerList } from '../../components/FlowerList/FlowerList.tsx';
 import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu.tsx';
-import { UserMenu } from '../../components/UserMenu/UserMenu.tsx';
 import { FilterPanel } from '../../components/FilterPanel/FilterPanel.tsx';
 import styles from './CatalogueView.module.css';
 
@@ -62,7 +61,6 @@ export function CatalogueView({
             <button className={styles.iconButton} aria-label="Notifications">
               <BellIcon width={20} height={20} aria-hidden="true" />
             </button>
-            <UserMenu />
           </div>
         </div>
 

@@ -1,10 +1,20 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { PersonIcon } from '@radix-ui/react-icons';
+import type { AppDispatch, RootState } from '../../stores/store';
+import { loadUser } from '../../stores/user/asyncActions/loadUser';
 import styles from './UserMenu.module.css';
 
-const MOCK_USER = { name: 'Demo Florist', email: 'demo@florai.com' };
-
 export function UserMenu() {
+  const dispatch = useDispatch<AppDispatch>();
+  const user = useSelector((state: RootState) => state.user.user);
+
+  useEffect(() => {
+    const promise = dispatch(loadUser());
+    return () => promise.abort();
+  }, [dispatch]);
+
   return (
     <div className={styles.wrapper}>
       <DropdownMenu.Root>
@@ -29,8 +39,8 @@ export function UserMenu() {
           >
             {/* Non-interactive user details header */}
             <div className={styles.userInfo}>
-              <span className={styles.userName}>{MOCK_USER.name}</span>
-              <span className={styles.userEmail}>{MOCK_USER.email}</span>
+              <span className={styles.userName}>{user?.name ?? '—'}</span>
+              <span className={styles.userEmail}>{user?.email ?? '—'}</span>
             </div>
 
             <div className={styles.separator} role="separator" />

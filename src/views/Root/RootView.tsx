@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { CatalogueContainer } from '../../containers/Catalogue/CatalogueContainer';
 import { CollectionView } from '../Collection/CollectionView';
 import { WeddingsView } from '../Weddings/WeddingsView';
+import { UserMenu } from '../../components/UserMenu/UserMenu';
+import styles from './RootView.module.css';
 
 function getRoute(): 'catalogue' | 'collection' | 'weddings' {
   const hash = window.location.hash.replace(/^#/, '');
@@ -25,7 +27,14 @@ export function RootView() {
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
 
-  if (route === 'collection') return <CollectionView />;
-  if (route === 'weddings') return <WeddingsView />;
-  return <CatalogueContainer />;
+  return (
+    <>
+      <div className={styles.userMenuAnchor}>
+        <UserMenu />
+      </div>
+      {route === 'collection' && <CollectionView />}
+      {route === 'weddings' && <WeddingsView />}
+      {route === 'catalogue' && <CatalogueContainer />}
+    </>
+  );
 }
