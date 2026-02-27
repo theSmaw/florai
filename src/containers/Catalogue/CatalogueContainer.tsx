@@ -9,10 +9,13 @@ import {
   selectFlowersFilter,
   selectLoadFlowersStatus,
   selectAllColors,
+  selectAllSeasons,
+  selectAllTypes,
 } from '../../stores/flowers/selectors';
 import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch } from '../../stores/store';
+import type { FragranceLevel, Toxicity } from '../../domain/Flower';
 
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,6 +25,8 @@ export function CatalogueContainer() {
   const loadFlowersStatus = useSelector(selectLoadFlowersStatus);
   const isLoading = loadFlowersStatus.status === 'pending';
   const availableColors = useSelector(selectAllColors);
+  const availableSeasons = useSelector(selectAllSeasons);
+  const availableTypes = useSelector(selectAllTypes);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -55,6 +60,42 @@ export function CatalogueContainer() {
     }
   };
 
+  const handleSeasonChange = (season?: string) => {
+    const { season: _omit, ...rest } = currentFilter;
+    if (season) {
+      dispatch(filterApplied({ ...rest, season }));
+    } else {
+      dispatch(filterApplied(rest));
+    }
+  };
+
+  const handleTypeChange = (type?: string) => {
+    const { type: _omit, ...rest } = currentFilter;
+    if (type) {
+      dispatch(filterApplied({ ...rest, type }));
+    } else {
+      dispatch(filterApplied(rest));
+    }
+  };
+
+  const handleFragranceLevelChange = (fragranceLevel?: FragranceLevel) => {
+    const { fragranceLevel: _omit, ...rest } = currentFilter;
+    if (fragranceLevel) {
+      dispatch(filterApplied({ ...rest, fragranceLevel }));
+    } else {
+      dispatch(filterApplied(rest));
+    }
+  };
+
+  const handleToxicityChange = (toxicity?: Toxicity) => {
+    const { toxicity: _omit, ...rest } = currentFilter;
+    if (toxicity) {
+      dispatch(filterApplied({ ...rest, toxicity }));
+    } else {
+      dispatch(filterApplied(rest));
+    }
+  };
+
   const handleGroupByChange = (groupBy?: 'color' | 'type' | 'none') => {
     const { groupBy: _omit, ...rest } = currentFilter;
     if (groupBy) {
@@ -75,6 +116,8 @@ export function CatalogueContainer() {
       flowers={filteredFlowers}
       groupedFlowers={groupedFlowers}
       availableColors={availableColors}
+      availableSeasons={availableSeasons}
+      availableTypes={availableTypes}
       currentFilter={currentFilter}
       isLoading={isLoading}
       isFilterOpen={isFilterOpen}
@@ -82,6 +125,10 @@ export function CatalogueContainer() {
       onSearchChange={handleSearchChange}
       onColorToggle={handleColorToggle}
       onAvailabilityChange={handleAvailabilityChange}
+      onSeasonChange={handleSeasonChange}
+      onTypeChange={handleTypeChange}
+      onFragranceLevelChange={handleFragranceLevelChange}
+      onToxicityChange={handleToxicityChange}
       onGroupByChange={handleGroupByChange}
       onCardClick={handleCardClick}
       onAddFlowerClick={handleAddFlowerClick}

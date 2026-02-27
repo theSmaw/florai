@@ -1,13 +1,19 @@
 // Filter panel component
 // Pure UI - handles filter display and events, no store access
-import type { FlowerFilter } from '../../domain/Flower';
+import type { FlowerFilter, FragranceLevel, Toxicity } from '../../domain/Flower';
 import styles from './FilterPanel.module.css';
 
 interface FilterPanelProps {
   availableColors: string[];
+  availableSeasons: string[];
+  availableTypes: string[];
   currentFilter: FlowerFilter;
   onColorToggle: (color: string) => void;
   onAvailabilityChange: (availability?: 'always' | 'seasonal' | 'limited') => void;
+  onSeasonChange: (season?: string) => void;
+  onTypeChange: (type?: string) => void;
+  onFragranceLevelChange: (fragranceLevel?: FragranceLevel) => void;
+  onToxicityChange: (toxicity?: Toxicity) => void;
   onGroupByChange: (groupBy?: 'color' | 'type' | 'none') => void;
   onApplyFilters: () => void;
 }
@@ -33,6 +39,21 @@ const AVAILABILITY_OPTIONS: {
   { value: 'limited', label: 'Limited' },
 ];
 
+const FRAGRANCE_OPTIONS: { value: FragranceLevel | undefined; label: string }[] = [
+  { value: undefined, label: 'All' },
+  { value: 'none', label: 'None' },
+  { value: 'light', label: 'Light' },
+  { value: 'moderate', label: 'Moderate' },
+  { value: 'strong', label: 'Strong' },
+];
+
+const TOXICITY_OPTIONS: { value: Toxicity | undefined; label: string }[] = [
+  { value: undefined, label: 'All' },
+  { value: 'safe', label: 'Safe' },
+  { value: 'mild', label: 'Mild' },
+  { value: 'toxic', label: 'Toxic' },
+];
+
 const GROUPBY_OPTIONS: { value: 'none' | 'color' | 'type'; label: string }[] = [
   { value: 'none', label: 'None' },
   { value: 'color', label: 'Color' },
@@ -41,9 +62,15 @@ const GROUPBY_OPTIONS: { value: 'none' | 'color' | 'type'; label: string }[] = [
 
 export function FilterPanel({
   availableColors,
+  availableSeasons,
+  availableTypes,
   currentFilter,
   onColorToggle,
   onAvailabilityChange,
+  onSeasonChange,
+  onTypeChange,
+  onFragranceLevelChange,
+  onToxicityChange,
   onGroupByChange,
   onApplyFilters,
 }: FilterPanelProps) {
@@ -76,6 +103,52 @@ export function FilterPanel({
         </section>
       )}
 
+      {/* Season */}
+      {availableSeasons.length > 0 && (
+        <section className={styles.section}>
+          <h3 className={styles.sectionTitle}>Season</h3>
+          <div className={styles.chips}>
+            {availableSeasons.map((season) => {
+              const selected = currentFilter.season === season;
+              return (
+                <button
+                  key={season}
+                  data-cy="season-chip"
+                  data-cy-value={season}
+                  onClick={() => onSeasonChange(selected ? undefined : season)}
+                  className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
+                >
+                  <span className={styles.chipLabel}>{season}</span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* Type */}
+      {availableTypes.length > 0 && (
+        <section className={styles.section}>
+          <h3 className={styles.sectionTitle}>Type</h3>
+          <div className={styles.chips}>
+            {availableTypes.map((type) => {
+              const selected = currentFilter.type === type;
+              return (
+                <button
+                  key={type}
+                  data-cy="type-chip"
+                  data-cy-value={type}
+                  onClick={() => onTypeChange(selected ? undefined : type)}
+                  className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
+                >
+                  <span className={styles.chipLabel}>{type}</span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
       {/* Availability */}
       <section className={styles.section}>
         <h3 className={styles.sectionTitle}>Availability</h3>
@@ -88,6 +161,48 @@ export function FilterPanel({
                 data-cy="availability-chip"
                 data-cy-value={value ?? 'all'}
                 onClick={() => onAvailabilityChange(value)}
+                className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
+              >
+                <span className={styles.chipLabel}>{label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Fragrance */}
+      <section className={styles.section}>
+        <h3 className={styles.sectionTitle}>Fragrance</h3>
+        <div className={styles.chips}>
+          {FRAGRANCE_OPTIONS.map(({ value, label }) => {
+            const selected = currentFilter.fragranceLevel === value;
+            return (
+              <button
+                key={label}
+                data-cy="fragrance-chip"
+                data-cy-value={value ?? 'all'}
+                onClick={() => onFragranceLevelChange(value)}
+                className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
+              >
+                <span className={styles.chipLabel}>{label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Toxicity */}
+      <section className={styles.section}>
+        <h3 className={styles.sectionTitle}>Safety</h3>
+        <div className={styles.chips}>
+          {TOXICITY_OPTIONS.map(({ value, label }) => {
+            const selected = currentFilter.toxicity === value;
+            return (
+              <button
+                key={label}
+                data-cy="toxicity-chip"
+                data-cy-value={value ?? 'all'}
+                onClick={() => onToxicityChange(value)}
                 className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
               >
                 <span className={styles.chipLabel}>{label}</span>

@@ -46,4 +46,69 @@ describe('Filter panel', () => {
     cy.get('[data-cy="flower-card"]').should('have.length', 1);
     cy.get('[data-cy="flower-card-name"]').should('contain.text', 'Peony');
   });
+
+  it('filters by season chip', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="season-chip"][data-cy-value="Spring"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    // Peony (Spring) and Lavender (Spring)
+    cy.get('[data-cy="flower-card"]').should('have.length', 2);
+    cy.get('[data-cy="filter-pill"]').should('contain.text', 'Spring');
+  });
+
+  it('deselects season chip when clicked again', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="season-chip"][data-cy-value="Spring"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    cy.get('[data-cy="flower-card"]').should('have.length', 2);
+
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="season-chip"][data-cy-value="Spring"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    cy.get('[data-cy="flower-card"]').should('have.length', 6);
+  });
+
+  it('filters by type chip', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="type-chip"][data-cy-value="Rose"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    cy.get('[data-cy="flower-card"]').should('have.length', 1);
+    cy.get('[data-cy="flower-card-name"]').should('contain.text', 'Rose');
+    cy.get('[data-cy="filter-pill"]').should('contain.text', 'Rose');
+  });
+
+  it('filters by fragrance chip', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="fragrance-chip"][data-cy-value="strong"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    // Peony (strong) and Lavender (strong)
+    cy.get('[data-cy="flower-card"]').should('have.length', 2);
+    cy.get('[data-cy="filter-pill"]').should('contain.text', 'strong');
+  });
+
+  it('filters fragrance to "none" shows flowers with no fragrance', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="fragrance-chip"][data-cy-value="none"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    // Hydrangea, Calla Lily, Sunflower (fragranceLevel: "none")
+    cy.get('[data-cy="flower-card"]').should('have.length', 3);
+  });
+
+  it('filters by toxicity chip', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="toxicity-chip"][data-cy-value="toxic"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    // Only Calla Lily is toxic
+    cy.get('[data-cy="flower-card"]').should('have.length', 1);
+    cy.get('[data-cy="flower-card-name"]').should('contain.text', 'Calla Lily');
+    cy.get('[data-cy="filter-pill"]').should('contain.text', 'toxic');
+  });
+
+  it('filters toxicity to "safe" shows safe flowers', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="toxicity-chip"][data-cy-value="safe"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    // Peony, Rose, Sunflower, Lavender (4 safe flowers)
+    cy.get('[data-cy="flower-card"]').should('have.length', 4);
+  });
 });

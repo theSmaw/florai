@@ -32,6 +32,24 @@ export const selectAllColors = createSelector(
   },
 );
 
+export const selectAllSeasons = createSelector(
+  (state: RootState) => state.flowers.flowers,
+  (flowers: Flower[]): string[] => {
+    const seasonSet = new Set<string>();
+    flowers.forEach((flower) => flower.season.forEach((s) => seasonSet.add(s)));
+    return Array.from(seasonSet).sort();
+  },
+);
+
+export const selectAllTypes = createSelector(
+  (state: RootState) => state.flowers.flowers,
+  (flowers: Flower[]): string[] => {
+    const typeSet = new Set<string>();
+    flowers.forEach((flower) => typeSet.add(flower.type));
+    return Array.from(typeSet).sort();
+  },
+);
+
 export const selectFilteredFlowers = createSelector(
   (state: RootState) => state.flowers.flowers,
   (state: RootState) => state.flowers.filter,
@@ -48,6 +66,26 @@ export const selectFilteredFlowers = createSelector(
     // Filter by availability
     if (filter.availability) {
       filtered = filtered.filter((flower) => flower.availability === filter.availability);
+    }
+
+    // Filter by type
+    if (filter.type) {
+      filtered = filtered.filter((flower) => flower.type === filter.type);
+    }
+
+    // Filter by season
+    if (filter.season) {
+      filtered = filtered.filter((flower) => flower.season.includes(filter.season!));
+    }
+
+    // Filter by fragrance level
+    if (filter.fragranceLevel) {
+      filtered = filtered.filter((flower) => flower.fragranceLevel === filter.fragranceLevel);
+    }
+
+    // Filter by toxicity
+    if (filter.toxicity) {
+      filtered = filtered.filter((flower) => flower.toxicity === filter.toxicity);
     }
 
     // Filter by search term

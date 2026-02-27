@@ -24,7 +24,6 @@ export interface Flower {
 
   // Inventory
   quantityOnHand: number;
-  stemsPerBunch?: number; // How many stems come per supplier bunch (for ordering calculations)
 
   // Physical characteristics
   stemLengthCm?: number; // Typical stem length in cm (e.g., 60 for roses, 30 for lavender)
@@ -45,6 +44,8 @@ export interface FlowerFilter {
   availability?: 'always' | 'seasonal' | 'limited';
   type?: string; // Filter by flower type (Rose, Peony, etc.)
   season?: string; // Filter by season (Spring, Summer, etc.)
+  fragranceLevel?: FragranceLevel; // Filter by fragrance level
+  toxicity?: Toxicity; // Filter by toxicity (safety)
   searchTerm?: string;
   groupBy?: 'color' | 'type' | 'none';
 }

@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import type { FragranceLevel, Toxicity } from '../src/domain/Flower'
 
 const prisma = new PrismaClient()
 
@@ -18,10 +19,9 @@ interface RawFlower {
   season?: string[]
   availability: string
   quantityOnHand?: number
-  stemsPerBunch?: number | null
   stemLengthCm?: number | null
-  fragranceLevel?: string | null
-  toxicity?: string | null
+  fragranceLevel?: FragranceLevel | null
+  toxicity?: Toxicity | null
   vaseLifeDays?: number | null
   careInstructions?: string | null
   notes?: string | null
@@ -54,7 +54,6 @@ async function main(): Promise<void> {
       season: JSON.stringify(f.season ?? []),
       availability: f.availability,
       quantityOnHand: qty,
-      stemsPerBunch: f.stemsPerBunch ?? null,
       stemLengthCm: f.stemLengthCm ?? null,
       fragranceLevel: f.fragranceLevel ?? null,
       toxicity: f.toxicity ?? null,

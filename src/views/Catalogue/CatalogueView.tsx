@@ -9,7 +9,7 @@ import {
   Cross2Icon,
   PlusIcon,
 } from '@radix-ui/react-icons';
-import type { Flower, FlowerFilter } from '../../domain/Flower';
+import type { Flower, FlowerFilter, FragranceLevel, Toxicity } from '../../domain/Flower';
 import { FlowerList } from '../../components/FlowerList/FlowerList.tsx';
 import { FilterPanel } from '../../components/FilterPanel/FilterPanel.tsx';
 import styles from './CatalogueView.module.css';
@@ -18,6 +18,8 @@ interface CatalogueViewProps {
   flowers: Flower[];
   groupedFlowers?: Record<string, Flower[]>;
   availableColors: string[];
+  availableSeasons: string[];
+  availableTypes: string[];
   currentFilter: FlowerFilter;
   isLoading?: boolean;
   isFilterOpen: boolean;
@@ -25,6 +27,10 @@ interface CatalogueViewProps {
   onSearchChange: (searchTerm: string) => void;
   onColorToggle: (color: string) => void;
   onAvailabilityChange: (availability?: 'always' | 'seasonal' | 'limited') => void;
+  onSeasonChange: (season?: string) => void;
+  onTypeChange: (type?: string) => void;
+  onFragranceLevelChange: (fragranceLevel?: FragranceLevel) => void;
+  onToxicityChange: (toxicity?: Toxicity) => void;
   onGroupByChange: (groupBy?: 'color' | 'type' | 'none') => void;
   onCardClick: (flowerId: string) => void;
   onAddFlowerClick: () => void;
@@ -34,6 +40,8 @@ export function CatalogueView({
   flowers,
   groupedFlowers,
   availableColors,
+  availableSeasons,
+  availableTypes,
   currentFilter,
   isLoading,
   isFilterOpen,
@@ -41,12 +49,22 @@ export function CatalogueView({
   onSearchChange,
   onColorToggle,
   onAvailabilityChange,
+  onSeasonChange,
+  onTypeChange,
+  onFragranceLevelChange,
+  onToxicityChange,
   onGroupByChange,
   onCardClick,
   onAddFlowerClick,
 }: CatalogueViewProps) {
   const hasActiveFilters =
-    currentFilter.colors.length > 0 || !!currentFilter.availability || !!currentFilter.searchTerm;
+    currentFilter.colors.length > 0 ||
+    !!currentFilter.availability ||
+    !!currentFilter.type ||
+    !!currentFilter.season ||
+    !!currentFilter.fragranceLevel ||
+    !!currentFilter.toxicity ||
+    !!currentFilter.searchTerm;
 
   return (
     <div data-cy="catalogue-view" className={styles.root}>
@@ -100,9 +118,15 @@ export function CatalogueView({
 
                 <FilterPanel
                   availableColors={availableColors}
+                  availableSeasons={availableSeasons}
+                  availableTypes={availableTypes}
                   currentFilter={currentFilter}
                   onColorToggle={onColorToggle}
                   onAvailabilityChange={onAvailabilityChange}
+                  onSeasonChange={onSeasonChange}
+                  onTypeChange={onTypeChange}
+                  onFragranceLevelChange={onFragranceLevelChange}
+                  onToxicityChange={onToxicityChange}
                   onGroupByChange={onGroupByChange}
                   onApplyFilters={() => onFilterOpenChange(false)}
                 />
@@ -119,9 +143,29 @@ export function CatalogueView({
                 {color}
               </div>
             ))}
+            {currentFilter.season && (
+              <div data-cy="filter-pill" className={styles.pill}>
+                {currentFilter.season}
+              </div>
+            )}
+            {currentFilter.type && (
+              <div data-cy="filter-pill" className={styles.pill}>
+                {currentFilter.type}
+              </div>
+            )}
             {currentFilter.availability && (
               <div data-cy="filter-pill" className={styles.pill}>
                 {currentFilter.availability}
+              </div>
+            )}
+            {currentFilter.fragranceLevel && (
+              <div data-cy="filter-pill" className={styles.pill}>
+                {currentFilter.fragranceLevel}
+              </div>
+            )}
+            {currentFilter.toxicity && (
+              <div data-cy="filter-pill" className={styles.pill}>
+                {currentFilter.toxicity}
               </div>
             )}
             {currentFilter.searchTerm && (

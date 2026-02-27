@@ -34,7 +34,6 @@ model Flower {
   season                 String   // JSON-serialised string[] (SQLite has no Json type)
   availability           String   // "seasonal" | "always" | "limited"
   quantityOnHand         Int      @default(0)
-  stemsPerBunch          Int?     // How many stems per supplier bunch
   stemLengthCm           Int?     // Typical stem length in cm
   fragranceLevel         String?  // "none" | "light" | "moderate" | "strong"
   toxicity               String?  // "safe" | "mild" | "toxic"
