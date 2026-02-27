@@ -17,7 +17,7 @@ export function UserMenu() {
 
   return (
     <div className={styles.wrapper}>
-      <DropdownMenu.Root>
+      <DropdownMenu.Root modal={false}>
         <DropdownMenu.Trigger asChild>
           <button
             data-cy="user-menu-trigger"

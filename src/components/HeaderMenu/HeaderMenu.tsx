@@ -19,7 +19,7 @@ export function HeaderMenu() {
 
   return (
     <div className={styles.wrapper}>
-      <DropdownMenu.Root>
+      <DropdownMenu.Root modal={false}>
         <DropdownMenu.Trigger asChild>
           <button
             data-cy="hamburger-menu-trigger"
