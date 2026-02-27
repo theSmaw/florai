@@ -1,9 +1,11 @@
 // Root view for the application
 // Implements minimal hash-based routing between Catalogue and Collection
 import { useEffect, useState } from 'react';
+import { BellIcon } from '@radix-ui/react-icons';
 import { CatalogueContainer } from '../../containers/Catalogue/CatalogueContainer';
 import { CollectionView } from '../Collection/CollectionView';
 import { WeddingsView } from '../Weddings/WeddingsView';
+import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu';
 import { UserMenu } from '../../components/UserMenu/UserMenu';
 import styles from './RootView.module.css';
 
@@ -29,7 +31,11 @@ export function RootView() {
 
   return (
     <>
-      <div className={styles.userMenuAnchor}>
+      <div className={styles.iconButtons}>
+        <HeaderMenu />
+        <button className={styles.iconButton} aria-label="Notifications">
+          <BellIcon width={20} height={20} aria-hidden="true" />
+        </button>
         <UserMenu />
       </div>
       {route === 'collection' && <CollectionView />}

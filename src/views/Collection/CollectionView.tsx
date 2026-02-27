@@ -1,5 +1,3 @@
-import { BellIcon } from '@radix-ui/react-icons';
-import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu.tsx';
 import styles from './CollectionView.module.css';
 
 /**
@@ -15,12 +13,6 @@ export function CollectionView() {
           <h1 data-cy="page-title" className={styles.title}>
             Collection
           </h1>
-          <div className={styles.iconButtons}>
-            <HeaderMenu />
-            <button className={styles.iconButton} aria-label="Notifications">
-              <BellIcon width={20} height={20} aria-hidden="true" />
-            </button>
-          </div>
         </div>
       </header>
 

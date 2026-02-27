@@ -4,7 +4,6 @@
  */
 import * as Dialog from '@radix-ui/react-dialog';
 import {
-  BellIcon,
   MagnifyingGlassIcon,
   MixerVerticalIcon,
   Cross2Icon,
@@ -12,7 +11,6 @@ import {
 } from '@radix-ui/react-icons';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import { FlowerList } from '../../components/FlowerList/FlowerList.tsx';
-import { HeaderMenu } from '../../components/HeaderMenu/HeaderMenu.tsx';
 import { FilterPanel } from '../../components/FilterPanel/FilterPanel.tsx';
 import styles from './CatalogueView.module.css';
 
@@ -56,12 +54,6 @@ export function CatalogueView({
       <header className={styles.header}>
         <div className={styles.headerRow}>
           <h1 className={styles.title}>Catalogue</h1>
-          <div className={styles.iconButtons}>
-            <HeaderMenu />
-            <button className={styles.iconButton} aria-label="Notifications">
-              <BellIcon width={20} height={20} aria-hidden="true" />
-            </button>
-          </div>
         </div>
 
         {/* Search + Filter trigger */}
