@@ -1,5 +1,8 @@
 // Flower domain types and interfaces
 
+export type FragranceLevel = 'none' | 'light' | 'moderate' | 'strong';
+export type Toxicity = 'safe' | 'mild' | 'toxic';
+
 export interface Flower {
   id: string;
   name: string;
@@ -21,9 +24,15 @@ export interface Flower {
 
   // Inventory
   quantityOnHand: number;
+  stemsPerBunch?: number; // How many stems come per supplier bunch (for ordering calculations)
+
+  // Physical characteristics
+  stemLengthCm?: number; // Typical stem length in cm (e.g., 60 for roses, 30 for lavender)
+  fragranceLevel?: FragranceLevel; // For fragrance-sensitive venues and event planning
+  toxicity?: Toxicity; // Safety — relevant for arrangements around children/pets
 
   // Care & Details
-  vaseLife: string; // "7-10 days"
+  vaseLifeDays?: number; // Minimum expected vase life in days (for event timing filters)
   careInstructions: string;
   notes: string;
 
@@ -34,6 +43,8 @@ export interface Flower {
 export interface FlowerFilter {
   colors: string[]; // Empty = no filter
   availability?: 'always' | 'seasonal' | 'limited';
+  type?: string; // Filter by flower type (Rose, Peony, etc.)
+  season?: string; // Filter by season (Spring, Summer, etc.)
   searchTerm?: string;
   groupBy?: 'color' | 'type' | 'none';
 }

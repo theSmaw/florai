@@ -18,7 +18,11 @@ interface RawFlower {
   season?: string[]
   availability: string
   quantityOnHand?: number
-  vaseLife?: string | null
+  stemsPerBunch?: number | null
+  stemLengthCm?: number | null
+  fragranceLevel?: string | null
+  toxicity?: string | null
+  vaseLifeDays?: number | null
   careInstructions?: string | null
   notes?: string | null
   complementaryFlowerIds?: string[]
@@ -50,7 +54,11 @@ async function main(): Promise<void> {
       season: JSON.stringify(f.season ?? []),
       availability: f.availability,
       quantityOnHand: qty,
-      vaseLife: f.vaseLife ?? null,
+      stemsPerBunch: f.stemsPerBunch ?? null,
+      stemLengthCm: f.stemLengthCm ?? null,
+      fragranceLevel: f.fragranceLevel ?? null,
+      toxicity: f.toxicity ?? null,
+      vaseLifeDays: f.vaseLifeDays ?? null,
       careInstructions: f.careInstructions ?? null,
       notes: f.notes ?? null,
       complementaryFlowerIds: JSON.stringify(f.complementaryFlowerIds ?? []),
