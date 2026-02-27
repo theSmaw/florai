@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import {
   HamburgerMenuIcon,
@@ -10,12 +11,9 @@ import styles from './HeaderMenu.module.css';
 /**
  * Reusable header hamburger menu with Radix DropdownMenu.
  * - Built-in a11y, keyboard navigation, focus management
- * - Hash-based navigation to keep parity with existing app
  */
 export function HeaderMenu() {
-  function navigate(hash: string) {
-    window.location.hash = hash;
-  }
+  const navigate = useNavigate();
 
   return (
     <div className={styles.wrapper}>

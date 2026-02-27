@@ -1,12 +1,29 @@
-// App root: bootstraps Redux store and provides React app
+// App root: bootstraps Redux store and sets up React Router
 import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom';
 import { store } from './stores/store';
-import { RootView } from './views/Root/RootView';
+import { AppLayout } from './layouts/AppLayout/AppLayout';
+import { CatalogueContainer } from './containers/Catalogue/CatalogueContainer';
+import { CollectionView } from './views/Collection/CollectionView';
+import { WeddingsView } from './views/Weddings/WeddingsView';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <AppLayout />,
+    children: [
+      { index: true, loader: () => redirect('/catalogue') },
+      { path: 'catalogue', element: <CatalogueContainer /> },
+      { path: 'collection', element: <CollectionView /> },
+      { path: 'weddings', element: <WeddingsView /> },
+    ],
+  },
+]);
 
 export function App() {
   return (
     <Provider store={store}>
-      <RootView />
+      <RouterProvider router={router} />
     </Provider>
   );
 }

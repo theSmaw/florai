@@ -30,10 +30,10 @@ describe('Navigation', () => {
     cy.get('[data-cy="catalogue-view"]').should('be.visible');
   });
 
-  it('loads the catalogue view when navigating directly to /#/catalogue', () => {
+  it('loads the catalogue view when navigating directly to /catalogue', () => {
     // The SPA does not re-fetch on same-route navigation, so we just assert
     // the view is visible — the stub + visit already happened in beforeEach.
-    cy.visit('/#/catalogue');
+    cy.visit('/catalogue');
     cy.get('[data-cy="catalogue-view"]').should('be.visible');
   });
 });

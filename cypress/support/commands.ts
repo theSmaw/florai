@@ -20,7 +20,7 @@ Cypress.Commands.add('stubUser', () => {
 });
 
 Cypress.Commands.add('visitCatalogue', () => {
-  cy.visit('/#/catalogue');
+  cy.visit('/catalogue');
   cy.wait('@getFlowers');
   cy.get('[data-cy="loading-indicator"]').should('not.exist');
   cy.get('[data-cy="flower-list"]').should('be.visible');
