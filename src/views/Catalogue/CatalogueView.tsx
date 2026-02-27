@@ -14,6 +14,7 @@ import type {
   Color,
   Flower,
   FlowerFilter,
+  FlowerType,
   FragranceLevel,
   GroupBy,
   Season,
@@ -28,7 +29,7 @@ interface CatalogueViewProps {
   groupedFlowers?: Record<string, Flower[]>;
   availableColors: Color[];
   availableSeasons: Season[];
-  availableTypes: string[];
+  availableTypes: FlowerType[];
   stemLengthBounds: { min: number; max: number };
   vaseLifeBounds: { min: number; max: number };
   currentFilter: FlowerFilter;
@@ -39,7 +40,7 @@ interface CatalogueViewProps {
   onColorToggle: (color: Color) => void;
   onAvailabilityChange: (availability?: Availability) => void;
   onSeasonChange: (season?: Season) => void;
-  onTypeChange: (type?: string) => void;
+  onTypeChange: (type?: FlowerType) => void;
   onFragranceLevelChange: (fragranceLevel?: FragranceLevel) => void;
   onToxicityChange: (toxicity?: Toxicity) => void;
   onStemLengthChange: (min: number, max: number) => void;
@@ -161,51 +162,25 @@ export function CatalogueView({
         {/* Active filter pills */}
         {hasActiveFilters && (
           <div data-cy="active-filters" className={styles.activeFilters}>
-            {currentFilter.colors.map((color) => (
-              <div key={color} data-cy="filter-pill" className={styles.pill}>
-                {color}
-              </div>
-            ))}
-            {currentFilter.season && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.season}
-              </div>
-            )}
-            {currentFilter.type && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.type}
-              </div>
-            )}
-            {currentFilter.availability && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.availability}
-              </div>
-            )}
-            {currentFilter.fragranceLevel && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.fragranceLevel}
-              </div>
-            )}
-            {currentFilter.toxicity && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.toxicity}
-              </div>
-            )}
-            {currentFilter.stemLengthRange && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.stemLengthRange.min}–{currentFilter.stemLengthRange.max} cm
-              </div>
-            )}
-            {currentFilter.vaseLifeRange && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.vaseLifeRange.min}–{currentFilter.vaseLifeRange.max} days
-              </div>
-            )}
-            {currentFilter.searchTerm && (
-              <div data-cy="filter-pill" className={styles.pill}>
-                {currentFilter.searchTerm}
-              </div>
-            )}
+            {[
+              ...currentFilter.colors,
+              currentFilter.season,
+              currentFilter.type,
+              currentFilter.availability,
+              currentFilter.fragranceLevel,
+              currentFilter.toxicity,
+              currentFilter.stemLengthRange &&
+                `${currentFilter.stemLengthRange.min}–${currentFilter.stemLengthRange.max} cm`,
+              currentFilter.vaseLifeRange &&
+                `${currentFilter.vaseLifeRange.min}–${currentFilter.vaseLifeRange.max} days`,
+              currentFilter.searchTerm,
+            ]
+              .filter((v): v is string => Boolean(v))
+              .map((pill) => (
+                <div key={pill} data-cy="filter-pill" className={styles.pill}>
+                  {pill}
+                </div>
+              ))}
           </div>
         )}
       </header>

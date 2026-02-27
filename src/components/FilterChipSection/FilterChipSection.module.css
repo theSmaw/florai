@@ -1,13 +1,5 @@
-/* FilterPanel — content rendered inside the bottom sheet */
+/* FilterChipSection — single-select chip group */
 
-.body {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  padding: var(--space-5) var(--space-5) var(--space-7);
-}
-
-/* Section (used by Colors and Group By which remain inline) */
 .section {
   display: flex;
   flex-direction: column;
@@ -23,7 +15,6 @@
   margin: 0;
 }
 
-/* Chips (used by Colors and Group By which remain inline) */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -66,38 +57,4 @@
 .chipLabel {
   line-height: var(--line-height-tight);
   text-transform: capitalize;
-}
-
-/* Color dot inside chip */
-.colorDot {
-  width: 10px;
-  height: 10px;
-  border-radius: var(--radius-full);
-  flex-shrink: 0;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-/* Apply button */
-.applyButton {
-  width: 100%;
-  background: var(--color-brand);
-  color: var(--color-text-on-brand);
-  padding: var(--space-4);
-  border-radius: var(--radius-lg);
-  border: none;
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-bold);
-  cursor: pointer;
-  box-shadow: var(--shadow-filter-badge);
-  transition:
-    background 150ms,
-    transform 120ms;
-  margin-top: var(--space-1);
-}
-
-.applyButton:hover {
-  background: var(--color-brand-dark);
-}
-.applyButton:active {
-  transform: scale(0.98);
 }

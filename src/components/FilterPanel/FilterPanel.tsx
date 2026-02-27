@@ -4,126 +4,15 @@ import type {
   Availability,
   Color,
   FlowerFilter,
+  FlowerType,
   FragranceLevel,
   GroupBy,
   Season,
   Toxicity,
 } from '../../domain/Flower';
+import { FilterChipSection } from '../FilterChipSection/FilterChipSection';
+import { FilterRangeSection } from '../FilterRangeSection/FilterRangeSection';
 import styles from './FilterPanel.module.css';
-
-// ---------------------------------------------------------------------------
-// Reusable chip section (single-select with optional "All" entry)
-// ---------------------------------------------------------------------------
-
-interface FilterChipSectionProps<T extends string> {
-  title: string;
-  options: ReadonlyArray<{ value: T | undefined; label: string }>;
-  currentValue: T | undefined;
-  onChange: (value: T | undefined) => void;
-  dataCy: string;
-}
-
-function FilterChipSection<T extends string>({
-  title,
-  options,
-  currentValue,
-  onChange,
-  dataCy,
-}: FilterChipSectionProps<T>) {
-  return (
-    <section className={styles.section}>
-      <h3 className={styles.sectionTitle}>{title}</h3>
-      <div className={styles.chips}>
-        {options.map(({ value, label }) => {
-          const selected = currentValue === value;
-          return (
-            <button
-              key={label}
-              data-cy={dataCy}
-              data-cy-value={value ?? 'all'}
-              onClick={() => onChange(value)}
-              className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
-            >
-              <span className={styles.chipLabel}>{label}</span>
-            </button>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-// ---------------------------------------------------------------------------
-// Reusable range slider section (min + max sliders)
-// ---------------------------------------------------------------------------
-
-interface FilterRangeSectionProps {
-  title: string;
-  unit: string;
-  min: number;
-  max: number;
-  currentMin: number;
-  currentMax: number;
-  onMinChange: (value: number) => void;
-  onMaxChange: (value: number) => void;
-  dataCyMin: string;
-  dataCyMax: string;
-}
-
-function FilterRangeSection({
-  title,
-  unit,
-  min,
-  max,
-  currentMin,
-  currentMax,
-  onMinChange,
-  onMaxChange,
-  dataCyMin,
-  dataCyMax,
-}: FilterRangeSectionProps) {
-  return (
-    <section className={styles.section}>
-      <h3 className={styles.sectionTitle}>{title}</h3>
-      <div className={styles.rangeGroup}>
-        <div className={styles.rangeRow}>
-          <span className={styles.rangeLabel}>
-            <span>Min</span>
-            <span className={styles.rangeValue}>
-              {currentMin} {unit}
-            </span>
-          </span>
-          <input
-            type="range"
-            data-cy={dataCyMin}
-            className={styles.rangeInput}
-            min={min}
-            max={max}
-            value={currentMin}
-            onChange={(e) => onMinChange(Number(e.target.value))}
-          />
-        </div>
-        <div className={styles.rangeRow}>
-          <span className={styles.rangeLabel}>
-            <span>Max</span>
-            <span className={styles.rangeValue}>
-              {currentMax} {unit}
-            </span>
-          </span>
-          <input
-            type="range"
-            data-cy={dataCyMax}
-            className={styles.rangeInput}
-            min={min}
-            max={max}
-            value={currentMax}
-            onChange={(e) => onMaxChange(Number(e.target.value))}
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
 
 // ---------------------------------------------------------------------------
 // Static option lists
@@ -175,14 +64,14 @@ const GROUPBY_OPTIONS: ReadonlyArray<{ value: GroupBy; label: string }> = [
 interface FilterPanelProps {
   availableColors: Color[];
   availableSeasons: Season[];
-  availableTypes: string[];
+  availableTypes: FlowerType[];
   stemLengthBounds: { min: number; max: number };
   vaseLifeBounds: { min: number; max: number };
   currentFilter: FlowerFilter;
   onColorToggle: (color: Color) => void;
   onAvailabilityChange: (availability?: Availability) => void;
   onSeasonChange: (season?: Season) => void;
-  onTypeChange: (type?: string) => void;
+  onTypeChange: (type?: FlowerType) => void;
   onFragranceLevelChange: (fragranceLevel?: FragranceLevel) => void;
   onToxicityChange: (toxicity?: Toxicity) => void;
   onStemLengthChange: (min: number, max: number) => void;
@@ -219,7 +108,7 @@ export function FilterPanel({
     ...availableSeasons.map((s) => ({ value: s, label: s })),
   ];
 
-  const typeOptions: ReadonlyArray<{ value: string | undefined; label: string }> = [
+  const typeOptions: ReadonlyArray<{ value: FlowerType | undefined; label: string }> = [
     { value: undefined, label: 'All' },
     ...availableTypes.map((t) => ({ value: t, label: t })),
   ];

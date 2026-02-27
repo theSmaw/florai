@@ -1,7 +1,7 @@
 // Flowers selectors
 import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import type { Color, Flower, FlowerFilter, Season } from '../../domain/Flower';
+import type { Color, Flower, FlowerFilter, FlowerType, Season } from '../../domain/Flower';
 
 import type { AsyncAction } from '../AsyncAction';
 
@@ -43,8 +43,8 @@ export const selectAllSeasons = createSelector(
 
 export const selectAllTypes = createSelector(
   (state: RootState) => state.flowers.flowers,
-  (flowers: Flower[]): string[] => {
-    const typeSet = new Set<string>();
+  (flowers: Flower[]): FlowerType[] => {
+    const typeSet = new Set<FlowerType>();
     flowers.forEach((flower) => typeSet.add(flower.type));
     return Array.from(typeSet).sort();
   },

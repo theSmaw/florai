@@ -129,4 +129,34 @@ describe('Filter panel', () => {
     cy.get('[data-cy="flower-card"]').should('have.length', 2);
     cy.get('[data-cy="filter-pill"]').should('contain.text', 'days');
   });
+
+  it('combines color and season filters', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="color-chip"][data-cy-color="pink"]').click(); // Peony
+    cy.get('[data-cy="season-chip"][data-cy-value="Spring"]').click(); // Peony, Lavender
+    cy.get('[data-cy="apply-filters-button"]').click();
+    // Only Peony is both pink AND Spring
+    cy.get('[data-cy="flower-card"]').should('have.length', 1);
+    cy.get('[data-cy="flower-card-name"]').should('contain.text', 'Peony');
+    cy.get('[data-cy="filter-pill"]').should('have.length', 2);
+  });
+
+  it('combines fragrance and toxicity filters', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="fragrance-chip"][data-cy-value="strong"]').click();
+    cy.get('[data-cy="toxicity-chip"][data-cy-value="safe"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    // Peony (strong, safe) and Lavender (strong, safe)
+    cy.get('[data-cy="flower-card"]').should('have.length', 2);
+    cy.get('[data-cy="filter-pill"]').should('have.length', 2);
+  });
+
+  it('combines season and availability filters', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="season-chip"][data-cy-value="Summer"]').click();
+    cy.get('[data-cy="availability-chip"][data-cy-value="seasonal"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    // Hydrangea (Summer, seasonal) and Sunflower (Summer, seasonal)
+    cy.get('[data-cy="flower-card"]').should('have.length', 2);
+  });
 });

@@ -17,7 +17,14 @@ import {
 import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch } from '../../stores/store';
-import type { Color, FragranceLevel, GroupBy, Season, Toxicity } from '../../domain/Flower';
+import type {
+  Color,
+  FlowerType,
+  FragranceLevel,
+  GroupBy,
+  Season,
+  Toxicity,
+} from '../../domain/Flower';
 
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
@@ -73,7 +80,7 @@ export function CatalogueContainer() {
     }
   };
 
-  const handleTypeChange = (type?: string) => {
+  const handleTypeChange = (type?: FlowerType) => {
     const { type: _omit, ...rest } = currentFilter;
     if (type) {
       dispatch(filterApplied({ ...rest, type }));
