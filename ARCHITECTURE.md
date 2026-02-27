@@ -56,6 +56,7 @@ Reusable UI layout and controls.
 - May have local UI state driven by props and user interaction.
 - **Must not contain business logic.**
 - **Must not talk to stores or APIs.**
+- **Must not use router hooks** (`useNavigate`, `useParams`, etc.) — receive navigation as plain callbacks via props.
 - Should be developable and testable in isolation (Storybook style).
 
 ### hooks

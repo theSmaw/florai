@@ -7,19 +7,24 @@ import {
 } from '@radix-ui/react-icons';
 import styles from './HeaderMenu.module.css';
 
+interface HeaderMenuProps {
+  onCatalogueClick: () => void;
+  onCollectionClick: () => void;
+  onWeddingsClick: () => void;
+}
+
 /**
  * Reusable header hamburger menu with Radix DropdownMenu.
  * - Built-in a11y, keyboard navigation, focus management
- * - Hash-based navigation to keep parity with existing app
  */
-export function HeaderMenu() {
-  function navigate(hash: string) {
-    window.location.hash = hash;
-  }
-
+export function HeaderMenu({
+  onCatalogueClick,
+  onCollectionClick,
+  onWeddingsClick,
+}: HeaderMenuProps) {
   return (
     <div className={styles.wrapper}>
-      <DropdownMenu.Root>
+      <DropdownMenu.Root modal={false}>
         <DropdownMenu.Trigger asChild>
           <button
             data-cy="hamburger-menu-trigger"
@@ -39,7 +44,7 @@ export function HeaderMenu() {
             sideOffset={8}
             aria-label="Main menu"
           >
-            <DropdownMenu.Item asChild onSelect={() => navigate('/catalogue')}>
+            <DropdownMenu.Item asChild onSelect={onCatalogueClick}>
               <button
                 data-cy="nav-catalogue"
                 type="button"
@@ -50,7 +55,7 @@ export function HeaderMenu() {
                 <span>Catalogue</span>
               </button>
             </DropdownMenu.Item>
-            <DropdownMenu.Item asChild onSelect={() => navigate('/collection')}>
+            <DropdownMenu.Item asChild onSelect={onCollectionClick}>
               <button
                 data-cy="nav-collection"
                 type="button"
@@ -61,7 +66,7 @@ export function HeaderMenu() {
                 <span>Collection</span>
               </button>
             </DropdownMenu.Item>
-            <DropdownMenu.Item asChild onSelect={() => navigate('/weddings')}>
+            <DropdownMenu.Item asChild onSelect={onWeddingsClick}>
               <button
                 data-cy="nav-weddings"
                 type="button"

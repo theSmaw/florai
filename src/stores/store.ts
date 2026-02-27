@@ -1,10 +1,12 @@
 // Redux store configuration
 import { configureStore } from '@reduxjs/toolkit';
 import flowersReducer from './flowers/slice';
+import userReducer from './user/slice';
 
 export const store = configureStore({
   reducer: {
     flowers: flowersReducer,
+    user: userReducer,
   },
 });
 
