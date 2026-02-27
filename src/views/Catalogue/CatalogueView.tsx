@@ -9,7 +9,16 @@ import {
   Cross2Icon,
   PlusIcon,
 } from '@radix-ui/react-icons';
-import type { Flower, FlowerFilter, FragranceLevel, Toxicity } from '../../domain/Flower';
+import type {
+  Availability,
+  Color,
+  Flower,
+  FlowerFilter,
+  FragranceLevel,
+  GroupBy,
+  Season,
+  Toxicity,
+} from '../../domain/Flower';
 import { FlowerList } from '../../components/FlowerList/FlowerList.tsx';
 import { FilterPanel } from '../../components/FilterPanel/FilterPanel.tsx';
 import styles from './CatalogueView.module.css';
@@ -17,21 +26,25 @@ import styles from './CatalogueView.module.css';
 interface CatalogueViewProps {
   flowers: Flower[];
   groupedFlowers?: Record<string, Flower[]>;
-  availableColors: string[];
-  availableSeasons: string[];
+  availableColors: Color[];
+  availableSeasons: Season[];
   availableTypes: string[];
+  stemLengthBounds: { min: number; max: number };
+  vaseLifeBounds: { min: number; max: number };
   currentFilter: FlowerFilter;
   isLoading?: boolean;
   isFilterOpen: boolean;
   onFilterOpenChange: (open: boolean) => void;
   onSearchChange: (searchTerm: string) => void;
-  onColorToggle: (color: string) => void;
-  onAvailabilityChange: (availability?: 'always' | 'seasonal' | 'limited') => void;
-  onSeasonChange: (season?: string) => void;
+  onColorToggle: (color: Color) => void;
+  onAvailabilityChange: (availability?: Availability) => void;
+  onSeasonChange: (season?: Season) => void;
   onTypeChange: (type?: string) => void;
   onFragranceLevelChange: (fragranceLevel?: FragranceLevel) => void;
   onToxicityChange: (toxicity?: Toxicity) => void;
-  onGroupByChange: (groupBy?: 'color' | 'type' | 'none') => void;
+  onStemLengthChange: (min: number, max: number) => void;
+  onVaseLifeChange: (min: number, max: number) => void;
+  onGroupByChange: (groupBy?: GroupBy) => void;
   onCardClick: (flowerId: string) => void;
   onAddFlowerClick: () => void;
 }
@@ -42,6 +55,8 @@ export function CatalogueView({
   availableColors,
   availableSeasons,
   availableTypes,
+  stemLengthBounds,
+  vaseLifeBounds,
   currentFilter,
   isLoading,
   isFilterOpen,
@@ -53,6 +68,8 @@ export function CatalogueView({
   onTypeChange,
   onFragranceLevelChange,
   onToxicityChange,
+  onStemLengthChange,
+  onVaseLifeChange,
   onGroupByChange,
   onCardClick,
   onAddFlowerClick,
@@ -64,6 +81,8 @@ export function CatalogueView({
     !!currentFilter.season ||
     !!currentFilter.fragranceLevel ||
     !!currentFilter.toxicity ||
+    !!currentFilter.stemLengthRange ||
+    !!currentFilter.vaseLifeRange ||
     !!currentFilter.searchTerm;
 
   return (
@@ -120,6 +139,8 @@ export function CatalogueView({
                   availableColors={availableColors}
                   availableSeasons={availableSeasons}
                   availableTypes={availableTypes}
+                  stemLengthBounds={stemLengthBounds}
+                  vaseLifeBounds={vaseLifeBounds}
                   currentFilter={currentFilter}
                   onColorToggle={onColorToggle}
                   onAvailabilityChange={onAvailabilityChange}
@@ -127,6 +148,8 @@ export function CatalogueView({
                   onTypeChange={onTypeChange}
                   onFragranceLevelChange={onFragranceLevelChange}
                   onToxicityChange={onToxicityChange}
+                  onStemLengthChange={onStemLengthChange}
+                  onVaseLifeChange={onVaseLifeChange}
                   onGroupByChange={onGroupByChange}
                   onApplyFilters={() => onFilterOpenChange(false)}
                 />
@@ -166,6 +189,16 @@ export function CatalogueView({
             {currentFilter.toxicity && (
               <div data-cy="filter-pill" className={styles.pill}>
                 {currentFilter.toxicity}
+              </div>
+            )}
+            {currentFilter.stemLengthRange && (
+              <div data-cy="filter-pill" className={styles.pill}>
+                {currentFilter.stemLengthRange.min}–{currentFilter.stemLengthRange.max} cm
+              </div>
+            )}
+            {currentFilter.vaseLifeRange && (
+              <div data-cy="filter-pill" className={styles.pill}>
+                {currentFilter.vaseLifeRange.min}–{currentFilter.vaseLifeRange.max} days
               </div>
             )}
             {currentFilter.searchTerm && (

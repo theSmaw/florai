@@ -11,11 +11,13 @@ import {
   selectAllColors,
   selectAllSeasons,
   selectAllTypes,
+  selectStemLengthBounds,
+  selectVaseLifeBounds,
 } from '../../stores/flowers/selectors';
 import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch } from '../../stores/store';
-import type { FragranceLevel, Toxicity } from '../../domain/Flower';
+import type { Color, FragranceLevel, GroupBy, Season, Toxicity } from '../../domain/Flower';
 
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,6 +29,8 @@ export function CatalogueContainer() {
   const availableColors = useSelector(selectAllColors);
   const availableSeasons = useSelector(selectAllSeasons);
   const availableTypes = useSelector(selectAllTypes);
+  const stemLengthBounds = useSelector(selectStemLengthBounds);
+  const vaseLifeBounds = useSelector(selectVaseLifeBounds);
 
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -44,7 +48,7 @@ export function CatalogueContainer() {
     }
   };
 
-  const handleColorToggle = (color: string) => {
+  const handleColorToggle = (color: Color) => {
     const colors = currentFilter.colors.includes(color)
       ? currentFilter.colors.filter((c) => c !== color)
       : [...currentFilter.colors, color];
@@ -60,7 +64,7 @@ export function CatalogueContainer() {
     }
   };
 
-  const handleSeasonChange = (season?: string) => {
+  const handleSeasonChange = (season?: Season) => {
     const { season: _omit, ...rest } = currentFilter;
     if (season) {
       dispatch(filterApplied({ ...rest, season }));
@@ -96,7 +100,25 @@ export function CatalogueContainer() {
     }
   };
 
-  const handleGroupByChange = (groupBy?: 'color' | 'type' | 'none') => {
+  const handleStemLengthChange = (min: number, max: number) => {
+    const { stemLengthRange: _omit, ...rest } = currentFilter;
+    if (min === stemLengthBounds.min && max === stemLengthBounds.max) {
+      dispatch(filterApplied(rest));
+    } else {
+      dispatch(filterApplied({ ...rest, stemLengthRange: { min, max } }));
+    }
+  };
+
+  const handleVaseLifeChange = (min: number, max: number) => {
+    const { vaseLifeRange: _omit, ...rest } = currentFilter;
+    if (min === vaseLifeBounds.min && max === vaseLifeBounds.max) {
+      dispatch(filterApplied(rest));
+    } else {
+      dispatch(filterApplied({ ...rest, vaseLifeRange: { min, max } }));
+    }
+  };
+
+  const handleGroupByChange = (groupBy?: GroupBy) => {
     const { groupBy: _omit, ...rest } = currentFilter;
     if (groupBy) {
       dispatch(filterApplied({ ...rest, groupBy }));
@@ -118,6 +140,8 @@ export function CatalogueContainer() {
       availableColors={availableColors}
       availableSeasons={availableSeasons}
       availableTypes={availableTypes}
+      stemLengthBounds={stemLengthBounds}
+      vaseLifeBounds={vaseLifeBounds}
       currentFilter={currentFilter}
       isLoading={isLoading}
       isFilterOpen={isFilterOpen}
@@ -129,6 +153,8 @@ export function CatalogueContainer() {
       onTypeChange={handleTypeChange}
       onFragranceLevelChange={handleFragranceLevelChange}
       onToxicityChange={handleToxicityChange}
+      onStemLengthChange={handleStemLengthChange}
+      onVaseLifeChange={handleVaseLifeChange}
       onGroupByChange={handleGroupByChange}
       onCardClick={handleCardClick}
       onAddFlowerClick={handleAddFlowerClick}

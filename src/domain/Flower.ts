@@ -1,12 +1,29 @@
 // Flower domain types and interfaces
 
+export const COLORS = [
+  'pink',
+  'red',
+  'blue',
+  'yellow',
+  'purple',
+  'white',
+  'orange',
+  'green',
+] as const;
+export type Color = (typeof COLORS)[number];
+
+export const SEASONS = ['Spring', 'Summer', 'Autumn', 'Winter', 'Year-round'] as const;
+export type Season = (typeof SEASONS)[number];
+
+export type Availability = 'always' | 'seasonal' | 'limited';
+export type GroupBy = 'color' | 'type' | 'none';
 export type FragranceLevel = 'none' | 'light' | 'moderate' | 'strong';
 export type Toxicity = 'safe' | 'mild' | 'toxic';
 
 export interface Flower {
   id: string;
   name: string;
-  colors: string[]; // Multiple colors (e.g., "red", "pink", "coral")
+  colors: Color[]; // Multiple colors (e.g., "red", "pink", "coral")
   type: string; // Rose, Tulip, etc.
 
   // Media
@@ -19,8 +36,8 @@ export interface Flower {
   // Sourcing
   supplier: string;
   origin: string; // Country/region
-  season: string[]; // Spring, Summer, etc.
-  availability: 'always' | 'seasonal' | 'limited';
+  season: Season[]; // Spring, Summer, etc.
+  availability: Availability;
 
   // Inventory
   quantityOnHand: number;
@@ -40,12 +57,14 @@ export interface Flower {
 }
 
 export interface FlowerFilter {
-  colors: string[]; // Empty = no filter
-  availability?: 'always' | 'seasonal' | 'limited';
+  colors: Color[]; // Empty = no filter
+  availability?: Availability;
   type?: string; // Filter by flower type (Rose, Peony, etc.)
-  season?: string; // Filter by season (Spring, Summer, etc.)
+  season?: Season; // Filter by season (Spring, Summer, etc.)
   fragranceLevel?: FragranceLevel; // Filter by fragrance level
   toxicity?: Toxicity; // Filter by toxicity (safety)
+  stemLengthRange?: { min: number; max: number }; // Filter by stem length in cm
+  vaseLifeRange?: { min: number; max: number }; // Filter by vase life in days
   searchTerm?: string;
-  groupBy?: 'color' | 'type' | 'none';
+  groupBy?: GroupBy;
 }
