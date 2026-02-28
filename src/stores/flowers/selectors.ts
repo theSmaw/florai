@@ -1,7 +1,7 @@
 // Flowers selectors
 import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import type { Flower, FlowerFilter } from '../../domain/Flower';
+import type { Color, Flower, FlowerFilter, FlowerType, Season } from '../../domain/Flower';
 
 import type { AsyncAction } from '../AsyncAction';
 
@@ -25,10 +25,46 @@ export const selectSelectedFlower = (state: RootState): Flower | null => {
 
 export const selectAllColors = createSelector(
   (state: RootState) => state.flowers.flowers,
-  (flowers: Flower[]): string[] => {
-    const colorSet = new Set<string>();
+  (flowers: Flower[]): Color[] => {
+    const colorSet = new Set<Color>();
     flowers.forEach((flower) => flower.colors.forEach((c) => colorSet.add(c)));
     return Array.from(colorSet).sort();
+  },
+);
+
+export const selectAllSeasons = createSelector(
+  (state: RootState) => state.flowers.flowers,
+  (flowers: Flower[]): Season[] => {
+    const seasonSet = new Set<Season>();
+    flowers.forEach((flower) => flower.season.forEach((s) => seasonSet.add(s)));
+    return Array.from(seasonSet).sort();
+  },
+);
+
+export const selectAllTypes = createSelector(
+  (state: RootState) => state.flowers.flowers,
+  (flowers: Flower[]): FlowerType[] => {
+    const typeSet = new Set<FlowerType>();
+    flowers.forEach((flower) => typeSet.add(flower.type));
+    return Array.from(typeSet).sort();
+  },
+);
+
+export const selectStemLengthBounds = createSelector(
+  (state: RootState) => state.flowers.flowers,
+  (flowers: Flower[]): { min: number; max: number } => {
+    const lengths = flowers.map((f) => f.stemLengthCm).filter((l): l is number => l !== undefined);
+    if (lengths.length === 0) return { min: 0, max: 100 };
+    return { min: Math.min(...lengths), max: Math.max(...lengths) };
+  },
+);
+
+export const selectVaseLifeBounds = createSelector(
+  (state: RootState) => state.flowers.flowers,
+  (flowers: Flower[]): { min: number; max: number } => {
+    const days = flowers.map((f) => f.vaseLifeDays).filter((d): d is number => d !== undefined);
+    if (days.length === 0) return { min: 0, max: 30 };
+    return { min: Math.min(...days), max: Math.max(...days) };
   },
 );
 
@@ -48,6 +84,48 @@ export const selectFilteredFlowers = createSelector(
     // Filter by availability
     if (filter.availability) {
       filtered = filtered.filter((flower) => flower.availability === filter.availability);
+    }
+
+    // Filter by type
+    if (filter.type) {
+      filtered = filtered.filter((flower) => flower.type === filter.type);
+    }
+
+    // Filter by season
+    if (filter.season) {
+      filtered = filtered.filter((flower) => flower.season.includes(filter.season as Season));
+    }
+
+    // Filter by fragrance level
+    if (filter.fragranceLevel) {
+      filtered = filtered.filter((flower) => flower.fragranceLevel === filter.fragranceLevel);
+    }
+
+    // Filter by toxicity
+    if (filter.toxicity) {
+      filtered = filtered.filter((flower) => flower.toxicity === filter.toxicity);
+    }
+
+    // Filter by stem length range
+    if (filter.stemLengthRange) {
+      const { min, max } = filter.stemLengthRange;
+      filtered = filtered.filter(
+        (flower) =>
+          flower.stemLengthCm !== undefined &&
+          flower.stemLengthCm >= min &&
+          flower.stemLengthCm <= max,
+      );
+    }
+
+    // Filter by vase life range
+    if (filter.vaseLifeRange) {
+      const { min, max } = filter.vaseLifeRange;
+      filtered = filtered.filter(
+        (flower) =>
+          flower.vaseLifeDays !== undefined &&
+          flower.vaseLifeDays >= min &&
+          flower.vaseLifeDays <= max,
+      );
     }
 
     // Filter by search term

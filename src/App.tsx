@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider, redirect } from 'react-router-dom';
 import { store } from './stores/store';
 import { AppLayout } from './layouts/AppLayout/AppLayout';
-import { CatalogueContainer } from './containers/Catalogue/CatalogueContainer';
+import { CatalogueView } from './views/Catalogue/CatalogueView';
 import { CollectionView } from './views/Collection/CollectionView';
 import { WeddingsView } from './views/Weddings/WeddingsView';
 
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { index: true, loader: () => redirect('/catalogue') },
-      { path: 'catalogue', element: <CatalogueContainer /> },
+      { path: 'catalogue', element: <CatalogueView /> },
       { path: 'collection', element: <CollectionView /> },
       { path: 'weddings', element: <WeddingsView /> },
     ],

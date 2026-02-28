@@ -32,9 +32,12 @@ model Flower {
   supplier               String?
   origin                 String?
   season                 String   // JSON-serialised string[] (SQLite has no Json type)
-  availability           String   // "seasonal" | "always" (string in db.json)
+  availability           String   // "seasonal" | "always" | "limited"
   quantityOnHand         Int      @default(0)
-  vaseLife               String?  // string in db.json (e.g., "7-10 days")
+  stemLengthCm           Int?     // Typical stem length in cm
+  fragranceLevel         String?  // "none" | "light" | "moderate" | "strong"
+  toxicity               String?  // "safe" | "mild" | "toxic"
+  vaseLifeDays           Int?     // Minimum expected vase life in days
   careInstructions       String?
   notes                  String?
   complementaryFlowerIds String   // JSON-serialised string[] (SQLite has no Json type)

@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { FilterPanel } from './FilterPanel';
-import type { FlowerFilter } from '../../domain/Flower';
-import { action } from '@storybook/addon-actions';
+import type { Color, FlowerFilter } from '../../domain/Flower';
 
 const meta: Meta<typeof FilterPanel> = {
   title: 'Components/FilterPanel',
@@ -14,13 +13,16 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-const COLORS = ['red', 'pink', 'white', 'yellow', 'purple', 'blue', 'orange', 'green'];
+const AVAILABLE_COLORS: Color[] = ['red', 'pink', 'white', 'yellow', 'purple', 'blue'];
+const STEM_BOUNDS = { min: 30, max: 70 };
+const VASE_BOUNDS = { min: 7, max: 12 };
 
-function FilterPanelWrapper(props: { initialFilter?: FlowerFilter; availableColors?: string[] }) {
-  const [filter, setFilter] = useState<FlowerFilter>(
-    props.initialFilter ?? { colors: [], groupBy: 'none' },
-  );
-  const availableColors = props.availableColors ?? COLORS;
+function FilterPanelWrapper(props: { initialFilter?: Partial<FlowerFilter> }) {
+  const [filter, setFilter] = useState<FlowerFilter>({
+    colors: [],
+    groupBy: 'none',
+    ...props.initialFilter,
+  });
 
   return (
     <div
@@ -32,7 +34,11 @@ function FilterPanelWrapper(props: { initialFilter?: FlowerFilter; availableColo
       }}
     >
       <FilterPanel
-        availableColors={availableColors}
+        availableColors={AVAILABLE_COLORS}
+        availableSeasons={['Spring', 'Summer', 'Autumn', 'Winter']}
+        availableTypes={['Rose', 'Peony', 'Hydrangea']}
+        stemLengthBounds={STEM_BOUNDS}
+        vaseLifeBounds={VASE_BOUNDS}
         currentFilter={filter}
         onColorToggle={(color) =>
           setFilter((f) => ({
@@ -43,8 +49,16 @@ function FilterPanelWrapper(props: { initialFilter?: FlowerFilter; availableColo
           }))
         }
         onAvailabilityChange={(availability) => setFilter((f) => ({ ...f, availability }))}
+        onSeasonChange={(season) => setFilter((f) => ({ ...f, season }))}
+        onTypeChange={(type) => setFilter((f) => ({ ...f, type }))}
+        onFragranceLevelChange={(fragranceLevel) => setFilter((f) => ({ ...f, fragranceLevel }))}
+        onToxicityChange={(toxicity) => setFilter((f) => ({ ...f, toxicity }))}
+        onStemLengthChange={(min, max) =>
+          setFilter((f) => ({ ...f, stemLengthRange: { min, max } }))
+        }
+        onVaseLifeChange={(min, max) => setFilter((f) => ({ ...f, vaseLifeRange: { min, max } }))}
         onGroupByChange={(groupBy) => setFilter((f) => ({ ...f, groupBy }))}
-        onApplyFilters={() => action('apply-filters')(filter)}
+        onApplyFilters={() => {}}
       />
     </div>
   );
@@ -56,16 +70,12 @@ export const Default: Story = {
 
 export const WithSelectedColors: Story = {
   name: 'With selected colors',
-  render: () => (
-    <FilterPanelWrapper initialFilter={{ colors: ['red', 'white'], groupBy: 'none' }} />
-  ),
+  render: () => <FilterPanelWrapper initialFilter={{ colors: ['red', 'pink'] }} />,
 };
 
-export const AvailabilitySeasonal: Story = {
-  name: 'Availability: seasonal',
-  render: () => (
-    <FilterPanelWrapper initialFilter={{ colors: [], availability: 'seasonal', groupBy: 'none' }} />
-  ),
+export const WithSeasonFilter: Story = {
+  name: 'With season filter',
+  render: () => <FilterPanelWrapper initialFilter={{ colors: [], season: 'Spring' }} />,
 };
 
 export const GroupByColor: Story = {
