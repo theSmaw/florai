@@ -5,5 +5,9 @@
 import { CatalogueContainer } from '../../containers/Catalogue/CatalogueContainer';
 
 export function CatalogueView() {
-  return <CatalogueContainer />;
+  return (
+    <div data-cy="catalogue-view">
+      <CatalogueContainer />
+    </div>
+  );
 }

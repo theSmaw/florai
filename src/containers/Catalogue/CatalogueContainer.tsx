@@ -25,7 +25,7 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
-import { CatalogueContent } from '../../views/Catalogue/CatalogueContent';
+import { Catalogue } from '../../components/Catalogue/Catalogue';
 
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
@@ -140,7 +140,7 @@ export function CatalogueContainer() {
   const handleAddFlowerClick = () => {};
 
   return (
-    <CatalogueContent
+    <Catalogue
       flowers={filteredFlowers}
       groupedFlowers={groupedFlowers}
       currentFilter={currentFilter}

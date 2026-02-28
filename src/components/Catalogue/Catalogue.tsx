@@ -1,4 +1,4 @@
-// Catalogue content component
+// Catalogue component
 // Pure presentational layer — all data and handlers come in as props from CatalogueContainer.
 // Owns layout, styling, and UI-only state (filter sheet open/close).
 import { useState } from 'react';
@@ -20,11 +20,11 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
-import { FlowerList } from '../../components/FlowerList/FlowerList';
-import { FilterPanel } from '../../components/FilterPanel/FilterPanel';
-import styles from './CatalogueView.module.css';
+import { FlowerList } from '../FlowerList/FlowerList';
+import { FilterPanel } from '../FilterPanel/FilterPanel';
+import styles from './Catalogue.module.css';
 
-interface CatalogueContentProps {
+export interface CatalogueProps {
   flowers: Flower[];
   groupedFlowers: Record<string, Flower[]>;
   currentFilter: FlowerFilter;
@@ -48,7 +48,7 @@ interface CatalogueContentProps {
   onAddFlowerClick: () => void;
 }
 
-export function CatalogueContent({
+export function Catalogue({
   flowers,
   groupedFlowers,
   currentFilter,
@@ -70,7 +70,7 @@ export function CatalogueContent({
   onGroupByChange,
   onCardClick,
   onAddFlowerClick,
-}: CatalogueContentProps) {
+}: CatalogueProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const hasActiveFilters =
@@ -85,7 +85,7 @@ export function CatalogueContent({
     !!currentFilter.searchTerm;
 
   return (
-    <div data-cy="catalogue-view" className={styles.root}>
+    <div className={styles.root}>
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerRow}>
