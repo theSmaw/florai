@@ -7,7 +7,7 @@ interface SectionHeaderProps {
 export function SectionHeader({ label }: SectionHeaderProps) {
   return (
     <div className={styles.sectionHeader}>
-      <span className={styles.sectionLabel}>{label}</span>
+      <h2 className={styles.sectionLabel}>{label}</h2>
       <div className={styles.sectionLine} />
     </div>
   );
