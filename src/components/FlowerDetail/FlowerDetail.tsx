@@ -55,6 +55,7 @@ export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDet
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <button
+            data-cy="back-button"
             className={styles.backButton}
             onClick={onBack}
             aria-label="Back to catalogue"
@@ -89,7 +90,7 @@ export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDet
         >
           {/* Identity */}
           <div className={styles.identity}>
-            <h1 className={styles.nameDisplay}>{flower.name}</h1>
+            <h1 data-cy="flower-name" className={styles.nameDisplay}>{flower.name}</h1>
             <div className={styles.identityMeta}>
               <span className={styles.typeLabel}>{flower.type}</span>
             </div>
@@ -139,7 +140,7 @@ export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDet
                 <div className={styles.field}>
                   <span className={styles.fieldLabel}>Climate</span>
                   <div className={styles.tagList}>
-                    <span className={styles.tag}>{CLIMATE_LABEL[flower.climate]}</span>
+                    <span data-cy="flower-climate" className={styles.tag}>{CLIMATE_LABEL[flower.climate]}</span>
                   </div>
                 </div>
               </div>
