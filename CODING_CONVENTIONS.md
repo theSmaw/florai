@@ -26,6 +26,11 @@ Use these standard top-level groupings (naming can be adapted, intent must remai
 - Selectors start with `select`:
   - `selectCurrentUser`, `selectOrders`, `selectIsAuthenticated`
 
+## One component per file
+- Each file must export exactly one React component.
+- Do not define multiple components in the same file, even small helper components.
+- If a component needs a helper (e.g. `SectionHeader` inside `FlowerDetail`), extract it to its own file in the same folder.
+
 ## File Size / Complexity
 - Prefer small files with single responsibility.
 - Split when a file becomes difficult to scan.

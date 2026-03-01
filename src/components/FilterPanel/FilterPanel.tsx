@@ -10,24 +10,10 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
+import { COLOR_HEX } from '../../domain/flowerDisplayMeta';
 import { FilterChipSection } from '../FilterChipSection/FilterChipSection';
 import { FilterRangeSection } from '../FilterRangeSection/FilterRangeSection';
 import styles from './FilterPanel.module.css';
-
-// ---------------------------------------------------------------------------
-// Static option lists
-// ---------------------------------------------------------------------------
-
-const COLOR_SWATCHES: Record<Color, string> = {
-  pink: '#f9a8d4',
-  red: '#dc2626',
-  blue: '#60a5fa',
-  yellow: '#facc15',
-  purple: '#c084fc',
-  white: '#f1f5f9',
-  orange: '#fb923c',
-  green: '#4ade80',
-};
 
 const AVAILABILITY_OPTIONS: ReadonlyArray<{ value: Availability | undefined; label: string }> = [
   { value: undefined, label: 'All' },
@@ -130,7 +116,7 @@ export function FilterPanel({
                   onClick={() => onColorToggle(color)}
                   className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
                 >
-                  <span className={styles.colorDot} style={{ background: COLOR_SWATCHES[color] }} />
+                  <span className={styles.colorDot} style={{ background: COLOR_HEX[color] }} />
                   <span className={styles.chipLabel}>{color}</span>
                 </button>
               );

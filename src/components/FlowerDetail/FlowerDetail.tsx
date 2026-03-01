@@ -1,44 +1,16 @@
 // FlowerDetail — pure presentational component
 // Receives all data via props from FlowerDetailContainer.
 import { ChevronLeftIcon } from '@radix-ui/react-icons';
-import type { Availability, Flower, FragranceLevel, Toxicity } from '../../domain/Flower';
+import type { Availability, Flower, Toxicity } from '../../domain/Flower';
+import {
+  AVAILABILITY_LABEL,
+  COLOR_HEX,
+  FRAGRANCE_LABEL,
+  FRAGRANCE_PIPS,
+  TOXICITY_LABEL,
+} from '../../domain/flowerDisplayMeta';
+import { SectionHeader } from './SectionHeader';
 import styles from './FlowerDetail.module.css';
-
-// ─── Colour palette for the swatch dots ──────────────────────────────────────
-
-const COLOR_VALUES: Record<string, string> = {
-  pink: '#f9a8d4',
-  red: '#ef4444',
-  blue: '#60a5fa',
-  yellow: '#facc15',
-  purple: '#a78bfa',
-  white: '#e2e8f0',
-  orange: '#fb923c',
-  green: '#4ade80',
-};
-
-// ─── Fragrance — maps level to filled pip count ───────────────────────────────
-
-const FRAGRANCE_LEVEL: Record<FragranceLevel, number> = {
-  none: 0,
-  light: 1,
-  moderate: 2,
-  strong: 3,
-};
-
-// ─── Human-readable labels ────────────────────────────────────────────────────
-
-const AVAILABILITY_LABELS: Record<Availability, string> = {
-  always: 'Always Available',
-  seasonal: 'Seasonal',
-  limited: 'Limited',
-};
-
-const TOXICITY_LABELS: Record<Toxicity, string> = {
-  safe: 'Safe',
-  mild: 'Mild',
-  toxic: 'Toxic',
-};
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -59,15 +31,6 @@ function toxicityTagClass(toxicity: Toxicity): string {
   return `${tag} ${tagWarning}`;
 }
 
-function SectionHeader({ label }: { label: string }) {
-  return (
-    <div className={styles.sectionHeader}>
-      <span className={styles.sectionLabel}>{label}</span>
-      <div className={styles.sectionLine} />
-    </div>
-  );
-}
-
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export interface FlowerDetailProps {
@@ -77,7 +40,7 @@ export interface FlowerDetailProps {
 }
 
 export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDetailProps) {
-  const fragrancePips = flower.fragranceLevel ? FRAGRANCE_LEVEL[flower.fragranceLevel] : 0;
+  const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
 
   function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
     const img = e.currentTarget;
@@ -144,7 +107,7 @@ export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDet
                     <div key={color} className={styles.colorChip}>
                       <div
                         className={styles.colorDot}
-                        style={{ backgroundColor: COLOR_VALUES[color] ?? '#e2e8f0' }}
+                        style={{ backgroundColor: COLOR_HEX[color] ?? '#e2e8f0' }}
                       />
                       {color}
                     </div>
@@ -158,7 +121,7 @@ export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDet
                   <span className={styles.fieldLabel}>Availability</span>
                   <div className={styles.tagList}>
                     <span className={availabilityTagClass(flower.availability)}>
-                      {AVAILABILITY_LABELS[flower.availability]}
+                      {AVAILABILITY_LABEL[flower.availability]}
                     </span>
                   </div>
                 </div>
@@ -253,8 +216,7 @@ export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDet
                         ))}
                       </div>
                       <span className={styles.fragranceText}>
-                        {flower.fragranceLevel.charAt(0).toUpperCase() +
-                          flower.fragranceLevel.slice(1)}
+                        {FRAGRANCE_LABEL[flower.fragranceLevel]}
                       </span>
                     </div>
                   </div>
@@ -263,7 +225,7 @@ export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDet
                   <div className={styles.statItem}>
                     <span className={styles.statLabel}>Toxicity</span>
                     <span className={toxicityTagClass(flower.toxicity)}>
-                      {TOXICITY_LABELS[flower.toxicity]}
+                      {TOXICITY_LABEL[flower.toxicity]}
                     </span>
                   </div>
                 )}
