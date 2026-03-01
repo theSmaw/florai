@@ -19,6 +19,7 @@
     "prisma:studio": "prisma studio",
     "prisma:seed": "prisma db seed",
     "prisma:test": "tsx scripts/list-flowers.ts",
+    "generate:images": "tsx scripts/generateFlowerImages.ts",
     "pr:create": "bash scripts/publish-branch.sh 'chore(prisma): add Prisma ORM setup'",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",

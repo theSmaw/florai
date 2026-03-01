@@ -26,7 +26,9 @@ If you are exploring or modifying features in `src/`, consult the relevant docum
 ## Quick Start
 
 - Install: `pnpm install` (or `npm install`/`yarn`)
-- Dev: `pnpm dev`
+- Dev: requires **two terminals** running simultaneously:
+  - Terminal 1 — UI: `pnpm dev`
+  - Terminal 2 — Mock API: `pnpm dev:api` (json-server on port 3001)
 - Build: `pnpm build`
 - Preview: `pnpm preview`
 [FlowerList.module.css](src/components/FlowerList.module.css)
@@ -52,6 +54,26 @@ Quick commands (replace <OWNER>/<REPO>):
 If you find documentation gaps, please update the relevant `.md` file and link it here to keep this index accurate.
 
 ## Images
+
+### Generating placeholder images with DALL-E 3
+
+Any flower in `db.json` without an `imageUrl` will show a placeholder in the UI. To generate real images for them via the OpenAI API:
+
+1. Get your API key from [platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+2. Run the generation script, passing the key as an environment variable:
+   ```
+   OPENAI_API_KEY=sk-... pnpm generate:images
+   ```
+3. The script will print progress and save each image to `public/images/flowers/` and update `db.json` automatically.
+4. Restart `pnpm dev:api` once complete so json-server picks up the updated `db.json`.
+
+**Cost**: ~$0.04 per image (DALL-E 3 standard, 1024×1024). 94 images ≈ $3.76.
+
+**Time**: ~21 minutes — the script waits 13 seconds between requests to respect the free-tier rate limit (5 images/min). If you are on a paid OpenAI plan with a higher limit, lower `DELAY_MS` in `scripts/generateFlowerImages.ts`.
+
+**Resumable**: `db.json` is written after each image. If the script is interrupted, re-run it and it will skip flowers that already have an `imageUrl`.
+
+### Adding images manually
 
 - Where to put files: Place images under `public/images/flowers/` and reference them via the `imageUrl` field in `db.json` (e.g., `/images/flowers/<id>.jpg`).
 - Fallback: If an image fails to load or is missing, the UI falls back to `/images/placeholder.svg`.

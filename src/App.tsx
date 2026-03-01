@@ -6,6 +6,7 @@ import { AppLayout } from './layouts/AppLayout/AppLayout';
 import { CatalogueView } from './views/Catalogue/CatalogueView';
 import { CollectionView } from './views/Collection/CollectionView';
 import { WeddingsView } from './views/Weddings/WeddingsView';
+import { FlowerDetailView } from './views/FlowerDetail/FlowerDetailView';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, loader: () => redirect('/catalogue') },
       { path: 'catalogue', element: <CatalogueView /> },
+      { path: 'catalogue/:flowerId', element: <FlowerDetailView /> },
       { path: 'collection', element: <CollectionView /> },
       { path: 'weddings', element: <WeddingsView /> },
     ],

@@ -1,17 +1,24 @@
 {
-  "user": { "name": "Demo Florist", "email": "demo@florai.com" },
+  "user": {
+    "name": "Demo Florist",
+    "email": "demo@florai.com"
+  },
   "flowers": [
     {
       "id": "1",
       "name": "Peony Sarah Bernhardt",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Peony",
       "imageUrl": "/images/flowers/peony.png",
       "wholesalePrice": 4.5,
       "retailPrice": 8.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 45,
       "stemLengthCm": 50,
@@ -20,19 +27,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, change daily",
       "notes": "Beautiful full bloom, long lasting",
-      "complementaryFlowerIds": ["3", "6"]
+      "complementaryFlowerIds": [
+        "3",
+        "6"
+      ]
     },
     {
       "id": "2",
       "name": "Explorer Red Rose",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Rose",
       "imageUrl": "/images/flowers/explorer-red-rose.png",
       "wholesalePrice": 2.25,
       "retailPrice": 4.99,
       "supplier": "Ecuador Flowers",
       "origin": "Ecuador",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 120,
       "stemLengthCm": 60,
@@ -41,19 +55,26 @@
       "vaseLifeDays": 10,
       "careInstructions": "Remove lower leaves, fresh water daily",
       "notes": "Deep red color, excellent longevity",
-      "complementaryFlowerIds": ["1", "4"]
+      "complementaryFlowerIds": [
+        "1",
+        "4"
+      ]
     },
     {
       "id": "3",
       "name": "Blue Hydrangea",
-      "colors": ["blue"],
+      "colors": [
+        "blue"
+      ],
       "type": "Hydrangea",
       "imageUrl": "/images/flowers/blue-hydrangea.png",
       "wholesalePrice": 8.9,
       "retailPrice": 14.99,
       "supplier": "Domestic Grower",
       "origin": "California",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 12,
       "stemLengthCm": 50,
@@ -62,19 +83,26 @@
       "vaseLifeDays": 10,
       "careInstructions": "Keep stems in water constantly",
       "notes": "Full heads, great filler flower",
-      "complementaryFlowerIds": ["1", "5"]
+      "complementaryFlowerIds": [
+        "1",
+        "5"
+      ]
     },
     {
       "id": "4",
       "name": "White Calla Lily",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Calla Lily",
       "imageUrl": "/images/flowers/lush-calla-lilly.png",
       "wholesalePrice": 3.75,
       "retailPrice": 6.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Winter"],
+      "season": [
+        "Winter"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 0,
       "stemLengthCm": 70,
@@ -83,19 +111,25 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep cool, change water frequently",
       "notes": "Elegant and sophisticated",
-      "complementaryFlowerIds": ["2"]
+      "complementaryFlowerIds": [
+        "2"
+      ]
     },
     {
       "id": "5",
       "name": "Sunbeam Sunflower",
-      "colors": ["yellow"],
+      "colors": [
+        "yellow"
+      ],
       "type": "Sunflower",
       "imageUrl": "/images/flowers/sunbeam-sunflower.png",
       "wholesalePrice": 1.5,
       "retailPrice": 3.99,
       "supplier": "Domestic Grower",
       "origin": "Texas",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 88,
       "stemLengthCm": 60,
@@ -104,19 +138,26 @@
       "vaseLifeDays": 12,
       "careInstructions": "Change water every 2 days",
       "notes": "Bright and cheerful, long lasting",
-      "complementaryFlowerIds": ["3", "6"]
+      "complementaryFlowerIds": [
+        "3",
+        "6"
+      ]
     },
     {
       "id": "6",
       "name": "English Lavender",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Lavender",
       "imageUrl": "/images/flowers/english-lavender.png",
       "wholesalePrice": 0.85,
       "retailPrice": 2.49,
       "supplier": "UK Grower",
       "origin": "United Kingdom",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 300,
       "stemLengthCm": 30,
@@ -125,19 +166,28 @@
       "vaseLifeDays": 10,
       "careInstructions": "Dry or fresh, very hardy",
       "notes": "Fragrant, excellent for arrangements",
-      "complementaryFlowerIds": ["1", "2"]
+      "complementaryFlowerIds": [
+        "1",
+        "2"
+      ]
     },
     {
       "id": "7",
       "name": "Juliet Garden Rose",
-      "colors": ["pink", "orange"],
+      "colors": [
+        "pink",
+        "orange"
+      ],
+      "imageUrl": "/images/flowers/7.png",
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=7",
       "wholesalePrice": 5.5,
       "retailPrice": 12.99,
       "supplier": "Ecuador Flowers",
       "origin": "Ecuador",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 30,
       "stemLengthCm": 55,
@@ -146,19 +196,27 @@
       "vaseLifeDays": 7,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Iconic David Austin garden rose, exceptional apricot-peach colouring",
-      "complementaryFlowerIds": ["8", "22", "92"]
+      "complementaryFlowerIds": [
+        "8",
+        "22",
+        "92"
+      ]
     },
     {
       "id": "8",
+      "imageUrl": "/images/flowers/8.png",
       "name": "Quicksand Rose",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=8",
-      "wholesalePrice": 3.0,
+      "wholesalePrice": 3,
       "retailPrice": 6.99,
       "supplier": "Ecuador Flowers",
       "origin": "Ecuador",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 85,
       "stemLengthCm": 60,
@@ -167,19 +225,28 @@
       "vaseLifeDays": 10,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Hugely popular dusty blush-mauve rose, a wedding staple",
-      "complementaryFlowerIds": ["7", "18", "92"]
+      "complementaryFlowerIds": [
+        "7",
+        "18",
+        "92"
+      ]
     },
     {
       "id": "9",
+      "imageUrl": "/images/flowers/9.png",
       "name": "Amnesia Rose",
-      "colors": ["purple", "pink"],
+      "colors": [
+        "purple",
+        "pink"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=9",
       "wholesalePrice": 3.5,
       "retailPrice": 7.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 50,
       "stemLengthCm": 60,
@@ -188,19 +255,27 @@
       "vaseLifeDays": 9,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Distinctive mauve-purple hue, moody and dramatic",
-      "complementaryFlowerIds": ["15", "22", "70"]
+      "complementaryFlowerIds": [
+        "15",
+        "22",
+        "70"
+      ]
     },
     {
       "id": "10",
+      "imageUrl": "/images/flowers/10.png",
       "name": "Black Baccara Rose",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=10",
       "wholesalePrice": 3.25,
       "retailPrice": 6.99,
       "supplier": "Ecuador Flowers",
       "origin": "Ecuador",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 40,
       "stemLengthCm": 65,
@@ -209,19 +284,26 @@
       "vaseLifeDays": 12,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Deepest darkest red, almost black — a true showstopper",
-      "complementaryFlowerIds": ["21", "25", "92"]
+      "complementaryFlowerIds": [
+        "21",
+        "25",
+        "92"
+      ]
     },
     {
       "id": "11",
       "name": "Mondial Rose",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=11",
       "wholesalePrice": 2.75,
       "retailPrice": 5.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 100,
       "stemLengthCm": 70,
@@ -230,19 +312,26 @@
       "vaseLifeDays": 10,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Classic large-headed white rose, perfect for bridal work",
-      "complementaryFlowerIds": ["12", "92", "70"]
+      "complementaryFlowerIds": [
+        "12",
+        "92",
+        "70"
+      ]
     },
     {
       "id": "12",
       "name": "Avalanche Rose",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=12",
       "wholesalePrice": 2.5,
       "retailPrice": 5.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 120,
       "stemLengthCm": 60,
@@ -251,19 +340,26 @@
       "vaseLifeDays": 12,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "One of the most reliable white roses, superb vase life",
-      "complementaryFlowerIds": ["11", "92", "73"]
+      "complementaryFlowerIds": [
+        "11",
+        "92",
+        "73"
+      ]
     },
     {
       "id": "13",
       "name": "Cappuccino Rose",
-      "colors": ["orange"],
+      "colors": [
+        "orange"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=13",
-      "wholesalePrice": 3.0,
+      "wholesalePrice": 3,
       "retailPrice": 6.49,
       "supplier": "Ecuador Flowers",
       "origin": "Ecuador",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 45,
       "stemLengthCm": 55,
@@ -272,19 +368,27 @@
       "vaseLifeDays": 8,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Warm peach-orange tones, coffee-coloured edges as it ages",
-      "complementaryFlowerIds": ["17", "79", "95"]
+      "complementaryFlowerIds": [
+        "17",
+        "79",
+        "95"
+      ]
     },
     {
       "id": "14",
       "name": "Tiffany Rose",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=14",
-      "wholesalePrice": 4.0,
+      "wholesalePrice": 4,
       "retailPrice": 8.49,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 25,
       "stemLengthCm": 60,
@@ -293,19 +397,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Deeply fragrant pink with high-centred bud, bridal favourite",
-      "complementaryFlowerIds": ["7", "22", "76"]
+      "complementaryFlowerIds": [
+        "7",
+        "22",
+        "76"
+      ]
     },
     {
       "id": "15",
       "name": "Blue Moon Rose",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=15",
       "wholesalePrice": 4.5,
       "retailPrice": 9.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "limited",
       "quantityOnHand": 15,
       "stemLengthCm": 60,
@@ -314,19 +425,26 @@
       "vaseLifeDays": 8,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Rare lavender-lilac rose with intense perfume",
-      "complementaryFlowerIds": ["9", "86", "69"]
+      "complementaryFlowerIds": [
+        "9",
+        "86",
+        "69"
+      ]
     },
     {
       "id": "16",
       "name": "Princess Diana Rose",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=16",
       "wholesalePrice": 2.75,
       "retailPrice": 5.99,
       "supplier": "Ecuador Flowers",
       "origin": "Ecuador",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 75,
       "stemLengthCm": 65,
@@ -335,19 +453,28 @@
       "vaseLifeDays": 10,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Bright candy-pink, excellent stem length and longevity",
-      "complementaryFlowerIds": ["7", "14", "92"]
+      "complementaryFlowerIds": [
+        "7",
+        "14",
+        "92"
+      ]
     },
     {
       "id": "17",
       "name": "Coral Reef Rose",
-      "colors": ["orange", "pink"],
+      "colors": [
+        "orange",
+        "pink"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=17",
       "wholesalePrice": 3.25,
       "retailPrice": 6.99,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 35,
       "stemLengthCm": 55,
@@ -356,19 +483,26 @@
       "vaseLifeDays": 9,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Vibrant coral-orange, great for tropical and summer arrangements",
-      "complementaryFlowerIds": ["13", "65", "95"]
+      "complementaryFlowerIds": [
+        "13",
+        "65",
+        "95"
+      ]
     },
     {
       "id": "18",
       "name": "Champagne Rose",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=18",
       "wholesalePrice": 2.75,
       "retailPrice": 5.49,
       "supplier": "Ecuador Flowers",
       "origin": "Ecuador",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 90,
       "stemLengthCm": 60,
@@ -377,19 +511,27 @@
       "vaseLifeDays": 10,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Cream with a warm blush flush, endlessly elegant",
-      "complementaryFlowerIds": ["11", "12", "92"]
+      "complementaryFlowerIds": [
+        "11",
+        "12",
+        "92"
+      ]
     },
     {
       "id": "19",
       "name": "Sweet Akito Rose",
-      "colors": ["white", "pink"],
+      "colors": [
+        "white",
+        "pink"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=19",
       "wholesalePrice": 2.25,
       "retailPrice": 4.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 110,
       "stemLengthCm": 55,
@@ -398,19 +540,27 @@
       "vaseLifeDays": 10,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "White petals with delicate pink blush edges, very popular",
-      "complementaryFlowerIds": ["73", "92", "70"]
+      "complementaryFlowerIds": [
+        "73",
+        "92",
+        "70"
+      ]
     },
     {
       "id": "20",
       "name": "Garden Spirit Rose",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=20",
       "wholesalePrice": 3.75,
       "retailPrice": 8.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 20,
       "stemLengthCm": 50,
@@ -419,19 +569,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Full garden-rose form with dusky pink blooms",
-      "complementaryFlowerIds": ["14", "22", "57"]
+      "complementaryFlowerIds": [
+        "14",
+        "22",
+        "57"
+      ]
     },
     {
       "id": "21",
       "name": "Red Naomi Rose",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Rose",
-      "imageUrl": "https://loremflickr.com/400/533/rose?lock=21",
       "wholesalePrice": 2.5,
       "retailPrice": 5.49,
       "supplier": "Kenya Blooms",
       "origin": "Kenya",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 130,
       "stemLengthCm": 70,
@@ -440,19 +597,27 @@
       "vaseLifeDays": 12,
       "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Rich velvety red, superb stem length, one of Kenya's finest",
-      "complementaryFlowerIds": ["10", "23", "92"]
+      "complementaryFlowerIds": [
+        "10",
+        "23",
+        "92"
+      ]
     },
     {
       "id": "22",
       "name": "Bowl of Beauty Peony",
-      "colors": ["pink", "white"],
+      "colors": [
+        "pink",
+        "white"
+      ],
       "type": "Peony",
-      "imageUrl": "https://loremflickr.com/400/533/peony?lock=22",
-      "wholesalePrice": 4.0,
+      "wholesalePrice": 4,
       "retailPrice": 8.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 30,
       "stemLengthCm": 45,
@@ -461,19 +626,26 @@
       "vaseLifeDays": 6,
       "careInstructions": "Store in cool water, remove guard petals gently, trim daily",
       "notes": "Japanese-form peony with hot pink outer petals and cream centre",
-      "complementaryFlowerIds": ["1", "7", "57"]
+      "complementaryFlowerIds": [
+        "1",
+        "7",
+        "57"
+      ]
     },
     {
       "id": "23",
       "name": "Red Charm Peony",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Peony",
-      "imageUrl": "https://loremflickr.com/400/533/peony?lock=23",
       "wholesalePrice": 4.5,
       "retailPrice": 9.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 25,
       "stemLengthCm": 50,
@@ -482,19 +654,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Store in cool water, remove guard petals gently, trim daily",
       "notes": "Fully double bomb-form peony in rich scarlet red",
-      "complementaryFlowerIds": ["21", "24", "92"]
+      "complementaryFlowerIds": [
+        "21",
+        "24",
+        "92"
+      ]
     },
     {
       "id": "24",
       "name": "Karl Rosenfield Peony",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Peony",
-      "imageUrl": "https://loremflickr.com/400/533/peony?lock=24",
       "wholesalePrice": 4.25,
       "retailPrice": 8.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 20,
       "stemLengthCm": 48,
@@ -503,19 +682,27 @@
       "vaseLifeDays": 6,
       "careInstructions": "Store in cool water, remove guard petals gently, trim daily",
       "notes": "Classic double peony in deep crimson-magenta",
-      "complementaryFlowerIds": ["23", "10", "55"]
+      "complementaryFlowerIds": [
+        "23",
+        "10",
+        "55"
+      ]
     },
     {
       "id": "25",
       "name": "Festiva Maxima Peony",
-      "colors": ["white", "red"],
+      "colors": [
+        "white",
+        "red"
+      ],
       "type": "Peony",
-      "imageUrl": "https://loremflickr.com/400/533/peony?lock=25",
-      "wholesalePrice": 5.0,
+      "wholesalePrice": 5,
       "retailPrice": 10.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 15,
       "stemLengthCm": 50,
@@ -524,19 +711,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Store in cool water, remove guard petals gently, trim daily",
       "notes": "White double peony with distinctive red-flecked inner petals",
-      "complementaryFlowerIds": ["22", "11", "73"]
+      "complementaryFlowerIds": [
+        "22",
+        "11",
+        "73"
+      ]
     },
     {
       "id": "26",
       "name": "Queen of Night Tulip",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Tulip",
-      "imageUrl": "https://loremflickr.com/400/533/tulip?lock=26",
       "wholesalePrice": 1.25,
       "retailPrice": 3.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 200,
       "stemLengthCm": 45,
@@ -545,19 +739,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep upright in cool water, wrap in paper to straighten stems",
       "notes": "Deep maroon-purple, almost black — the most dramatic tulip",
-      "complementaryFlowerIds": ["31", "86", "93"]
+      "complementaryFlowerIds": [
+        "31",
+        "86",
+        "93"
+      ]
     },
     {
       "id": "27",
       "name": "Angelique Tulip",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Tulip",
-      "imageUrl": "https://loremflickr.com/400/533/tulip?lock=27",
-      "wholesalePrice": 1.0,
+      "wholesalePrice": 1,
       "retailPrice": 2.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 250,
       "stemLengthCm": 40,
@@ -566,19 +767,27 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep upright in cool water, wrap in paper to straighten stems",
       "notes": "Fully double peony-like tulip in soft blush-pink",
-      "complementaryFlowerIds": ["28", "67", "76"]
+      "complementaryFlowerIds": [
+        "28",
+        "67",
+        "76"
+      ]
     },
     {
       "id": "28",
       "name": "Parrot Tulip",
-      "colors": ["pink", "red"],
+      "colors": [
+        "pink",
+        "red"
+      ],
       "type": "Tulip",
-      "imageUrl": "https://loremflickr.com/400/533/tulip?lock=28",
       "wholesalePrice": 1.5,
       "retailPrice": 3.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 180,
       "stemLengthCm": 45,
@@ -587,19 +796,26 @@
       "vaseLifeDays": 6,
       "careInstructions": "Keep upright in cool water, wrap in paper to straighten stems",
       "notes": "Flamboyant fringed petals in pink-red, highly decorative",
-      "complementaryFlowerIds": ["27", "76", "57"]
+      "complementaryFlowerIds": [
+        "27",
+        "76",
+        "57"
+      ]
     },
     {
       "id": "29",
       "name": "White Dream Tulip",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Tulip",
-      "imageUrl": "https://loremflickr.com/400/533/tulip?lock=29",
       "wholesalePrice": 0.9,
       "retailPrice": 2.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 300,
       "stemLengthCm": 40,
@@ -608,19 +824,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep upright in cool water, wrap in paper to straighten stems",
       "notes": "Pure ivory white, a clean and versatile choice",
-      "complementaryFlowerIds": ["67", "73", "78"]
+      "complementaryFlowerIds": [
+        "67",
+        "73",
+        "78"
+      ]
     },
     {
       "id": "30",
       "name": "Monte Carlo Tulip",
-      "colors": ["yellow"],
+      "colors": [
+        "yellow"
+      ],
       "type": "Tulip",
-      "imageUrl": "https://loremflickr.com/400/533/tulip?lock=30",
       "wholesalePrice": 0.85,
       "retailPrice": 2.29,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 280,
       "stemLengthCm": 38,
@@ -629,19 +852,26 @@
       "vaseLifeDays": 6,
       "careInstructions": "Keep upright in cool water, wrap in paper to straighten stems",
       "notes": "Buttery yellow double tulip with peony-like fullness",
-      "complementaryFlowerIds": ["68", "88", "81"]
+      "complementaryFlowerIds": [
+        "68",
+        "88",
+        "81"
+      ]
     },
     {
       "id": "31",
       "name": "Purple Prince Tulip",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Tulip",
-      "imageUrl": "https://loremflickr.com/400/533/tulip?lock=31",
       "wholesalePrice": 1.1,
       "retailPrice": 2.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 220,
       "stemLengthCm": 42,
@@ -650,19 +880,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep upright in cool water, wrap in paper to straighten stems",
       "notes": "Deep purple single tulip with a silvery sheen on the petals",
-      "complementaryFlowerIds": ["26", "69", "74"]
+      "complementaryFlowerIds": [
+        "26",
+        "69",
+        "74"
+      ]
     },
     {
       "id": "32",
       "name": "Orange Princess Tulip",
-      "colors": ["orange"],
+      "colors": [
+        "orange"
+      ],
       "type": "Tulip",
-      "imageUrl": "https://loremflickr.com/400/533/tulip?lock=32",
       "wholesalePrice": 1.25,
       "retailPrice": 3.29,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 190,
       "stemLengthCm": 42,
@@ -671,19 +908,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep upright in cool water, wrap in paper to straighten stems",
       "notes": "Double tulip in bright orange with flushed pink tips",
-      "complementaryFlowerIds": ["79", "68", "65"]
+      "complementaryFlowerIds": [
+        "79",
+        "68",
+        "65"
+      ]
     },
     {
       "id": "33",
       "name": "Casa Blanca Lily",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Lily",
-      "imageUrl": "https://loremflickr.com/400/533/lily?lock=33",
       "wholesalePrice": 3.5,
       "retailPrice": 7.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 40,
       "stemLengthCm": 80,
@@ -692,19 +936,27 @@
       "vaseLifeDays": 10,
       "careInstructions": "Remove anthers to prevent pollen staining, change water every 2 days",
       "notes": "The queen of white lilies — intensely fragrant, pure white blooms",
-      "complementaryFlowerIds": ["56", "92", "70"]
+      "complementaryFlowerIds": [
+        "56",
+        "92",
+        "70"
+      ]
     },
     {
       "id": "34",
       "name": "Stargazer Lily",
-      "colors": ["pink", "white"],
+      "colors": [
+        "pink",
+        "white"
+      ],
       "type": "Lily",
-      "imageUrl": "https://loremflickr.com/400/533/lily?lock=34",
       "wholesalePrice": 3.25,
       "retailPrice": 6.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 55,
       "stemLengthCm": 75,
@@ -713,19 +965,26 @@
       "vaseLifeDays": 8,
       "careInstructions": "Remove anthers to prevent pollen staining, change water every 2 days",
       "notes": "Upward-facing pink and white blooms with powerful fragrance",
-      "complementaryFlowerIds": ["57", "76", "70"]
+      "complementaryFlowerIds": [
+        "57",
+        "76",
+        "70"
+      ]
     },
     {
       "id": "35",
       "name": "Tiger Lily",
-      "colors": ["orange"],
+      "colors": [
+        "orange"
+      ],
       "type": "Lily",
-      "imageUrl": "https://loremflickr.com/400/533/lily?lock=35",
       "wholesalePrice": 2.5,
       "retailPrice": 5.49,
       "supplier": "Domestic Grower",
       "origin": "California",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 35,
       "stemLengthCm": 70,
@@ -734,19 +993,27 @@
       "vaseLifeDays": 10,
       "careInstructions": "Remove anthers to prevent pollen staining, change water every 2 days",
       "notes": "Nodding orange blooms with black spots, wildly dramatic",
-      "complementaryFlowerIds": ["79", "32", "65"]
+      "complementaryFlowerIds": [
+        "79",
+        "32",
+        "65"
+      ]
     },
     {
       "id": "36",
       "name": "Pink Asiatic Lily",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Lily",
-      "imageUrl": "https://loremflickr.com/400/533/lily?lock=36",
       "wholesalePrice": 2.75,
       "retailPrice": 5.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 45,
       "stemLengthCm": 65,
@@ -755,19 +1022,27 @@
       "vaseLifeDays": 9,
       "careInstructions": "Remove anthers to prevent pollen staining, change water every 2 days",
       "notes": "Unscented pink lily that makes a bold colour statement",
-      "complementaryFlowerIds": ["34", "80", "72"]
+      "complementaryFlowerIds": [
+        "34",
+        "80",
+        "72"
+      ]
     },
     {
       "id": "37",
       "name": "Golden Oriole Lily",
-      "colors": ["yellow", "orange"],
+      "colors": [
+        "yellow",
+        "orange"
+      ],
       "type": "Lily",
-      "imageUrl": "https://loremflickr.com/400/533/lily?lock=37",
-      "wholesalePrice": 3.0,
+      "wholesalePrice": 3,
       "retailPrice": 6.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 30,
       "stemLengthCm": 75,
@@ -776,19 +1051,26 @@
       "vaseLifeDays": 8,
       "careInstructions": "Remove anthers to prevent pollen staining, change water every 2 days",
       "notes": "Golden yellow petals flushed with orange, warm and sunny",
-      "complementaryFlowerIds": ["30", "81", "65"]
+      "complementaryFlowerIds": [
+        "30",
+        "81",
+        "65"
+      ]
     },
     {
       "id": "38",
       "name": "Regale Lily",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Lily",
-      "imageUrl": "https://loremflickr.com/400/533/lily?lock=38",
       "wholesalePrice": 3.75,
       "retailPrice": 7.99,
       "supplier": "UK Grower",
       "origin": "United Kingdom",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 20,
       "stemLengthCm": 80,
@@ -797,19 +1079,28 @@
       "vaseLifeDays": 10,
       "careInstructions": "Remove anthers to prevent pollen staining, change water every 2 days",
       "notes": "Trumpet-shaped white lily with yellow throat, a cottage garden classic",
-      "complementaryFlowerIds": ["33", "92", "70"]
+      "complementaryFlowerIds": [
+        "33",
+        "92",
+        "70"
+      ]
     },
     {
       "id": "39",
       "name": "Café au Lait Dahlia",
-      "colors": ["white", "pink"],
+      "colors": [
+        "white",
+        "pink"
+      ],
       "type": "Dahlia",
-      "imageUrl": "https://loremflickr.com/400/533/dahlia?lock=39",
-      "wholesalePrice": 5.0,
+      "wholesalePrice": 5,
       "retailPrice": 10.99,
       "supplier": "Domestic Grower",
       "origin": "Oregon",
-      "season": ["Summer", "Autumn"],
+      "season": [
+        "Summer",
+        "Autumn"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 25,
       "stemLengthCm": 50,
@@ -818,19 +1109,27 @@
       "vaseLifeDays": 8,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
       "notes": "The most-pinned dahlia on the internet — creamy caramel perfection",
-      "complementaryFlowerIds": ["45", "95", "80"]
+      "complementaryFlowerIds": [
+        "45",
+        "95",
+        "80"
+      ]
     },
     {
       "id": "40",
       "name": "Bishop of Llandaff Dahlia",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Dahlia",
-      "imageUrl": "https://loremflickr.com/400/533/dahlia?lock=40",
       "wholesalePrice": 4.5,
       "retailPrice": 9.49,
       "supplier": "Domestic Grower",
       "origin": "Oregon",
-      "season": ["Summer", "Autumn"],
+      "season": [
+        "Summer",
+        "Autumn"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 20,
       "stemLengthCm": 45,
@@ -839,19 +1138,27 @@
       "vaseLifeDays": 7,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
       "notes": "Single red blooms with dark foliage — a classic garden dahlia",
-      "complementaryFlowerIds": ["41", "64", "84"]
+      "complementaryFlowerIds": [
+        "41",
+        "64",
+        "84"
+      ]
     },
     {
       "id": "41",
       "name": "Karma Choc Dahlia",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Dahlia",
-      "imageUrl": "https://loremflickr.com/400/533/dahlia?lock=41",
       "wholesalePrice": 5.5,
       "retailPrice": 11.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Summer", "Autumn"],
+      "season": [
+        "Summer",
+        "Autumn"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 15,
       "stemLengthCm": 50,
@@ -860,19 +1167,27 @@
       "vaseLifeDays": 8,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
       "notes": "Dark maroon-chocolate blooms with velvety texture",
-      "complementaryFlowerIds": ["40", "84", "97"]
+      "complementaryFlowerIds": [
+        "40",
+        "84",
+        "97"
+      ]
     },
     {
       "id": "42",
       "name": "Wizard of Oz Dahlia",
-      "colors": ["yellow", "orange"],
+      "colors": [
+        "yellow",
+        "orange"
+      ],
       "type": "Dahlia",
-      "imageUrl": "https://loremflickr.com/400/533/dahlia?lock=42",
-      "wholesalePrice": 4.0,
+      "wholesalePrice": 4,
       "retailPrice": 8.49,
       "supplier": "Domestic Grower",
       "origin": "Oregon",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 30,
       "stemLengthCm": 45,
@@ -881,19 +1196,28 @@
       "vaseLifeDays": 7,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
       "notes": "Bright yellow-orange bicolour, full decorative form",
-      "complementaryFlowerIds": ["44", "81", "65"]
+      "complementaryFlowerIds": [
+        "44",
+        "81",
+        "65"
+      ]
     },
     {
       "id": "43",
       "name": "Edinburgh Dahlia",
-      "colors": ["white", "purple"],
+      "colors": [
+        "white",
+        "purple"
+      ],
       "type": "Dahlia",
-      "imageUrl": "https://loremflickr.com/400/533/dahlia?lock=43",
       "wholesalePrice": 4.75,
       "retailPrice": 10.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Summer", "Autumn"],
+      "season": [
+        "Summer",
+        "Autumn"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 18,
       "stemLengthCm": 50,
@@ -902,19 +1226,26 @@
       "vaseLifeDays": 8,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
       "notes": "White petals tipped with purple, a striking bi-colour dahlia",
-      "complementaryFlowerIds": ["56", "92", "70"]
+      "complementaryFlowerIds": [
+        "56",
+        "92",
+        "70"
+      ]
     },
     {
       "id": "44",
       "name": "Mystic Illusion Dahlia",
-      "colors": ["yellow"],
+      "colors": [
+        "yellow"
+      ],
       "type": "Dahlia",
-      "imageUrl": "https://loremflickr.com/400/533/dahlia?lock=44",
       "wholesalePrice": 3.75,
       "retailPrice": 7.99,
       "supplier": "Domestic Grower",
       "origin": "Oregon",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 35,
       "stemLengthCm": 40,
@@ -923,19 +1254,28 @@
       "vaseLifeDays": 7,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
       "notes": "Bright yellow single dahlia with dark contrasting foliage",
-      "complementaryFlowerIds": ["42", "30", "68"]
+      "complementaryFlowerIds": [
+        "42",
+        "30",
+        "68"
+      ]
     },
     {
       "id": "45",
       "name": "Peaches and Cream Dahlia",
-      "colors": ["pink", "white"],
+      "colors": [
+        "pink",
+        "white"
+      ],
       "type": "Dahlia",
-      "imageUrl": "https://loremflickr.com/400/533/dahlia?lock=45",
       "wholesalePrice": 5.25,
       "retailPrice": 11.49,
       "supplier": "Domestic Grower",
       "origin": "Oregon",
-      "season": ["Summer", "Autumn"],
+      "season": [
+        "Summer",
+        "Autumn"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 22,
       "stemLengthCm": 50,
@@ -944,19 +1284,26 @@
       "vaseLifeDays": 8,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
       "notes": "Lush decorative dahlia in soft pink and cream tones",
-      "complementaryFlowerIds": ["39", "95", "57"]
+      "complementaryFlowerIds": [
+        "39",
+        "95",
+        "57"
+      ]
     },
     {
       "id": "46",
       "name": "White Phalaenopsis Orchid",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Orchid",
-      "imageUrl": "https://loremflickr.com/400/533/orchid?lock=46",
-      "wholesalePrice": 8.0,
+      "wholesalePrice": 8,
       "retailPrice": 18.99,
       "supplier": "Thai Orchid Co",
       "origin": "Thailand",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 20,
       "stemLengthCm": 60,
@@ -965,19 +1312,26 @@
       "vaseLifeDays": 21,
       "careInstructions": "Mist daily, keep in indirect bright light, avoid cold drafts",
       "notes": "The classic moth orchid, unrivalled vase life of up to 3 weeks",
-      "complementaryFlowerIds": ["70", "92", "96"]
+      "complementaryFlowerIds": [
+        "70",
+        "92",
+        "96"
+      ]
     },
     {
       "id": "47",
       "name": "Purple Dendrobium Orchid",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Orchid",
-      "imageUrl": "https://loremflickr.com/400/533/orchid?lock=47",
-      "wholesalePrice": 6.0,
+      "wholesalePrice": 6,
       "retailPrice": 14.99,
       "supplier": "Thai Orchid Co",
       "origin": "Thailand",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 25,
       "stemLengthCm": 55,
@@ -986,19 +1340,28 @@
       "vaseLifeDays": 14,
       "careInstructions": "Mist daily, keep in indirect bright light, avoid cold drafts",
       "notes": "Spray orchid with multiple blooms per stem, perfect for corsages",
-      "complementaryFlowerIds": ["71", "86", "96"]
+      "complementaryFlowerIds": [
+        "71",
+        "86",
+        "96"
+      ]
     },
     {
       "id": "48",
       "name": "Pink Cymbidium Orchid",
-      "colors": ["pink", "white"],
+      "colors": [
+        "pink",
+        "white"
+      ],
       "type": "Orchid",
-      "imageUrl": "https://loremflickr.com/400/533/orchid?lock=48",
-      "wholesalePrice": 9.0,
+      "wholesalePrice": 9,
       "retailPrice": 19.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Winter", "Spring"],
+      "season": [
+        "Winter",
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 12,
       "stemLengthCm": 65,
@@ -1007,19 +1370,27 @@
       "vaseLifeDays": 21,
       "careInstructions": "Mist daily, keep in indirect bright light, avoid cold drafts",
       "notes": "Large waxy blooms on arching sprays, classic orchid elegance",
-      "complementaryFlowerIds": ["72", "80", "95"]
+      "complementaryFlowerIds": [
+        "72",
+        "80",
+        "95"
+      ]
     },
     {
       "id": "49",
       "name": "Blue Vanda Orchid",
-      "colors": ["blue", "purple"],
+      "colors": [
+        "blue",
+        "purple"
+      ],
       "type": "Orchid",
-      "imageUrl": "https://loremflickr.com/400/533/orchid?lock=49",
-      "wholesalePrice": 12.0,
+      "wholesalePrice": 12,
       "retailPrice": 27.99,
       "supplier": "Thai Orchid Co",
       "origin": "Thailand",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "limited",
       "quantityOnHand": 8,
       "stemLengthCm": 50,
@@ -1028,19 +1399,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Mist daily, keep in indirect bright light, avoid cold drafts",
       "notes": "One of the few naturally blue flowers — an extraordinary statement piece",
-      "complementaryFlowerIds": ["85", "47", "96"]
+      "complementaryFlowerIds": [
+        "85",
+        "47",
+        "96"
+      ]
     },
     {
       "id": "50",
       "name": "Purple Cattleya Orchid",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Orchid",
-      "imageUrl": "https://loremflickr.com/400/533/orchid?lock=50",
-      "wholesalePrice": 10.0,
+      "wholesalePrice": 10,
       "retailPrice": 22.99,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "limited",
       "quantityOnHand": 10,
       "stemLengthCm": 45,
@@ -1049,19 +1427,28 @@
       "vaseLifeDays": 12,
       "careInstructions": "Mist daily, keep in indirect bright light, avoid cold drafts",
       "notes": "The corsage orchid — large ruffled purple blooms with sweet scent",
-      "complementaryFlowerIds": ["47", "71", "86"]
+      "complementaryFlowerIds": [
+        "47",
+        "71",
+        "86"
+      ]
     },
     {
       "id": "51",
       "name": "Limelight Hydrangea",
-      "colors": ["green", "white"],
+      "colors": [
+        "green",
+        "white"
+      ],
       "type": "Hydrangea",
-      "imageUrl": "https://loremflickr.com/400/533/hydrangea?lock=51",
-      "wholesalePrice": 9.0,
+      "wholesalePrice": 9,
       "retailPrice": 15.99,
       "supplier": "Domestic Grower",
       "origin": "Georgia",
-      "season": ["Summer", "Autumn"],
+      "season": [
+        "Summer",
+        "Autumn"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 18,
       "stemLengthCm": 50,
@@ -1070,19 +1457,26 @@
       "vaseLifeDays": 10,
       "careInstructions": "Submerge blooms briefly in cold water, keep stems in deep water",
       "notes": "Conical lime-green panicles fade to cream and pink, excellent dried",
-      "complementaryFlowerIds": ["3", "85", "93"]
+      "complementaryFlowerIds": [
+        "3",
+        "85",
+        "93"
+      ]
     },
     {
       "id": "52",
       "name": "Pink Hydrangea",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Hydrangea",
-      "imageUrl": "https://loremflickr.com/400/533/hydrangea?lock=52",
       "wholesalePrice": 8.5,
       "retailPrice": 14.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 20,
       "stemLengthCm": 50,
@@ -1091,19 +1485,26 @@
       "vaseLifeDays": 10,
       "careInstructions": "Submerge blooms briefly in cold water, keep stems in deep water",
       "notes": "Full mophead blooms in rich pink, a staple for garden-style bouquets",
-      "complementaryFlowerIds": ["1", "22", "80"]
+      "complementaryFlowerIds": [
+        "1",
+        "22",
+        "80"
+      ]
     },
     {
       "id": "53",
       "name": "Deep Purple Hydrangea",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Hydrangea",
-      "imageUrl": "https://loremflickr.com/400/533/hydrangea?lock=53",
       "wholesalePrice": 9.5,
       "retailPrice": 16.99,
       "supplier": "Domestic Grower",
       "origin": "California",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 14,
       "stemLengthCm": 50,
@@ -1112,19 +1513,26 @@
       "vaseLifeDays": 9,
       "careInstructions": "Submerge blooms briefly in cold water, keep stems in deep water",
       "notes": "Intense deep purple-blue heads, striking in dark arrangements",
-      "complementaryFlowerIds": ["86", "93", "74"]
+      "complementaryFlowerIds": [
+        "86",
+        "93",
+        "74"
+      ]
     },
     {
       "id": "54",
       "name": "Caramel Ranunculus",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Ranunculus",
-      "imageUrl": "https://loremflickr.com/400/533/ranunculus?lock=54",
       "wholesalePrice": 2.5,
       "retailPrice": 5.49,
       "supplier": "Italian Gardens",
       "origin": "Italy",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 60,
       "stemLengthCm": 40,
@@ -1133,19 +1541,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, remove lower leaves, trim stems regularly",
       "notes": "Warm cream tones with layered petals like a tiny peony",
-      "complementaryFlowerIds": ["57", "39", "95"]
+      "complementaryFlowerIds": [
+        "57",
+        "39",
+        "95"
+      ]
     },
     {
       "id": "55",
       "name": "Red Ranunculus",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Ranunculus",
-      "imageUrl": "https://loremflickr.com/400/533/ranunculus?lock=55",
       "wholesalePrice": 2.25,
       "retailPrice": 4.99,
       "supplier": "Italian Gardens",
       "origin": "Italy",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 70,
       "stemLengthCm": 40,
@@ -1154,19 +1569,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, remove lower leaves, trim stems regularly",
       "notes": "Vivid scarlet ranunculus with tissue-paper soft petals",
-      "complementaryFlowerIds": ["75", "64", "24"]
+      "complementaryFlowerIds": [
+        "75",
+        "64",
+        "24"
+      ]
     },
     {
       "id": "56",
       "name": "White Ranunculus",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Ranunculus",
-      "imageUrl": "https://loremflickr.com/400/533/ranunculus?lock=56",
-      "wholesalePrice": 2.0,
+      "wholesalePrice": 2,
       "retailPrice": 4.49,
       "supplier": "Italian Gardens",
       "origin": "Italy",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 80,
       "stemLengthCm": 38,
@@ -1175,19 +1597,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, remove lower leaves, trim stems regularly",
       "notes": "Pure white layered petals, bridal and minimalist arrangements",
-      "complementaryFlowerIds": ["73", "92", "70"]
+      "complementaryFlowerIds": [
+        "73",
+        "92",
+        "70"
+      ]
     },
     {
       "id": "57",
       "name": "Blush Ranunculus",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Ranunculus",
-      "imageUrl": "https://loremflickr.com/400/533/ranunculus?lock=57",
       "wholesalePrice": 2.25,
       "retailPrice": 4.99,
       "supplier": "Italian Gardens",
       "origin": "Italy",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 75,
       "stemLengthCm": 40,
@@ -1196,19 +1625,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, remove lower leaves, trim stems regularly",
       "notes": "Delicate blush pink — the most popular ranunculus colour",
-      "complementaryFlowerIds": ["22", "76", "72"]
+      "complementaryFlowerIds": [
+        "22",
+        "76",
+        "72"
+      ]
     },
     {
       "id": "58",
       "name": "Clove Pink Carnation",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Carnation",
-      "imageUrl": "https://loremflickr.com/400/533/carnation?lock=58",
       "wholesalePrice": 0.75,
       "retailPrice": 2.49,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 200,
       "stemLengthCm": 55,
@@ -1217,19 +1653,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Add flower food, change water every 3 days, trim stems",
       "notes": "Spicy clove fragrance, excellent value and longevity",
-      "complementaryFlowerIds": ["92", "95", "80"]
+      "complementaryFlowerIds": [
+        "92",
+        "95",
+        "80"
+      ]
     },
     {
       "id": "59",
       "name": "Scarlet Carnation",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Carnation",
-      "imageUrl": "https://loremflickr.com/400/533/carnation?lock=59",
       "wholesalePrice": 0.7,
       "retailPrice": 2.29,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 220,
       "stemLengthCm": 55,
@@ -1238,19 +1681,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Add flower food, change water every 3 days, trim stems",
       "notes": "Bright scarlet carnation, long-lasting and versatile",
-      "complementaryFlowerIds": ["92", "64", "84"]
+      "complementaryFlowerIds": [
+        "92",
+        "64",
+        "84"
+      ]
     },
     {
       "id": "60",
       "name": "White Carnation",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Carnation",
-      "imageUrl": "https://loremflickr.com/400/533/carnation?lock=60",
       "wholesalePrice": 0.65,
       "retailPrice": 1.99,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 250,
       "stemLengthCm": 55,
@@ -1259,19 +1709,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Add flower food, change water every 3 days, trim stems",
       "notes": "Classic white carnation, a florist workhorse",
-      "complementaryFlowerIds": ["92", "67", "70"]
+      "complementaryFlowerIds": [
+        "92",
+        "67",
+        "70"
+      ]
     },
     {
       "id": "61",
       "name": "Spider Chrysanthemum",
-      "colors": ["yellow"],
+      "colors": [
+        "yellow"
+      ],
       "type": "Chrysanthemum",
-      "imageUrl": "https://loremflickr.com/400/533/chrysanthemum?lock=61",
       "wholesalePrice": 2.5,
       "retailPrice": 4.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 80,
       "stemLengthCm": 60,
@@ -1280,19 +1737,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Remove lower leaves, keep in clean water with flower food",
       "notes": "Quill-like petals radiating from the centre, very structural",
-      "complementaryFlowerIds": ["81", "68", "96"]
+      "complementaryFlowerIds": [
+        "81",
+        "68",
+        "96"
+      ]
     },
     {
       "id": "62",
       "name": "Pom Pom Chrysanthemum",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Chrysanthemum",
-      "imageUrl": "https://loremflickr.com/400/533/chrysanthemum?lock=62",
       "wholesalePrice": 2.25,
       "retailPrice": 4.49,
       "supplier": "Domestic Grower",
       "origin": "California",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 100,
       "stemLengthCm": 55,
@@ -1301,19 +1765,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Remove lower leaves, keep in clean water with flower food",
       "notes": "Compact ball-shaped blooms, neat and abundant on each stem",
-      "complementaryFlowerIds": ["92", "60", "96"]
+      "complementaryFlowerIds": [
+        "92",
+        "60",
+        "96"
+      ]
     },
     {
       "id": "63",
       "name": "Button Chrysanthemum",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Chrysanthemum",
-      "imageUrl": "https://loremflickr.com/400/533/chrysanthemum?lock=63",
-      "wholesalePrice": 2.0,
+      "wholesalePrice": 2,
       "retailPrice": 3.99,
       "supplier": "Domestic Grower",
       "origin": "California",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 90,
       "stemLengthCm": 55,
@@ -1322,19 +1793,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Remove lower leaves, keep in clean water with flower food",
       "notes": "Tiny purple button blooms, ideal filler and textural accent",
-      "complementaryFlowerIds": ["86", "96", "74"]
+      "complementaryFlowerIds": [
+        "86",
+        "96",
+        "74"
+      ]
     },
     {
       "id": "64",
       "name": "Scarlet Gerbera",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Gerbera",
-      "imageUrl": "https://loremflickr.com/400/533/gerbera?lock=64",
       "wholesalePrice": 1.5,
       "retailPrice": 3.49,
       "supplier": "Kenya Blooms",
       "origin": "Kenya",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 150,
       "stemLengthCm": 45,
@@ -1343,19 +1821,26 @@
       "vaseLifeDays": 10,
       "careInstructions": "Keep in shallow water to avoid stem rot, change water frequently",
       "notes": "Bold scarlet daisy face, cheerful and long-lasting",
-      "complementaryFlowerIds": ["92", "59", "84"]
+      "complementaryFlowerIds": [
+        "92",
+        "59",
+        "84"
+      ]
     },
     {
       "id": "65",
       "name": "Sunset Orange Gerbera",
-      "colors": ["orange"],
+      "colors": [
+        "orange"
+      ],
       "type": "Gerbera",
-      "imageUrl": "https://loremflickr.com/400/533/gerbera?lock=65",
       "wholesalePrice": 1.5,
       "retailPrice": 3.49,
       "supplier": "Kenya Blooms",
       "origin": "Kenya",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 140,
       "stemLengthCm": 45,
@@ -1364,19 +1849,26 @@
       "vaseLifeDays": 10,
       "careInstructions": "Keep in shallow water to avoid stem rot, change water frequently",
       "notes": "Warm orange daisy face, brings energy to any arrangement",
-      "complementaryFlowerIds": ["79", "98", "32"]
+      "complementaryFlowerIds": [
+        "79",
+        "98",
+        "32"
+      ]
     },
     {
       "id": "66",
       "name": "Bubblegum Pink Gerbera",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Gerbera",
-      "imageUrl": "https://loremflickr.com/400/533/gerbera?lock=66",
       "wholesalePrice": 1.5,
       "retailPrice": 3.49,
       "supplier": "Kenya Blooms",
       "origin": "Kenya",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 160,
       "stemLengthCm": 45,
@@ -1385,19 +1877,26 @@
       "vaseLifeDays": 10,
       "careInstructions": "Keep in shallow water to avoid stem rot, change water frequently",
       "notes": "Hot candy-pink, a favourite for children's and celebratory work",
-      "complementaryFlowerIds": ["80", "72", "92"]
+      "complementaryFlowerIds": [
+        "80",
+        "72",
+        "92"
+      ]
     },
     {
       "id": "67",
       "name": "White Freesia",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Freesia",
-      "imageUrl": "https://loremflickr.com/400/533/freesia?lock=67",
       "wholesalePrice": 1.25,
       "retailPrice": 2.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 120,
       "stemLengthCm": 30,
@@ -1406,19 +1905,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they open progressively, trim daily",
       "notes": "One of the most fragrant flowers available — pure white blooms",
-      "complementaryFlowerIds": ["78", "60", "92"]
+      "complementaryFlowerIds": [
+        "78",
+        "60",
+        "92"
+      ]
     },
     {
       "id": "68",
       "name": "Yellow Freesia",
-      "colors": ["yellow"],
+      "colors": [
+        "yellow"
+      ],
       "type": "Freesia",
-      "imageUrl": "https://loremflickr.com/400/533/freesia?lock=68",
-      "wholesalePrice": 1.0,
+      "wholesalePrice": 1,
       "retailPrice": 2.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 130,
       "stemLengthCm": 30,
@@ -1427,19 +1933,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they open progressively, trim daily",
       "notes": "Sunshine yellow with an intense sweet fragrance",
-      "complementaryFlowerIds": ["30", "81", "61"]
+      "complementaryFlowerIds": [
+        "30",
+        "81",
+        "61"
+      ]
     },
     {
       "id": "69",
       "name": "Purple Freesia",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Freesia",
-      "imageUrl": "https://loremflickr.com/400/533/freesia?lock=69",
       "wholesalePrice": 1.25,
       "retailPrice": 2.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 110,
       "stemLengthCm": 30,
@@ -1448,19 +1961,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they open progressively, trim daily",
       "notes": "Deep violet freesia, fragrant and elegant",
-      "complementaryFlowerIds": ["77", "74", "86"]
+      "complementaryFlowerIds": [
+        "77",
+        "74",
+        "86"
+      ]
     },
     {
       "id": "70",
       "name": "White Lisianthus",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Lisianthus",
-      "imageUrl": "https://loremflickr.com/400/533/lisianthus?lock=70",
-      "wholesalePrice": 3.0,
+      "wholesalePrice": 3,
       "retailPrice": 6.49,
       "supplier": "Japan Flora",
       "origin": "Japan",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 40,
       "stemLengthCm": 60,
@@ -1469,19 +1989,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Change water every 2 days, remove lower leaves, keep cool",
       "notes": "Often mistaken for a rose or peony — exceptional vase life",
-      "complementaryFlowerIds": ["56", "92", "67"]
+      "complementaryFlowerIds": [
+        "56",
+        "92",
+        "67"
+      ]
     },
     {
       "id": "71",
       "name": "Purple Lisianthus",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Lisianthus",
-      "imageUrl": "https://loremflickr.com/400/533/lisianthus?lock=71",
       "wholesalePrice": 3.25,
       "retailPrice": 6.99,
       "supplier": "Japan Flora",
       "origin": "Japan",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 35,
       "stemLengthCm": 60,
@@ -1490,19 +2017,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Change water every 2 days, remove lower leaves, keep cool",
       "notes": "Rich purple with ruffled petals, a romantic and refined bloom",
-      "complementaryFlowerIds": ["74", "86", "69"]
+      "complementaryFlowerIds": [
+        "74",
+        "86",
+        "69"
+      ]
     },
     {
       "id": "72",
       "name": "Blush Pink Lisianthus",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Lisianthus",
-      "imageUrl": "https://loremflickr.com/400/533/lisianthus?lock=72",
-      "wholesalePrice": 3.0,
+      "wholesalePrice": 3,
       "retailPrice": 6.49,
       "supplier": "Japan Flora",
       "origin": "Japan",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 38,
       "stemLengthCm": 60,
@@ -1511,19 +2045,27 @@
       "vaseLifeDays": 14,
       "careInstructions": "Change water every 2 days, remove lower leaves, keep cool",
       "notes": "Soft blush pink that pairs beautifully with garden roses",
-      "complementaryFlowerIds": ["57", "80", "76"]
+      "complementaryFlowerIds": [
+        "57",
+        "80",
+        "76"
+      ]
     },
     {
       "id": "73",
       "name": "White Anemone",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Anemone",
-      "imageUrl": "https://loremflickr.com/400/533/anemone?lock=73",
-      "wholesalePrice": 2.0,
+      "wholesalePrice": 2,
       "retailPrice": 4.49,
       "supplier": "Italian Gardens",
       "origin": "Italy",
-      "season": ["Winter", "Spring"],
+      "season": [
+        "Winter",
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 80,
       "stemLengthCm": 35,
@@ -1532,19 +2074,27 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they drink heavily, refresh daily",
       "notes": "White petals with a striking dark centre — graphic and modern",
-      "complementaryFlowerIds": ["56", "78", "95"]
+      "complementaryFlowerIds": [
+        "56",
+        "78",
+        "95"
+      ]
     },
     {
       "id": "74",
       "name": "Purple Anemone",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Anemone",
-      "imageUrl": "https://loremflickr.com/400/533/anemone?lock=74",
       "wholesalePrice": 2.25,
       "retailPrice": 4.99,
       "supplier": "Italian Gardens",
       "origin": "Italy",
-      "season": ["Winter", "Spring"],
+      "season": [
+        "Winter",
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 70,
       "stemLengthCm": 35,
@@ -1553,19 +2103,27 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they drink heavily, refresh daily",
       "notes": "Jewel-toned purple anemone with a bold black eye",
-      "complementaryFlowerIds": ["77", "71", "86"]
+      "complementaryFlowerIds": [
+        "77",
+        "71",
+        "86"
+      ]
     },
     {
       "id": "75",
       "name": "Red Anemone",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Anemone",
-      "imageUrl": "https://loremflickr.com/400/533/anemone?lock=75",
-      "wholesalePrice": 2.0,
+      "wholesalePrice": 2,
       "retailPrice": 4.49,
       "supplier": "Italian Gardens",
       "origin": "Italy",
-      "season": ["Winter", "Spring"],
+      "season": [
+        "Winter",
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 75,
       "stemLengthCm": 35,
@@ -1574,19 +2132,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they drink heavily, refresh daily",
       "notes": "Brilliant red petals with contrasting black stamens",
-      "complementaryFlowerIds": ["55", "84", "64"]
+      "complementaryFlowerIds": [
+        "55",
+        "84",
+        "64"
+      ]
     },
     {
       "id": "76",
       "name": "Pink Sweet Pea",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Sweet Pea",
-      "imageUrl": "https://loremflickr.com/400/533/sweetpea?lock=76",
       "wholesalePrice": 1.5,
       "retailPrice": 3.99,
       "supplier": "UK Grower",
       "origin": "United Kingdom",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 100,
       "stemLengthCm": 25,
@@ -1595,19 +2160,26 @@
       "vaseLifeDays": 5,
       "careInstructions": "Trim stems daily, keep in cool fresh water, avoid heat",
       "notes": "Intensely fragrant and utterly romantic, a spring essential",
-      "complementaryFlowerIds": ["57", "72", "27"]
+      "complementaryFlowerIds": [
+        "57",
+        "72",
+        "27"
+      ]
     },
     {
       "id": "77",
       "name": "Purple Sweet Pea",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Sweet Pea",
-      "imageUrl": "https://loremflickr.com/400/533/sweetpea?lock=77",
       "wholesalePrice": 1.5,
       "retailPrice": 3.99,
       "supplier": "UK Grower",
       "origin": "United Kingdom",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 90,
       "stemLengthCm": 25,
@@ -1616,19 +2188,26 @@
       "vaseLifeDays": 5,
       "careInstructions": "Trim stems daily, keep in cool fresh water, avoid heat",
       "notes": "Deep lavender-purple blooms with a heavenly scent",
-      "complementaryFlowerIds": ["74", "71", "69"]
+      "complementaryFlowerIds": [
+        "74",
+        "71",
+        "69"
+      ]
     },
     {
       "id": "78",
       "name": "White Sweet Pea",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Sweet Pea",
-      "imageUrl": "https://loremflickr.com/400/533/sweetpea?lock=78",
       "wholesalePrice": 1.25,
       "retailPrice": 3.49,
       "supplier": "UK Grower",
       "origin": "United Kingdom",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 80,
       "stemLengthCm": 25,
@@ -1637,19 +2216,26 @@
       "vaseLifeDays": 5,
       "careInstructions": "Trim stems daily, keep in cool fresh water, avoid heat",
       "notes": "Pure white with a light floral perfume, a bridal staple",
-      "complementaryFlowerIds": ["73", "70", "67"]
+      "complementaryFlowerIds": [
+        "73",
+        "70",
+        "67"
+      ]
     },
     {
       "id": "79",
       "name": "Orange Alstroemeria",
-      "colors": ["orange"],
+      "colors": [
+        "orange"
+      ],
       "type": "Alstroemeria",
-      "imageUrl": "https://loremflickr.com/400/533/alstroemeria?lock=79",
       "wholesalePrice": 1.5,
       "retailPrice": 3.49,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 120,
       "stemLengthCm": 60,
@@ -1658,19 +2244,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Remove lower leaves, change water every 2-3 days",
       "notes": "Brilliant orange with streaked inner petals, superb longevity",
-      "complementaryFlowerIds": ["35", "65", "98"]
+      "complementaryFlowerIds": [
+        "35",
+        "65",
+        "98"
+      ]
     },
     {
       "id": "80",
       "name": "Pink Alstroemeria",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Alstroemeria",
-      "imageUrl": "https://loremflickr.com/400/533/alstroemeria?lock=80",
       "wholesalePrice": 1.5,
       "retailPrice": 3.49,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 130,
       "stemLengthCm": 60,
@@ -1679,19 +2272,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Remove lower leaves, change water every 2-3 days",
       "notes": "Soft pink with intricate markings, excellent filler flower",
-      "complementaryFlowerIds": ["52", "72", "76"]
+      "complementaryFlowerIds": [
+        "52",
+        "72",
+        "76"
+      ]
     },
     {
       "id": "81",
       "name": "Yellow Alstroemeria",
-      "colors": ["yellow"],
+      "colors": [
+        "yellow"
+      ],
       "type": "Alstroemeria",
-      "imageUrl": "https://loremflickr.com/400/533/alstroemeria?lock=81",
       "wholesalePrice": 1.25,
       "retailPrice": 2.99,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 110,
       "stemLengthCm": 60,
@@ -1700,19 +2300,27 @@
       "vaseLifeDays": 14,
       "careInstructions": "Remove lower leaves, change water every 2-3 days",
       "notes": "Bright golden-yellow, ideal for sunny and tropical arrangements",
-      "complementaryFlowerIds": ["42", "44", "68"]
+      "complementaryFlowerIds": [
+        "42",
+        "44",
+        "68"
+      ]
     },
     {
       "id": "82",
       "name": "White Snapdragon",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Snapdragon",
-      "imageUrl": "https://loremflickr.com/400/533/snapdragon?lock=82",
       "wholesalePrice": 1.75,
       "retailPrice": 3.99,
       "supplier": "Spanish Blooms",
       "origin": "Spain",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 90,
       "stemLengthCm": 70,
@@ -1721,19 +2329,27 @@
       "vaseLifeDays": 10,
       "careInstructions": "Keep in deep water, remove lower leaves, remove bottom florets as they fade",
       "notes": "Tall white spikes with a gentle fragrance, great vertical element",
-      "complementaryFlowerIds": ["70", "92", "38"]
+      "complementaryFlowerIds": [
+        "70",
+        "92",
+        "38"
+      ]
     },
     {
       "id": "83",
       "name": "Pink Snapdragon",
-      "colors": ["pink"],
+      "colors": [
+        "pink"
+      ],
       "type": "Snapdragon",
-      "imageUrl": "https://loremflickr.com/400/533/snapdragon?lock=83",
       "wholesalePrice": 1.75,
       "retailPrice": 3.99,
       "supplier": "Spanish Blooms",
       "origin": "Spain",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 85,
       "stemLengthCm": 70,
@@ -1742,19 +2358,27 @@
       "vaseLifeDays": 10,
       "careInstructions": "Keep in deep water, remove lower leaves, remove bottom florets as they fade",
       "notes": "Soft pink spires that add height and movement to arrangements",
-      "complementaryFlowerIds": ["72", "76", "57"]
+      "complementaryFlowerIds": [
+        "72",
+        "76",
+        "57"
+      ]
     },
     {
       "id": "84",
       "name": "Red Snapdragon",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Snapdragon",
-      "imageUrl": "https://loremflickr.com/400/533/snapdragon?lock=84",
       "wholesalePrice": 1.75,
       "retailPrice": 3.99,
       "supplier": "Spanish Blooms",
       "origin": "Spain",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 80,
       "stemLengthCm": 70,
@@ -1763,19 +2387,26 @@
       "vaseLifeDays": 10,
       "careInstructions": "Keep in deep water, remove lower leaves, remove bottom florets as they fade",
       "notes": "Bold red spikes for drama and height in arrangements",
-      "complementaryFlowerIds": ["40", "64", "75"]
+      "complementaryFlowerIds": [
+        "40",
+        "64",
+        "75"
+      ]
     },
     {
       "id": "85",
       "name": "Blue Delphinium",
-      "colors": ["blue"],
+      "colors": [
+        "blue"
+      ],
       "type": "Delphinium",
-      "imageUrl": "https://loremflickr.com/400/533/delphinium?lock=85",
-      "wholesalePrice": 3.0,
+      "wholesalePrice": 3,
       "retailPrice": 6.99,
       "supplier": "UK Grower",
       "origin": "United Kingdom",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 40,
       "stemLengthCm": 90,
@@ -1784,19 +2415,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Hollow stems — turn upside down, fill with water, plug with cotton wool",
       "notes": "True blue spires up to 90 cm tall, a garden wedding essential",
-      "complementaryFlowerIds": ["51", "93", "49"]
+      "complementaryFlowerIds": [
+        "51",
+        "93",
+        "49"
+      ]
     },
     {
       "id": "86",
       "name": "Purple Delphinium",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Delphinium",
-      "imageUrl": "https://loremflickr.com/400/533/delphinium?lock=86",
       "wholesalePrice": 3.25,
       "retailPrice": 6.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 35,
       "stemLengthCm": 90,
@@ -1805,19 +2443,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Hollow stems — turn upside down, fill with water, plug with cotton wool",
       "notes": "Rich violet-purple spires, magnificent for tall arrangements",
-      "complementaryFlowerIds": ["26", "53", "93"]
+      "complementaryFlowerIds": [
+        "26",
+        "53",
+        "93"
+      ]
     },
     {
       "id": "87",
       "name": "Purple Iris",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Iris",
-      "imageUrl": "https://loremflickr.com/400/533/iris?lock=87",
-      "wholesalePrice": 2.0,
+      "wholesalePrice": 2,
       "retailPrice": 4.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 80,
       "stemLengthCm": 60,
@@ -1826,19 +2471,26 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in shallow cool water, they open from tight buds, very little water needed",
       "notes": "Deep violet with yellow throat, a classic spring statement",
-      "complementaryFlowerIds": ["26", "85", "93"]
+      "complementaryFlowerIds": [
+        "26",
+        "85",
+        "93"
+      ]
     },
     {
       "id": "88",
       "name": "Yellow Iris",
-      "colors": ["yellow"],
+      "colors": [
+        "yellow"
+      ],
       "type": "Iris",
-      "imageUrl": "https://loremflickr.com/400/533/iris?lock=88",
       "wholesalePrice": 1.75,
       "retailPrice": 3.99,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 70,
       "stemLengthCm": 60,
@@ -1847,19 +2499,28 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in shallow cool water, they open from tight buds, very little water needed",
       "notes": "Golden yellow iris, cheerful and bold in spring arrangements",
-      "complementaryFlowerIds": ["30", "81", "68"]
+      "complementaryFlowerIds": [
+        "30",
+        "81",
+        "68"
+      ]
     },
     {
       "id": "89",
       "name": "Hellebore",
-      "colors": ["purple", "white"],
+      "colors": [
+        "purple",
+        "white"
+      ],
       "type": "Hellebore",
-      "imageUrl": "https://loremflickr.com/400/533/hellebore?lock=89",
       "wholesalePrice": 4.5,
       "retailPrice": 9.99,
       "supplier": "UK Grower",
       "origin": "United Kingdom",
-      "season": ["Winter", "Spring"],
+      "season": [
+        "Winter",
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 20,
       "stemLengthCm": 30,
@@ -1868,19 +2529,28 @@
       "vaseLifeDays": 5,
       "careInstructions": "Condition by submerging stems in cold water overnight before arranging",
       "notes": "The Lenten rose — moody and beautiful in winter arrangements",
-      "complementaryFlowerIds": ["73", "95", "56"]
+      "complementaryFlowerIds": [
+        "73",
+        "95",
+        "56"
+      ]
     },
     {
       "id": "90",
       "name": "Pink Cosmos",
-      "colors": ["pink", "white"],
+      "colors": [
+        "pink",
+        "white"
+      ],
       "type": "Cosmos",
-      "imageUrl": "https://loremflickr.com/400/533/cosmos?lock=90",
       "wholesalePrice": 0.75,
       "retailPrice": 2.29,
       "supplier": "Domestic Grower",
       "origin": "Oregon",
-      "season": ["Summer", "Autumn"],
+      "season": [
+        "Summer",
+        "Autumn"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 200,
       "stemLengthCm": 50,
@@ -1889,19 +2559,28 @@
       "vaseLifeDays": 7,
       "careInstructions": "Change water daily, keep cool, trim stems regularly",
       "notes": "Feathery meadow flower in sugar-pink, delicate and airy",
-      "complementaryFlowerIds": ["66", "45", "83"]
+      "complementaryFlowerIds": [
+        "66",
+        "45",
+        "83"
+      ]
     },
     {
       "id": "91",
       "name": "Shirley Poppy",
-      "colors": ["red", "pink"],
+      "colors": [
+        "red",
+        "pink"
+      ],
       "type": "Poppy",
-      "imageUrl": "https://loremflickr.com/400/533/poppy?lock=91",
       "wholesalePrice": 1.5,
       "retailPrice": 3.49,
       "supplier": "UK Grower",
       "origin": "United Kingdom",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 60,
       "stemLengthCm": 45,
@@ -1910,19 +2589,26 @@
       "vaseLifeDays": 5,
       "careInstructions": "Sear cut stem ends in boiling water to prevent sap loss, then cool water",
       "notes": "Tissue-paper petals in red and pink, wild and romantic",
-      "complementaryFlowerIds": ["73", "55", "75"]
+      "complementaryFlowerIds": [
+        "73",
+        "55",
+        "75"
+      ]
     },
     {
       "id": "92",
       "name": "Baby's Breath",
-      "colors": ["white"],
+      "colors": [
+        "white"
+      ],
       "type": "Gypsophila",
-      "imageUrl": "https://loremflickr.com/400/533/gypsophila?lock=92",
       "wholesalePrice": 0.5,
       "retailPrice": 1.99,
       "supplier": "Domestic Grower",
       "origin": "California",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 400,
       "stemLengthCm": 50,
@@ -1931,19 +2617,27 @@
       "vaseLifeDays": 12,
       "careInstructions": "Keep in clean water, minimal care needed",
       "notes": "The ultimate filler flower — cloud-like masses of tiny white blooms",
-      "complementaryFlowerIds": ["7", "11", "58"]
+      "complementaryFlowerIds": [
+        "7",
+        "11",
+        "58"
+      ]
     },
     {
       "id": "93",
       "name": "Purple Allium",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Allium",
-      "imageUrl": "https://loremflickr.com/400/533/allium?lock=93",
       "wholesalePrice": 2.5,
       "retailPrice": 5.49,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring", "Summer"],
+      "season": [
+        "Spring",
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 45,
       "stemLengthCm": 80,
@@ -1952,19 +2646,27 @@
       "vaseLifeDays": 14,
       "careInstructions": "Keep in cool water, stems may have faint onion scent when cut",
       "notes": "Perfectly round purple globe on a tall slender stem — very architectural",
-      "complementaryFlowerIds": ["87", "85", "26"]
+      "complementaryFlowerIds": [
+        "87",
+        "85",
+        "26"
+      ]
     },
     {
       "id": "94",
       "name": "King Protea",
-      "colors": ["pink", "red"],
+      "colors": [
+        "pink",
+        "red"
+      ],
       "type": "Protea",
-      "imageUrl": "https://loremflickr.com/400/533/protea?lock=94",
-      "wholesalePrice": 7.0,
+      "wholesalePrice": 7,
       "retailPrice": 14.99,
       "supplier": "Australian Protea Co",
       "origin": "Australia",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 15,
       "stemLengthCm": 60,
@@ -1973,19 +2675,28 @@
       "vaseLifeDays": 14,
       "careInstructions": "Keep in clean water, remove leaves below waterline",
       "notes": "South Africa's national flower — a dramatic centrepiece bloom",
-      "complementaryFlowerIds": ["95", "96", "98"]
+      "complementaryFlowerIds": [
+        "95",
+        "96",
+        "98"
+      ]
     },
     {
       "id": "95",
       "name": "Wax Flower",
-      "colors": ["pink", "white"],
+      "colors": [
+        "pink",
+        "white"
+      ],
       "type": "Wax Flower",
-      "imageUrl": "https://loremflickr.com/400/533/waxflower?lock=95",
       "wholesalePrice": 1.5,
       "retailPrice": 3.99,
       "supplier": "Australian Protea Co",
       "origin": "Australia",
-      "season": ["Winter", "Spring"],
+      "season": [
+        "Winter",
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 80,
       "stemLengthCm": 40,
@@ -1994,19 +2705,26 @@
       "vaseLifeDays": 14,
       "careInstructions": "Very hardy, keep in fresh water, remove lower stems",
       "notes": "Tiny star-shaped blooms with a pleasant herbal fragrance, dries beautifully",
-      "complementaryFlowerIds": ["94", "58", "73"]
+      "complementaryFlowerIds": [
+        "94",
+        "58",
+        "73"
+      ]
     },
     {
       "id": "96",
       "name": "Sea Lavender",
-      "colors": ["purple"],
+      "colors": [
+        "purple"
+      ],
       "type": "Statice",
-      "imageUrl": "https://loremflickr.com/400/533/statice?lock=96",
       "wholesalePrice": 0.75,
       "retailPrice": 2.49,
       "supplier": "Domestic Grower",
       "origin": "California",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 300,
       "stemLengthCm": 45,
@@ -2015,19 +2733,26 @@
       "vaseLifeDays": 21,
       "careInstructions": "Hardy filler, keep in fresh water or dry naturally upside down",
       "notes": "Tiny purple papery flowers that hold their colour even when dried",
-      "complementaryFlowerIds": ["92", "94", "58"]
+      "complementaryFlowerIds": [
+        "92",
+        "94",
+        "58"
+      ]
     },
     {
       "id": "97",
       "name": "Anthurium",
-      "colors": ["red"],
+      "colors": [
+        "red"
+      ],
       "type": "Anthurium",
-      "imageUrl": "https://loremflickr.com/400/533/anthurium?lock=97",
-      "wholesalePrice": 5.0,
+      "wholesalePrice": 5,
       "retailPrice": 10.99,
       "supplier": "Colombia Select",
       "origin": "Colombia",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 25,
       "stemLengthCm": 55,
@@ -2036,19 +2761,27 @@
       "vaseLifeDays": 21,
       "careInstructions": "Keep in clean water, avoid direct sunlight and cold draughts",
       "notes": "Waxy heart-shaped spathe in lacquer red — tropical and long-lasting",
-      "complementaryFlowerIds": ["98", "46", "94"]
+      "complementaryFlowerIds": [
+        "98",
+        "46",
+        "94"
+      ]
     },
     {
       "id": "98",
       "name": "Bird of Paradise",
-      "colors": ["orange", "yellow"],
+      "colors": [
+        "orange",
+        "yellow"
+      ],
       "type": "Bird of Paradise",
-      "imageUrl": "https://loremflickr.com/400/533/strelitzia?lock=98",
       "wholesalePrice": 6.5,
       "retailPrice": 14.99,
       "supplier": "Domestic Grower",
       "origin": "California",
-      "season": ["Year-round"],
+      "season": [
+        "Year-round"
+      ],
       "availability": "always",
       "quantityOnHand": 18,
       "stemLengthCm": 90,
@@ -2057,19 +2790,27 @@
       "vaseLifeDays": 14,
       "careInstructions": "Keep in deep water, open individual florets by gently pulling them out",
       "notes": "Exotic orange and blue blooms that unfurl over several days",
-      "complementaryFlowerIds": ["97", "94", "79"]
+      "complementaryFlowerIds": [
+        "97",
+        "94",
+        "79"
+      ]
     },
     {
       "id": "99",
       "name": "Foxglove",
-      "colors": ["purple", "pink"],
+      "colors": [
+        "purple",
+        "pink"
+      ],
       "type": "Foxglove",
-      "imageUrl": "https://loremflickr.com/400/533/foxglove?lock=99",
       "wholesalePrice": 2.5,
       "retailPrice": 5.99,
       "supplier": "UK Grower",
       "origin": "United Kingdom",
-      "season": ["Summer"],
+      "season": [
+        "Summer"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 30,
       "stemLengthCm": 90,
@@ -2078,19 +2819,27 @@
       "vaseLifeDays": 7,
       "careInstructions": "Toxic — handle with care and wash hands after. Keep in fresh cool water",
       "notes": "Towering cottage-garden spires with spotted bells — utterly dramatic",
-      "complementaryFlowerIds": ["85", "93", "87"]
+      "complementaryFlowerIds": [
+        "85",
+        "93",
+        "87"
+      ]
     },
     {
       "id": "100",
       "name": "Grape Hyacinth",
-      "colors": ["blue", "purple"],
+      "colors": [
+        "blue",
+        "purple"
+      ],
       "type": "Muscari",
-      "imageUrl": "https://loremflickr.com/400/533/muscari?lock=100",
       "wholesalePrice": 0.75,
       "retailPrice": 2.29,
       "supplier": "Holland Flowers",
       "origin": "Netherlands",
-      "season": ["Spring"],
+      "season": [
+        "Spring"
+      ],
       "availability": "seasonal",
       "quantityOnHand": 150,
       "stemLengthCm": 20,
@@ -2099,7 +2848,11 @@
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, handle gently as stems are delicate",
       "notes": "Tiny cobalt-blue grape-like clusters with a sweet musky scent",
-      "complementaryFlowerIds": ["26", "87", "93"]
+      "complementaryFlowerIds": [
+        "26",
+        "87",
+        "93"
+      ]
     }
   ]
 }

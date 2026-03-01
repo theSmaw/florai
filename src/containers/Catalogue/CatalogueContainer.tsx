@@ -3,6 +3,7 @@
 // Rendered by CatalogueView (the route target).
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
   selectFilteredFlowers,
   selectGroupedFlowers,
@@ -29,6 +30,7 @@ import { Catalogue } from '../../components/Catalogue/Catalogue';
 
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const filteredFlowers = useSelector(selectFilteredFlowers);
   const groupedFlowers = useSelector(selectGroupedFlowers);
   const currentFilter = useSelector(selectFlowersFilter);
@@ -135,6 +137,7 @@ export function CatalogueContainer() {
 
   const handleCardClick = (flowerId: string) => {
     dispatch(flowerSelected(flowerId));
+    navigate(`/catalogue/${flowerId}`);
   };
 
   const handleAddFlowerClick = () => {};
