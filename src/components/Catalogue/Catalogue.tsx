@@ -11,6 +11,7 @@ import {
 } from '@radix-ui/react-icons';
 import type {
   Availability,
+  Climate,
   Color,
   Flower,
   FlowerFilter,
@@ -32,6 +33,7 @@ export interface CatalogueProps {
   availableColors: Color[];
   availableSeasons: Season[];
   availableTypes: FlowerType[];
+  availableClimates: Climate[];
   stemLengthBounds: { min: number; max: number };
   vaseLifeBounds: { min: number; max: number };
   onSearchChange: (searchTerm: string) => void;
@@ -39,6 +41,7 @@ export interface CatalogueProps {
   onAvailabilityChange: (availability?: Availability) => void;
   onSeasonChange: (season?: Season) => void;
   onTypeChange: (type?: FlowerType) => void;
+  onClimateChange: (climate?: Climate) => void;
   onFragranceLevelChange: (fragranceLevel?: FragranceLevel) => void;
   onToxicityChange: (toxicity?: Toxicity) => void;
   onStemLengthChange: (min: number, max: number) => void;
@@ -56,6 +59,7 @@ export function Catalogue({
   availableColors,
   availableSeasons,
   availableTypes,
+  availableClimates,
   stemLengthBounds,
   vaseLifeBounds,
   onSearchChange,
@@ -63,6 +67,7 @@ export function Catalogue({
   onAvailabilityChange,
   onSeasonChange,
   onTypeChange,
+  onClimateChange,
   onFragranceLevelChange,
   onToxicityChange,
   onStemLengthChange,
@@ -78,6 +83,7 @@ export function Catalogue({
     !!currentFilter.availability ||
     !!currentFilter.type ||
     !!currentFilter.season ||
+    !!currentFilter.climate ||
     !!currentFilter.fragranceLevel ||
     !!currentFilter.toxicity ||
     !!currentFilter.stemLengthRange ||
@@ -138,6 +144,7 @@ export function Catalogue({
                   availableColors={availableColors}
                   availableSeasons={availableSeasons}
                   availableTypes={availableTypes}
+                  availableClimates={availableClimates}
                   stemLengthBounds={stemLengthBounds}
                   vaseLifeBounds={vaseLifeBounds}
                   currentFilter={currentFilter}
@@ -145,6 +152,7 @@ export function Catalogue({
                   onAvailabilityChange={onAvailabilityChange}
                   onSeasonChange={onSeasonChange}
                   onTypeChange={onTypeChange}
+                  onClimateChange={onClimateChange}
                   onFragranceLevelChange={onFragranceLevelChange}
                   onToxicityChange={onToxicityChange}
                   onStemLengthChange={onStemLengthChange}
@@ -164,6 +172,7 @@ export function Catalogue({
               ...currentFilter.colors,
               currentFilter.season,
               currentFilter.type,
+              currentFilter.climate,
               currentFilter.availability,
               currentFilter.fragranceLevel,
               currentFilter.toxicity,

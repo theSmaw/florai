@@ -1,7 +1,7 @@
 // Flowers selectors
 import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
-import type { Color, Flower, FlowerFilter, FlowerType, Season } from '../../domain/Flower';
+import type { Climate, Color, Flower, FlowerFilter, FlowerType, Season } from '../../domain/Flower';
 
 import type { AsyncAction } from '../AsyncAction';
 
@@ -50,6 +50,15 @@ export const selectAllTypes = createSelector(
   },
 );
 
+export const selectAllClimates = createSelector(
+  (state: RootState) => state.flowers.flowers,
+  (flowers: Flower[]): Climate[] => {
+    const climateSet = new Set<Climate>();
+    flowers.forEach((flower) => climateSet.add(flower.climate));
+    return Array.from(climateSet).sort();
+  },
+);
+
 export const selectStemLengthBounds = createSelector(
   (state: RootState) => state.flowers.flowers,
   (flowers: Flower[]): { min: number; max: number } => {
@@ -94,6 +103,11 @@ export const selectFilteredFlowers = createSelector(
     // Filter by season
     if (filter.season) {
       filtered = filtered.filter((flower) => flower.season.includes(filter.season as Season));
+    }
+
+    // Filter by climate
+    if (filter.climate) {
+      filtered = filtered.filter((flower) => flower.climate === filter.climate);
     }
 
     // Filter by fragrance level

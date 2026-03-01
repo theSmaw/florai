@@ -4,6 +4,7 @@ import { ChevronLeftIcon } from '@radix-ui/react-icons';
 import type { Availability, Flower, Toxicity } from '../../domain/Flower';
 import {
   AVAILABILITY_LABEL,
+  CLIMATE_LABEL,
   COLOR_HEX,
   FRAGRANCE_LABEL,
   FRAGRANCE_PIPS,
@@ -132,6 +133,13 @@ export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDet
                     {flower.season.map((s) => (
                       <span key={s} className={styles.tag}>{s}</span>
                     ))}
+                  </div>
+                </div>
+
+                <div className={styles.field}>
+                  <span className={styles.fieldLabel}>Climate</span>
+                  <div className={styles.tagList}>
+                    <span className={styles.tag}>{CLIMATE_LABEL[flower.climate]}</span>
                   </div>
                 </div>
               </div>

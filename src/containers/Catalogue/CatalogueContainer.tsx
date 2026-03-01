@@ -12,6 +12,7 @@ import {
   selectAllColors,
   selectAllSeasons,
   selectAllTypes,
+  selectAllClimates,
   selectStemLengthBounds,
   selectVaseLifeBounds,
 } from '../../stores/flowers/selectors';
@@ -19,6 +20,7 @@ import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch } from '../../stores/store';
 import type {
+  Climate,
   Color,
   FlowerType,
   FragranceLevel,
@@ -39,6 +41,7 @@ export function CatalogueContainer() {
   const availableColors = useSelector(selectAllColors);
   const availableSeasons = useSelector(selectAllSeasons);
   const availableTypes = useSelector(selectAllTypes);
+  const availableClimates = useSelector(selectAllClimates);
   const stemLengthBounds = useSelector(selectStemLengthBounds);
   const vaseLifeBounds = useSelector(selectVaseLifeBounds);
 
@@ -85,6 +88,15 @@ export function CatalogueContainer() {
     const { type: _omit, ...rest } = currentFilter;
     if (type) {
       dispatch(filterApplied({ ...rest, type }));
+    } else {
+      dispatch(filterApplied(rest));
+    }
+  };
+
+  const handleClimateChange = (climate?: Climate) => {
+    const { climate: _omit, ...rest } = currentFilter;
+    if (climate) {
+      dispatch(filterApplied({ ...rest, climate }));
     } else {
       dispatch(filterApplied(rest));
     }
@@ -151,6 +163,7 @@ export function CatalogueContainer() {
       availableColors={availableColors}
       availableSeasons={availableSeasons}
       availableTypes={availableTypes}
+      availableClimates={availableClimates}
       stemLengthBounds={stemLengthBounds}
       vaseLifeBounds={vaseLifeBounds}
       onSearchChange={handleSearchChange}
@@ -158,6 +171,7 @@ export function CatalogueContainer() {
       onAvailabilityChange={handleAvailabilityChange}
       onSeasonChange={handleSeasonChange}
       onTypeChange={handleTypeChange}
+      onClimateChange={handleClimateChange}
       onFragranceLevelChange={handleFragranceLevelChange}
       onToxicityChange={handleToxicityChange}
       onStemLengthChange={handleStemLengthChange}

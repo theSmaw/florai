@@ -27,6 +27,7 @@ const MOCK_FLOWER: Flower = {
   origin: 'Netherlands',
   season: ['Spring'],
   availability: 'seasonal',
+  climate: 'temperate',
   quantityOnHand: 45,
   stemLengthCm: 50,
   fragranceLevel: 'strong',
@@ -49,6 +50,7 @@ const MOCK_COMPLEMENTARY: Flower[] = [
     origin: 'Kenya',
     season: ['Year-round'],
     availability: 'always',
+    climate: 'subtropical',
     quantityOnHand: 120,
     complementaryFlowerIds: [],
   },
@@ -63,6 +65,7 @@ const MOCK_COMPLEMENTARY: Flower[] = [
     origin: 'Netherlands',
     season: ['Summer'],
     availability: 'seasonal',
+    climate: 'temperate',
     quantityOnHand: 30,
     complementaryFlowerIds: [],
   },
@@ -100,6 +103,7 @@ export const NoOptionalFields: Story = {
         origin: 'Turkey',
         season: ['Spring'],
         availability: 'limited',
+        climate: 'mediterranean',
         quantityOnHand: 20,
         complementaryFlowerIds: [],
       }}
@@ -129,6 +133,7 @@ export const ToxicFlower: Story = {
         name: 'Lily of the Valley',
         toxicity: 'toxic',
         availability: 'always',
+        climate: 'temperate',
         fragranceLevel: 'moderate',
       }}
       complementaryFlowers={[]}

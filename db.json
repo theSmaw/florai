@@ -20,6 +20,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 45,
       "stemLengthCm": 50,
       "fragranceLevel": "strong",
@@ -48,6 +49,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 120,
       "stemLengthCm": 60,
       "fragranceLevel": "light",
@@ -76,6 +78,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 12,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
@@ -104,6 +107,7 @@
         "Winter"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 0,
       "stemLengthCm": 70,
       "fragranceLevel": "none",
@@ -131,6 +135,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 88,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
@@ -159,6 +164,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 300,
       "stemLengthCm": 30,
       "fragranceLevel": "strong",
@@ -189,12 +195,13 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "subtropical",
       "quantityOnHand": 30,
       "stemLengthCm": 55,
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 7,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Iconic David Austin garden rose, exceptional apricot-peach colouring",
       "complementaryFlowerIds": [
         "8",
@@ -218,12 +225,13 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 85,
       "stemLengthCm": 60,
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Hugely popular dusty blush-mauve rose, a wedding staple",
       "complementaryFlowerIds": [
         "7",
@@ -248,12 +256,13 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "temperate",
       "quantityOnHand": 50,
       "stemLengthCm": 60,
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 9,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Distinctive mauve-purple hue, moody and dramatic",
       "complementaryFlowerIds": [
         "15",
@@ -277,13 +286,14 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 40,
       "stemLengthCm": 65,
       "fragranceLevel": "moderate",
       "toxicity": "safe",
       "vaseLifeDays": 12,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
-      "notes": "Deepest darkest red, almost black — a true showstopper",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "notes": "Deepest darkest red, almost black \u2014 a true showstopper",
       "complementaryFlowerIds": [
         "21",
         "25",
@@ -292,6 +302,7 @@
     },
     {
       "id": "11",
+      "imageUrl": "/images/flowers/11.png",
       "name": "Mondial Rose",
       "colors": [
         "white"
@@ -305,12 +316,13 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "temperate",
       "quantityOnHand": 100,
       "stemLengthCm": 70,
       "fragranceLevel": "none",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Classic large-headed white rose, perfect for bridal work",
       "complementaryFlowerIds": [
         "12",
@@ -320,6 +332,7 @@
     },
     {
       "id": "12",
+      "imageUrl": "/images/flowers/12.png",
       "name": "Avalanche Rose",
       "colors": [
         "white"
@@ -333,12 +346,13 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "temperate",
       "quantityOnHand": 120,
       "stemLengthCm": 60,
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 12,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "One of the most reliable white roses, superb vase life",
       "complementaryFlowerIds": [
         "11",
@@ -361,12 +375,13 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 45,
       "stemLengthCm": 55,
       "fragranceLevel": "moderate",
       "toxicity": "safe",
       "vaseLifeDays": 8,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Warm peach-orange tones, coffee-coloured edges as it ages",
       "complementaryFlowerIds": [
         "17",
@@ -390,12 +405,13 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "subtropical",
       "quantityOnHand": 25,
       "stemLengthCm": 60,
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 7,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Deeply fragrant pink with high-centred bud, bridal favourite",
       "complementaryFlowerIds": [
         "7",
@@ -418,12 +434,13 @@
         "Year-round"
       ],
       "availability": "limited",
+      "climate": "temperate",
       "quantityOnHand": 15,
       "stemLengthCm": 60,
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 8,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Rare lavender-lilac rose with intense perfume",
       "complementaryFlowerIds": [
         "9",
@@ -446,12 +463,13 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 75,
       "stemLengthCm": 65,
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Bright candy-pink, excellent stem length and longevity",
       "complementaryFlowerIds": [
         "7",
@@ -476,12 +494,13 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "subtropical",
       "quantityOnHand": 35,
       "stemLengthCm": 55,
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 9,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Vibrant coral-orange, great for tropical and summer arrangements",
       "complementaryFlowerIds": [
         "13",
@@ -504,12 +523,13 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 90,
       "stemLengthCm": 60,
       "fragranceLevel": "moderate",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Cream with a warm blush flush, endlessly elegant",
       "complementaryFlowerIds": [
         "11",
@@ -533,12 +553,13 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "temperate",
       "quantityOnHand": 110,
       "stemLengthCm": 55,
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "White petals with delicate pink blush edges, very popular",
       "complementaryFlowerIds": [
         "73",
@@ -562,12 +583,13 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 20,
       "stemLengthCm": 50,
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 7,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Full garden-rose form with dusky pink blooms",
       "complementaryFlowerIds": [
         "14",
@@ -590,12 +612,13 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 130,
       "stemLengthCm": 70,
       "fragranceLevel": "moderate",
       "toxicity": "safe",
       "vaseLifeDays": 12,
-      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
       "notes": "Rich velvety red, superb stem length, one of Kenya's finest",
       "complementaryFlowerIds": [
         "10",
@@ -619,6 +642,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 30,
       "stemLengthCm": 45,
       "fragranceLevel": "strong",
@@ -647,6 +671,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 25,
       "stemLengthCm": 50,
       "fragranceLevel": "moderate",
@@ -675,6 +700,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 20,
       "stemLengthCm": 48,
       "fragranceLevel": "strong",
@@ -704,6 +730,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 15,
       "stemLengthCm": 50,
       "fragranceLevel": "strong",
@@ -732,13 +759,14 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 200,
       "stemLengthCm": 45,
       "fragranceLevel": "none",
       "toxicity": "mild",
       "vaseLifeDays": 7,
       "careInstructions": "Keep upright in cool water, wrap in paper to straighten stems",
-      "notes": "Deep maroon-purple, almost black — the most dramatic tulip",
+      "notes": "Deep maroon-purple, almost black \u2014 the most dramatic tulip",
       "complementaryFlowerIds": [
         "31",
         "86",
@@ -760,6 +788,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 250,
       "stemLengthCm": 40,
       "fragranceLevel": "none",
@@ -789,6 +818,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 180,
       "stemLengthCm": 45,
       "fragranceLevel": "none",
@@ -817,6 +847,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 300,
       "stemLengthCm": 40,
       "fragranceLevel": "none",
@@ -845,6 +876,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 280,
       "stemLengthCm": 38,
       "fragranceLevel": "none",
@@ -873,6 +905,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 220,
       "stemLengthCm": 42,
       "fragranceLevel": "none",
@@ -901,6 +934,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 190,
       "stemLengthCm": 42,
       "fragranceLevel": "none",
@@ -929,13 +963,14 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 40,
       "stemLengthCm": 80,
       "fragranceLevel": "strong",
       "toxicity": "toxic",
       "vaseLifeDays": 10,
       "careInstructions": "Remove anthers to prevent pollen staining, change water every 2 days",
-      "notes": "The queen of white lilies — intensely fragrant, pure white blooms",
+      "notes": "The queen of white lilies \u2014 intensely fragrant, pure white blooms",
       "complementaryFlowerIds": [
         "56",
         "92",
@@ -958,6 +993,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 55,
       "stemLengthCm": 75,
       "fragranceLevel": "strong",
@@ -986,6 +1022,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 35,
       "stemLengthCm": 70,
       "fragranceLevel": "light",
@@ -1015,6 +1052,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 45,
       "stemLengthCm": 65,
       "fragranceLevel": "none",
@@ -1044,6 +1082,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 30,
       "stemLengthCm": 75,
       "fragranceLevel": "light",
@@ -1072,6 +1111,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 20,
       "stemLengthCm": 80,
       "fragranceLevel": "strong",
@@ -1087,7 +1127,7 @@
     },
     {
       "id": "39",
-      "name": "Café au Lait Dahlia",
+      "name": "Caf\u00e9 au Lait Dahlia",
       "colors": [
         "white",
         "pink"
@@ -1102,13 +1142,14 @@
         "Autumn"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 25,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
       "toxicity": "safe",
       "vaseLifeDays": 8,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
-      "notes": "The most-pinned dahlia on the internet — creamy caramel perfection",
+      "notes": "The most-pinned dahlia on the internet \u2014 creamy caramel perfection",
       "complementaryFlowerIds": [
         "45",
         "95",
@@ -1131,13 +1172,14 @@
         "Autumn"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 20,
       "stemLengthCm": 45,
       "fragranceLevel": "none",
       "toxicity": "safe",
       "vaseLifeDays": 7,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
-      "notes": "Single red blooms with dark foliage — a classic garden dahlia",
+      "notes": "Single red blooms with dark foliage \u2014 a classic garden dahlia",
       "complementaryFlowerIds": [
         "41",
         "64",
@@ -1160,6 +1202,7 @@
         "Autumn"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 15,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
@@ -1189,6 +1232,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 30,
       "stemLengthCm": 45,
       "fragranceLevel": "none",
@@ -1219,6 +1263,7 @@
         "Autumn"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 18,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
@@ -1247,6 +1292,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 35,
       "stemLengthCm": 40,
       "fragranceLevel": "none",
@@ -1277,6 +1323,7 @@
         "Autumn"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 22,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
@@ -1305,6 +1352,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "tropical",
       "quantityOnHand": 20,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
@@ -1333,6 +1381,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "tropical",
       "quantityOnHand": 25,
       "stemLengthCm": 55,
       "fragranceLevel": "none",
@@ -1363,6 +1412,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "tropical",
       "quantityOnHand": 12,
       "stemLengthCm": 65,
       "fragranceLevel": "none",
@@ -1392,13 +1442,14 @@
         "Year-round"
       ],
       "availability": "limited",
+      "climate": "tropical",
       "quantityOnHand": 8,
       "stemLengthCm": 50,
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 14,
       "careInstructions": "Mist daily, keep in indirect bright light, avoid cold drafts",
-      "notes": "One of the few naturally blue flowers — an extraordinary statement piece",
+      "notes": "One of the few naturally blue flowers \u2014 an extraordinary statement piece",
       "complementaryFlowerIds": [
         "85",
         "47",
@@ -1420,13 +1471,14 @@
         "Year-round"
       ],
       "availability": "limited",
+      "climate": "tropical",
       "quantityOnHand": 10,
       "stemLengthCm": 45,
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 12,
       "careInstructions": "Mist daily, keep in indirect bright light, avoid cold drafts",
-      "notes": "The corsage orchid — large ruffled purple blooms with sweet scent",
+      "notes": "The corsage orchid \u2014 large ruffled purple blooms with sweet scent",
       "complementaryFlowerIds": [
         "47",
         "71",
@@ -1450,6 +1502,7 @@
         "Autumn"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 18,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
@@ -1478,6 +1531,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 20,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
@@ -1506,6 +1560,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 14,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
@@ -1534,6 +1589,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 60,
       "stemLengthCm": 40,
       "fragranceLevel": "none",
@@ -1562,6 +1618,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 70,
       "stemLengthCm": 40,
       "fragranceLevel": "none",
@@ -1590,6 +1647,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 80,
       "stemLengthCm": 38,
       "fragranceLevel": "none",
@@ -1618,13 +1676,14 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 75,
       "stemLengthCm": 40,
       "fragranceLevel": "none",
       "toxicity": "mild",
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, remove lower leaves, trim stems regularly",
-      "notes": "Delicate blush pink — the most popular ranunculus colour",
+      "notes": "Delicate blush pink \u2014 the most popular ranunculus colour",
       "complementaryFlowerIds": [
         "22",
         "76",
@@ -1646,6 +1705,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 200,
       "stemLengthCm": 55,
       "fragranceLevel": "moderate",
@@ -1674,6 +1734,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 220,
       "stemLengthCm": 55,
       "fragranceLevel": "moderate",
@@ -1702,6 +1763,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 250,
       "stemLengthCm": 55,
       "fragranceLevel": "moderate",
@@ -1730,6 +1792,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "temperate",
       "quantityOnHand": 80,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
@@ -1758,6 +1821,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "mediterranean",
       "quantityOnHand": 100,
       "stemLengthCm": 55,
       "fragranceLevel": "none",
@@ -1786,6 +1850,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "mediterranean",
       "quantityOnHand": 90,
       "stemLengthCm": 55,
       "fragranceLevel": "none",
@@ -1814,6 +1879,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 150,
       "stemLengthCm": 45,
       "fragranceLevel": "none",
@@ -1842,6 +1908,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 140,
       "stemLengthCm": 45,
       "fragranceLevel": "none",
@@ -1870,6 +1937,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 160,
       "stemLengthCm": 45,
       "fragranceLevel": "none",
@@ -1898,13 +1966,14 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "subtropical",
       "quantityOnHand": 120,
       "stemLengthCm": 30,
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they open progressively, trim daily",
-      "notes": "One of the most fragrant flowers available — pure white blooms",
+      "notes": "One of the most fragrant flowers available \u2014 pure white blooms",
       "complementaryFlowerIds": [
         "78",
         "60",
@@ -1926,6 +1995,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "subtropical",
       "quantityOnHand": 130,
       "stemLengthCm": 30,
       "fragranceLevel": "strong",
@@ -1954,6 +2024,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "subtropical",
       "quantityOnHand": 110,
       "stemLengthCm": 30,
       "fragranceLevel": "strong",
@@ -1982,13 +2053,14 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "subtropical",
       "quantityOnHand": 40,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
       "toxicity": "safe",
       "vaseLifeDays": 14,
       "careInstructions": "Change water every 2 days, remove lower leaves, keep cool",
-      "notes": "Often mistaken for a rose or peony — exceptional vase life",
+      "notes": "Often mistaken for a rose or peony \u2014 exceptional vase life",
       "complementaryFlowerIds": [
         "56",
         "92",
@@ -2010,6 +2082,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "subtropical",
       "quantityOnHand": 35,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
@@ -2038,6 +2111,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "subtropical",
       "quantityOnHand": 38,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
@@ -2067,13 +2141,14 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 80,
       "stemLengthCm": 35,
       "fragranceLevel": "none",
       "toxicity": "mild",
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they drink heavily, refresh daily",
-      "notes": "White petals with a striking dark centre — graphic and modern",
+      "notes": "White petals with a striking dark centre \u2014 graphic and modern",
       "complementaryFlowerIds": [
         "56",
         "78",
@@ -2096,6 +2171,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 70,
       "stemLengthCm": 35,
       "fragranceLevel": "none",
@@ -2125,6 +2201,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 75,
       "stemLengthCm": 35,
       "fragranceLevel": "none",
@@ -2153,6 +2230,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 100,
       "stemLengthCm": 25,
       "fragranceLevel": "strong",
@@ -2181,6 +2259,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 90,
       "stemLengthCm": 25,
       "fragranceLevel": "strong",
@@ -2209,6 +2288,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 80,
       "stemLengthCm": 25,
       "fragranceLevel": "strong",
@@ -2237,6 +2317,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 120,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
@@ -2265,6 +2346,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 130,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
@@ -2293,6 +2375,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 110,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
@@ -2322,6 +2405,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 90,
       "stemLengthCm": 70,
       "fragranceLevel": "light",
@@ -2351,6 +2435,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 85,
       "stemLengthCm": 70,
       "fragranceLevel": "light",
@@ -2380,6 +2465,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 80,
       "stemLengthCm": 70,
       "fragranceLevel": "light",
@@ -2408,12 +2494,13 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 40,
       "stemLengthCm": 90,
       "fragranceLevel": "none",
       "toxicity": "toxic",
       "vaseLifeDays": 7,
-      "careInstructions": "Hollow stems — turn upside down, fill with water, plug with cotton wool",
+      "careInstructions": "Hollow stems \u2014 turn upside down, fill with water, plug with cotton wool",
       "notes": "True blue spires up to 90 cm tall, a garden wedding essential",
       "complementaryFlowerIds": [
         "51",
@@ -2436,12 +2523,13 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 35,
       "stemLengthCm": 90,
       "fragranceLevel": "none",
       "toxicity": "toxic",
       "vaseLifeDays": 7,
-      "careInstructions": "Hollow stems — turn upside down, fill with water, plug with cotton wool",
+      "careInstructions": "Hollow stems \u2014 turn upside down, fill with water, plug with cotton wool",
       "notes": "Rich violet-purple spires, magnificent for tall arrangements",
       "complementaryFlowerIds": [
         "26",
@@ -2464,6 +2552,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 80,
       "stemLengthCm": 60,
       "fragranceLevel": "light",
@@ -2492,6 +2581,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 70,
       "stemLengthCm": 60,
       "fragranceLevel": "light",
@@ -2522,13 +2612,14 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 20,
       "stemLengthCm": 30,
       "fragranceLevel": "none",
       "toxicity": "toxic",
       "vaseLifeDays": 5,
       "careInstructions": "Condition by submerging stems in cold water overnight before arranging",
-      "notes": "The Lenten rose — moody and beautiful in winter arrangements",
+      "notes": "The Lenten rose \u2014 moody and beautiful in winter arrangements",
       "complementaryFlowerIds": [
         "73",
         "95",
@@ -2552,6 +2643,7 @@
         "Autumn"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 200,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
@@ -2582,6 +2674,7 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 60,
       "stemLengthCm": 45,
       "fragranceLevel": "none",
@@ -2610,13 +2703,14 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "mediterranean",
       "quantityOnHand": 400,
       "stemLengthCm": 50,
       "fragranceLevel": "none",
       "toxicity": "safe",
       "vaseLifeDays": 12,
       "careInstructions": "Keep in clean water, minimal care needed",
-      "notes": "The ultimate filler flower — cloud-like masses of tiny white blooms",
+      "notes": "The ultimate filler flower \u2014 cloud-like masses of tiny white blooms",
       "complementaryFlowerIds": [
         "7",
         "11",
@@ -2639,13 +2733,14 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 45,
       "stemLengthCm": 80,
       "fragranceLevel": "none",
       "toxicity": "safe",
       "vaseLifeDays": 14,
       "careInstructions": "Keep in cool water, stems may have faint onion scent when cut",
-      "notes": "Perfectly round purple globe on a tall slender stem — very architectural",
+      "notes": "Perfectly round purple globe on a tall slender stem \u2014 very architectural",
       "complementaryFlowerIds": [
         "87",
         "85",
@@ -2668,13 +2763,14 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "mediterranean",
       "quantityOnHand": 15,
       "stemLengthCm": 60,
       "fragranceLevel": "none",
       "toxicity": "safe",
       "vaseLifeDays": 14,
       "careInstructions": "Keep in clean water, remove leaves below waterline",
-      "notes": "South Africa's national flower — a dramatic centrepiece bloom",
+      "notes": "South Africa's national flower \u2014 a dramatic centrepiece bloom",
       "complementaryFlowerIds": [
         "95",
         "96",
@@ -2698,6 +2794,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 80,
       "stemLengthCm": 40,
       "fragranceLevel": "light",
@@ -2726,6 +2823,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "mediterranean",
       "quantityOnHand": 300,
       "stemLengthCm": 45,
       "fragranceLevel": "none",
@@ -2754,13 +2852,14 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "tropical",
       "quantityOnHand": 25,
       "stemLengthCm": 55,
       "fragranceLevel": "none",
       "toxicity": "mild",
       "vaseLifeDays": 21,
       "careInstructions": "Keep in clean water, avoid direct sunlight and cold draughts",
-      "notes": "Waxy heart-shaped spathe in lacquer red — tropical and long-lasting",
+      "notes": "Waxy heart-shaped spathe in lacquer red \u2014 tropical and long-lasting",
       "complementaryFlowerIds": [
         "98",
         "46",
@@ -2783,6 +2882,7 @@
         "Year-round"
       ],
       "availability": "always",
+      "climate": "subtropical",
       "quantityOnHand": 18,
       "stemLengthCm": 90,
       "fragranceLevel": "none",
@@ -2812,13 +2912,14 @@
         "Summer"
       ],
       "availability": "seasonal",
+      "climate": "temperate",
       "quantityOnHand": 30,
       "stemLengthCm": 90,
       "fragranceLevel": "none",
       "toxicity": "toxic",
       "vaseLifeDays": 7,
-      "careInstructions": "Toxic — handle with care and wash hands after. Keep in fresh cool water",
-      "notes": "Towering cottage-garden spires with spotted bells — utterly dramatic",
+      "careInstructions": "Toxic \u2014 handle with care and wash hands after. Keep in fresh cool water",
+      "notes": "Towering cottage-garden spires with spotted bells \u2014 utterly dramatic",
       "complementaryFlowerIds": [
         "85",
         "93",
@@ -2841,6 +2942,7 @@
         "Spring"
       ],
       "availability": "seasonal",
+      "climate": "mediterranean",
       "quantityOnHand": 150,
       "stemLengthCm": 20,
       "fragranceLevel": "moderate",

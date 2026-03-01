@@ -2,6 +2,7 @@
 // Pure UI - handles filter display and events, no store access
 import type {
   Availability,
+  Climate,
   Color,
   FlowerFilter,
   FlowerType,
@@ -10,7 +11,7 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
-import { COLOR_HEX } from '../../domain/flowerDisplayMeta';
+import { CLIMATE_LABEL, COLOR_HEX } from '../../domain/flowerDisplayMeta';
 import { FilterChipSection } from '../FilterChipSection/FilterChipSection';
 import { FilterRangeSection } from '../FilterRangeSection/FilterRangeSection';
 import styles from './FilterPanel.module.css';
@@ -51,6 +52,7 @@ interface FilterPanelProps {
   availableColors: Color[];
   availableSeasons: Season[];
   availableTypes: FlowerType[];
+  availableClimates: Climate[];
   stemLengthBounds: { min: number; max: number };
   vaseLifeBounds: { min: number; max: number };
   currentFilter: FlowerFilter;
@@ -58,6 +60,7 @@ interface FilterPanelProps {
   onAvailabilityChange: (availability?: Availability) => void;
   onSeasonChange: (season?: Season) => void;
   onTypeChange: (type?: FlowerType) => void;
+  onClimateChange: (climate?: Climate) => void;
   onFragranceLevelChange: (fragranceLevel?: FragranceLevel) => void;
   onToxicityChange: (toxicity?: Toxicity) => void;
   onStemLengthChange: (min: number, max: number) => void;
@@ -70,6 +73,7 @@ export function FilterPanel({
   availableColors,
   availableSeasons,
   availableTypes,
+  availableClimates,
   stemLengthBounds,
   vaseLifeBounds,
   currentFilter,
@@ -77,6 +81,7 @@ export function FilterPanel({
   onAvailabilityChange,
   onSeasonChange,
   onTypeChange,
+  onClimateChange,
   onFragranceLevelChange,
   onToxicityChange,
   onStemLengthChange,
@@ -97,6 +102,11 @@ export function FilterPanel({
   const typeOptions: ReadonlyArray<{ value: FlowerType | undefined; label: string }> = [
     { value: undefined, label: 'All' },
     ...availableTypes.map((t) => ({ value: t, label: t })),
+  ];
+
+  const climateOptions: ReadonlyArray<{ value: Climate | undefined; label: string }> = [
+    { value: undefined, label: 'All' },
+    ...availableClimates.map((c) => ({ value: c, label: CLIMATE_LABEL[c] })),
   ];
 
   return (
@@ -144,6 +154,17 @@ export function FilterPanel({
           currentValue={currentFilter.type}
           onChange={onTypeChange}
           dataCy="type-chip"
+        />
+      )}
+
+      {/* Climate */}
+      {availableClimates.length > 0 && (
+        <FilterChipSection
+          title="Climate"
+          options={climateOptions}
+          currentValue={currentFilter.climate}
+          onChange={onClimateChange}
+          dataCy="climate-chip"
         />
       )}
 

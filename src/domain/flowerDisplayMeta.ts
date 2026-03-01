@@ -1,6 +1,6 @@
 // Display metadata for Flower domain values.
 // Single source of truth for labels and colour swatches used across the UI.
-import type { Availability, Color, FragranceLevel, Toxicity } from './Flower';
+import type { Availability, Climate, Color, FragranceLevel, Toxicity } from './Flower';
 
 /** Hex colour for each Color variant, used in swatches. */
 export const COLOR_HEX: Record<Color, string> = {
@@ -42,4 +42,13 @@ export const TOXICITY_LABEL: Record<Toxicity, string> = {
   safe: 'Safe',
   mild: 'Mild',
   toxic: 'Toxic',
+};
+
+/** Human-readable label for each Climate variant. */
+export const CLIMATE_LABEL: Record<Climate, string> = {
+  tropical: 'Tropical',
+  subtropical: 'Subtropical',
+  mediterranean: 'Mediterranean',
+  temperate: 'Temperate',
+  alpine: 'Alpine',
 };
