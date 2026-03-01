@@ -10,7 +10,7 @@ import {
   FRAGRANCE_PIPS,
   TOXICITY_LABEL,
 } from '../../domain/flowerDisplayMeta';
-import { SectionHeader } from './SectionHeader';
+import { SectionHeader } from '../SectionHeader/SectionHeader';
 import styles from './FlowerDetail.module.css';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────

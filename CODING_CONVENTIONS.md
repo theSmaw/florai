@@ -29,7 +29,8 @@ Use these standard top-level groupings (naming can be adapted, intent must remai
 ## One component per file
 - Each file must export exactly one React component.
 - Do not define multiple components in the same file, even small helper components.
-- If a component needs a helper (e.g. `SectionHeader` inside `FlowerDetail`), extract it to its own file in the same folder.
+- Every component, including helpers, gets its own top-level folder under `components/` (e.g. `components/SectionHeader/`), never nested inside another component's folder.
+- Treat all components as first-class — they may be reused elsewhere later.
 
 ## File Size / Complexity
 - Prefer small files with single responsibility.

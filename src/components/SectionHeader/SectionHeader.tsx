@@ -1,4 +1,4 @@
-import styles from './FlowerDetail.module.css';
+import styles from './SectionHeader.module.css';
 
 interface SectionHeaderProps {
   label: string;
