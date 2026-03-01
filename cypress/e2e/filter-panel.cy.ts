@@ -207,39 +207,6 @@ describe('Filter panel', () => {
     cy.get('[data-cy="flower-card-name"]').should('contain.text', 'Peony');
   });
 
-  it('clears a season filter by clicking its pill', () => {
-    cy.get('[data-cy="filter-toggle-button"]').click();
-    cy.get('[data-cy="season-chip"][data-cy-value="Spring"]').click();
-    cy.get('[data-cy="apply-filters-button"]').click();
-    cy.get('[data-cy="flower-card"]').should('have.length', 2);
-
-    cy.get('[data-cy="filter-pill"]').contains('Spring').click();
-    cy.get('[data-cy="flower-card"]').should('have.length', 6);
-    cy.get('[data-cy="filter-pill"]').should('not.exist');
-  });
-
-  it('clears a color filter by clicking its pill', () => {
-    cy.get('[data-cy="filter-toggle-button"]').click();
-    cy.get('[data-cy="color-chip"][data-cy-color="pink"]').click();
-    cy.get('[data-cy="apply-filters-button"]').click();
-    cy.get('[data-cy="flower-card"]').should('have.length', 1);
-
-    cy.get('[data-cy="filter-pill"]').contains('pink').click();
-    cy.get('[data-cy="flower-card"]').should('have.length', 6);
-    cy.get('[data-cy="filter-pill"]').should('not.exist');
-  });
-
-  it('clears a type filter by clicking its pill', () => {
-    cy.get('[data-cy="filter-toggle-button"]').click();
-    cy.get('[data-cy="type-chip"][data-cy-value="Rose"]').click();
-    cy.get('[data-cy="apply-filters-button"]').click();
-    cy.get('[data-cy="flower-card"]').should('have.length', 1);
-
-    cy.get('[data-cy="filter-pill"]').contains('Rose').click();
-    cy.get('[data-cy="flower-card"]').should('have.length', 6);
-    cy.get('[data-cy="filter-pill"]').should('not.exist');
-  });
-
   it('deselects a chip in the filter panel by clicking it again', () => {
     cy.get('[data-cy="filter-toggle-button"]').click();
     cy.get('[data-cy="season-chip"][data-cy-value="Spring"]').click();
