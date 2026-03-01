@@ -4,6 +4,7 @@ declare global {
       stubFlowers(): Chainable<void>;
       stubUser(): Chainable<void>;
       visitCatalogue(): Chainable<void>;
+      visitFlowerDetail(flowerId: string): Chainable<void>;
       navigateTo(item: 'catalogue' | 'collection' | 'weddings'): Chainable<void>;
     }
   }
@@ -24,6 +25,12 @@ Cypress.Commands.add('visitCatalogue', () => {
   cy.wait('@getFlowers');
   cy.get('[data-cy="loading-indicator"]').should('not.exist');
   cy.get('[data-cy="flower-list"]').should('be.visible');
+});
+
+Cypress.Commands.add('visitFlowerDetail', (flowerId: string) => {
+  cy.visit(`/catalogue/${flowerId}`);
+  cy.wait('@getFlowers');
+  cy.get('[data-cy="flower-detail-view"]').should('be.visible');
 });
 
 Cypress.Commands.add('navigateTo', (item: 'catalogue' | 'collection' | 'weddings') => {

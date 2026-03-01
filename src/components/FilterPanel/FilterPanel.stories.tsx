@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { FilterPanel } from './FilterPanel';
-import type { Color, FlowerFilter } from '../../domain/Flower';
+import type { Climate, Color, FlowerFilter } from '../../domain/Flower';
 
 const meta: Meta<typeof FilterPanel> = {
   title: 'Components/FilterPanel',
@@ -14,6 +14,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const AVAILABLE_COLORS: Color[] = ['red', 'pink', 'white', 'yellow', 'purple', 'blue'];
+const AVAILABLE_CLIMATES: Climate[] = ['temperate', 'mediterranean', 'subtropical', 'tropical'];
 const STEM_BOUNDS = { min: 30, max: 70 };
 const VASE_BOUNDS = { min: 7, max: 12 };
 
@@ -37,6 +38,7 @@ function FilterPanelWrapper(props: { initialFilter?: Partial<FlowerFilter> }) {
         availableColors={AVAILABLE_COLORS}
         availableSeasons={['Spring', 'Summer', 'Autumn', 'Winter']}
         availableTypes={['Rose', 'Peony', 'Hydrangea']}
+        availableClimates={AVAILABLE_CLIMATES}
         stemLengthBounds={STEM_BOUNDS}
         vaseLifeBounds={VASE_BOUNDS}
         currentFilter={filter}
@@ -51,6 +53,7 @@ function FilterPanelWrapper(props: { initialFilter?: Partial<FlowerFilter> }) {
         onAvailabilityChange={(availability) => setFilter((f) => ({ ...f, availability }))}
         onSeasonChange={(season) => setFilter((f) => ({ ...f, season }))}
         onTypeChange={(type) => setFilter((f) => ({ ...f, type }))}
+        onClimateChange={(climate) => setFilter((f) => ({ ...f, climate }))}
         onFragranceLevelChange={(fragranceLevel) => setFilter((f) => ({ ...f, fragranceLevel }))}
         onToxicityChange={(toxicity) => setFilter((f) => ({ ...f, toxicity }))}
         onStemLengthChange={(min, max) =>

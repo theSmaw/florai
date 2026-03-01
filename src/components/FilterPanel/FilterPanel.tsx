@@ -2,6 +2,7 @@
 // Pure UI - handles filter display and events, no store access
 import type {
   Availability,
+  Climate,
   Color,
   FlowerFilter,
   FlowerType,
@@ -10,24 +11,10 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
+import { CLIMATE_LABEL, COLOR_HEX } from '../../domain/flowerDisplayMeta';
 import { FilterChipSection } from '../FilterChipSection/FilterChipSection';
 import { FilterRangeSection } from '../FilterRangeSection/FilterRangeSection';
 import styles from './FilterPanel.module.css';
-
-// ---------------------------------------------------------------------------
-// Static option lists
-// ---------------------------------------------------------------------------
-
-const COLOR_SWATCHES: Record<Color, string> = {
-  pink: '#f9a8d4',
-  red: '#dc2626',
-  blue: '#60a5fa',
-  yellow: '#facc15',
-  purple: '#c084fc',
-  white: '#f1f5f9',
-  orange: '#fb923c',
-  green: '#4ade80',
-};
 
 const AVAILABILITY_OPTIONS: ReadonlyArray<{ value: Availability | undefined; label: string }> = [
   { value: undefined, label: 'All' },
@@ -65,6 +52,7 @@ interface FilterPanelProps {
   availableColors: Color[];
   availableSeasons: Season[];
   availableTypes: FlowerType[];
+  availableClimates: Climate[];
   stemLengthBounds: { min: number; max: number };
   vaseLifeBounds: { min: number; max: number };
   currentFilter: FlowerFilter;
@@ -72,6 +60,7 @@ interface FilterPanelProps {
   onAvailabilityChange: (availability?: Availability) => void;
   onSeasonChange: (season?: Season) => void;
   onTypeChange: (type?: FlowerType) => void;
+  onClimateChange: (climate?: Climate) => void;
   onFragranceLevelChange: (fragranceLevel?: FragranceLevel) => void;
   onToxicityChange: (toxicity?: Toxicity) => void;
   onStemLengthChange: (min: number, max: number) => void;
@@ -84,6 +73,7 @@ export function FilterPanel({
   availableColors,
   availableSeasons,
   availableTypes,
+  availableClimates,
   stemLengthBounds,
   vaseLifeBounds,
   currentFilter,
@@ -91,6 +81,7 @@ export function FilterPanel({
   onAvailabilityChange,
   onSeasonChange,
   onTypeChange,
+  onClimateChange,
   onFragranceLevelChange,
   onToxicityChange,
   onStemLengthChange,
@@ -113,6 +104,11 @@ export function FilterPanel({
     ...availableTypes.map((t) => ({ value: t, label: t })),
   ];
 
+  const climateOptions: ReadonlyArray<{ value: Climate | undefined; label: string }> = [
+    { value: undefined, label: 'All' },
+    ...availableClimates.map((c) => ({ value: c, label: CLIMATE_LABEL[c] })),
+  ];
+
   return (
     <div data-cy="filter-panel" className={styles.body}>
       {/* Colors */}
@@ -130,7 +126,7 @@ export function FilterPanel({
                   onClick={() => onColorToggle(color)}
                   className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
                 >
-                  <span className={styles.colorDot} style={{ background: COLOR_SWATCHES[color] }} />
+                  <span className={styles.colorDot} style={{ background: COLOR_HEX[color] }} />
                   <span className={styles.chipLabel}>{color}</span>
                 </button>
               );
@@ -158,6 +154,17 @@ export function FilterPanel({
           currentValue={currentFilter.type}
           onChange={onTypeChange}
           dataCy="type-chip"
+        />
+      )}
+
+      {/* Climate */}
+      {availableClimates.length > 0 && (
+        <FilterChipSection
+          title="Climate"
+          options={climateOptions}
+          currentValue={currentFilter.climate}
+          onChange={onClimateChange}
+          dataCy="climate-chip"
         />
       )}
 

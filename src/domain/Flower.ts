@@ -21,6 +21,15 @@ export type FlowerType = string; // Dynamic category — e.g. Rose, Peony, Tulip
 export type FragranceLevel = 'none' | 'light' | 'moderate' | 'strong';
 export type Toxicity = 'safe' | 'mild' | 'toxic';
 
+export const CLIMATES = [
+  'tropical',
+  'subtropical',
+  'mediterranean',
+  'temperate',
+  'alpine',
+] as const;
+export type Climate = (typeof CLIMATES)[number];
+
 export interface Flower {
   id: string;
   name: string;
@@ -39,6 +48,7 @@ export interface Flower {
   origin: string; // Country/region
   season: Season[]; // Spring, Summer, etc.
   availability: Availability;
+  climate: Climate; // Growing climate (tropical, mediterranean, etc.)
 
   // Inventory
   quantityOnHand: number;
@@ -62,6 +72,7 @@ export interface FlowerFilter {
   availability?: Availability;
   type?: FlowerType; // Filter by flower type (Rose, Peony, etc.)
   season?: Season; // Filter by season (Spring, Summer, etc.)
+  climate?: Climate; // Filter by growing climate
   fragranceLevel?: FragranceLevel; // Filter by fragrance level
   toxicity?: Toxicity; // Filter by toxicity (safety)
   stemLengthRange?: { min: number; max: number }; // Filter by stem length in cm

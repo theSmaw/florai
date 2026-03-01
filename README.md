@@ -26,7 +26,9 @@ If you are exploring or modifying features in `src/`, consult the relevant docum
 ## Quick Start
 
 - Install: `pnpm install` (or `npm install`/`yarn`)
-- Dev: `pnpm dev`
+- Dev: requires **two terminals** running simultaneously:
+  - Terminal 1 — UI: `pnpm dev`
+  - Terminal 2 — Mock API: `pnpm dev:api` (json-server on port 3001)
 - Build: `pnpm build`
 - Preview: `pnpm preview`
 [FlowerList.module.css](src/components/FlowerList.module.css)
@@ -52,6 +54,8 @@ Quick commands (replace <OWNER>/<REPO>):
 If you find documentation gaps, please update the relevant `.md` file and link it here to keep this index accurate.
 
 ## Images
+
+### Adding images manually
 
 - Where to put files: Place images under `public/images/flowers/` and reference them via the `imageUrl` field in `db.json` (e.g., `/images/flowers/<id>.jpg`).
 - Fallback: If an image fails to load or is missing, the UI falls back to `/images/placeholder.svg`.

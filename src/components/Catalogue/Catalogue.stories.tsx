@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 import { Catalogue } from './Catalogue';
 import type { CatalogueProps } from './Catalogue';
-import type { Flower, FlowerFilter } from '../../domain/Flower';
+import type { Climate, Flower, FlowerFilter } from '../../domain/Flower';
 
 const meta: Meta<typeof Catalogue> = {
   title: 'Components/Catalogue',
@@ -30,6 +30,7 @@ const MOCK_FLOWERS: Flower[] = [
     origin: 'Netherlands',
     season: ['Spring'],
     availability: 'seasonal',
+    climate: 'temperate',
     quantityOnHand: 45,
     stemLengthCm: 50,
     fragranceLevel: 'strong',
@@ -50,6 +51,7 @@ const MOCK_FLOWERS: Flower[] = [
     origin: 'Kenya',
     season: ['Year-round'],
     availability: 'always',
+    climate: 'subtropical',
     quantityOnHand: 120,
     stemLengthCm: 60,
     fragranceLevel: 'light',
@@ -70,6 +72,7 @@ const MOCK_FLOWERS: Flower[] = [
     origin: 'Netherlands',
     season: ['Summer'],
     availability: 'seasonal',
+    climate: 'temperate',
     quantityOnHand: 30,
     stemLengthCm: 40,
     fragranceLevel: 'none',
@@ -82,6 +85,7 @@ const MOCK_FLOWERS: Flower[] = [
 ];
 
 const EMPTY_FILTER: FlowerFilter = { colors: [] };
+const AVAILABLE_CLIMATES: Climate[] = ['temperate', 'subtropical'];
 
 const GROUPED_ALL: Record<string, Flower[]> = { 'All Flowers': MOCK_FLOWERS };
 
@@ -96,6 +100,7 @@ function defaultProps(overrides?: Partial<CatalogueProps>): CatalogueProps {
     availableColors: ['pink', 'red', 'white'],
     availableSeasons: ['Spring', 'Summer', 'Year-round'],
     availableTypes: ['Peony', 'Rose', 'Hydrangea'],
+    availableClimates: AVAILABLE_CLIMATES,
     stemLengthBounds: { min: 40, max: 60 },
     vaseLifeBounds: { min: 7, max: 10 },
     onSearchChange: NO_OP,
@@ -103,6 +108,7 @@ function defaultProps(overrides?: Partial<CatalogueProps>): CatalogueProps {
     onAvailabilityChange: NO_OP,
     onSeasonChange: NO_OP,
     onTypeChange: NO_OP,
+    onClimateChange: NO_OP,
     onFragranceLevelChange: NO_OP,
     onToxicityChange: NO_OP,
     onStemLengthChange: NO_OP,
