@@ -28,7 +28,15 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
+import { AVAILABILITY_LABEL, CLIMATE_LABEL, FRAGRANCE_LABEL, TOXICITY_LABEL } from '../../domain/flowerDisplayMeta';
 import { Catalogue } from '../../components/Catalogue/Catalogue';
+
+type Pill = { label: string; onClear: () => void };
+
+/** Returns a single-item pill array when value is present, otherwise empty. */
+function pill<T>(value: T | undefined, label: (v: T) => string, onClear: () => void): Pill[] {
+  return value !== undefined ? [{ label: label(value), onClear }] : [];
+}
 
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
@@ -154,6 +162,19 @@ export function CatalogueContainer() {
 
   const handleAddFlowerClick = () => {};
 
+  const filterPills: Pill[] = [
+    ...currentFilter.colors.map((c) => ({ label: c, onClear: () => handleColorToggle(c) })),
+    ...pill(currentFilter.season, (s) => s, () => handleSeasonChange(undefined)),
+    ...pill(currentFilter.type, (t) => t, () => handleTypeChange(undefined)),
+    ...pill(currentFilter.climate, (c) => CLIMATE_LABEL[c], () => handleClimateChange(undefined)),
+    ...pill(currentFilter.availability, (a) => AVAILABILITY_LABEL[a], () => handleAvailabilityChange(undefined)),
+    ...pill(currentFilter.fragranceLevel, (f) => FRAGRANCE_LABEL[f], () => handleFragranceLevelChange(undefined)),
+    ...pill(currentFilter.toxicity, (t) => TOXICITY_LABEL[t], () => handleToxicityChange(undefined)),
+    ...pill(currentFilter.stemLengthRange, (r) => `${r.min}–${r.max} cm`, () => handleStemLengthChange(stemLengthBounds.min, stemLengthBounds.max)),
+    ...pill(currentFilter.vaseLifeRange, (r) => `${r.min}–${r.max} days`, () => handleVaseLifeChange(vaseLifeBounds.min, vaseLifeBounds.max)),
+    ...pill(currentFilter.searchTerm, (s) => `"${s}"`, () => handleSearchChange('')),
+  ];
+
   return (
     <Catalogue
       flowers={filteredFlowers}
@@ -179,6 +200,7 @@ export function CatalogueContainer() {
       onGroupByChange={handleGroupByChange}
       onCardClick={handleCardClick}
       onAddFlowerClick={handleAddFlowerClick}
+      filterPills={filterPills}
     />
   );
 }

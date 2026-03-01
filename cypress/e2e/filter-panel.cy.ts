@@ -83,7 +83,7 @@ describe('Filter panel', () => {
     cy.get('[data-cy="apply-filters-button"]').click();
     // Peony (strong) and Lavender (strong)
     cy.get('[data-cy="flower-card"]').should('have.length', 2);
-    cy.get('[data-cy="filter-pill"]').should('contain.text', 'strong');
+    cy.get('[data-cy="filter-pill"]').should('contain.text', 'Strong');
   });
 
   it('filters fragrance to "none" shows flowers with no fragrance', () => {
@@ -101,7 +101,7 @@ describe('Filter panel', () => {
     // Only Calla Lily is toxic
     cy.get('[data-cy="flower-card"]').should('have.length', 1);
     cy.get('[data-cy="flower-card-name"]').should('contain.text', 'Calla Lily');
-    cy.get('[data-cy="filter-pill"]').should('contain.text', 'toxic');
+    cy.get('[data-cy="filter-pill"]').should('contain.text', 'Toxic');
   });
 
   it('filters toxicity to "safe" shows safe flowers', () => {
@@ -166,7 +166,7 @@ describe('Filter panel', () => {
     cy.get('[data-cy="apply-filters-button"]').click();
     // Peony (temperate) and Sunflower (temperate)
     cy.get('[data-cy="flower-card"]').should('have.length', 2);
-    cy.get('[data-cy="filter-pill"]').should('contain.text', 'temperate');
+    cy.get('[data-cy="filter-pill"]').should('contain.text', 'Temperate');
   });
 
   it('filters by subtropical climate', () => {
@@ -205,5 +205,15 @@ describe('Filter panel', () => {
     // Peony is temperate AND Spring; Sunflower is temperate but Summer
     cy.get('[data-cy="flower-card"]').should('have.length', 1);
     cy.get('[data-cy="flower-card-name"]').should('contain.text', 'Peony');
+  });
+
+  it('deselects a chip in the filter panel by clicking it again', () => {
+    cy.get('[data-cy="filter-toggle-button"]').click();
+    cy.get('[data-cy="season-chip"][data-cy-value="Spring"]').click();
+    // Click again to deselect
+    cy.get('[data-cy="season-chip"][data-cy-value="Spring"]').click();
+    cy.get('[data-cy="apply-filters-button"]').click();
+    cy.get('[data-cy="flower-card"]').should('have.length', 6);
+    cy.get('[data-cy="filter-pill"]').should('not.exist');
   });
 });

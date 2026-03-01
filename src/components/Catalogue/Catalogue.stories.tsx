@@ -116,6 +116,7 @@ function defaultProps(overrides?: Partial<CatalogueProps>): CatalogueProps {
     onGroupByChange: NO_OP,
     onCardClick: NO_OP,
     onAddFlowerClick: NO_OP,
+    filterPills: [],
     ...overrides,
   };
 }
@@ -158,12 +159,20 @@ export const WithActiveFilters: Story = {
     const filtered = MOCK_FLOWERS.filter(
       (f) => f.colors.includes('pink') && f.season.includes('Spring'),
     );
+    const clearColor = (color: (typeof filter.colors)[number]) =>
+      setFilter((f) => ({ ...f, colors: f.colors.filter((c) => c !== color) }));
+    const clearSeason = () => setFilter((f) => { const { season: _, ...rest } = f; return rest; });
+    const pills = [
+      ...filter.colors.map((c) => ({ label: c, onClear: () => clearColor(c) })),
+      ...(filter.season ? [{ label: filter.season, onClear: clearSeason }] : []),
+    ];
     return (
       <Catalogue
         {...defaultProps({
           flowers: filtered,
           groupedFlowers: { 'All Flowers': filtered },
           currentFilter: filter,
+          filterPills: pills,
           onColorToggle: (color) => {
             setFilter((f) => ({
               ...f,
@@ -172,6 +181,7 @@ export const WithActiveFilters: Story = {
                 : [...f.colors, color],
             }));
           },
+          onSeasonChange: clearSeason,
         })}
       />
     );

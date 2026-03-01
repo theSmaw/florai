@@ -11,6 +11,7 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
+import { Cross2Icon } from '@radix-ui/react-icons';
 import { CLIMATE_LABEL, COLOR_HEX } from '../../domain/flowerDisplayMeta';
 import { FilterChipSection } from '../FilterChipSection/FilterChipSection';
 import { FilterRangeSection } from '../FilterRangeSection/FilterRangeSection';
@@ -128,6 +129,9 @@ export function FilterPanel({
                 >
                   <span className={styles.colorDot} style={{ background: COLOR_HEX[color] }} />
                   <span className={styles.chipLabel}>{color}</span>
+                  {selected && (
+                    <Cross2Icon className={styles.chipIcon} width={10} height={10} aria-hidden="true" />
+                  )}
                 </button>
               );
             })}
