@@ -4,9 +4,9 @@
 import { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import {
+  Cross2Icon,
   MagnifyingGlassIcon,
   MixerVerticalIcon,
-  Cross2Icon,
   PlusIcon,
 } from '@radix-ui/react-icons';
 import type {
@@ -49,6 +49,7 @@ export interface CatalogueProps {
   onGroupByChange: (groupBy?: GroupBy) => void;
   onCardClick: (flowerId: string) => void;
   onAddFlowerClick: () => void;
+  filterPills: Array<{ label: string; onClear: () => void }>;
 }
 
 export function Catalogue({
@@ -75,20 +76,11 @@ export function Catalogue({
   onGroupByChange,
   onCardClick,
   onAddFlowerClick,
+  filterPills,
 }: CatalogueProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const hasActiveFilters =
-    currentFilter.colors.length > 0 ||
-    !!currentFilter.availability ||
-    !!currentFilter.type ||
-    !!currentFilter.season ||
-    !!currentFilter.climate ||
-    !!currentFilter.fragranceLevel ||
-    !!currentFilter.toxicity ||
-    !!currentFilter.stemLengthRange ||
-    !!currentFilter.vaseLifeRange ||
-    !!currentFilter.searchTerm;
+  const hasActiveFilters = filterPills.length > 0;
 
   return (
     <div className={styles.root}>
@@ -168,26 +160,17 @@ export function Catalogue({
         {/* Active filter pills */}
         {hasActiveFilters && (
           <div data-cy="active-filters" className={styles.activeFilters}>
-            {[
-              ...currentFilter.colors,
-              currentFilter.season,
-              currentFilter.type,
-              currentFilter.climate,
-              currentFilter.availability,
-              currentFilter.fragranceLevel,
-              currentFilter.toxicity,
-              currentFilter.stemLengthRange &&
-                `${currentFilter.stemLengthRange.min}–${currentFilter.stemLengthRange.max} cm`,
-              currentFilter.vaseLifeRange &&
-                `${currentFilter.vaseLifeRange.min}–${currentFilter.vaseLifeRange.max} days`,
-              currentFilter.searchTerm,
-            ]
-              .filter((v): v is string => Boolean(v))
-              .map((pill) => (
-                <div key={pill} data-cy="filter-pill" className={styles.pill}>
-                  {pill}
-                </div>
-              ))}
+            {filterPills.map((pill) => (
+              <button
+                key={pill.label}
+                data-cy="filter-pill"
+                onClick={pill.onClear}
+                className={styles.pill}
+              >
+                {pill.label}
+                <Cross2Icon width={10} height={10} aria-hidden="true" />
+              </button>
+            ))}
           </div>
         )}
       </header>

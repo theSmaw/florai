@@ -28,6 +28,7 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
+import { AVAILABILITY_LABEL, CLIMATE_LABEL, FRAGRANCE_LABEL, TOXICITY_LABEL } from '../../domain/flowerDisplayMeta';
 import { Catalogue } from '../../components/Catalogue/Catalogue';
 
 export function CatalogueContainer() {
@@ -154,6 +155,46 @@ export function CatalogueContainer() {
 
   const handleAddFlowerClick = () => {};
 
+  const filterPills: Array<{ label: string; onClear: () => void }> = [
+    ...currentFilter.colors.map((c) => ({
+      label: c,
+      onClear: () => handleColorToggle(c),
+    })),
+    ...(currentFilter.season
+      ? [{ label: currentFilter.season, onClear: () => handleSeasonChange(undefined) }]
+      : []),
+    ...(currentFilter.type
+      ? [{ label: currentFilter.type, onClear: () => handleTypeChange(undefined) }]
+      : []),
+    ...(currentFilter.climate
+      ? [{ label: CLIMATE_LABEL[currentFilter.climate], onClear: () => handleClimateChange(undefined) }]
+      : []),
+    ...(currentFilter.availability
+      ? [{ label: AVAILABILITY_LABEL[currentFilter.availability], onClear: () => handleAvailabilityChange(undefined) }]
+      : []),
+    ...(currentFilter.fragranceLevel
+      ? [{ label: FRAGRANCE_LABEL[currentFilter.fragranceLevel], onClear: () => handleFragranceLevelChange(undefined) }]
+      : []),
+    ...(currentFilter.toxicity
+      ? [{ label: TOXICITY_LABEL[currentFilter.toxicity], onClear: () => handleToxicityChange(undefined) }]
+      : []),
+    ...(currentFilter.stemLengthRange
+      ? [{
+          label: `${currentFilter.stemLengthRange.min}–${currentFilter.stemLengthRange.max} cm`,
+          onClear: () => handleStemLengthChange(stemLengthBounds.min, stemLengthBounds.max),
+        }]
+      : []),
+    ...(currentFilter.vaseLifeRange
+      ? [{
+          label: `${currentFilter.vaseLifeRange.min}–${currentFilter.vaseLifeRange.max} days`,
+          onClear: () => handleVaseLifeChange(vaseLifeBounds.min, vaseLifeBounds.max),
+        }]
+      : []),
+    ...(currentFilter.searchTerm
+      ? [{ label: `"${currentFilter.searchTerm}"`, onClear: () => handleSearchChange('') }]
+      : []),
+  ];
+
   return (
     <Catalogue
       flowers={filteredFlowers}
@@ -179,6 +220,7 @@ export function CatalogueContainer() {
       onGroupByChange={handleGroupByChange}
       onCardClick={handleCardClick}
       onAddFlowerClick={handleAddFlowerClick}
+      filterPills={filterPills}
     />
   );
 }

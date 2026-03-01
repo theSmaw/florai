@@ -68,6 +68,11 @@
   text-transform: capitalize;
 }
 
+.chipIcon {
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
 /* Color dot inside chip */
 .colorDot {
   width: 10px;

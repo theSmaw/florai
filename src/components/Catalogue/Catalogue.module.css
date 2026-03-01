@@ -125,13 +125,23 @@
 
 .pill {
   flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: transparent;
   color: var(--color-text-muted);
   border: 1px solid var(--color-text-muted);
-  padding: 0.375rem 1rem;
+  padding: 0.375rem 0.625rem 0.375rem 0.875rem;
   border-radius: var(--radius-xs);
   font-size: 0.75rem;
   font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.pill:hover {
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
 }
 
 .fab {
