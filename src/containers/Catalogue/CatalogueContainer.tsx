@@ -31,6 +31,13 @@ import type {
 import { AVAILABILITY_LABEL, CLIMATE_LABEL, FRAGRANCE_LABEL, TOXICITY_LABEL } from '../../domain/flowerDisplayMeta';
 import { Catalogue } from '../../components/Catalogue/Catalogue';
 
+type Pill = { label: string; onClear: () => void };
+
+/** Returns a single-item pill array when value is present, otherwise empty. */
+function pill<T>(value: T | undefined, label: (v: T) => string, onClear: () => void): Pill[] {
+  return value !== undefined ? [{ label: label(value), onClear }] : [];
+}
+
 export function CatalogueContainer() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -155,44 +162,17 @@ export function CatalogueContainer() {
 
   const handleAddFlowerClick = () => {};
 
-  const filterPills: Array<{ label: string; onClear: () => void }> = [
-    ...currentFilter.colors.map((c) => ({
-      label: c,
-      onClear: () => handleColorToggle(c),
-    })),
-    ...(currentFilter.season
-      ? [{ label: currentFilter.season, onClear: () => handleSeasonChange(undefined) }]
-      : []),
-    ...(currentFilter.type
-      ? [{ label: currentFilter.type, onClear: () => handleTypeChange(undefined) }]
-      : []),
-    ...(currentFilter.climate
-      ? [{ label: CLIMATE_LABEL[currentFilter.climate], onClear: () => handleClimateChange(undefined) }]
-      : []),
-    ...(currentFilter.availability
-      ? [{ label: AVAILABILITY_LABEL[currentFilter.availability], onClear: () => handleAvailabilityChange(undefined) }]
-      : []),
-    ...(currentFilter.fragranceLevel
-      ? [{ label: FRAGRANCE_LABEL[currentFilter.fragranceLevel], onClear: () => handleFragranceLevelChange(undefined) }]
-      : []),
-    ...(currentFilter.toxicity
-      ? [{ label: TOXICITY_LABEL[currentFilter.toxicity], onClear: () => handleToxicityChange(undefined) }]
-      : []),
-    ...(currentFilter.stemLengthRange
-      ? [{
-          label: `${currentFilter.stemLengthRange.min}–${currentFilter.stemLengthRange.max} cm`,
-          onClear: () => handleStemLengthChange(stemLengthBounds.min, stemLengthBounds.max),
-        }]
-      : []),
-    ...(currentFilter.vaseLifeRange
-      ? [{
-          label: `${currentFilter.vaseLifeRange.min}–${currentFilter.vaseLifeRange.max} days`,
-          onClear: () => handleVaseLifeChange(vaseLifeBounds.min, vaseLifeBounds.max),
-        }]
-      : []),
-    ...(currentFilter.searchTerm
-      ? [{ label: `"${currentFilter.searchTerm}"`, onClear: () => handleSearchChange('') }]
-      : []),
+  const filterPills: Pill[] = [
+    ...currentFilter.colors.map((c) => ({ label: c, onClear: () => handleColorToggle(c) })),
+    ...pill(currentFilter.season, (s) => s, () => handleSeasonChange(undefined)),
+    ...pill(currentFilter.type, (t) => t, () => handleTypeChange(undefined)),
+    ...pill(currentFilter.climate, (c) => CLIMATE_LABEL[c], () => handleClimateChange(undefined)),
+    ...pill(currentFilter.availability, (a) => AVAILABILITY_LABEL[a], () => handleAvailabilityChange(undefined)),
+    ...pill(currentFilter.fragranceLevel, (f) => FRAGRANCE_LABEL[f], () => handleFragranceLevelChange(undefined)),
+    ...pill(currentFilter.toxicity, (t) => TOXICITY_LABEL[t], () => handleToxicityChange(undefined)),
+    ...pill(currentFilter.stemLengthRange, (r) => `${r.min}–${r.max} cm`, () => handleStemLengthChange(stemLengthBounds.min, stemLengthBounds.max)),
+    ...pill(currentFilter.vaseLifeRange, (r) => `${r.min}–${r.max} days`, () => handleVaseLifeChange(vaseLifeBounds.min, vaseLifeBounds.max)),
+    ...pill(currentFilter.searchTerm, (s) => `"${s}"`, () => handleSearchChange('')),
   ];
 
   return (
