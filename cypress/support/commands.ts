@@ -4,6 +4,7 @@ declare global {
       stubFlowers(): Chainable<void>;
       visitCatalogue(): Chainable<void>;
       visitFlowerDetail(flowerId: string): Chainable<void>;
+      visitWithFakeAuth(url: string): Chainable<void>;
       navigateTo(item: 'catalogue' | 'collection' | 'weddings'): Chainable<void>;
       fakeSignIn(): Chainable<void>;
       signUp(email: string, password: string): Chainable<void>;
@@ -65,32 +66,39 @@ Cypress.Commands.add('stubFlowers', () => {
 });
 
 /**
- * Sets a fake session in localStorage so RequireAuth passes in stub tests.
- * Also intercepts Supabase auth refresh calls to prevent network errors.
+ * Intercepts Supabase auth refresh calls to prevent network errors in stub tests.
+ * Does NOT set localStorage — use visitWithFakeAuth to visit a page with a fake session.
  */
 Cypress.Commands.add('fakeSignIn', () => {
-  // Intercept any auth token refresh so it never hits the network
   cy.intercept('POST', '**/auth/v1/token*', {
     body: FAKE_SESSION,
     statusCode: 200,
   }).as('authRefresh');
+});
 
-  cy.window().then((win) => {
-    win.localStorage.setItem(supabaseStorageKey(), JSON.stringify(FAKE_SESSION));
+/**
+ * Visits a URL with a fake session pre-loaded in localStorage so RequireAuth passes.
+ * Uses onBeforeLoad to set the session before page scripts run, ensuring the
+ * Supabase client reads the fake session on initialisation.
+ */
+Cypress.Commands.add('visitWithFakeAuth', (url: string) => {
+  cy.fakeSignIn();
+  cy.visit(url, {
+    onBeforeLoad(win) {
+      win.localStorage.setItem(supabaseStorageKey(), JSON.stringify(FAKE_SESSION));
+    },
   });
 });
 
 Cypress.Commands.add('visitCatalogue', () => {
-  cy.fakeSignIn();
-  cy.visit('/catalogue');
+  cy.visitWithFakeAuth('/catalogue');
   cy.wait('@getFlowers');
   cy.get('[data-cy="loading-indicator"]').should('not.exist');
   cy.get('[data-cy="flower-list"]').should('be.visible');
 });
 
 Cypress.Commands.add('visitFlowerDetail', (flowerId: string) => {
-  cy.fakeSignIn();
-  cy.visit(`/catalogue/${flowerId}`);
+  cy.visitWithFakeAuth(`/catalogue/${flowerId}`);
   cy.wait('@getFlowers');
   cy.get('[data-cy="flower-detail-view"]').should('be.visible');
 });

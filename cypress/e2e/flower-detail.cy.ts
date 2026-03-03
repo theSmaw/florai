@@ -119,7 +119,7 @@ describe('Flower detail page', () => {
         }));
         cy.intercept('GET', '**/rest/v1/flowers*', rows).as('getFlowersNoComplement');
       });
-      cy.visit('/catalogue/1');
+      cy.visitWithFakeAuth('/catalogue/1');
       cy.wait('@getFlowersNoComplement');
       cy.contains('Pairs Well With').should('not.exist');
     });

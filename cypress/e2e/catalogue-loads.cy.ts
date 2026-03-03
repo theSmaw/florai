@@ -38,7 +38,7 @@ describe('Catalogue loads', () => {
       }).as('getFlowersDelayed');
     });
 
-    cy.visit('/catalogue');
+    cy.visitWithFakeAuth('/catalogue');
     cy.get('[data-cy="loading-indicator"]').should('be.visible');
     cy.wait('@getFlowersDelayed');
     cy.get('[data-cy="loading-indicator"]').should('not.exist');
