@@ -6,6 +6,12 @@ const meta: Meta<typeof FlowerDetail> = {
   title: 'Components/FlowerDetail',
   component: FlowerDetail,
   tags: ['autodocs'],
+  args: {
+    isAuthenticated: false,
+    uploadingImage: false,
+    onBack: () => undefined,
+    onImageUpload: () => undefined,
+  },
 };
 
 export default meta;
@@ -53,6 +59,8 @@ const MOCK_COMPLEMENTARY: Flower[] = [
     climate: 'subtropical',
     quantityOnHand: 120,
     complementaryFlowerIds: [],
+    careInstructions: '',
+    notes: '',
   },
   {
     id: '3',
@@ -68,76 +76,85 @@ const MOCK_COMPLEMENTARY: Flower[] = [
     climate: 'temperate',
     quantityOnHand: 30,
     complementaryFlowerIds: [],
+    careInstructions: '',
+    notes: '',
   },
 ];
-
-const NO_OP = () => {};
 
 // ---------------------------------------------------------------------------
 // Stories
 // ---------------------------------------------------------------------------
 
 export const Default: Story = {
-  name: 'Full details',
-  render: () => (
-    <FlowerDetail
-      flower={MOCK_FLOWER}
-      complementaryFlowers={MOCK_COMPLEMENTARY}
-      onBack={NO_OP}
-    />
-  ),
+  name: 'Full details (signed out)',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: MOCK_COMPLEMENTARY,
+  },
+};
+
+export const Authenticated: Story = {
+  name: 'Full details (signed in — upload button visible)',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: MOCK_COMPLEMENTARY,
+    isAuthenticated: true,
+  },
+};
+
+export const UploadingImage: Story = {
+  name: 'Image uploading in progress',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: [],
+    isAuthenticated: true,
+    uploadingImage: true,
+  },
 };
 
 export const NoOptionalFields: Story = {
   name: 'Minimal (no optional fields)',
-  render: () => (
-    <FlowerDetail
-      flower={{
-        id: '4',
-        name: 'Simple Tulip',
-        colors: ['yellow'],
-        type: 'Tulip',
-        wholesalePrice: 1.5,
-        retailPrice: 3.0,
-        supplier: 'Spring Co.',
-        origin: 'Turkey',
-        season: ['Spring'],
-        availability: 'limited',
-        climate: 'mediterranean',
-        quantityOnHand: 20,
-        complementaryFlowerIds: [],
-      }}
-      complementaryFlowers={[]}
-      onBack={NO_OP}
-    />
-  ),
+  args: {
+    flower: {
+      id: '4',
+      name: 'Simple Tulip',
+      colors: ['yellow'],
+      type: 'Tulip',
+      wholesalePrice: 1.5,
+      retailPrice: 3.0,
+      supplier: 'Spring Co.',
+      origin: 'Turkey',
+      season: ['Spring'],
+      availability: 'limited',
+      climate: 'mediterranean',
+      quantityOnHand: 20,
+      complementaryFlowerIds: [],
+      careInstructions: '',
+      notes: '',
+    },
+    complementaryFlowers: [],
+  },
 };
 
 export const NoPairings: Story = {
   name: 'No complementary flowers',
-  render: () => (
-    <FlowerDetail
-      flower={MOCK_FLOWER}
-      complementaryFlowers={[]}
-      onBack={NO_OP}
-    />
-  ),
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: [],
+  },
 };
 
 export const ToxicFlower: Story = {
   name: 'Toxic flower',
-  render: () => (
-    <FlowerDetail
-      flower={{
-        ...MOCK_FLOWER,
-        name: 'Lily of the Valley',
-        toxicity: 'toxic',
-        availability: 'always',
-        climate: 'temperate',
-        fragranceLevel: 'moderate',
-      }}
-      complementaryFlowers={[]}
-      onBack={NO_OP}
-    />
-  ),
+  args: {
+    flower: {
+      ...MOCK_FLOWER,
+      name: 'Lily of the Valley',
+      toxicity: 'toxic',
+      availability: 'always',
+      climate: 'temperate',
+      fragranceLevel: 'moderate',
+    },
+    complementaryFlowers: [],
+  },
 };

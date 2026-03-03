@@ -37,3 +37,4 @@ storybook-static
 # Prisma local database
 *.db
 *.db-journal
+cypress.env.json

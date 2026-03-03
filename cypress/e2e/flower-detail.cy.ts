@@ -107,8 +107,17 @@ describe('Flower detail page', () => {
 
     it('does not show the Pairs Well With section when there are no complementary flowers', () => {
       cy.fixture('flowers.json').then((flowers) => {
-        flowers[0].complementaryFlowerIds = [];
-        cy.intercept('GET', '/api/flowers', flowers).as('getFlowersNoComplement');
+        const rows = flowers.map((f: Record<string, unknown>, i: number) => ({
+          ...Object.fromEntries(
+            Object.entries(f).map(([k, v]) => [
+              k.replace(/([A-Z])/g, '_$1').toLowerCase(),
+              v,
+            ]),
+          ),
+          ...(i === 0 ? { complementary_flower_ids: [] } : {}),
+          user_flower_overrides: [],
+        }));
+        cy.intercept('GET', '**/rest/v1/flowers*', rows).as('getFlowersNoComplement');
       });
       cy.visit('/catalogue/1');
       cy.wait('@getFlowersNoComplement');

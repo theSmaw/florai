@@ -18,16 +18,27 @@ describe('Catalogue loads', () => {
   });
 
   it('shows a loading indicator while fetching', () => {
-    // Cannot use cy.visitCatalogue() here — that command waits for the loading
-    // indicator to disappear, which would defeat the purpose of this test.
-    cy.intercept('GET', '/api/flowers', (req) => {
-      req.reply((res) => {
-        res.setDelay(500);
-        res.send({ fixture: 'flowers.json' });
-      });
-    }).as('getFlowersDelayed');
+    // Intercept with a delay to catch the loading state
+    cy.fixture('flowers.json').then((flowers) => {
+      const rows = flowers.map((f: Record<string, unknown>) => ({
+        ...Object.fromEntries(
+          Object.entries(f).map(([k, v]) => [
+            k.replace(/([A-Z])/g, '_$1').toLowerCase(),
+            v,
+          ]),
+        ),
+        user_flower_overrides: [],
+      }));
 
-    cy.visit('/#/catalogue');
+      cy.intercept('GET', '**/rest/v1/flowers*', (req) => {
+        req.reply((res) => {
+          res.setDelay(500);
+          res.send(rows);
+        });
+      }).as('getFlowersDelayed');
+    });
+
+    cy.visit('/catalogue');
     cy.get('[data-cy="loading-indicator"]').should('be.visible');
     cy.wait('@getFlowersDelayed');
     cy.get('[data-cy="loading-indicator"]').should('not.exist');

@@ -1,5 +1,8 @@
 import { defineConfig } from 'cypress';
 
+// Supabase credentials for isolation/auth tests are loaded from cypress.env.json
+// (gitignored). Copy cypress.env.json.example to cypress.env.json and fill in
+// the values from `supabase status` before running auth/isolation tests.
 export default defineConfig({
   e2e: {
     baseUrl: 'http://localhost:5173',

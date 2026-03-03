@@ -6,7 +6,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFlowersList, selectLoadFlowersStatus } from '../../stores/flowers/selectors';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
-import type { AppDispatch } from '../../stores/store';
+import { overrideFlowerImage } from '../../stores/flowers/asyncActions/overrideFlowerImage';
+import { selectIsAuthenticated } from '../../stores/auth/selectors';
+import type { AppDispatch, RootState } from '../../stores/store';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
 
 export function FlowerDetailContainer() {
@@ -16,6 +18,9 @@ export function FlowerDetailContainer() {
 
   const flowers = useSelector(selectFlowersList);
   const loadStatus = useSelector(selectLoadFlowersStatus);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const uploadingImage =
+    useSelector((state: RootState) => state.flowers.overrideImageStatus.status) === 'pending';
 
   // Ensure flowers are loaded if this page is visited directly via URL
   useEffect(() => {
@@ -33,6 +38,12 @@ export function FlowerDetailContainer() {
 
   const handleBack = () => navigate('/catalogue');
 
+  function handleImageUpload(file: File) {
+    if (flowerId) {
+      void dispatch(overrideFlowerImage({ flowerId, file }));
+    }
+  }
+
   if (!flower) {
     return null;
   }
@@ -41,7 +52,10 @@ export function FlowerDetailContainer() {
     <FlowerDetail
       flower={flower}
       complementaryFlowers={complementaryFlowers}
+      isAuthenticated={isAuthenticated}
+      uploadingImage={uploadingImage}
       onBack={handleBack}
+      onImageUpload={handleImageUpload}
     />
   );
 }
