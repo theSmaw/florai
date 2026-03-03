@@ -201,7 +201,7 @@
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 7,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Iconic David Austin garden rose, exceptional apricot-peach colouring",
       "complementaryFlowerIds": [
         "8",
@@ -231,7 +231,7 @@
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Hugely popular dusty blush-mauve rose, a wedding staple",
       "complementaryFlowerIds": [
         "7",
@@ -262,7 +262,7 @@
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 9,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Distinctive mauve-purple hue, moody and dramatic",
       "complementaryFlowerIds": [
         "15",
@@ -292,8 +292,8 @@
       "fragranceLevel": "moderate",
       "toxicity": "safe",
       "vaseLifeDays": 12,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
-      "notes": "Deepest darkest red, almost black \u2014 a true showstopper",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
+      "notes": "Deepest darkest red, almost black — a true showstopper",
       "complementaryFlowerIds": [
         "21",
         "25",
@@ -322,7 +322,7 @@
       "fragranceLevel": "none",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Classic large-headed white rose, perfect for bridal work",
       "complementaryFlowerIds": [
         "12",
@@ -352,7 +352,7 @@
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 12,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "One of the most reliable white roses, superb vase life",
       "complementaryFlowerIds": [
         "11",
@@ -381,13 +381,14 @@
       "fragranceLevel": "moderate",
       "toxicity": "safe",
       "vaseLifeDays": 8,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Warm peach-orange tones, coffee-coloured edges as it ages",
       "complementaryFlowerIds": [
         "17",
         "79",
         "95"
-      ]
+      ],
+      "imageUrl": "/images/flowers/13.png"
     },
     {
       "id": "14",
@@ -411,13 +412,14 @@
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 7,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Deeply fragrant pink with high-centred bud, bridal favourite",
       "complementaryFlowerIds": [
         "7",
         "22",
         "76"
-      ]
+      ],
+      "imageUrl": "/images/flowers/14.png"
     },
     {
       "id": "15",
@@ -440,13 +442,14 @@
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 8,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Rare lavender-lilac rose with intense perfume",
       "complementaryFlowerIds": [
         "9",
         "86",
         "69"
-      ]
+      ],
+      "imageUrl": "/images/flowers/15.png"
     },
     {
       "id": "16",
@@ -469,13 +472,14 @@
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Bright candy-pink, excellent stem length and longevity",
       "complementaryFlowerIds": [
         "7",
         "14",
         "92"
-      ]
+      ],
+      "imageUrl": "/images/flowers/16.png"
     },
     {
       "id": "17",
@@ -500,13 +504,14 @@
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 9,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Vibrant coral-orange, great for tropical and summer arrangements",
       "complementaryFlowerIds": [
         "13",
         "65",
         "95"
-      ]
+      ],
+      "imageUrl": "/images/flowers/17.png"
     },
     {
       "id": "18",
@@ -529,13 +534,14 @@
       "fragranceLevel": "moderate",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Cream with a warm blush flush, endlessly elegant",
       "complementaryFlowerIds": [
         "11",
         "12",
         "92"
-      ]
+      ],
+      "imageUrl": "/images/flowers/18.png"
     },
     {
       "id": "19",
@@ -559,13 +565,14 @@
       "fragranceLevel": "light",
       "toxicity": "safe",
       "vaseLifeDays": 10,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "White petals with delicate pink blush edges, very popular",
       "complementaryFlowerIds": [
         "73",
         "92",
         "70"
-      ]
+      ],
+      "imageUrl": "/images/flowers/19.png"
     },
     {
       "id": "20",
@@ -589,13 +596,14 @@
       "fragranceLevel": "strong",
       "toxicity": "safe",
       "vaseLifeDays": 7,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Full garden-rose form with dusky pink blooms",
       "complementaryFlowerIds": [
         "14",
         "22",
         "57"
-      ]
+      ],
+      "imageUrl": "/images/flowers/20.png"
     },
     {
       "id": "21",
@@ -618,13 +626,14 @@
       "fragranceLevel": "moderate",
       "toxicity": "safe",
       "vaseLifeDays": 12,
-      "careInstructions": "Trim stems at 45\u00b0 angle, remove lower leaves, change water daily",
+      "careInstructions": "Trim stems at 45° angle, remove lower leaves, change water daily",
       "notes": "Rich velvety red, superb stem length, one of Kenya's finest",
       "complementaryFlowerIds": [
         "10",
         "23",
         "92"
-      ]
+      ],
+      "imageUrl": "/images/flowers/21.png"
     },
     {
       "id": "22",
@@ -654,7 +663,8 @@
         "1",
         "7",
         "57"
-      ]
+      ],
+      "imageUrl": "/images/flowers/22.png"
     },
     {
       "id": "23",
@@ -683,7 +693,8 @@
         "21",
         "24",
         "92"
-      ]
+      ],
+      "imageUrl": "/images/flowers/23.png"
     },
     {
       "id": "24",
@@ -712,7 +723,8 @@
         "23",
         "10",
         "55"
-      ]
+      ],
+      "imageUrl": "/images/flowers/24.png"
     },
     {
       "id": "25",
@@ -742,7 +754,8 @@
         "22",
         "11",
         "73"
-      ]
+      ],
+      "imageUrl": "/images/flowers/25.png"
     },
     {
       "id": "26",
@@ -766,12 +779,13 @@
       "toxicity": "mild",
       "vaseLifeDays": 7,
       "careInstructions": "Keep upright in cool water, wrap in paper to straighten stems",
-      "notes": "Deep maroon-purple, almost black \u2014 the most dramatic tulip",
+      "notes": "Deep maroon-purple, almost black — the most dramatic tulip",
       "complementaryFlowerIds": [
         "31",
         "86",
         "93"
-      ]
+      ],
+      "imageUrl": "/images/flowers/26.png"
     },
     {
       "id": "27",
@@ -800,7 +814,8 @@
         "28",
         "67",
         "76"
-      ]
+      ],
+      "imageUrl": "/images/flowers/27.png"
     },
     {
       "id": "28",
@@ -830,7 +845,8 @@
         "27",
         "76",
         "57"
-      ]
+      ],
+      "imageUrl": "/images/flowers/28.png"
     },
     {
       "id": "29",
@@ -859,7 +875,8 @@
         "67",
         "73",
         "78"
-      ]
+      ],
+      "imageUrl": "/images/flowers/29.png"
     },
     {
       "id": "30",
@@ -888,7 +905,8 @@
         "68",
         "88",
         "81"
-      ]
+      ],
+      "imageUrl": "/images/flowers/30.png"
     },
     {
       "id": "31",
@@ -917,7 +935,8 @@
         "26",
         "69",
         "74"
-      ]
+      ],
+      "imageUrl": "/images/flowers/31.png"
     },
     {
       "id": "32",
@@ -946,7 +965,8 @@
         "79",
         "68",
         "65"
-      ]
+      ],
+      "imageUrl": "/images/flowers/32.png"
     },
     {
       "id": "33",
@@ -970,12 +990,13 @@
       "toxicity": "toxic",
       "vaseLifeDays": 10,
       "careInstructions": "Remove anthers to prevent pollen staining, change water every 2 days",
-      "notes": "The queen of white lilies \u2014 intensely fragrant, pure white blooms",
+      "notes": "The queen of white lilies — intensely fragrant, pure white blooms",
       "complementaryFlowerIds": [
         "56",
         "92",
         "70"
-      ]
+      ],
+      "imageUrl": "/images/flowers/33.png"
     },
     {
       "id": "34",
@@ -1005,7 +1026,8 @@
         "57",
         "76",
         "70"
-      ]
+      ],
+      "imageUrl": "/images/flowers/34.png"
     },
     {
       "id": "35",
@@ -1034,7 +1056,8 @@
         "79",
         "32",
         "65"
-      ]
+      ],
+      "imageUrl": "/images/flowers/35.png"
     },
     {
       "id": "36",
@@ -1064,7 +1087,8 @@
         "34",
         "80",
         "72"
-      ]
+      ],
+      "imageUrl": "/images/flowers/36.png"
     },
     {
       "id": "37",
@@ -1094,7 +1118,8 @@
         "30",
         "81",
         "65"
-      ]
+      ],
+      "imageUrl": "/images/flowers/37.png"
     },
     {
       "id": "38",
@@ -1123,11 +1148,12 @@
         "33",
         "92",
         "70"
-      ]
+      ],
+      "imageUrl": "/images/flowers/38.png"
     },
     {
       "id": "39",
-      "name": "Caf\u00e9 au Lait Dahlia",
+      "name": "Café au Lait Dahlia",
       "colors": [
         "white",
         "pink"
@@ -1149,12 +1175,13 @@
       "toxicity": "safe",
       "vaseLifeDays": 8,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
-      "notes": "The most-pinned dahlia on the internet \u2014 creamy caramel perfection",
+      "notes": "The most-pinned dahlia on the internet — creamy caramel perfection",
       "complementaryFlowerIds": [
         "45",
         "95",
         "80"
-      ]
+      ],
+      "imageUrl": "/images/flowers/39.png"
     },
     {
       "id": "40",
@@ -1179,12 +1206,13 @@
       "toxicity": "safe",
       "vaseLifeDays": 7,
       "careInstructions": "Cut stems at angle underwater, keep in cool water",
-      "notes": "Single red blooms with dark foliage \u2014 a classic garden dahlia",
+      "notes": "Single red blooms with dark foliage — a classic garden dahlia",
       "complementaryFlowerIds": [
         "41",
         "64",
         "84"
-      ]
+      ],
+      "imageUrl": "/images/flowers/40.png"
     },
     {
       "id": "41",
@@ -1214,7 +1242,8 @@
         "40",
         "84",
         "97"
-      ]
+      ],
+      "imageUrl": "/images/flowers/41.png"
     },
     {
       "id": "42",
@@ -1244,7 +1273,8 @@
         "44",
         "81",
         "65"
-      ]
+      ],
+      "imageUrl": "/images/flowers/42.png"
     },
     {
       "id": "43",
@@ -1275,7 +1305,8 @@
         "56",
         "92",
         "70"
-      ]
+      ],
+      "imageUrl": "/images/flowers/43.png"
     },
     {
       "id": "44",
@@ -1304,7 +1335,8 @@
         "42",
         "30",
         "68"
-      ]
+      ],
+      "imageUrl": "/images/flowers/44.png"
     },
     {
       "id": "45",
@@ -1335,7 +1367,8 @@
         "39",
         "95",
         "57"
-      ]
+      ],
+      "imageUrl": "/images/flowers/45.png"
     },
     {
       "id": "46",
@@ -1364,7 +1397,8 @@
         "70",
         "92",
         "96"
-      ]
+      ],
+      "imageUrl": "/images/flowers/46.png"
     },
     {
       "id": "47",
@@ -1393,7 +1427,8 @@
         "71",
         "86",
         "96"
-      ]
+      ],
+      "imageUrl": "/images/flowers/47.png"
     },
     {
       "id": "48",
@@ -1424,7 +1459,8 @@
         "72",
         "80",
         "95"
-      ]
+      ],
+      "imageUrl": "/images/flowers/48.png"
     },
     {
       "id": "49",
@@ -1449,12 +1485,13 @@
       "toxicity": "safe",
       "vaseLifeDays": 14,
       "careInstructions": "Mist daily, keep in indirect bright light, avoid cold drafts",
-      "notes": "One of the few naturally blue flowers \u2014 an extraordinary statement piece",
+      "notes": "One of the few naturally blue flowers — an extraordinary statement piece",
       "complementaryFlowerIds": [
         "85",
         "47",
         "96"
-      ]
+      ],
+      "imageUrl": "/images/flowers/49.png"
     },
     {
       "id": "50",
@@ -1478,12 +1515,13 @@
       "toxicity": "safe",
       "vaseLifeDays": 12,
       "careInstructions": "Mist daily, keep in indirect bright light, avoid cold drafts",
-      "notes": "The corsage orchid \u2014 large ruffled purple blooms with sweet scent",
+      "notes": "The corsage orchid — large ruffled purple blooms with sweet scent",
       "complementaryFlowerIds": [
         "47",
         "71",
         "86"
-      ]
+      ],
+      "imageUrl": "/images/flowers/50.png"
     },
     {
       "id": "51",
@@ -1514,7 +1552,8 @@
         "3",
         "85",
         "93"
-      ]
+      ],
+      "imageUrl": "/images/flowers/51.png"
     },
     {
       "id": "52",
@@ -1543,7 +1582,8 @@
         "1",
         "22",
         "80"
-      ]
+      ],
+      "imageUrl": "/images/flowers/52.png"
     },
     {
       "id": "53",
@@ -1572,7 +1612,8 @@
         "86",
         "93",
         "74"
-      ]
+      ],
+      "imageUrl": "/images/flowers/53.png"
     },
     {
       "id": "54",
@@ -1601,7 +1642,8 @@
         "57",
         "39",
         "95"
-      ]
+      ],
+      "imageUrl": "/images/flowers/54.png"
     },
     {
       "id": "55",
@@ -1630,7 +1672,8 @@
         "75",
         "64",
         "24"
-      ]
+      ],
+      "imageUrl": "/images/flowers/55.png"
     },
     {
       "id": "56",
@@ -1659,7 +1702,8 @@
         "73",
         "92",
         "70"
-      ]
+      ],
+      "imageUrl": "/images/flowers/56.png"
     },
     {
       "id": "57",
@@ -1683,12 +1727,13 @@
       "toxicity": "mild",
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, remove lower leaves, trim stems regularly",
-      "notes": "Delicate blush pink \u2014 the most popular ranunculus colour",
+      "notes": "Delicate blush pink — the most popular ranunculus colour",
       "complementaryFlowerIds": [
         "22",
         "76",
         "72"
-      ]
+      ],
+      "imageUrl": "/images/flowers/57.png"
     },
     {
       "id": "58",
@@ -1717,7 +1762,8 @@
         "92",
         "95",
         "80"
-      ]
+      ],
+      "imageUrl": "/images/flowers/58.png"
     },
     {
       "id": "59",
@@ -1746,7 +1792,8 @@
         "92",
         "64",
         "84"
-      ]
+      ],
+      "imageUrl": "/images/flowers/59.png"
     },
     {
       "id": "60",
@@ -1775,7 +1822,8 @@
         "92",
         "67",
         "70"
-      ]
+      ],
+      "imageUrl": "/images/flowers/60.png"
     },
     {
       "id": "61",
@@ -1804,7 +1852,8 @@
         "81",
         "68",
         "96"
-      ]
+      ],
+      "imageUrl": "/images/flowers/61.png"
     },
     {
       "id": "62",
@@ -1833,7 +1882,8 @@
         "92",
         "60",
         "96"
-      ]
+      ],
+      "imageUrl": "/images/flowers/62.png"
     },
     {
       "id": "63",
@@ -1862,7 +1912,8 @@
         "86",
         "96",
         "74"
-      ]
+      ],
+      "imageUrl": "/images/flowers/63.png"
     },
     {
       "id": "64",
@@ -1891,7 +1942,8 @@
         "92",
         "59",
         "84"
-      ]
+      ],
+      "imageUrl": "/images/flowers/64.png"
     },
     {
       "id": "65",
@@ -1920,7 +1972,8 @@
         "79",
         "98",
         "32"
-      ]
+      ],
+      "imageUrl": "/images/flowers/65.png"
     },
     {
       "id": "66",
@@ -1949,7 +2002,8 @@
         "80",
         "72",
         "92"
-      ]
+      ],
+      "imageUrl": "/images/flowers/66.png"
     },
     {
       "id": "67",
@@ -1973,12 +2027,13 @@
       "toxicity": "safe",
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they open progressively, trim daily",
-      "notes": "One of the most fragrant flowers available \u2014 pure white blooms",
+      "notes": "One of the most fragrant flowers available — pure white blooms",
       "complementaryFlowerIds": [
         "78",
         "60",
         "92"
-      ]
+      ],
+      "imageUrl": "/images/flowers/67.png"
     },
     {
       "id": "68",
@@ -2007,7 +2062,8 @@
         "30",
         "81",
         "61"
-      ]
+      ],
+      "imageUrl": "/images/flowers/68.png"
     },
     {
       "id": "69",
@@ -2036,7 +2092,8 @@
         "77",
         "74",
         "86"
-      ]
+      ],
+      "imageUrl": "/images/flowers/69.png"
     },
     {
       "id": "70",
@@ -2060,12 +2117,13 @@
       "toxicity": "safe",
       "vaseLifeDays": 14,
       "careInstructions": "Change water every 2 days, remove lower leaves, keep cool",
-      "notes": "Often mistaken for a rose or peony \u2014 exceptional vase life",
+      "notes": "Often mistaken for a rose or peony — exceptional vase life",
       "complementaryFlowerIds": [
         "56",
         "92",
         "67"
-      ]
+      ],
+      "imageUrl": "/images/flowers/70.png"
     },
     {
       "id": "71",
@@ -2094,7 +2152,8 @@
         "74",
         "86",
         "69"
-      ]
+      ],
+      "imageUrl": "/images/flowers/71.png"
     },
     {
       "id": "72",
@@ -2123,7 +2182,8 @@
         "57",
         "80",
         "76"
-      ]
+      ],
+      "imageUrl": "/images/flowers/72.png"
     },
     {
       "id": "73",
@@ -2148,12 +2208,13 @@
       "toxicity": "mild",
       "vaseLifeDays": 7,
       "careInstructions": "Keep in cool water, they drink heavily, refresh daily",
-      "notes": "White petals with a striking dark centre \u2014 graphic and modern",
+      "notes": "White petals with a striking dark centre — graphic and modern",
       "complementaryFlowerIds": [
         "56",
         "78",
         "95"
-      ]
+      ],
+      "imageUrl": "/images/flowers/73.png"
     },
     {
       "id": "74",
@@ -2183,7 +2244,8 @@
         "77",
         "71",
         "86"
-      ]
+      ],
+      "imageUrl": "/images/flowers/74.png"
     },
     {
       "id": "75",
@@ -2213,7 +2275,8 @@
         "55",
         "84",
         "64"
-      ]
+      ],
+      "imageUrl": "/images/flowers/75.png"
     },
     {
       "id": "76",
@@ -2242,7 +2305,8 @@
         "57",
         "72",
         "27"
-      ]
+      ],
+      "imageUrl": "/images/flowers/76.png"
     },
     {
       "id": "77",
@@ -2271,7 +2335,8 @@
         "74",
         "71",
         "69"
-      ]
+      ],
+      "imageUrl": "/images/flowers/77.png"
     },
     {
       "id": "78",
@@ -2300,7 +2365,8 @@
         "73",
         "70",
         "67"
-      ]
+      ],
+      "imageUrl": "/images/flowers/78.png"
     },
     {
       "id": "79",
@@ -2329,7 +2395,8 @@
         "35",
         "65",
         "98"
-      ]
+      ],
+      "imageUrl": "/images/flowers/79.png"
     },
     {
       "id": "80",
@@ -2358,7 +2425,8 @@
         "52",
         "72",
         "76"
-      ]
+      ],
+      "imageUrl": "/images/flowers/80.png"
     },
     {
       "id": "81",
@@ -2387,7 +2455,8 @@
         "42",
         "44",
         "68"
-      ]
+      ],
+      "imageUrl": "/images/flowers/81.png"
     },
     {
       "id": "82",
@@ -2417,7 +2486,8 @@
         "70",
         "92",
         "38"
-      ]
+      ],
+      "imageUrl": "/images/flowers/82.png"
     },
     {
       "id": "83",
@@ -2447,7 +2517,8 @@
         "72",
         "76",
         "57"
-      ]
+      ],
+      "imageUrl": "/images/flowers/83.png"
     },
     {
       "id": "84",
@@ -2477,7 +2548,8 @@
         "40",
         "64",
         "75"
-      ]
+      ],
+      "imageUrl": "/images/flowers/84.png"
     },
     {
       "id": "85",
@@ -2500,13 +2572,14 @@
       "fragranceLevel": "none",
       "toxicity": "toxic",
       "vaseLifeDays": 7,
-      "careInstructions": "Hollow stems \u2014 turn upside down, fill with water, plug with cotton wool",
+      "careInstructions": "Hollow stems — turn upside down, fill with water, plug with cotton wool",
       "notes": "True blue spires up to 90 cm tall, a garden wedding essential",
       "complementaryFlowerIds": [
         "51",
         "93",
         "49"
-      ]
+      ],
+      "imageUrl": "/images/flowers/85.png"
     },
     {
       "id": "86",
@@ -2529,13 +2602,14 @@
       "fragranceLevel": "none",
       "toxicity": "toxic",
       "vaseLifeDays": 7,
-      "careInstructions": "Hollow stems \u2014 turn upside down, fill with water, plug with cotton wool",
+      "careInstructions": "Hollow stems — turn upside down, fill with water, plug with cotton wool",
       "notes": "Rich violet-purple spires, magnificent for tall arrangements",
       "complementaryFlowerIds": [
         "26",
         "53",
         "93"
-      ]
+      ],
+      "imageUrl": "/images/flowers/86.png"
     },
     {
       "id": "87",
@@ -2564,7 +2638,8 @@
         "26",
         "85",
         "93"
-      ]
+      ],
+      "imageUrl": "/images/flowers/87.png"
     },
     {
       "id": "88",
@@ -2593,7 +2668,8 @@
         "30",
         "81",
         "68"
-      ]
+      ],
+      "imageUrl": "/images/flowers/88.png"
     },
     {
       "id": "89",
@@ -2619,12 +2695,13 @@
       "toxicity": "toxic",
       "vaseLifeDays": 5,
       "careInstructions": "Condition by submerging stems in cold water overnight before arranging",
-      "notes": "The Lenten rose \u2014 moody and beautiful in winter arrangements",
+      "notes": "The Lenten rose — moody and beautiful in winter arrangements",
       "complementaryFlowerIds": [
         "73",
         "95",
         "56"
-      ]
+      ],
+      "imageUrl": "/images/flowers/89.png"
     },
     {
       "id": "90",
@@ -2655,7 +2732,8 @@
         "66",
         "45",
         "83"
-      ]
+      ],
+      "imageUrl": "/images/flowers/90.png"
     },
     {
       "id": "91",
@@ -2686,7 +2764,8 @@
         "73",
         "55",
         "75"
-      ]
+      ],
+      "imageUrl": "/images/flowers/91.png"
     },
     {
       "id": "92",
@@ -2710,12 +2789,13 @@
       "toxicity": "safe",
       "vaseLifeDays": 12,
       "careInstructions": "Keep in clean water, minimal care needed",
-      "notes": "The ultimate filler flower \u2014 cloud-like masses of tiny white blooms",
+      "notes": "The ultimate filler flower — cloud-like masses of tiny white blooms",
       "complementaryFlowerIds": [
         "7",
         "11",
         "58"
-      ]
+      ],
+      "imageUrl": "/images/flowers/92.png"
     },
     {
       "id": "93",
@@ -2740,12 +2820,13 @@
       "toxicity": "safe",
       "vaseLifeDays": 14,
       "careInstructions": "Keep in cool water, stems may have faint onion scent when cut",
-      "notes": "Perfectly round purple globe on a tall slender stem \u2014 very architectural",
+      "notes": "Perfectly round purple globe on a tall slender stem — very architectural",
       "complementaryFlowerIds": [
         "87",
         "85",
         "26"
-      ]
+      ],
+      "imageUrl": "/images/flowers/93.png"
     },
     {
       "id": "94",
@@ -2770,12 +2851,13 @@
       "toxicity": "safe",
       "vaseLifeDays": 14,
       "careInstructions": "Keep in clean water, remove leaves below waterline",
-      "notes": "South Africa's national flower \u2014 a dramatic centrepiece bloom",
+      "notes": "South Africa's national flower — a dramatic centrepiece bloom",
       "complementaryFlowerIds": [
         "95",
         "96",
         "98"
-      ]
+      ],
+      "imageUrl": "/images/flowers/94.png"
     },
     {
       "id": "95",
@@ -2806,7 +2888,8 @@
         "94",
         "58",
         "73"
-      ]
+      ],
+      "imageUrl": "/images/flowers/95.png"
     },
     {
       "id": "96",
@@ -2835,7 +2918,8 @@
         "92",
         "94",
         "58"
-      ]
+      ],
+      "imageUrl": "/images/flowers/96.png"
     },
     {
       "id": "97",
@@ -2859,12 +2943,13 @@
       "toxicity": "mild",
       "vaseLifeDays": 21,
       "careInstructions": "Keep in clean water, avoid direct sunlight and cold draughts",
-      "notes": "Waxy heart-shaped spathe in lacquer red \u2014 tropical and long-lasting",
+      "notes": "Waxy heart-shaped spathe in lacquer red — tropical and long-lasting",
       "complementaryFlowerIds": [
         "98",
         "46",
         "94"
-      ]
+      ],
+      "imageUrl": "/images/flowers/97.png"
     },
     {
       "id": "98",
@@ -2894,7 +2979,8 @@
         "97",
         "94",
         "79"
-      ]
+      ],
+      "imageUrl": "/images/flowers/98.png"
     },
     {
       "id": "99",
@@ -2918,13 +3004,14 @@
       "fragranceLevel": "none",
       "toxicity": "toxic",
       "vaseLifeDays": 7,
-      "careInstructions": "Toxic \u2014 handle with care and wash hands after. Keep in fresh cool water",
-      "notes": "Towering cottage-garden spires with spotted bells \u2014 utterly dramatic",
+      "careInstructions": "Toxic — handle with care and wash hands after. Keep in fresh cool water",
+      "notes": "Towering cottage-garden spires with spotted bells — utterly dramatic",
       "complementaryFlowerIds": [
         "85",
         "93",
         "87"
-      ]
+      ],
+      "imageUrl": "/images/flowers/99.png"
     },
     {
       "id": "100",
@@ -2954,7 +3041,8 @@
         "26",
         "87",
         "93"
-      ]
+      ],
+      "imageUrl": "/images/flowers/100.png"
     }
   ]
 }
