@@ -31,12 +31,14 @@ export const signOut = createAsyncThunk('auth/signOut', async () => {
 
 interface AuthState {
   session: Session | null;
+  initialized: boolean; // true once the initial Supabase session check completes
   loading: boolean;
   error: string | null;
 }
 
 const initialState: AuthState = {
   session: null,
+  initialized: false,
   loading: false,
   error: null,
 };
@@ -47,6 +49,7 @@ export const authSlice = createSlice({
   reducers: {
     sessionChanged(state, action: PayloadAction<Session | null>) {
       state.session = action.payload;
+      state.initialized = true;
       state.error = null;
     },
   },
