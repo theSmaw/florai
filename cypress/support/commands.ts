@@ -15,14 +15,17 @@ declare global {
   }
 }
 
-// ── Supabase local storage key (deterministic from URL) ──────────────────────
-// For http://127.0.0.1:54321, hostname is '127.0.0.1' → sb-127-0-0-1-auth-token
+// ── Supabase local storage key ────────────────────────────────────────────────
+// Supabase JS v2 derives the key as: sb-{hostname.split('.')[0]}-auth-token
+// For http://127.0.0.1:54321 → sb-127-auth-token
+// For https://xyz.supabase.co → sb-xyz-auth-token
+// Source: SupabaseClient.ts line ~127
 const SUPABASE_URL = Cypress.env('SUPABASE_URL') as string | undefined ?? 'http://127.0.0.1:54321';
 const SERVICE_ROLE_KEY = Cypress.env('SUPABASE_SERVICE_ROLE_KEY') as string | undefined ?? '';
 
 function supabaseStorageKey(): string {
   const hostname = new URL(SUPABASE_URL).hostname;
-  return `sb-${hostname.replace(/\./g, '-')}-auth-token`;
+  return `sb-${hostname.split('.')[0]}-auth-token`;
 }
 
 // Minimal fake session that satisfies RequireAuth without a real Supabase auth call.
