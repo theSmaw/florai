@@ -30,11 +30,10 @@ describe('Catalogue loads', () => {
         user_flower_overrides: [],
       }));
 
-      cy.intercept('GET', '**/rest/v1/flowers*', (req) => {
-        req.reply((res) => {
-          res.setDelay(500);
-          res.send(rows);
-        });
+      cy.intercept('GET', '**/rest/v1/flowers*', {
+        statusCode: 200,
+        body: rows,
+        delay: 500,
       }).as('getFlowersDelayed');
     });
 
