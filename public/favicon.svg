@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Rounded square in brand emerald -->
+  <rect width="32" height="32" rx="7" fill="#10b981"/>
+  <!-- 6 petals arranged around centre -->
+  <g transform="translate(16,16)" fill="white">
+    <ellipse cx="0" cy="-7" rx="3" ry="5" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-7" rx="3" ry="5" transform="rotate(60)"/>
+    <ellipse cx="0" cy="-7" rx="3" ry="5" transform="rotate(120)"/>
+    <ellipse cx="0" cy="-7" rx="3" ry="5" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-7" rx="3" ry="5" transform="rotate(240)"/>
+    <ellipse cx="0" cy="-7" rx="3" ry="5" transform="rotate(300)"/>
+    <!-- Centre disc -->
+    <circle cx="0" cy="0" r="3.2" fill="white"/>
+    <circle cx="0" cy="0" r="1.8" fill="#059669"/>
+  </g>
+</svg>
