@@ -22,14 +22,17 @@ export function FlowerDetailContainer() {
   const uploadingImage =
     useSelector((state: RootState) => state.flowers.overrideImageStatus.status) === 'pending';
 
-  // Ensure flowers are loaded if this page is visited directly via URL
+  // Ensure flowers are loaded if this page is visited directly via URL.
+  // loadStatus.status is intentionally read at mount time only — including it
+  // in deps would abort the in-flight request when status changes to 'pending'.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (loadStatus.status === 'idle') {
       const promise = dispatch(loadFlowers());
       return () => promise.abort();
     }
     return undefined;
-  }, [dispatch, loadStatus.status]);
+  }, [dispatch]);
 
   const flower = flowers.find((f) => f.id === flowerId) ?? null;
   const complementaryFlowers = flower

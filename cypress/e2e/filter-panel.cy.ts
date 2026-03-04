@@ -115,7 +115,7 @@ describe('Filter panel', () => {
   it('filters by stem length min range slider', () => {
     cy.get('[data-cy="filter-toggle-button"]').click();
     // Set min stem length to 60 — only Rose (60), Sunflower (60), Calla Lily (70) qualify
-    cy.get('[data-cy="stem-length-min"]').invoke('val', 60).trigger('change');
+    cy.get('[data-cy="stem-length-min"]').setRangeValue(60);
     cy.get('[data-cy="apply-filters-button"]').click();
     cy.get('[data-cy="flower-card"]').should('have.length', 3);
     cy.get('[data-cy="filter-pill"]').should('contain.text', 'cm');
@@ -124,7 +124,7 @@ describe('Filter panel', () => {
   it('filters by vase life max range slider', () => {
     cy.get('[data-cy="filter-toggle-button"]').click();
     // Set max vase life to 7 — only Peony (7) and Calla Lily (7) qualify
-    cy.get('[data-cy="vase-life-max"]').invoke('val', 7).trigger('change');
+    cy.get('[data-cy="vase-life-max"]').setRangeValue(7);
     cy.get('[data-cy="apply-filters-button"]').click();
     cy.get('[data-cy="flower-card"]').should('have.length', 2);
     cy.get('[data-cy="filter-pill"]').should('contain.text', 'days');

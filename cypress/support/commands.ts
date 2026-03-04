@@ -11,6 +11,7 @@ declare global {
       signIn(email: string, password: string): Chainable<void>;
       signOut(): Chainable<void>;
       resetTestData(): Chainable<void>;
+      setRangeValue(value: number): Chainable<JQuery<HTMLInputElement>>;
     }
   }
 }
@@ -104,6 +105,19 @@ Cypress.Commands.add('visitFlowerDetail', (flowerId: string) => {
   cy.visitWithFakeAuth(`/catalogue/${flowerId}`);
   cy.wait('@getFlowers');
   cy.get('[data-cy="flower-detail-view"]').should('be.visible');
+});
+
+/**
+ * Sets the value of a range input in a way that triggers React's synthetic onChange.
+ * React 17+ maps onChange to the native `input` event; using the native input value
+ * setter ensures React detects the change (bypassing React's internal tracking).
+ */
+Cypress.Commands.add('setRangeValue', { prevSubject: 'element' }, (subject, value: number) => {
+  const el = subject[0] as HTMLInputElement;
+  const nativeSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value')?.set;
+  if (nativeSetter) nativeSetter.call(el, String(value));
+  el.dispatchEvent(new Event('input', { bubbles: true }));
+  return subject as unknown as Cypress.Chainable<JQuery<HTMLInputElement>>;
 });
 
 Cypress.Commands.add('navigateTo', (item: 'catalogue' | 'collection' | 'weddings') => {
