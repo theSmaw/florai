@@ -1,4 +1,4 @@
-name: Cypress E2E
+name: CI
 
 on:
   push:
@@ -6,19 +6,42 @@ on:
   pull_request:
 
 jobs:
-  cypress:
+  type-check:
+    name: TypeScript
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v4
         with:
           version: 10
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Type check
+        run: pnpm type-check
+
+  cypress:
+    name: Cypress (stub tests)
+    runs-on: ubuntu-latest
+    # Placeholder values — all Supabase network calls are intercepted by Cypress
+    env:
+      VITE_SUPABASE_URL: http://127.0.0.1:54321
+      VITE_SUPABASE_ANON_KEY: stub-anon-key-for-ci
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: pnpm
@@ -36,14 +59,14 @@ jobs:
       - name: Install Cypress binary
         run: pnpm cypress install
 
-      - name: Start dev server and API, run Cypress
+      - name: Start dev server and run stub tests
         uses: cypress-io/github-action@v6
         with:
           install: false
-          start: pnpm dev, pnpm dev:api
-          wait-on: 'http://localhost:5173, http://localhost:3001/flowers'
+          start: pnpm dev
+          wait-on: http://localhost:5173
           wait-on-timeout: 60
-          command: pnpm cypress:run
+          command: pnpm cypress:run:stub
 
       - name: Upload screenshots on failure
         if: failure()
@@ -51,10 +74,3 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-
-      - name: Upload videos on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: cypress-videos
-          path: cypress/videos

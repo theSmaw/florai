@@ -1,6 +1,7 @@
 // FlowerDetail — pure presentational component
 // Receives all data via props from FlowerDetailContainer.
-import { ChevronLeftIcon } from '@radix-ui/react-icons';
+import { useRef } from 'react';
+import { ChevronLeftIcon, UploadIcon } from '@radix-ui/react-icons';
 import type { Availability, Flower, Toxicity } from '../../domain/Flower';
 import {
   AVAILABILITY_LABEL,
@@ -37,16 +38,40 @@ function toxicityTagClass(toxicity: Toxicity): string {
 export interface FlowerDetailProps {
   flower: Flower;
   complementaryFlowers: Flower[];
+  uploadingImage: boolean;
+  uploadError: string | null;
   onBack: () => void;
+  onImageUpload: (file: File) => void;
 }
 
-export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDetailProps) {
+export function FlowerDetail({
+  flower,
+  complementaryFlowers,
+  uploadingImage,
+  uploadError,
+  onBack,
+  onImageUpload,
+}: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
     const img = e.currentTarget;
     const fallback = '/images/placeholder.svg';
     if (!img.src.endsWith(fallback)) img.src = fallback;
+  }
+
+  function handleUploadClick() {
+    fileInputRef.current?.click();
+  }
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (file) {
+      onImageUpload(file);
+      // Reset input so the same file can be picked again if needed
+      e.target.value = '';
+    }
   }
 
   return (
@@ -75,11 +100,34 @@ export function FlowerDetail({ flower, complementaryFlowers, onBack }: FlowerDet
         <section className={styles.imagePanel} aria-label="Flower image">
           <div className={styles.imageWrapper}>
             <img
+              data-cy="flower-image"
               src={flower.imageUrl ?? '/images/placeholder.svg'}
               alt={flower.name}
               className={styles.image}
               onError={handleImgError}
             />
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className={styles.hiddenInput}
+              onChange={handleFileChange}
+              aria-label="Upload flower image"
+            />
+            <button
+              data-cy="upload-image-button"
+              type="button"
+              className={styles.uploadButton}
+              onClick={handleUploadClick}
+              disabled={uploadingImage}
+              aria-label="Upload new flower image"
+            >
+              <UploadIcon width={14} height={14} aria-hidden="true" />
+              {uploadingImage ? 'Uploading…' : 'Replace image'}
+            </button>
+            {uploadError && (
+              <p data-cy="upload-error" className={styles.uploadError}>{uploadError}</p>
+            )}
           </div>
         </section>
 

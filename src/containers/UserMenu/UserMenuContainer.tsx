@@ -1,17 +1,27 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserMenu } from '../../components/UserMenu/UserMenu';
-import { loadUser } from '../../stores/user/asyncActions/loadUser';
-import type { AppDispatch, RootState } from '../../stores/store';
+import { signOut } from '../../stores/auth/slice';
+import { selectSession } from '../../stores/auth/selectors';
+import type { AppDispatch } from '../../stores/store';
 
 export function UserMenuContainer() {
   const dispatch = useDispatch<AppDispatch>();
-  const user = useSelector((state: RootState) => state.user.user);
+  const session = useSelector(selectSession);
 
-  useEffect(() => {
-    const promise = dispatch(loadUser());
-    return () => promise.abort();
-  }, [dispatch]);
+  const user = session
+    ? {
+        id: session.user.id,
+        name:
+          (session.user.user_metadata?.['name'] as string | undefined) ??
+          session.user.email ??
+          '',
+        email: session.user.email ?? '',
+      }
+    : null;
 
-  return <UserMenu user={user} />;
+  function handleSignOut() {
+    void dispatch(signOut());
+  }
+
+  return <UserMenu user={user} onSignOut={handleSignOut} />;
 }

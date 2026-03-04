@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Edit Flower Details - Florist Inventory</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#102210",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Work Sans', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(19, 236, 19, 0.2);
+            border-radius: 10px;
+        }
+        .ios-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-display overflow-hidden h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10 px-6 py-4 flex items-center justify-between sticky top-0 z-30">
+    <div class="flex items-center gap-4">
+        <button class="p-2 hover:bg-primary/10 rounded-full transition-colors">
+            <span class="material-icons text-slate-500 dark:text-slate-400">arrow_back_ios_new</span>
+        </button>
+        <h1 class="text-xl font-semibold tracking-tight">Edit Flower Details</h1>
+    </div>
+    <div class="flex items-center gap-3">
+        <button class="px-4 py-2 text-slate-500 font-medium hover:bg-primary/5 rounded-lg transition-colors">
+            Cancel
+        </button>
+        <button class="px-8 py-2 bg-primary text-background-dark font-bold rounded-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all">
+            Save
+        </button>
+    </div>
+</header>
+<main class="flex-1 flex overflow-hidden flex-col md:flex-row">
+    <!-- Left: Image Upload Area (Fixed on Desktop, Top on Mobile) -->
+    <section class="w-full md:w-1/2 p-6 flex flex-col items-center justify-center bg-white/50 dark:bg-black/20 border-r border-primary/5">
+        <div class="relative w-full aspect-[4/5] max-w-md group">
+            <img alt="Rose Flower Close-up" class="w-full h-full object-cover rounded-xl shadow-2xl ios-shadow" data-alt="Vibrant red rose with water droplets" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAf4KACXbeueybYVJuc7wEKd8IU_V57fSfiDz4o7YXqzJNmW5eVMBci47WhbToegtSn_kzZPKd6S0f6uAPGWi9ZG6TjyEP8nvXOyFyZiWlMGp-tpIs8n5lWGHvpgj-Zwmx6sXUn2lpUnYOHMJ0IMceK9oEPVDseRwbIzZvoBzBqcyNvBhbxqQHLUzQTdfy5pbaWsEK-AAegHXdvgkKS85IEsVIEqbh9UyN9Szn4AE4aMugiOcRYzk5bJzF44SwjajYaBk0eMMDKxik"/>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl flex items-center justify-center backdrop-blur-[2px]">
+                <div class="bg-white/20 p-4 rounded-full border border-white/30 backdrop-blur-md cursor-pointer hover:bg-white/40 transition-all">
+                    <span class="material-icons text-white text-4xl">photo_camera</span>
+                </div>
+            </div>
+            <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                <button class="px-4 py-2 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-full text-xs font-bold uppercase tracking-wider shadow-lg flex items-center gap-2">
+                    <span class="material-icons text-[14px]">edit</span> Change Photo
+                </button>
+                <button class="p-2 bg-red-500/90 text-white backdrop-blur-sm rounded-full shadow-lg hover:bg-red-600">
+                    <span class="material-icons text-[18px]">delete</span>
+                </button>
+            </div>
+        </div>
+        <p class="mt-4 text-xs text-slate-400 dark:text-slate-500 uppercase tracking-[0.15em] font-semibold">Image Preview: 1200 x 1500px</p>
+    </section>
+    <!-- Right: Scrollable Form -->
+    <section class="w-full md:w-1/2 bg-white dark:bg-background-dark p-6 md:p-10 overflow-y-auto custom-scrollbar">
+        <div class="max-w-xl mx-auto space-y-8 pb-20">
+            <!-- Section Title -->
+            <div>
+                <h2 class="text-sm font-bold text-primary uppercase tracking-widest mb-1">General Information</h2>
+                <div class="h-1 w-12 bg-primary rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 gap-6">
+                <!-- Flower Name -->
+                <div class="group">
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-2 group-focus-within:text-primary transition-colors">Flower Name</label>
+                    <input class="w-full bg-slate-50 dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-xl px-4 py-3 focus:ring-0 focus:border-primary focus:bg-white dark:focus:bg-slate-900 transition-all outline-none" placeholder="e.g. Red Rose" type="text" value="Deep Crimson Velvet Rose"/>
+                </div>
+                <!-- Scientific Name -->
+                <div class="group">
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-2 group-focus-within:text-primary transition-colors">Scientific Name</label>
+                    <input class="w-full bg-slate-50 dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-xl px-4 py-3 italic focus:ring-0 focus:border-primary focus:bg-white transition-all outline-none" placeholder="e.g. Rosa gallica" type="text" value="Rosa gallica 'Crimson'"/>
+                </div>
+                <!-- Price per Stem -->
+                <div class="group">
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-2 group-focus-within:text-primary transition-colors">Price per Stem</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                        <input class="w-full bg-slate-50 dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-xl pl-8 pr-4 py-3 focus:ring-0 focus:border-primary focus:bg-white transition-all outline-none font-medium" placeholder="0.00" step="0.01" type="number" value="4.50"/>
+                    </div>
+                </div>
+            </div>
+            <!-- Sourcing Notes -->
+            <div class="space-y-4">
+                <h2 class="text-sm font-bold text-primary uppercase tracking-widest mb-1">Logistics</h2>
+                <div class="h-1 w-12 bg-primary rounded-full"></div>
+                <div class="group">
+                    <label class="block text-xs font-bold text-slate-500 dark:text-slate-400 uppercase mb-2 group-focus-within:text-primary transition-colors">Sourcing Notes</label>
+                    <textarea class="w-full bg-slate-50 dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 rounded-xl px-4 py-3 focus:ring-0 focus:border-primary focus:bg-white transition-all outline-none resize-none" placeholder="Details about supplier, lead times, or origin..." rows="3">Supplied by Highland Florals. 48-hour lead time required for peak season. Cold chain maintenance critical during transit.</textarea>
+                </div>
+            </div>
+            <!-- Rich-Text Area: Care Instructions -->
+            <div class="space-y-4">
+                <h2 class="text-sm font-bold text-primary uppercase tracking-widest mb-1">Botanical Care</h2>
+                <div class="h-1 w-12 bg-primary rounded-full"></div>
+                <div class="group border-2 border-slate-100 dark:border-slate-800 rounded-xl overflow-hidden focus-within:border-primary transition-all">
+                    <div class="bg-slate-50 dark:bg-slate-900 px-4 py-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-1">
+                        <button class="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">
+                            <span class="material-icons text-sm">format_bold</span>
+                        </button>
+                        <button class="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">
+                            <span class="material-icons text-sm">format_italic</span>
+                        </button>
+                        <div class="w-px h-4 bg-slate-300 dark:bg-slate-700 mx-1"></div>
+                        <button class="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">
+                            <span class="material-icons text-sm">format_list_bulleted</span>
+                        </button>
+                        <button class="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300">
+                            <span class="material-icons text-sm">format_list_numbered</span>
+                        </button>
+                        <div class="w-px h-4 bg-slate-300 dark:bg-slate-700 mx-1"></div>
+                        <button class="p-1.5 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-600 dark:text-slate-300 ml-auto">
+                            <span class="material-icons text-sm">info_outline</span>
+                        </button>
+                    </div>
+                    <label class="hidden">Care Instructions</label>
+                    <textarea class="w-full bg-white dark:bg-slate-900 border-none px-4 py-4 focus:ring-0 transition-all outline-none resize-none leading-relaxed" placeholder="Detailed care instructions for customers..." rows="6">1. Trim stems at a 45-degree angle under lukewarm water.
+2. Remove any foliage that will sit below the water line to prevent bacterial growth.
+3. Change water every 48 hours and keep in a cool spot away from direct sunlight.</textarea>
+                </div>
+            </div>
+            <!-- Tags / Category -->
+            <div class="flex flex-wrap gap-2 pt-4">
+                <span class="px-3 py-1 bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest rounded-full">Inventory: High</span>
+                <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold uppercase tracking-widest rounded-full">Season: Spring/Summer</span>
+                <button class="px-3 py-1 border-2 border-dashed border-slate-200 dark:border-slate-800 text-slate-400 text-[10px] font-bold uppercase tracking-widest rounded-full hover:border-primary hover:text-primary transition-all">
+                    + Add Tag
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+<!-- Bottom Tablet Bar (Optional contextual actions) -->
+<footer class="md:hidden bg-white dark:bg-background-dark border-t border-slate-100 dark:border-slate-800 p-4 flex gap-3">
+    <button class="flex-1 py-3 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-bold rounded-xl active:scale-95 transition-all">
+        Discard
+    </button>
+    <button class="flex-[2] py-3 bg-primary text-background-dark font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all">
+        Update Catalog
+    </button>
+</footer>
+</body></html>

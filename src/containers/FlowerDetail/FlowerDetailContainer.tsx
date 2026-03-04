@@ -6,7 +6,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFlowersList, selectLoadFlowersStatus } from '../../stores/flowers/selectors';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
-import type { AppDispatch } from '../../stores/store';
+import { overrideFlowerImage } from '../../stores/flowers/asyncActions/overrideFlowerImage';
+import type { AppDispatch, RootState } from '../../stores/store';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
 
 export function FlowerDetailContainer() {
@@ -16,15 +17,24 @@ export function FlowerDetailContainer() {
 
   const flowers = useSelector(selectFlowersList);
   const loadStatus = useSelector(selectLoadFlowersStatus);
+  const uploadingImage =
+    useSelector((state: RootState) => state.flowers.overrideImageStatus.status) === 'pending';
+  const uploadError = useSelector((state: RootState) => {
+    const s = state.flowers.overrideImageStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
 
-  // Ensure flowers are loaded if this page is visited directly via URL
+  // Ensure flowers are loaded if this page is visited directly via URL.
+  // loadStatus.status is intentionally read at mount time only — including it
+  // in deps would abort the in-flight request when status changes to 'pending'.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (loadStatus.status === 'idle') {
       const promise = dispatch(loadFlowers());
       return () => promise.abort();
     }
     return undefined;
-  }, [dispatch, loadStatus.status]);
+  }, [dispatch]);
 
   const flower = flowers.find((f) => f.id === flowerId) ?? null;
   const complementaryFlowers = flower
@@ -32,6 +42,13 @@ export function FlowerDetailContainer() {
     : [];
 
   const handleBack = () => navigate('/catalogue');
+
+  function handleImageUpload(file: File) {
+    if (flowerId) {
+      // void discards the returned Promise — we track status via Redux state instead
+      void dispatch(overrideFlowerImage({ flowerId, file }));
+    }
+  }
 
   if (!flower) {
     return null;
@@ -41,7 +58,10 @@ export function FlowerDetailContainer() {
     <FlowerDetail
       flower={flower}
       complementaryFlowers={complementaryFlowers}
+      uploadingImage={uploadingImage}
+      uploadError={uploadError}
       onBack={handleBack}
+      onImageUpload={handleImageUpload}
     />
   );
 }

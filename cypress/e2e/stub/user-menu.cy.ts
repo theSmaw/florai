@@ -1,19 +1,12 @@
 describe('User Menu', () => {
   beforeEach(() => {
     cy.stubFlowers();
-    cy.stubUser();
     cy.visitCatalogue();
   });
 
   it('opens the user menu on trigger click', () => {
     cy.get('[data-cy="user-menu-trigger"]').click();
     cy.get('[data-cy="user-menu-profile"]').should('be.visible');
-  });
-
-  it('displays the user name and email from the API', () => {
-    cy.get('[data-cy="user-menu-trigger"]').click();
-    cy.contains('Demo Florist').should('be.visible');
-    cy.contains('demo@florai.com').should('be.visible');
   });
 
   it('shows a View Profile menu item', () => {
@@ -39,15 +32,11 @@ describe('User Menu', () => {
     cy.navigateTo('collection');
     cy.get('[data-cy="collection-view"]').should('be.visible');
     cy.get('[data-cy="user-menu-trigger"]').should('be.visible');
-    cy.get('[data-cy="user-menu-trigger"]').click();
-    cy.contains('Demo Florist').should('be.visible');
   });
 
   it('shows the user menu trigger on the Weddings page', () => {
     cy.navigateTo('weddings');
     cy.get('[data-cy="weddings-view"]').should('be.visible');
     cy.get('[data-cy="user-menu-trigger"]').should('be.visible');
-    cy.get('[data-cy="user-menu-trigger"]').click();
-    cy.contains('Demo Florist').should('be.visible');
   });
 });

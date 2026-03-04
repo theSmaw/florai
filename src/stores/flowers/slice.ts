@@ -1,6 +1,7 @@
 // Flowers slice using Redux Toolkit
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { loadFlowers } from './asyncActions/loadFlowers';
+import { overrideFlowerImage } from './asyncActions/overrideFlowerImage';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import type { AsyncAction } from '../AsyncAction';
 
@@ -12,6 +13,7 @@ const initialState = {
   } as FlowerFilter,
   selectedFlowerId: null as string | null,
   loadFlowersStatus: { status: 'idle' } as AsyncAction,
+  overrideImageStatus: { status: 'idle' } as AsyncAction,
 };
 
 export const flowersSlice = createSlice({
@@ -55,11 +57,35 @@ export const flowersSlice = createSlice({
           status: 'rejected',
           errorMessage: action.error.message ?? 'Failed to load flowers',
         };
+      })
+      // Override flower image
+      .addCase(overrideFlowerImage.pending, (state, action) => {
+        state.overrideImageStatus = { status: 'pending' };
+        // Optimistic update: create a temporary object URL for immediate feedback
+        const { flowerId } = action.meta.arg;
+        const flower = state.flowers.find((f) => f.id === flowerId);
+        if (flower) {
+          flower.imageUrl = URL.createObjectURL(action.meta.arg.file);
+        }
+      })
+      .addCase(overrideFlowerImage.fulfilled, (state, action) => {
+        state.overrideImageStatus = { status: 'fulfilled' };
+        // Replace temp blob URL with the real storage URL
+        const { flowerId } = action.meta.arg;
+        const flower = state.flowers.find((f) => f.id === flowerId);
+        if (flower) {
+          flower.imageUrl = action.payload;
+        }
+      })
+      .addCase(overrideFlowerImage.rejected, (state, action) => {
+        state.overrideImageStatus = {
+          status: 'rejected',
+          errorMessage: action.error.message ?? 'Failed to override image',
+        };
       });
   },
 });
 
-// Action creators are generated automatically
 export const {
   filterApplied,
   flowerSelected,
@@ -69,5 +95,4 @@ export const {
   flowerRemoved,
 } = flowersSlice.actions;
 
-// Reducer is exported as default
 export default flowersSlice.reducer;
