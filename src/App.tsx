@@ -12,7 +12,7 @@ import { CollectionView } from './views/Collection/CollectionView';
 import { WeddingsView } from './views/Weddings/WeddingsView';
 import { FlowerDetailView } from './views/FlowerDetail/FlowerDetailView';
 import { AuthView } from './views/Auth/AuthView';
-import { RequireAuth } from './components/RequireAuth/RequireAuth';
+import { RequireAuthContainer } from './containers/RequireAuth/RequireAuthContainer';
 
 const router = createBrowserRouter([
   {
@@ -27,33 +27,33 @@ const router = createBrowserRouter([
       {
         path: 'catalogue',
         element: (
-          <RequireAuth>
+          <RequireAuthContainer>
             <CatalogueView />
-          </RequireAuth>
+          </RequireAuthContainer>
         ),
       },
       {
         path: 'catalogue/:flowerId',
         element: (
-          <RequireAuth>
+          <RequireAuthContainer>
             <FlowerDetailView />
-          </RequireAuth>
+          </RequireAuthContainer>
         ),
       },
       {
         path: 'collection',
         element: (
-          <RequireAuth>
+          <RequireAuthContainer>
             <CollectionView />
-          </RequireAuth>
+          </RequireAuthContainer>
         ),
       },
       {
         path: 'weddings',
         element: (
-          <RequireAuth>
+          <RequireAuthContainer>
             <WeddingsView />
-          </RequireAuth>
+          </RequireAuthContainer>
         ),
       },
     ],

@@ -1,7 +1,10 @@
 import { supabase } from '../lib/supabase';
 import type { Flower } from '../domain/Flower';
 
-// Row shape returned by Supabase (snake_case DB columns)
+// Row shape returned by Supabase (snake_case DB columns).
+// user_flower_overrides is a nested one-to-many join — we only select
+// image_url, and there will be at most one row per flower per user (UNIQUE
+// constraint on user_id, flower_id).
 interface FlowerRow {
   id: string;
   name: string;
@@ -23,16 +26,19 @@ interface FlowerRow {
   care_instructions: string | null;
   notes: string | null;
   complementary_flower_ids: string[];
-  // Joined from user_flower_overrides via a nested select alias
+  // Nested select result: one row when the signed-in user has an override, empty otherwise
   user_flower_overrides: Array<{ image_url: string | null }>;
 }
 
+// Maps a raw DB row to the camelCase Flower domain type.
+// Per-user image override wins over the global flower image when present.
+// Optional fields (stem length, vase life, etc.) are omitted entirely when
+// null rather than being set to undefined, satisfying exactOptionalPropertyTypes.
 function rowToFlower(row: FlowerRow): Flower {
+  // Use the user's custom image if they've uploaded one, otherwise the global default
   const effectiveImageUrl =
     row.user_flower_overrides[0]?.image_url ?? row.image_url ?? null;
 
-  // Build the flower object without optional keys first, then spread conditionally
-  // to satisfy exactOptionalPropertyTypes (can't assign undefined to optional props)
   const flower: Flower = {
     id: row.id,
     name: row.name,
@@ -51,6 +57,7 @@ function rowToFlower(row: FlowerRow): Flower {
     complementaryFlowerIds: row.complementary_flower_ids,
   };
 
+  // Spread optional fields only when non-null (required by exactOptionalPropertyTypes)
   if (effectiveImageUrl !== null) flower.imageUrl = effectiveImageUrl;
   if (row.stem_length_cm !== null) flower.stemLengthCm = row.stem_length_cm;
   if (row.fragrance_level !== null)
@@ -61,6 +68,10 @@ function rowToFlower(row: FlowerRow): Flower {
   return flower;
 }
 
+// Fetches all flowers for the current user.
+// Uses a PostgREST nested select to join user_flower_overrides in a single
+// round-trip. RLS on user_flower_overrides ensures each user only sees their
+// own overrides — no extra filtering needed here.
 export async function fetchFlowers(_signal?: AbortSignal): Promise<Flower[]> {
   const { data, error } = await supabase
     .from('flowers')

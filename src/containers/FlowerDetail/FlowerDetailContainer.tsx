@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectFlowersList, selectLoadFlowersStatus } from '../../stores/flowers/selectors';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import { overrideFlowerImage } from '../../stores/flowers/asyncActions/overrideFlowerImage';
-import { selectIsAuthenticated } from '../../stores/auth/selectors';
 import type { AppDispatch, RootState } from '../../stores/store';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
 
@@ -18,9 +17,12 @@ export function FlowerDetailContainer() {
 
   const flowers = useSelector(selectFlowersList);
   const loadStatus = useSelector(selectLoadFlowersStatus);
-  const isAuthenticated = useSelector(selectIsAuthenticated);
   const uploadingImage =
     useSelector((state: RootState) => state.flowers.overrideImageStatus.status) === 'pending';
+  const uploadError = useSelector((state: RootState) => {
+    const s = state.flowers.overrideImageStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
 
   // Ensure flowers are loaded if this page is visited directly via URL.
   // loadStatus.status is intentionally read at mount time only — including it
@@ -43,6 +45,7 @@ export function FlowerDetailContainer() {
 
   function handleImageUpload(file: File) {
     if (flowerId) {
+      // void discards the returned Promise — we track status via Redux state instead
       void dispatch(overrideFlowerImage({ flowerId, file }));
     }
   }
@@ -55,8 +58,8 @@ export function FlowerDetailContainer() {
     <FlowerDetail
       flower={flower}
       complementaryFlowers={complementaryFlowers}
-      isAuthenticated={isAuthenticated}
       uploadingImage={uploadingImage}
+      uploadError={uploadError}
       onBack={handleBack}
       onImageUpload={handleImageUpload}
     />

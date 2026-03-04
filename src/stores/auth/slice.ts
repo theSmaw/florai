@@ -1,31 +1,10 @@
-import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { Session } from '@supabase/supabase-js';
-import { supabase } from '../../lib/supabase';
+import { signIn } from './asyncActions/signIn';
+import { signUp } from './asyncActions/signUp';
+import { signOut } from './asyncActions/signOut';
 
-// ── Thunks ────────────────────────────────────────────────────────────────────
-
-export const signIn = createAsyncThunk(
-  'auth/signIn',
-  async ({ email, password }: { email: string; password: string }) => {
-    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) throw new Error(error.message);
-    return data.session;
-  },
-);
-
-export const signUp = createAsyncThunk(
-  'auth/signUp',
-  async ({ email, password }: { email: string; password: string }) => {
-    const { data, error } = await supabase.auth.signUp({ email, password });
-    if (error) throw new Error(error.message);
-    return data.session;
-  },
-);
-
-export const signOut = createAsyncThunk('auth/signOut', async () => {
-  const { error } = await supabase.auth.signOut();
-  if (error) throw new Error(error.message);
-});
+export { signIn, signUp, signOut };
 
 // ── Slice ─────────────────────────────────────────────────────────────────────
 

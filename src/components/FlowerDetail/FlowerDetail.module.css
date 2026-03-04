@@ -140,6 +140,13 @@
   cursor: not-allowed;
 }
 
+.uploadError {
+  margin-top: 0.5rem;
+  font-size: var(--font-size-sm);
+  color: var(--color-danger, #dc2626);
+  text-align: center;
+}
+
 /* ─── Details Panel ───────────────────────────────────── */
 
 .detailsPanel {

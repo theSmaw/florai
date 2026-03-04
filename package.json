@@ -14,7 +14,7 @@
     "task:publish": "bash scripts/publish-branch.sh",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:run:stub": "cypress run --spec 'cypress/e2e/catalogue-loads.cy.ts,cypress/e2e/filter-panel.cy.ts,cypress/e2e/filter-pills.cy.ts,cypress/e2e/flower-card-click.cy.ts,cypress/e2e/flower-detail.cy.ts,cypress/e2e/navigation.cy.ts,cypress/e2e/search.cy.ts'",
+    "cypress:run:stub": "cypress run --spec 'cypress/e2e/stub/**'",
     "cypress:ci": "start-server-and-test 'pnpm dev' http://localhost:5173 'cypress:run'",
     "format": "prettier --write \"src/**/*.{ts,tsx,css}\" \"*.{js,ts,json}\"",
     "prepare": "husky"

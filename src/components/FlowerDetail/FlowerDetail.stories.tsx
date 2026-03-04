@@ -7,8 +7,8 @@ const meta: Meta<typeof FlowerDetail> = {
   component: FlowerDetail,
   tags: ['autodocs'],
   args: {
-    isAuthenticated: false,
     uploadingImage: false,
+    uploadError: null,
     onBack: () => undefined,
     onImageUpload: () => undefined,
   },
@@ -86,19 +86,10 @@ const MOCK_COMPLEMENTARY: Flower[] = [
 // ---------------------------------------------------------------------------
 
 export const Default: Story = {
-  name: 'Full details (signed out)',
+  name: 'Full details',
   args: {
     flower: MOCK_FLOWER,
     complementaryFlowers: MOCK_COMPLEMENTARY,
-  },
-};
-
-export const Authenticated: Story = {
-  name: 'Full details (signed in — upload button visible)',
-  args: {
-    flower: MOCK_FLOWER,
-    complementaryFlowers: MOCK_COMPLEMENTARY,
-    isAuthenticated: true,
   },
 };
 
@@ -107,8 +98,16 @@ export const UploadingImage: Story = {
   args: {
     flower: MOCK_FLOWER,
     complementaryFlowers: [],
-    isAuthenticated: true,
     uploadingImage: true,
+  },
+};
+
+export const UploadError: Story = {
+  name: 'Upload failed',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: [],
+    uploadError: 'Image upload failed: Storage quota exceeded',
   },
 };
 

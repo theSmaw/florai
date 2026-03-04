@@ -38,8 +38,8 @@ function toxicityTagClass(toxicity: Toxicity): string {
 export interface FlowerDetailProps {
   flower: Flower;
   complementaryFlowers: Flower[];
-  isAuthenticated: boolean;
   uploadingImage: boolean;
+  uploadError: string | null;
   onBack: () => void;
   onImageUpload: (file: File) => void;
 }
@@ -47,8 +47,8 @@ export interface FlowerDetailProps {
 export function FlowerDetail({
   flower,
   complementaryFlowers,
-  isAuthenticated,
   uploadingImage,
+  uploadError,
   onBack,
   onImageUpload,
 }: FlowerDetailProps) {
@@ -106,28 +106,27 @@ export function FlowerDetail({
               className={styles.image}
               onError={handleImgError}
             />
-            {isAuthenticated && (
-              <>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  className={styles.hiddenInput}
-                  onChange={handleFileChange}
-                  aria-label="Upload flower image"
-                />
-                <button
-                  data-cy="upload-image-button"
-                  type="button"
-                  className={styles.uploadButton}
-                  onClick={handleUploadClick}
-                  disabled={uploadingImage}
-                  aria-label="Upload new flower image"
-                >
-                  <UploadIcon width={14} height={14} aria-hidden="true" />
-                  {uploadingImage ? 'Uploading…' : 'Replace image'}
-                </button>
-              </>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className={styles.hiddenInput}
+              onChange={handleFileChange}
+              aria-label="Upload flower image"
+            />
+            <button
+              data-cy="upload-image-button"
+              type="button"
+              className={styles.uploadButton}
+              onClick={handleUploadClick}
+              disabled={uploadingImage}
+              aria-label="Upload new flower image"
+            >
+              <UploadIcon width={14} height={14} aria-hidden="true" />
+              {uploadingImage ? 'Uploading…' : 'Replace image'}
+            </button>
+            {uploadError && (
+              <p data-cy="upload-error" className={styles.uploadError}>{uploadError}</p>
             )}
           </div>
         </section>
