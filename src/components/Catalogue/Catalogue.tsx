@@ -21,6 +21,7 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
+import { FilterChip } from '../FilterChip/FilterChip';
 import { FlowerList } from '../FlowerList/FlowerList';
 import { FilterPanel } from '../FilterPanel/FilterPanel';
 import styles from './Catalogue.module.css';
@@ -161,15 +162,14 @@ export function Catalogue({
         {hasActiveFilters && (
           <div data-cy="active-filters" className={styles.activeFilters}>
             {filterPills.map((pill) => (
-              <button
+              <FilterChip
                 key={pill.label}
-                data-cy="filter-pill"
+                label={pill.label}
+                selected
+                showClearIcon
                 onClick={pill.onClear}
-                className={styles.pill}
-              >
-                {pill.label}
-                <Cross2Icon width={10} height={10} aria-hidden="true" />
-              </button>
+                dataCy="filter-pill"
+              />
             ))}
           </div>
         )}

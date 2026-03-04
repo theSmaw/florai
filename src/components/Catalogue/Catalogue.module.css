@@ -123,28 +123,6 @@
   padding-bottom: 0.25rem;
 }
 
-.pill {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
-  border-radius: var(--radius-sm);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  background: var(--color-brand);
-  border: 1.5px solid var(--color-brand);
-  color: var(--color-text-on-brand);
-  box-shadow: var(--shadow-brand);
-  cursor: pointer;
-  transition: var(--transition-fast);
-}
-
-.pill:hover {
-  background: var(--color-brand-dark);
-  border-color: var(--color-brand-dark);
-  color: var(--color-text-on-brand);
-}
 
 .fab {
   position: fixed;

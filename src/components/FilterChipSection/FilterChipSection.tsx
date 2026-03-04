@@ -1,5 +1,5 @@
 // FilterChipSection — generic single-select chip group (with optional "All" entry)
-import { Cross2Icon } from '@radix-ui/react-icons';
+import { FilterChip } from '../FilterChip/FilterChip';
 import styles from './FilterChipSection.module.css';
 
 export interface FilterChipSectionProps<T extends string> {
@@ -24,18 +24,15 @@ export function FilterChipSection<T extends string>({
         {options.map(({ value, label }) => {
           const selected = currentValue === value;
           return (
-            <button
+            <FilterChip
               key={label}
-              data-cy={dataCy}
-              data-cy-value={value ?? 'all'}
+              label={label}
+              selected={selected}
+              showClearIcon={selected && value !== undefined}
               onClick={() => onChange(selected ? undefined : value)}
-              className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
-            >
-              <span className={styles.chipLabel}>{label}</span>
-              {selected && value !== undefined && (
-                <Cross2Icon className={styles.chipIcon} width={10} height={10} aria-hidden="true" />
-              )}
-            </button>
+              dataCy={dataCy}
+              dataCyValue={value ?? 'all'}
+            />
           );
         })}
       </div>

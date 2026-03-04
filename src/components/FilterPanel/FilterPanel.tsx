@@ -11,8 +11,8 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
-import { Cross2Icon } from '@radix-ui/react-icons';
 import { CLIMATE_LABEL, COLOR_HEX } from '../../domain/flowerDisplayMeta';
+import { FilterChip } from '../FilterChip/FilterChip';
 import { FilterChipSection } from '../FilterChipSection/FilterChipSection';
 import { FilterRangeSection } from '../FilterRangeSection/FilterRangeSection';
 import styles from './FilterPanel.module.css';
@@ -120,19 +120,16 @@ export function FilterPanel({
             {availableColors.map((color) => {
               const selected = currentFilter.colors.includes(color);
               return (
-                <button
+                <FilterChip
                   key={color}
-                  data-cy="color-chip"
-                  data-cy-color={color}
+                  label={color}
+                  selected={selected}
+                  showClearIcon={selected}
+                  colorDot={COLOR_HEX[color]}
                   onClick={() => onColorToggle(color)}
-                  className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
-                >
-                  <span className={styles.colorDot} style={{ background: COLOR_HEX[color] }} />
-                  <span className={styles.chipLabel}>{color}</span>
-                  {selected && (
-                    <Cross2Icon className={styles.chipIcon} width={10} height={10} aria-hidden="true" />
-                  )}
-                </button>
+                  dataCy="color-chip"
+                  dataCyColor={color}
+                />
               );
             })}
           </div>
@@ -234,15 +231,14 @@ export function FilterPanel({
           {GROUPBY_OPTIONS.map(({ value, label }) => {
             const selected = (currentFilter.groupBy ?? 'none') === value;
             return (
-              <button
+              <FilterChip
                 key={value}
-                data-cy="groupby-chip"
-                data-cy-value={value}
+                label={label}
+                selected={selected}
                 onClick={() => onGroupByChange(value)}
-                className={`${styles.chip} ${selected ? styles.chipSelected : ''}`}
-              >
-                <span className={styles.chipLabel}>{label}</span>
-              </button>
+                dataCy="groupby-chip"
+                dataCyValue={value}
+              />
             );
           })}
         </div>
