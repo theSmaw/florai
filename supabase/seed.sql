@@ -1,4 +1,4 @@
--- Seed data: 100 flowers from db.json
+-- Seed data: 100 flowers
 INSERT INTO flowers (id, name, image_url, colors, type, wholesale_price, retail_price, supplier, origin, season, availability, climate, quantity_on_hand, stem_length_cm, fragrance_level, toxicity, vase_life_days, care_instructions, notes, complementary_flower_ids) VALUES
   ('1', 'Peony Sarah Bernhardt', '/images/flowers/peony.png', ARRAY['pink'], 'Peony', 4.5, 8.99, 'Holland Flowers', 'Netherlands', ARRAY['Spring'], 'seasonal', 'temperate', 45, 50, 'strong', 'safe', 7, 'Keep in cool water, change daily', 'Beautiful full bloom, long lasting', ARRAY['3','6']),
   ('2', 'Explorer Red Rose', '/images/flowers/explorer-red-rose.png', ARRAY['red'], 'Rose', 2.25, 4.99, 'Ecuador Flowers', 'Ecuador', ARRAY['Year-round'], 'always', 'subtropical', 120, 60, 'light', 'safe', 10, 'Remove lower leaves, fresh water daily', 'Deep red color, excellent longevity', ARRAY['1','4']),
