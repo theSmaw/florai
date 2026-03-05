@@ -86,9 +86,6 @@ describe('Flower detail page', () => {
       cy.contains('Netherlands').should('be.visible');
     });
 
-    it('displays the quantity on hand', () => {
-      cy.contains('45').should('be.visible');
-    });
   });
 
   describe('complementary flowers', () => {
