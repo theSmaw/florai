@@ -27,7 +27,11 @@ interface FlowerRow {
   notes: string | null;
   complementary_flower_ids: string[];
   // Nested select result: one row when the signed-in user has an override, empty otherwise
-  user_flower_overrides: Array<{ image_url: string | null }>;
+  user_flower_overrides: Array<{
+    image_url: string | null;
+    wholesale_price: number | null;
+    retail_price: number | null;
+  }>;
 }
 
 // Maps a raw DB row to the camelCase Flower domain type.
@@ -36,16 +40,18 @@ interface FlowerRow {
 // null rather than being set to undefined, satisfying exactOptionalPropertyTypes.
 function rowToFlower(row: FlowerRow): Flower {
   // Use the user's custom image if they've uploaded one, otherwise the global default
-  const effectiveImageUrl =
-    row.user_flower_overrides[0]?.image_url ?? row.image_url ?? null;
+  const override = row.user_flower_overrides[0];
+  const effectiveImageUrl = override?.image_url ?? row.image_url ?? null;
+  const effectiveWholesalePrice = override?.wholesale_price ?? row.wholesale_price;
+  const effectiveRetailPrice = override?.retail_price ?? row.retail_price;
 
   const flower: Flower = {
     id: row.id,
     name: row.name,
     colors: row.colors as Flower['colors'],
     type: row.type,
-    wholesalePrice: row.wholesale_price,
-    retailPrice: row.retail_price,
+    wholesalePrice: effectiveWholesalePrice,
+    retailPrice: effectiveRetailPrice,
     supplier: row.supplier ?? '',
     origin: row.origin ?? '',
     season: row.season as Flower['season'],
@@ -75,7 +81,7 @@ function rowToFlower(row: FlowerRow): Flower {
 export async function fetchFlowers(_signal?: AbortSignal): Promise<Flower[]> {
   const { data, error } = await supabase
     .from('flowers')
-    .select('*, user_flower_overrides(image_url)')
+    .select('*, user_flower_overrides(image_url, wholesale_price, retail_price)')
     .order('name');
 
   if (error) {

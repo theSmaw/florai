@@ -2,6 +2,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { loadFlowers } from './asyncActions/loadFlowers';
 import { overrideFlowerImage } from './asyncActions/overrideFlowerImage';
+import { updateFlowerPrices } from './asyncActions/updateFlowerPrices';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import type { AsyncAction } from '../AsyncAction';
 
@@ -14,6 +15,7 @@ const initialState = {
   selectedFlowerId: null as string | null,
   loadFlowersStatus: { status: 'idle' } as AsyncAction,
   overrideImageStatus: { status: 'idle' } as AsyncAction,
+  updatePricesStatus: { status: 'idle' } as AsyncAction,
 };
 
 export const flowersSlice = createSlice({
@@ -81,6 +83,25 @@ export const flowersSlice = createSlice({
         state.overrideImageStatus = {
           status: 'rejected',
           errorMessage: action.error.message ?? 'Failed to override image',
+        };
+      })
+      // Update flower prices
+      .addCase(updateFlowerPrices.pending, (state) => {
+        state.updatePricesStatus = { status: 'pending' };
+      })
+      .addCase(updateFlowerPrices.fulfilled, (state, action) => {
+        state.updatePricesStatus = { status: 'fulfilled' };
+        const { flowerId, wholesalePrice, retailPrice } = action.payload;
+        const flower = state.flowers.find((f) => f.id === flowerId);
+        if (flower) {
+          flower.wholesalePrice = wholesalePrice;
+          flower.retailPrice = retailPrice;
+        }
+      })
+      .addCase(updateFlowerPrices.rejected, (state, action) => {
+        state.updatePricesStatus = {
+          status: 'rejected',
+          errorMessage: action.error.message ?? 'Failed to update prices',
         };
       });
   },

@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectFlowersList, selectLoadFlowersStatus } from '../../stores/flowers/selectors';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import { overrideFlowerImage } from '../../stores/flowers/asyncActions/overrideFlowerImage';
+import { updateFlowerPrices } from '../../stores/flowers/asyncActions/updateFlowerPrices';
 import type { AppDispatch, RootState } from '../../stores/store';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
 
@@ -21,6 +22,12 @@ export function FlowerDetailContainer() {
     useSelector((state: RootState) => state.flowers.overrideImageStatus.status) === 'pending';
   const uploadError = useSelector((state: RootState) => {
     const s = state.flowers.overrideImageStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
+  const savingPrices =
+    useSelector((state: RootState) => state.flowers.updatePricesStatus.status) === 'pending';
+  const savePricesError = useSelector((state: RootState) => {
+    const s = state.flowers.updatePricesStatus;
     return s.status === 'rejected' ? s.errorMessage : null;
   });
 
@@ -50,6 +57,12 @@ export function FlowerDetailContainer() {
     }
   }
 
+  function handlePricesSave(wholesalePrice: number, retailPrice: number) {
+    if (flowerId) {
+      void dispatch(updateFlowerPrices({ flowerId, wholesalePrice, retailPrice }));
+    }
+  }
+
   if (!flower) {
     return null;
   }
@@ -60,8 +73,11 @@ export function FlowerDetailContainer() {
       complementaryFlowers={complementaryFlowers}
       uploadingImage={uploadingImage}
       uploadError={uploadError}
+      savingPrices={savingPrices}
+      savePricesError={savePricesError}
       onBack={handleBack}
       onImageUpload={handleImageUpload}
+      onPricesSave={handlePricesSave}
     />
   );
 }

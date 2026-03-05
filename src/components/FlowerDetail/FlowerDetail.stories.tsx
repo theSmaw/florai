@@ -9,8 +9,11 @@ const meta: Meta<typeof FlowerDetail> = {
   args: {
     uploadingImage: false,
     uploadError: null,
+    savingPrices: false,
+    savePricesError: null,
     onBack: () => undefined,
     onImageUpload: () => undefined,
+    onPricesSave: () => undefined,
   },
 };
 
@@ -155,5 +158,23 @@ export const ToxicFlower: Story = {
       fragranceLevel: 'moderate',
     },
     complementaryFlowers: [],
+  },
+};
+
+export const SavingPrices: Story = {
+  name: 'Saving prices in progress',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: [],
+    savingPrices: true,
+  },
+};
+
+export const SavePricesError: Story = {
+  name: 'Save prices failed',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: [],
+    savePricesError: 'Failed to save price override: network error',
   },
 };

@@ -308,6 +308,42 @@
   color: #991b1b;
 }
 
+/* ─── Price section header row ────────────────────────── */
+
+.sectionHeaderRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sectionHeaderRow > :first-child {
+  flex: 1;
+  min-width: 0;
+}
+
+.editPricesButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.editPricesButton:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-muted);
+}
+
 /* ─── Price cards ─────────────────────────────────────── */
 
 .priceRow {
@@ -342,6 +378,84 @@
 
 .priceCardValueBrand {
   color: var(--color-brand);
+}
+
+.priceInput {
+  width: 100%;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-brand);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-2);
+  font-family: var(--font-family);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.priceInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.priceInputBrand {
+  color: var(--color-brand);
+}
+
+.priceEditActions {
+  display: flex;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.savePricesButton {
+  padding: var(--space-2) var(--space-5);
+  background: var(--color-brand);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+.savePricesButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cancelPriceEditButton {
+  padding: var(--space-2) var(--space-5);
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.cancelPriceEditButton:hover:not(:disabled) {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-muted);
+}
+
+.cancelPriceEditButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.priceSaveError {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-danger, #dc2626);
 }
 
 /* ─── Stat rows ───────────────────────────────────────── */
