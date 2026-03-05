@@ -44,7 +44,7 @@ export interface FlowerDetailProps {
   savePricesError: string | null;
   onBack: () => void;
   onImageUpload: (file: File) => void;
-  onPricesSave: (wholesalePrice: number, retailPrice: number) => void;
+  onPricesSave: (wholesalePrice: number) => void;
 }
 
 export function FlowerDetail({
@@ -63,11 +63,9 @@ export function FlowerDetail({
 
   const [isPriceEditing, setIsPriceEditing] = useState(false);
   const [draftWholesale, setDraftWholesale] = useState(flower.wholesalePrice);
-  const [draftRetail, setDraftRetail] = useState(flower.retailPrice);
 
   function handleEditPricesClick() {
     setDraftWholesale(flower.wholesalePrice);
-    setDraftRetail(flower.retailPrice);
     setIsPriceEditing(true);
   }
 
@@ -76,7 +74,7 @@ export function FlowerDetail({
   }
 
   function handleSavePrices() {
-    onPricesSave(draftWholesale, draftRetail);
+    onPricesSave(draftWholesale);
     setIsPriceEditing(false);
   }
 
@@ -220,53 +218,61 @@ export function FlowerDetail({
             </div>
           </div>
 
-          {/* Pricing */}
+          {/* Sourcing (includes wholesale price) */}
           <div className={styles.section}>
             <div className={styles.sectionHeaderRow}>
-              <SectionHeader label="Pricing" />
+              <SectionHeader label="Sourcing" />
               {!isPriceEditing && (
                 <button
                   data-cy="edit-prices-button"
                   type="button"
                   className={styles.editPricesButton}
                   onClick={handleEditPricesClick}
-                  aria-label="Edit prices"
+                  aria-label="Edit wholesale price"
                 >
                   <Pencil1Icon width={12} height={12} aria-hidden="true" />
                   Edit
                 </button>
               )}
             </div>
-            {isPriceEditing ? (
+            <div className={styles.statList}>
+              <div className={styles.statItem}>
+                <span className={styles.statLabel}>Wholesale</span>
+                {isPriceEditing ? (
+                  <input
+                    data-cy="wholesale-price-input"
+                    type="number"
+                    min={0}
+                    step={0.01}
+                    className={styles.priceInput}
+                    value={draftWholesale}
+                    onChange={(e) => setDraftWholesale(parseFloat(e.target.value) || 0)}
+                    disabled={savingPrices}
+                  />
+                ) : (
+                  <span data-cy="wholesale-price-value" className={styles.statValue}>
+                    ${flower.wholesalePrice.toFixed(2)}
+                  </span>
+                )}
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statLabel}>Supplier</span>
+                <span className={styles.statValue}>{flower.supplier}</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statLabel}>Origin</span>
+                <span className={styles.statValue}>{flower.origin}</span>
+              </div>
+              <div className={styles.statItem}>
+                <span className={styles.statLabel}>Quantity on Hand</span>
+                <span className={styles.statValue}>
+                  {flower.quantityOnHand}
+                  <span className={styles.inventoryUnit}> stems</span>
+                </span>
+              </div>
+            </div>
+            {isPriceEditing && (
               <>
-                <div className={styles.priceRow}>
-                  <div className={styles.priceCard}>
-                    <p className={styles.priceCardLabel}>Wholesale</p>
-                    <input
-                      data-cy="wholesale-price-input"
-                      type="number"
-                      min={0}
-                      step={0.01}
-                      className={styles.priceInput}
-                      value={draftWholesale}
-                      onChange={(e) => setDraftWholesale(parseFloat(e.target.value) || 0)}
-                      disabled={savingPrices}
-                    />
-                  </div>
-                  <div className={styles.priceCard}>
-                    <p className={styles.priceCardLabel}>Retail</p>
-                    <input
-                      data-cy="retail-price-input"
-                      type="number"
-                      min={0}
-                      step={0.01}
-                      className={`${styles.priceInput} ${styles.priceInputBrand}`}
-                      value={draftRetail}
-                      onChange={(e) => setDraftRetail(parseFloat(e.target.value) || 0)}
-                      disabled={savingPrices}
-                    />
-                  </div>
-                </div>
                 <div className={styles.priceEditActions}>
                   <button
                     data-cy="save-prices-button"
@@ -293,47 +299,7 @@ export function FlowerDetail({
                   </p>
                 )}
               </>
-            ) : (
-              <div className={styles.priceRow}>
-                <div className={styles.priceCard}>
-                  <p className={styles.priceCardLabel}>Wholesale</p>
-                  <p data-cy="wholesale-price-value" className={styles.priceCardValue}>
-                    ${flower.wholesalePrice.toFixed(2)}
-                  </p>
-                </div>
-                <div className={styles.priceCard}>
-                  <p className={styles.priceCardLabel}>Retail</p>
-                  <p
-                    data-cy="retail-price-value"
-                    className={`${styles.priceCardValue} ${styles.priceCardValueBrand}`}
-                  >
-                    ${flower.retailPrice.toFixed(2)}
-                  </p>
-                </div>
-              </div>
             )}
-          </div>
-
-          {/* Sourcing */}
-          <div className={styles.section}>
-            <SectionHeader label="Sourcing" />
-            <div className={styles.statList}>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Supplier</span>
-                <span className={styles.statValue}>{flower.supplier}</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Origin</span>
-                <span className={styles.statValue}>{flower.origin}</span>
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Quantity on Hand</span>
-                <span className={styles.statValue}>
-                  {flower.quantityOnHand}
-                  <span className={styles.inventoryUnit}> stems</span>
-                </span>
-              </div>
-            </div>
           </div>
 
           {/* Physical characteristics */}

@@ -41,7 +41,6 @@ export interface Flower {
 
   // Pricing
   wholesalePrice: number;
-  retailPrice: number;
 
   // Sourcing
   supplier: string;

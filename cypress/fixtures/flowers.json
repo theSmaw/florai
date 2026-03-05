@@ -2,14 +2,17 @@
   {
     "id": "1",
     "name": "Peony Sarah Bernhardt",
-    "colors": ["pink"],
+    "colors": [
+      "pink"
+    ],
     "type": "Peony",
     "imageUrl": "/images/flowers/peony.png",
     "wholesalePrice": 4.5,
-    "retailPrice": 8.99,
     "supplier": "Holland Flowers",
     "origin": "Netherlands",
-    "season": ["Spring"],
+    "season": [
+      "Spring"
+    ],
     "availability": "seasonal",
     "climate": "temperate",
     "quantityOnHand": 45,
@@ -19,19 +22,25 @@
     "vaseLifeDays": 7,
     "careInstructions": "Keep in cool water, change daily",
     "notes": "Beautiful full bloom, long lasting",
-    "complementaryFlowerIds": ["3", "6"]
+    "complementaryFlowerIds": [
+      "3",
+      "6"
+    ]
   },
   {
     "id": "2",
     "name": "Explorer Red Rose",
-    "colors": ["red"],
+    "colors": [
+      "red"
+    ],
     "type": "Rose",
     "imageUrl": "/images/flowers/explorer-red-rose.png",
     "wholesalePrice": 2.25,
-    "retailPrice": 4.99,
     "supplier": "Ecuador Flowers",
     "origin": "Ecuador",
-    "season": ["Year-round"],
+    "season": [
+      "Year-round"
+    ],
     "availability": "always",
     "climate": "subtropical",
     "quantityOnHand": 120,
@@ -41,19 +50,25 @@
     "vaseLifeDays": 10,
     "careInstructions": "Remove lower leaves, fresh water daily",
     "notes": "Deep red color, excellent longevity",
-    "complementaryFlowerIds": ["1", "4"]
+    "complementaryFlowerIds": [
+      "1",
+      "4"
+    ]
   },
   {
     "id": "3",
     "name": "Blue Hydrangea",
-    "colors": ["blue"],
+    "colors": [
+      "blue"
+    ],
     "type": "Hydrangea",
     "imageUrl": "/images/flowers/blue-hydrangea.png",
     "wholesalePrice": 8.9,
-    "retailPrice": 14.99,
     "supplier": "Domestic Grower",
     "origin": "California",
-    "season": ["Summer"],
+    "season": [
+      "Summer"
+    ],
     "availability": "seasonal",
     "climate": "mediterranean",
     "quantityOnHand": 12,
@@ -63,19 +78,25 @@
     "vaseLifeDays": 10,
     "careInstructions": "Keep stems in water constantly",
     "notes": "Full heads, great filler flower",
-    "complementaryFlowerIds": ["1", "5"]
+    "complementaryFlowerIds": [
+      "1",
+      "5"
+    ]
   },
   {
     "id": "4",
     "name": "White Calla Lily",
-    "colors": ["white"],
+    "colors": [
+      "white"
+    ],
     "type": "Calla Lily",
     "imageUrl": "/images/flowers/lush-calla-lilly.png",
     "wholesalePrice": 3.75,
-    "retailPrice": 6.99,
     "supplier": "Holland Flowers",
     "origin": "Netherlands",
-    "season": ["Winter"],
+    "season": [
+      "Winter"
+    ],
     "availability": "seasonal",
     "climate": "subtropical",
     "quantityOnHand": 0,
@@ -85,19 +106,24 @@
     "vaseLifeDays": 7,
     "careInstructions": "Keep cool, change water frequently",
     "notes": "Elegant and sophisticated",
-    "complementaryFlowerIds": ["2"]
+    "complementaryFlowerIds": [
+      "2"
+    ]
   },
   {
     "id": "5",
     "name": "Sunbeam Sunflower",
-    "colors": ["yellow"],
+    "colors": [
+      "yellow"
+    ],
     "type": "Sunflower",
     "imageUrl": "/images/flowers/sunbeam-sunflower.png",
     "wholesalePrice": 1.5,
-    "retailPrice": 3.99,
     "supplier": "Domestic Grower",
     "origin": "Texas",
-    "season": ["Summer"],
+    "season": [
+      "Summer"
+    ],
     "availability": "seasonal",
     "climate": "temperate",
     "quantityOnHand": 88,
@@ -107,19 +133,25 @@
     "vaseLifeDays": 12,
     "careInstructions": "Change water every 2 days",
     "notes": "Bright and cheerful, long lasting",
-    "complementaryFlowerIds": ["3", "6"]
+    "complementaryFlowerIds": [
+      "3",
+      "6"
+    ]
   },
   {
     "id": "6",
     "name": "English Lavender",
-    "colors": ["purple"],
+    "colors": [
+      "purple"
+    ],
     "type": "Lavender",
     "imageUrl": "/images/flowers/english-lavender.png",
     "wholesalePrice": 0.85,
-    "retailPrice": 2.49,
     "supplier": "UK Grower",
     "origin": "United Kingdom",
-    "season": ["Spring"],
+    "season": [
+      "Spring"
+    ],
     "availability": "seasonal",
     "climate": "mediterranean",
     "quantityOnHand": 300,
@@ -129,6 +161,9 @@
     "vaseLifeDays": 10,
     "careInstructions": "Dry or fresh, very hardy",
     "notes": "Fragrant, excellent for arrangements",
-    "complementaryFlowerIds": ["1", "2"]
+    "complementaryFlowerIds": [
+      "1",
+      "2"
+    ]
   }
 ]

@@ -346,63 +346,23 @@
 
 /* ─── Price cards ─────────────────────────────────────── */
 
-.priceRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
-}
-
-.priceCard {
-  background: var(--color-bg-subtle);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-4) var(--space-5);
-}
-
-.priceCardLabel {
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-text-subtle);
-  margin-bottom: var(--space-2);
-}
-
-.priceCardValue {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
-.priceCardValueBrand {
-  color: var(--color-brand);
-}
-
 .priceInput {
-  width: 100%;
-  font-size: var(--font-size-2xl);
+  width: 100px;
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);
-  letter-spacing: -0.02em;
-  line-height: 1;
   background: var(--color-bg-surface);
   border: 1px solid var(--color-brand);
   border-radius: var(--radius-sm);
   padding: var(--space-1) var(--space-2);
   font-family: var(--font-family);
   outline: none;
-  box-sizing: border-box;
+  text-align: right;
 }
 
 .priceInput:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-}
-
-.priceInputBrand {
-  color: var(--color-brand);
 }
 
 .priceEditActions {
@@ -615,7 +575,4 @@
     grid-template-columns: 1fr;
   }
 
-  .priceRow {
-    grid-template-columns: 1fr 1fr;
-  }
 }

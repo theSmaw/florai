@@ -91,11 +91,10 @@ export const flowersSlice = createSlice({
       })
       .addCase(updateFlowerPrices.fulfilled, (state, action) => {
         state.updatePricesStatus = { status: 'fulfilled' };
-        const { flowerId, wholesalePrice, retailPrice } = action.payload;
+        const { flowerId, wholesalePrice } = action.payload;
         const flower = state.flowers.find((f) => f.id === flowerId);
         if (flower) {
           flower.wholesalePrice = wholesalePrice;
-          flower.retailPrice = retailPrice;
         }
       })
       .addCase(updateFlowerPrices.rejected, (state, action) => {

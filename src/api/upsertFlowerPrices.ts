@@ -6,7 +6,6 @@ import { supabase } from '../lib/supabase';
 export async function upsertFlowerPrices(
   flowerId: string,
   wholesalePrice: number,
-  retailPrice: number,
 ): Promise<void> {
   const {
     data: { session },
@@ -23,7 +22,6 @@ export async function upsertFlowerPrices(
         user_id: session.user.id,
         flower_id: flowerId,
         wholesale_price: wholesalePrice,
-        retail_price: retailPrice,
       },
       { onConflict: 'user_id,flower_id' },
     );

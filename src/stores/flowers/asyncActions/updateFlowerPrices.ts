@@ -3,16 +3,8 @@ import { upsertFlowerPrices } from '../../../api/upsertFlowerPrices';
 
 export const updateFlowerPrices = createAsyncThunk(
   'flowers/updateFlowerPrices',
-  async ({
-    flowerId,
-    wholesalePrice,
-    retailPrice,
-  }: {
-    flowerId: string;
-    wholesalePrice: number;
-    retailPrice: number;
-  }) => {
-    await upsertFlowerPrices(flowerId, wholesalePrice, retailPrice);
-    return { flowerId, wholesalePrice, retailPrice };
+  async ({ flowerId, wholesalePrice }: { flowerId: string; wholesalePrice: number }) => {
+    await upsertFlowerPrices(flowerId, wholesalePrice);
+    return { flowerId, wholesalePrice };
   },
 );

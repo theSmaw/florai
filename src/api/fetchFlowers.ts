@@ -3,8 +3,8 @@ import type { Flower } from '../domain/Flower';
 
 // Row shape returned by Supabase (snake_case DB columns).
 // user_flower_overrides is a nested one-to-many join — we only select
-// image_url, and there will be at most one row per flower per user (UNIQUE
-// constraint on user_id, flower_id).
+// image_url and wholesale_price, and there will be at most one row per flower
+// per user (UNIQUE constraint on user_id, flower_id).
 interface FlowerRow {
   id: string;
   name: string;
@@ -12,7 +12,6 @@ interface FlowerRow {
   colors: string[];
   type: string;
   wholesale_price: number;
-  retail_price: number;
   supplier: string | null;
   origin: string | null;
   season: string[];
@@ -30,7 +29,6 @@ interface FlowerRow {
   user_flower_overrides: Array<{
     image_url: string | null;
     wholesale_price: number | null;
-    retail_price: number | null;
   }>;
 }
 
@@ -39,11 +37,10 @@ interface FlowerRow {
 // Optional fields (stem length, vase life, etc.) are omitted entirely when
 // null rather than being set to undefined, satisfying exactOptionalPropertyTypes.
 function rowToFlower(row: FlowerRow): Flower {
-  // Use the user's custom image if they've uploaded one, otherwise the global default
+  // Use the user's custom image/price if they have an override, otherwise the global default
   const override = row.user_flower_overrides[0];
   const effectiveImageUrl = override?.image_url ?? row.image_url ?? null;
   const effectiveWholesalePrice = override?.wholesale_price ?? row.wholesale_price;
-  const effectiveRetailPrice = override?.retail_price ?? row.retail_price;
 
   const flower: Flower = {
     id: row.id,
@@ -51,7 +48,6 @@ function rowToFlower(row: FlowerRow): Flower {
     colors: row.colors as Flower['colors'],
     type: row.type,
     wholesalePrice: effectiveWholesalePrice,
-    retailPrice: effectiveRetailPrice,
     supplier: row.supplier ?? '',
     origin: row.origin ?? '',
     season: row.season as Flower['season'],
@@ -81,7 +77,7 @@ function rowToFlower(row: FlowerRow): Flower {
 export async function fetchFlowers(_signal?: AbortSignal): Promise<Flower[]> {
   const { data, error } = await supabase
     .from('flowers')
-    .select('*, user_flower_overrides(image_url, wholesale_price, retail_price)')
+    .select('*, user_flower_overrides(image_url, wholesale_price)')
     .order('name');
 
   if (error) {
