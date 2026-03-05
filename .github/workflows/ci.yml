@@ -4,73 +4,63 @@ on:
   push:
     branches: [main]
   pull_request:
+    branches: [main]
 
 jobs:
-  type-check:
-    name: TypeScript
+  typecheck:
+    name: Type check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 9
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Type check
         run: pnpm type-check
 
   cypress:
-    name: Cypress (stub tests)
+    name: Cypress stub tests
     runs-on: ubuntu-latest
-    # Placeholder values — all Supabase network calls are intercepted by Cypress
-    env:
-      VITE_SUPABASE_URL: http://127.0.0.1:54321
-      VITE_SUPABASE_ANON_KEY: stub-anon-key-for-ci
     steps:
       - uses: actions/checkout@v4
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 9
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
-
-      - name: Cache Cypress binary
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/Cypress
-          key: cypress-binary-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: cypress-binary-${{ runner.os }}-
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
-      - name: Install Cypress binary
-        run: pnpm cypress install
-
-      - name: Start dev server and run stub tests
+      - name: Run stub tests
         uses: cypress-io/github-action@v6
         with:
           install: false
           start: pnpm dev
-          wait-on: http://localhost:5173
-          wait-on-timeout: 60
+          wait-on: 'http://localhost:5173'
           command: pnpm cypress:run:stub
+        env:
+          VITE_SUPABASE_URL: http://127.0.0.1:54321
+          VITE_SUPABASE_ANON_KEY: stub-anon-key
 
       - name: Upload screenshots on failure
-        if: failure()
         uses: actions/upload-artifact@v4
+        if: failure()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+          if-no-files-found: ignore
