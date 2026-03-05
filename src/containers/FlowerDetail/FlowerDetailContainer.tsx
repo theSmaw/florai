@@ -57,9 +57,9 @@ export function FlowerDetailContainer() {
     }
   }
 
-  function handlePricesSave(wholesalePrice: number, retailPrice: number) {
+  function handlePricesSave(wholesalePrice: number) {
     if (flowerId) {
-      void dispatch(updateFlowerPrices({ flowerId, wholesalePrice, retailPrice }));
+      void dispatch(updateFlowerPrices({ flowerId, wholesalePrice }));
     }
   }
 

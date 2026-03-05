@@ -71,11 +71,6 @@ describe('Flower detail page', () => {
       cy.contains('Wholesale').should('be.visible');
       cy.contains('$4.50').should('be.visible');
     });
-
-    it('displays the retail price', () => {
-      cy.contains('Retail').should('be.visible');
-      cy.contains('$8.99').should('be.visible');
-    });
   });
 
   describe('Sourcing section', () => {
@@ -165,13 +160,6 @@ describe('Flower detail page', () => {
       cy.get('[data-cy="wholesale-price-input"]').clear().type('6.00');
       cy.get('[data-cy="save-prices-button"]').click();
       cy.get('[data-cy="wholesale-price-value"]').should('contain.text', '$6.00');
-    });
-
-    it('saves updated retail price and displays new value', () => {
-      cy.get('[data-cy="edit-prices-button"]').click();
-      cy.get('[data-cy="retail-price-input"]').clear().type('12.50');
-      cy.get('[data-cy="save-prices-button"]').click();
-      cy.get('[data-cy="retail-price-value"]').should('contain.text', '$12.50');
     });
 
     it('cancel edit restores original values without saving', () => {
