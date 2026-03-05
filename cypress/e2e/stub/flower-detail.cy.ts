@@ -145,4 +145,41 @@ describe('Flower detail page', () => {
       cy.contains('Beautiful full bloom, long lasting').should('be.visible');
     });
   });
+
+  describe('Price editing', () => {
+    beforeEach(() => {
+      cy.intercept('PATCH', '**/user_flower_overrides**', { statusCode: 200, body: {} }).as(
+        'savePrices',
+      );
+      cy.visitFlowerDetail('1');
+    });
+
+    it('opens price edit mode when edit button is clicked', () => {
+      cy.get('[data-cy="edit-prices-button"]').click();
+      cy.get('[data-cy="wholesale-price-input"]').should('be.visible');
+      cy.get('[data-cy="retail-price-input"]').should('be.visible');
+    });
+
+    it('saves updated wholesale price and displays new value', () => {
+      cy.get('[data-cy="edit-prices-button"]').click();
+      cy.get('[data-cy="wholesale-price-input"]').clear().type('6.00');
+      cy.get('[data-cy="save-prices-button"]').click();
+      cy.get('[data-cy="wholesale-price-value"]').should('contain.text', '$6.00');
+    });
+
+    it('saves updated retail price and displays new value', () => {
+      cy.get('[data-cy="edit-prices-button"]').click();
+      cy.get('[data-cy="retail-price-input"]').clear().type('12.50');
+      cy.get('[data-cy="save-prices-button"]').click();
+      cy.get('[data-cy="retail-price-value"]').should('contain.text', '$12.50');
+    });
+
+    it('cancel edit restores original values without saving', () => {
+      cy.get('[data-cy="edit-prices-button"]').click();
+      cy.get('[data-cy="wholesale-price-input"]').clear().type('99.99');
+      cy.get('[data-cy="cancel-price-edit-button"]').click();
+      cy.get('[data-cy="wholesale-price-value"]').should('contain.text', '$4.50');
+      cy.get('[data-cy="edit-prices-button"]').should('be.visible');
+    });
+  });
 });
