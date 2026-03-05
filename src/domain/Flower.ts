@@ -49,9 +49,6 @@ export interface Flower {
   availability: Availability;
   climate: Climate; // Growing climate (tropical, mediterranean, etc.)
 
-  // Inventory
-  quantityOnHand: number;
-
   // Physical characteristics
   stemLengthCm?: number; // Typical stem length in cm (e.g., 60 for roses, 30 for lavender)
   fragranceLevel?: FragranceLevel; // For fragrance-sensitive venues and event planning

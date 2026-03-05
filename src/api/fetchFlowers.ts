@@ -17,7 +17,6 @@ interface FlowerRow {
   season: string[];
   availability: string;
   climate: string;
-  quantity_on_hand: number;
   stem_length_cm: number | null;
   fragrance_level: string | null;
   toxicity: string | null;
@@ -53,7 +52,6 @@ function rowToFlower(row: FlowerRow): Flower {
     season: row.season as Flower['season'],
     availability: row.availability as Flower['availability'],
     climate: row.climate as Flower['climate'],
-    quantityOnHand: row.quantity_on_hand,
     careInstructions: row.care_instructions ?? '',
     notes: row.notes ?? '',
     complementaryFlowerIds: row.complementary_flower_ids,

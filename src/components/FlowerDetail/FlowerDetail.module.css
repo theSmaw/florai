@@ -480,19 +480,6 @@
   color: var(--color-text-primary);
 }
 
-/* ─── Inventory badge ─────────────────────────────────── */
-
-.inventoryValue {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-primary);
-}
-
-.inventoryUnit {
-  font-weight: var(--font-weight-normal);
-  color: var(--color-text-muted);
-}
-
 /* ─── Care / Notes block ──────────────────────────────── */
 
 .textBlock {

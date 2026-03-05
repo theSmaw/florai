@@ -263,13 +263,6 @@ export function FlowerDetail({
                 <span className={styles.statLabel}>Origin</span>
                 <span className={styles.statValue}>{flower.origin}</span>
               </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Quantity on Hand</span>
-                <span className={styles.statValue}>
-                  {flower.quantityOnHand}
-                  <span className={styles.inventoryUnit}> stems</span>
-                </span>
-              </div>
             </div>
             {isPriceEditing && (
               <>
