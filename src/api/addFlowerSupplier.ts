@@ -1,11 +1,11 @@
 import { supabase } from '../lib/supabase';
 import type { FlowerSupplier } from '../domain/Flower';
 
-interface SupplierRow {
+type SupplierRow = {
   id: string;
   name: string;
   wholesale_price: number | null;
-}
+};
 
 export async function addFlowerSupplier(
   flowerId: string,
