@@ -1,6 +1,12 @@
 import { supabase } from '../lib/supabase';
 import type { FlowerSupplier } from '../domain/Flower';
 
+interface SupplierRow {
+  id: string;
+  name: string;
+  wholesale_price: number | null;
+}
+
 export async function addFlowerSupplier(
   flowerId: string,
   name: string,
@@ -24,9 +30,6 @@ export async function addFlowerSupplier(
     throw new Error(`Failed to add supplier: ${error.message}`);
   }
 
-  return {
-    id: (data as { id: string; name: string; wholesale_price: number | null }).id,
-    name: (data as { id: string; name: string; wholesale_price: number | null }).name,
-    wholesalePrice: (data as { id: string; name: string; wholesale_price: number | null }).wholesale_price,
-  };
+  const row = data as SupplierRow;
+  return { id: row.id, name: row.name, wholesalePrice: row.wholesale_price };
 }
