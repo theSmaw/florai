@@ -59,6 +59,10 @@ export interface FlowerDetailProps {
   onCareSave: (careInstructions: string) => void;
   onNotesSave: (notes: string) => void;
   onFlowerSelect: (flowerId: string) => void;
+  allFlowers: Flower[];
+  savingPairings: boolean;
+  savePairingsError: string | null;
+  onPairingsSave: (flowerIds: string[]) => void;
 }
 
 export function FlowerDetail({
@@ -81,6 +85,10 @@ export function FlowerDetail({
   onCareSave,
   onNotesSave,
   onFlowerSelect,
+  allFlowers,
+  savingPairings,
+  savePairingsError,
+  onPairingsSave,
 }: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -91,6 +99,10 @@ export function FlowerDetail({
   const [isNotesEditing, setIsNotesEditing] = useState(false);
   const [draftNotes, setDraftNotes] = useState('');
   const notesSaveInitiated = useRef(false);
+
+  const [isPairingsEditing, setIsPairingsEditing] = useState(false);
+  const [draftPairingIds, setDraftPairingIds] = useState<string[]>([]);
+  const pairingsSaveInitiated = useRef(false);
 
   // Close edit mode after a save completes (success only; keep open on error so the user sees it)
   useEffect(() => {
@@ -110,6 +122,15 @@ export function FlowerDetail({
       }
     }
   }, [savingNotes, saveNotesError]);
+
+  useEffect(() => {
+    if (pairingsSaveInitiated.current && !savingPairings) {
+      pairingsSaveInitiated.current = false;
+      if (!savePairingsError) {
+        setIsPairingsEditing(false);
+      }
+    }
+  }, [savingPairings, savePairingsError]);
 
   function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
     const img = e.currentTarget;
@@ -156,6 +177,30 @@ export function FlowerDetail({
   function handleNotesSave() {
     notesSaveInitiated.current = true;
     onNotesSave(draftNotes);
+  }
+
+  function handlePairingsEditClick() {
+    setDraftPairingIds([...flower.complementaryFlowerIds]);
+    setIsPairingsEditing(true);
+  }
+
+  function handlePairingsCancel() {
+    setIsPairingsEditing(false);
+  }
+
+  function handlePairingRemove(id: string) {
+    setDraftPairingIds((prev) => prev.filter((fId) => fId !== id));
+  }
+
+  function handlePairingAdd(id: string) {
+    if (id && !draftPairingIds.includes(id)) {
+      setDraftPairingIds((prev) => [...prev, id]);
+    }
+  }
+
+  function handlePairingsSave() {
+    pairingsSaveInitiated.current = true;
+    onPairingsSave(draftPairingIds);
   }
 
   return (
@@ -444,31 +489,107 @@ export function FlowerDetail({
             )}
           </div>
 
-          {/* Complementary flowers */}
-          {complementaryFlowers.length > 0 && (
-            <div className={styles.section}>
+          {/* Complementary flowers — always rendered so users can add pairings */}
+          <div className={styles.section}>
+            <div className={styles.pairingsHeader}>
               <SectionHeader label="Pairs Well With" />
-              <div className={styles.pairings}>
-                {complementaryFlowers.map((complementaryFlower) => (
-                  <button
-                    key={complementaryFlower.id}
-                    type="button"
-                    className={styles.pairingCard}
-                    onClick={() => onFlowerSelect(complementaryFlower.id)}
-                    aria-label={`View ${complementaryFlower.name}`}
-                  >
-                    <img
-                      src={complementaryFlower.imageUrl ?? '/images/placeholder.svg'}
-                      alt={complementaryFlower.name}
-                      className={styles.pairingImage}
-                      onError={handleImgError}
-                    />
-                    <span className={styles.pairingName}>{complementaryFlower.name}</span>
-                  </button>
-                ))}
-              </div>
+              {!isPairingsEditing && (
+                <EditButton
+                  data-cy="edit-pairings-button"
+                  onClick={handlePairingsEditClick}
+                  disabled={savingPairings}
+                  aria-label="Edit pairings"
+                />
+              )}
             </div>
-          )}
+            {isPairingsEditing ? (
+              <div>
+                {draftPairingIds.length > 0 ? (
+                  <ul data-cy="pairings-edit-list" className={styles.pairingsEditList}>
+                    {draftPairingIds.map((id) => {
+                      const pairedFlower = allFlowers.find((f) => f.id === id);
+                      if (!pairedFlower) return null;
+                      return (
+                        <li key={id} className={styles.pairingsEditItem}>
+                          <span className={styles.pairingsEditName}>{pairedFlower.name}</span>
+                          <button
+                            type="button"
+                            data-cy="pairings-remove-button"
+                            className={styles.pairingsRemoveButton}
+                            onClick={() => handlePairingRemove(id)}
+                            disabled={savingPairings}
+                            aria-label={`Remove ${pairedFlower.name}`}
+                          >
+                            ✕
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                ) : (
+                  <p className={styles.careEmpty}>No pairings selected.</p>
+                )}
+                {(() => {
+                  const available = allFlowers.filter((f) => !draftPairingIds.includes(f.id));
+                  return available.length > 0 ? (
+                    <select
+                      data-cy="pairings-add-select"
+                      className={styles.pairingsAddSelect}
+                      value=""
+                      onChange={(e) => handlePairingAdd(e.target.value)}
+                      disabled={savingPairings}
+                    >
+                      <option value="" disabled>Add a flower…</option>
+                      {available.map((f) => (
+                        <option key={f.id} value={f.id}>{f.name}</option>
+                      ))}
+                    </select>
+                  ) : null;
+                })()}
+                {savePairingsError && (
+                  <p data-cy="save-pairings-error" className={styles.careError}>{savePairingsError}</p>
+                )}
+                <div className={styles.careEditActions}>
+                  <SaveButton
+                    data-cy="save-pairings-button"
+                    saving={savingPairings}
+                    onClick={handlePairingsSave}
+                  />
+                  <CancelButton
+                    data-cy="cancel-pairings-button"
+                    onClick={handlePairingsCancel}
+                    disabled={savingPairings}
+                  />
+                </div>
+              </div>
+            ) : (
+              complementaryFlowers.length > 0 ? (
+                <div className={styles.pairings}>
+                  {complementaryFlowers.map((complementaryFlower) => (
+                    <button
+                      key={complementaryFlower.id}
+                      type="button"
+                      className={styles.pairingCard}
+                      onClick={() => onFlowerSelect(complementaryFlower.id)}
+                      aria-label={`View ${complementaryFlower.name}`}
+                    >
+                      <img
+                        src={complementaryFlower.imageUrl ?? '/images/placeholder.svg'}
+                        alt={complementaryFlower.name}
+                        className={styles.pairingImage}
+                        onError={handleImgError}
+                      />
+                      <span className={styles.pairingName}>{complementaryFlower.name}</span>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.pairingsHint}>
+                  <span className={styles.pairingsHintText}>No pairings added yet.</span>
+                </div>
+              )
+            )}
+          </div>
         </section>
       </div>
     </div>

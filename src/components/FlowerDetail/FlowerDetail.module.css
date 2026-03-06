@@ -448,6 +448,102 @@
   font-family: var(--font-family);
 }
 
+/* ─── Pairings inline edit ────────────────────────────── */
+
+.pairingsHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.pairingsHeader > div:first-child {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.pairingsEditList {
+  list-style: none;
+  margin: 0 0 var(--space-3);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.pairingsEditItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.pairingsEditName {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+}
+
+.pairingsRemoveButton {
+  background: none;
+  border: none;
+  padding: 2px var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-xs);
+  transition: color 150ms ease, background 150ms ease;
+  font-family: var(--font-family);
+}
+
+.pairingsRemoveButton:hover:not(:disabled) {
+  color: var(--color-danger);
+  background: rgba(239, 68, 68, 0.08);
+}
+
+.pairingsRemoveButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pairingsAddSelect {
+  width: 100%;
+  margin-bottom: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+
+.pairingsAddSelect:focus {
+  border-color: var(--color-brand);
+}
+
+.pairingsAddSelect:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pairingsHint {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-bg-subtle);
+}
+
+.pairingsHintText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-subtle);
+  font-style: italic;
+}
+
 /* ─── Complementary flowers ───────────────────────────── */
 
 .pairings {
