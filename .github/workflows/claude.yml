@@ -43,6 +43,7 @@ jobs:
   claude-review:
     name: Claude — auto PR review
     runs-on: ubuntu-latest
+    continue-on-error: true
     if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
 
     steps:
