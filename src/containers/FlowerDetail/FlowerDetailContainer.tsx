@@ -10,6 +10,7 @@ import { overrideFlowerImage } from '../../stores/flowers/asyncActions/overrideF
 import { addFlowerSupplier } from '../../stores/flowers/asyncActions/addFlowerSupplier';
 import { updateFlowerSupplier } from '../../stores/flowers/asyncActions/updateFlowerSupplier';
 import { removeFlowerSupplier } from '../../stores/flowers/asyncActions/removeFlowerSupplier';
+import { updateCareInstructions } from '../../stores/flowers/asyncActions/updateCareInstructions';
 import type { AppDispatch, RootState } from '../../stores/store';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
 
@@ -30,6 +31,13 @@ export function FlowerDetailContainer() {
     useSelector((state: RootState) => state.flowers.supplierOperationStatus.status) === 'pending';
   const supplierError = useSelector((state: RootState) => {
     const s = state.flowers.supplierOperationStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
+  const savingCare =
+    useSelector((state: RootState) => state.flowers.updateCareInstructionsStatus.status) ===
+    'pending';
+  const saveCareError = useSelector((state: RootState) => {
+    const s = state.flowers.updateCareInstructionsStatus;
     return s.status === 'rejected' ? s.errorMessage : null;
   });
 
@@ -76,6 +84,12 @@ export function FlowerDetailContainer() {
     }
   }
 
+  function handleCareSave(careInstructions: string) {
+    if (flowerId) {
+      void dispatch(updateCareInstructions({ flowerId, careInstructions }));
+    }
+  }
+
   if (!flower) {
     return null;
   }
@@ -88,11 +102,14 @@ export function FlowerDetailContainer() {
       uploadError={uploadError}
       savingSupplier={savingSupplier}
       supplierError={supplierError}
+      savingCare={savingCare}
+      saveCareError={saveCareError}
       onBack={handleBack}
       onImageUpload={handleImageUpload}
       onAddSupplier={handleAddSupplier}
       onUpdateSupplier={handleUpdateSupplier}
       onRemoveSupplier={handleRemoveSupplier}
+      onCareSave={handleCareSave}
     />
   );
 }

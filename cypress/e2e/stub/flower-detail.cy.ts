@@ -113,6 +113,45 @@ describe('Flower detail page', () => {
     });
   });
 
+  describe('Botanical Care editing', () => {
+    beforeEach(() => {
+      cy.intercept('POST', '**/rest/v1/user_flower_overrides**', {
+        statusCode: 200,
+        body: {},
+      }).as('saveCare');
+      cy.visitFlowerDetail('1');
+    });
+
+    it('shows the Edit button', () => {
+      cy.get('[data-cy="edit-care-button"]').should('be.visible');
+    });
+
+    it('clicking Edit shows textarea pre-filled with existing care text', () => {
+      cy.get('[data-cy="edit-care-button"]').click();
+      cy.get('[data-cy="care-instructions-textarea"]')
+        .should('be.visible')
+        .and('have.value', 'Keep in cool water, change daily');
+    });
+
+    it('typing and saving calls the intercept and shows updated text', () => {
+      cy.get('[data-cy="edit-care-button"]').click();
+      cy.get('[data-cy="care-instructions-textarea"]').clear().type('New care notes');
+      cy.get('[data-cy="save-care-button"]').click();
+      cy.wait('@saveCare');
+      cy.get('[data-cy="care-instructions-textarea"]').should('not.exist');
+      cy.contains('New care notes').should('be.visible');
+    });
+
+    it('clicking Cancel restores original text without saving', () => {
+      cy.get('[data-cy="edit-care-button"]').click();
+      cy.get('[data-cy="care-instructions-textarea"]').clear().type('Should not be saved');
+      cy.get('[data-cy="cancel-care-button"]').click();
+      cy.get('[data-cy="care-instructions-textarea"]').should('not.exist');
+      cy.contains('Keep in cool water, change daily').should('be.visible');
+      cy.get('@saveCare.all').should('have.length', 0);
+    });
+  });
+
   describe('Supplier management', () => {
     beforeEach(() => {
       cy.intercept('POST', '**/rest/v1/flower_suppliers**', {

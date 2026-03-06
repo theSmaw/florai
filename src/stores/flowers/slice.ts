@@ -5,6 +5,7 @@ import { overrideFlowerImage } from './asyncActions/overrideFlowerImage';
 import { addFlowerSupplier } from './asyncActions/addFlowerSupplier';
 import { updateFlowerSupplier } from './asyncActions/updateFlowerSupplier';
 import { removeFlowerSupplier } from './asyncActions/removeFlowerSupplier';
+import { updateCareInstructions } from './asyncActions/updateCareInstructions';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import type { AsyncAction } from '../AsyncAction';
 
@@ -18,6 +19,7 @@ const initialState = {
   loadFlowersStatus: { status: 'idle' } as AsyncAction,
   overrideImageStatus: { status: 'idle' } as AsyncAction,
   supplierOperationStatus: { status: 'idle' } as AsyncAction,
+  updateCareInstructionsStatus: { status: 'idle' } as AsyncAction,
 };
 
 export const flowersSlice = createSlice({
@@ -143,6 +145,24 @@ export const flowersSlice = createSlice({
         state.supplierOperationStatus = {
           status: 'rejected',
           errorMessage: action.error.message ?? 'Failed to remove supplier',
+        };
+      })
+      // Update care instructions
+      .addCase(updateCareInstructions.pending, (state) => {
+        state.updateCareInstructionsStatus = { status: 'pending' };
+      })
+      .addCase(updateCareInstructions.fulfilled, (state, action) => {
+        state.updateCareInstructionsStatus = { status: 'fulfilled' };
+        const { flowerId, careInstructions } = action.payload;
+        const flower = state.flowers.find((f) => f.id === flowerId);
+        if (flower) {
+          flower.careInstructions = careInstructions;
+        }
+      })
+      .addCase(updateCareInstructions.rejected, (state, action) => {
+        state.updateCareInstructionsStatus = {
+          status: 'rejected',
+          errorMessage: action.error.message ?? 'Failed to update care instructions',
         };
       });
   },
