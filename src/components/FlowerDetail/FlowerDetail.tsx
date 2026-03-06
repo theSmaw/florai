@@ -584,7 +584,9 @@ export function FlowerDetail({
                   ))}
                 </div>
               ) : (
-                <p className={styles.careEmpty}>No pairings yet. Click Edit to add flowers.</p>
+                <div className={styles.pairingsHint}>
+                  <span className={styles.pairingsHintText}>No pairings added yet.</span>
+                </div>
               )
             )}
           </div>

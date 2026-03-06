@@ -533,6 +533,17 @@
   cursor: not-allowed;
 }
 
+.pairingsHint {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--color-bg-subtle);
+}
+
+.pairingsHintText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-subtle);
+  font-style: italic;
+}
+
 /* ─── Complementary flowers ───────────────────────────── */
 
 .pairings {
