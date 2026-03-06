@@ -7,6 +7,7 @@
 
   /* Semantic / state */
   --color-error: #ef4444;
+  --color-danger: #dc2626; /* red-600 — destructive actions and danger text */
 
   /* Backgrounds */
   --color-bg-app: #faf9f7; /* warm off-white */

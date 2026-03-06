@@ -84,8 +84,8 @@
 }
 
 .removeButton:hover:not(:disabled) {
-  color: var(--color-danger, #dc2626);
-  border-color: var(--color-danger, #dc2626);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
 }
 
 /* ─── Add supplier button ─────────────────────────────── */
@@ -120,5 +120,5 @@
 .error {
   margin-top: var(--space-2);
   font-size: var(--font-size-sm);
-  color: var(--color-danger, #dc2626);
+  color: var(--color-danger);
 }
