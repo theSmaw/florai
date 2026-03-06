@@ -90,7 +90,7 @@ describe('Flower detail page', () => {
       cy.get('[data-cy="back-button"]').should('contain.text', 'Catalogue');
     });
 
-    it('does not show the Pairs Well With section when there are no complementary flowers', () => {
+    it('shows the empty hint when there are no complementary flowers', () => {
       // This test needs a custom fixture variant (flower id=1 with no complementary
       // flower IDs), so it sets up its own intercept rather than using cy.stubFlowers().
       // The fixture is loaded, the first flower's complementary_flower_ids is zeroed out,
@@ -112,7 +112,8 @@ describe('Flower detail page', () => {
       });
       cy.visitWithFakeAuth('/catalogue/1');
       cy.wait('@getFlowersNoComplement');
-      cy.contains('Pairs Well With').should('not.exist');
+      cy.contains('Pairs Well With').should('be.visible');
+      cy.contains('No pairings added yet.').should('be.visible');
     });
   });
 
