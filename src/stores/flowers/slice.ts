@@ -2,7 +2,9 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { loadFlowers } from './asyncActions/loadFlowers';
 import { overrideFlowerImage } from './asyncActions/overrideFlowerImage';
-import { updateFlowerPrices } from './asyncActions/updateFlowerPrices';
+import { addFlowerSupplier } from './asyncActions/addFlowerSupplier';
+import { updateFlowerSupplier } from './asyncActions/updateFlowerSupplier';
+import { removeFlowerSupplier } from './asyncActions/removeFlowerSupplier';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import type { AsyncAction } from '../AsyncAction';
 
@@ -15,7 +17,7 @@ const initialState = {
   selectedFlowerId: null as string | null,
   loadFlowersStatus: { status: 'idle' } as AsyncAction,
   overrideImageStatus: { status: 'idle' } as AsyncAction,
-  updatePricesStatus: { status: 'idle' } as AsyncAction,
+  supplierOperationStatus: { status: 'idle' } as AsyncAction,
 };
 
 export const flowersSlice = createSlice({
@@ -85,22 +87,62 @@ export const flowersSlice = createSlice({
           errorMessage: action.error.message ?? 'Failed to override image',
         };
       })
-      // Update flower prices
-      .addCase(updateFlowerPrices.pending, (state) => {
-        state.updatePricesStatus = { status: 'pending' };
+      // Add flower supplier
+      .addCase(addFlowerSupplier.pending, (state) => {
+        state.supplierOperationStatus = { status: 'pending' };
       })
-      .addCase(updateFlowerPrices.fulfilled, (state, action) => {
-        state.updatePricesStatus = { status: 'fulfilled' };
-        const { flowerId, wholesalePrice } = action.payload;
+      .addCase(addFlowerSupplier.fulfilled, (state, action) => {
+        state.supplierOperationStatus = { status: 'fulfilled' };
+        const { flowerId, supplier } = action.payload;
         const flower = state.flowers.find((f) => f.id === flowerId);
         if (flower) {
-          flower.wholesalePrice = wholesalePrice;
+          flower.suppliers.push(supplier);
         }
       })
-      .addCase(updateFlowerPrices.rejected, (state, action) => {
-        state.updatePricesStatus = {
+      .addCase(addFlowerSupplier.rejected, (state, action) => {
+        state.supplierOperationStatus = {
           status: 'rejected',
-          errorMessage: action.error.message ?? 'Failed to update prices',
+          errorMessage: action.error.message ?? 'Failed to add supplier',
+        };
+      })
+      // Update flower supplier
+      .addCase(updateFlowerSupplier.pending, (state) => {
+        state.supplierOperationStatus = { status: 'pending' };
+      })
+      .addCase(updateFlowerSupplier.fulfilled, (state, action) => {
+        state.supplierOperationStatus = { status: 'fulfilled' };
+        const { flowerId, id, name, wholesalePrice } = action.payload;
+        const flower = state.flowers.find((f) => f.id === flowerId);
+        if (flower) {
+          const supplier = flower.suppliers.find((s) => s.id === id);
+          if (supplier) {
+            supplier.name = name;
+            supplier.wholesalePrice = wholesalePrice;
+          }
+        }
+      })
+      .addCase(updateFlowerSupplier.rejected, (state, action) => {
+        state.supplierOperationStatus = {
+          status: 'rejected',
+          errorMessage: action.error.message ?? 'Failed to update supplier',
+        };
+      })
+      // Remove flower supplier
+      .addCase(removeFlowerSupplier.pending, (state) => {
+        state.supplierOperationStatus = { status: 'pending' };
+      })
+      .addCase(removeFlowerSupplier.fulfilled, (state, action) => {
+        state.supplierOperationStatus = { status: 'fulfilled' };
+        const { flowerId, supplierId } = action.payload;
+        const flower = state.flowers.find((f) => f.id === flowerId);
+        if (flower) {
+          flower.suppliers = flower.suppliers.filter((s) => s.id !== supplierId);
+        }
+      })
+      .addCase(removeFlowerSupplier.rejected, (state, action) => {
+        state.supplierOperationStatus = {
+          status: 'rejected',
+          errorMessage: action.error.message ?? 'Failed to remove supplier',
         };
       });
   },

@@ -63,6 +63,7 @@ Cypress.Commands.add('stubFlowers', () => {
         Object.entries(f).map(([k, v]) => [k.replace(/([A-Z])/g, '_$1').toLowerCase(), v]),
       ),
       user_flower_overrides: [],
+      flower_suppliers: [],
     }));
 
     cy.intercept('GET', '**/rest/v1/flowers*', { body: rows, statusCode: 200 }).as('getFlowers');

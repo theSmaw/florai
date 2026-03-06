@@ -30,6 +30,12 @@ export const CLIMATES = [
 ] as const;
 export type Climate = (typeof CLIMATES)[number];
 
+export interface FlowerSupplier {
+  id: string;
+  name: string;
+  wholesalePrice: number | null;
+}
+
 export interface Flower {
   id: string;
   name: string;
@@ -40,10 +46,11 @@ export interface Flower {
   imageUrl?: string; // Relative path to an image in /public (e.g., "/images/flowers/1.jpg")
 
   // Pricing
-  wholesalePrice: number;
+  wholesalePrice: number; // Global default shown as hint when suppliers is empty
 
   // Sourcing
-  supplier: string;
+  supplier: string; // Global default shown as hint when suppliers is empty
+  suppliers: FlowerSupplier[];
   season: Season[]; // Spring, Summer, etc.
   availability: Availability;
   climate: Climate; // Growing climate (tropical, mediterranean, etc.)

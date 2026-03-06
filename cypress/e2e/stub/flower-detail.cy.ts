@@ -62,28 +62,6 @@ describe('Flower detail page', () => {
     });
   });
 
-  describe('Pricing section', () => {
-    beforeEach(() => {
-      cy.visitFlowerDetail('1');
-    });
-
-    it('displays the wholesale price', () => {
-      cy.contains('Wholesale').should('be.visible');
-      cy.contains('$4.50').should('be.visible');
-    });
-  });
-
-  describe('Sourcing section', () => {
-    beforeEach(() => {
-      cy.visitFlowerDetail('1');
-    });
-
-    it('displays the supplier', () => {
-      cy.contains('Holland Flowers').should('be.visible');
-    });
-
-  });
-
   describe('complementary flowers', () => {
     it('displays complementary flowers when present', () => {
       // Peony (id 1) has complementaryFlowerIds: ["3", "6"] — Hydrangea and Lavender
@@ -109,6 +87,7 @@ describe('Flower detail page', () => {
           ),
           ...(i === 0 ? { complementary_flower_ids: [] } : {}),
           user_flower_overrides: [],
+          flower_suppliers: [],
         }));
         cy.intercept('GET', '**/rest/v1/flowers*', rows).as('getFlowersNoComplement');
       });
@@ -134,32 +113,58 @@ describe('Flower detail page', () => {
     });
   });
 
-  describe('Price editing', () => {
+  describe('Supplier management', () => {
     beforeEach(() => {
-      cy.intercept('POST', '**/user_flower_overrides**', { statusCode: 200, body: {} }).as(
-        'savePrices',
-      );
+      cy.intercept('POST', '**/rest/v1/flower_suppliers**', {
+        statusCode: 201,
+        body: { id: 'new-supplier-id', name: 'Test Supplier', wholesale_price: 5.0 },
+      }).as('addSupplier');
+      cy.intercept('PATCH', '**/rest/v1/flower_suppliers**', {
+        statusCode: 200,
+        body: {},
+      }).as('updateSupplier');
+      cy.intercept('DELETE', '**/rest/v1/flower_suppliers**', {
+        statusCode: 204,
+        body: {},
+      }).as('removeSupplier');
       cy.visitFlowerDetail('1');
     });
 
-    it('opens price edit mode when edit button is clicked', () => {
-      cy.get('[data-cy="edit-prices-button"]').click();
-      cy.get('[data-cy="wholesale-price-input"]').should('be.visible');
+    it('shows the default hint when there are no suppliers', () => {
+      // Peony: supplier = "Holland Flowers", wholesalePrice = 4.50
+      cy.get('[data-cy="supplier-list"]').should('be.visible');
+      cy.contains('Holland Flowers').should('be.visible');
+      cy.contains('$4.50').should('be.visible');
     });
 
-    it('saves updated wholesale price and displays new value', () => {
-      cy.get('[data-cy="edit-prices-button"]').click();
-      cy.get('[data-cy="wholesale-price-input"]').clear().type('6.00');
-      cy.get('[data-cy="save-prices-button"]').click();
-      cy.get('[data-cy="wholesale-price-value"]').should('contain.text', '$6.00');
+    it('shows the add supplier button', () => {
+      cy.get('[data-cy="add-supplier-button"]').should('be.visible');
     });
 
-    it('cancel edit restores original values without saving', () => {
-      cy.get('[data-cy="edit-prices-button"]').click();
-      cy.get('[data-cy="wholesale-price-input"]').clear().type('99.99');
-      cy.get('[data-cy="cancel-price-edit-button"]').click();
-      cy.get('[data-cy="wholesale-price-value"]').should('contain.text', '$4.50');
-      cy.get('[data-cy="edit-prices-button"]').should('be.visible');
+    it('opens inline form when Add supplier is clicked', () => {
+      cy.get('[data-cy="add-supplier-button"]').click();
+      cy.get('[data-cy="supplier-name-input"]').should('be.visible');
+      cy.get('[data-cy="supplier-price-input"]').should('be.visible');
+      cy.get('[data-cy="save-supplier-button"]').should('be.visible');
+      cy.get('[data-cy="cancel-supplier-button"]').should('be.visible');
+    });
+
+    it('adds a new supplier and shows it in the list', () => {
+      cy.get('[data-cy="add-supplier-button"]').click();
+      cy.get('[data-cy="supplier-name-input"]').type('Test Supplier');
+      cy.get('[data-cy="supplier-price-input"]').type('5.00');
+      cy.get('[data-cy="save-supplier-button"]').click();
+      cy.wait('@addSupplier');
+      cy.get('[data-cy="supplier-item"]').should('exist');
+      cy.get('[data-cy="supplier-name"]').should('contain.text', 'Test Supplier');
+    });
+
+    it('cancel closes the form without saving', () => {
+      cy.get('[data-cy="add-supplier-button"]').click();
+      cy.get('[data-cy="supplier-name-input"]').type('Should Not Save');
+      cy.get('[data-cy="cancel-supplier-button"]').click();
+      cy.get('[data-cy="supplier-name-input"]').should('not.exist');
+      cy.get('[data-cy="add-supplier-button"]').should('be.visible');
     });
   });
 });
