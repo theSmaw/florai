@@ -48,12 +48,15 @@ export interface FlowerDetailProps {
   supplierError: string | null;
   savingCare: boolean;
   saveCareError: string | null;
+  savingNotes: boolean;
+  saveNotesError: string | null;
   onBack: () => void;
   onImageUpload: (file: File) => void;
   onAddSupplier: (name: string, wholesalePrice: number | null) => void;
   onUpdateSupplier: (id: string, name: string, wholesalePrice: number | null) => void;
   onRemoveSupplier: (id: string) => void;
   onCareSave: (careInstructions: string) => void;
+  onNotesSave: (notes: string) => void;
 }
 
 export function FlowerDetail({
@@ -65,18 +68,25 @@ export function FlowerDetail({
   supplierError,
   savingCare,
   saveCareError,
+  savingNotes,
+  saveNotesError,
   onBack,
   onImageUpload,
   onAddSupplier,
   onUpdateSupplier,
   onRemoveSupplier,
   onCareSave,
+  onNotesSave,
 }: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isCareEditing, setIsCareEditing] = useState(false);
   const [draftCare, setDraftCare] = useState('');
   const careSaveInitiated = useRef(false);
+
+  const [isNotesEditing, setIsNotesEditing] = useState(false);
+  const [draftNotes, setDraftNotes] = useState('');
+  const notesSaveInitiated = useRef(false);
 
   // Close edit mode after a save completes (success only; keep open on error so the user sees it)
   useEffect(() => {
@@ -87,6 +97,15 @@ export function FlowerDetail({
       }
     }
   }, [savingCare, saveCareError]);
+
+  useEffect(() => {
+    if (notesSaveInitiated.current && !savingNotes) {
+      notesSaveInitiated.current = false;
+      if (!saveNotesError) {
+        setIsNotesEditing(false);
+      }
+    }
+  }, [savingNotes, saveNotesError]);
 
   function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
     const img = e.currentTarget;
@@ -119,6 +138,20 @@ export function FlowerDetail({
   function handleCareSave() {
     careSaveInitiated.current = true;
     onCareSave(draftCare);
+  }
+
+  function handleNotesEditClick() {
+    setDraftNotes(flower.notes);
+    setIsNotesEditing(true);
+  }
+
+  function handleNotesCancel() {
+    setIsNotesEditing(false);
+  }
+
+  function handleNotesSave() {
+    notesSaveInitiated.current = true;
+    onNotesSave(draftNotes);
   }
 
   return (
@@ -359,15 +392,53 @@ export function FlowerDetail({
             )}
           </div>
 
-          {/* Notes */}
-          {flower.notes && (
-            <div className={styles.section}>
+          {/* Sourcing notes — always rendered so users can add notes */}
+          <div className={styles.section}>
+            <div className={styles.careHeader}>
               <SectionHeader label="Sourcing Notes" />
-              <div className={styles.textBlock}>
-                <p className={styles.textBlockContent}>{flower.notes}</p>
-              </div>
+              {!isNotesEditing && (
+                <EditButton
+                  data-cy="edit-notes-button"
+                  onClick={handleNotesEditClick}
+                  disabled={savingNotes}
+                  aria-label="Edit sourcing notes"
+                />
+              )}
             </div>
-          )}
+            {isNotesEditing ? (
+              <div>
+                <textarea
+                  data-cy="sourcing-notes-textarea"
+                  className={styles.careTextarea}
+                  value={draftNotes}
+                  onChange={(e) => setDraftNotes(e.target.value)}
+                  disabled={savingNotes}
+                  rows={5}
+                />
+                {saveNotesError && (
+                  <p data-cy="save-notes-error" className={styles.careError}>{saveNotesError}</p>
+                )}
+                <div className={styles.careEditActions}>
+                  <SaveButton
+                    data-cy="save-notes-button"
+                    saving={savingNotes}
+                    onClick={handleNotesSave}
+                  />
+                  <CancelButton
+                    data-cy="cancel-notes-button"
+                    onClick={handleNotesCancel}
+                    disabled={savingNotes}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className={styles.textBlock}>
+                <p className={styles.textBlockContent}>
+                  {flower.notes || <span className={styles.careEmpty}>No sourcing notes yet. Click Edit to add your notes.</span>}
+                </p>
+              </div>
+            )}
+          </div>
 
           {/* Complementary flowers */}
           {complementaryFlowers.length > 0 && (

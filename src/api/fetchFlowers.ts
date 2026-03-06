@@ -2,8 +2,8 @@ import { supabase } from '../lib/supabase';
 import type { Flower, FlowerSupplier } from '../domain/Flower';
 
 // Row shape returned by Supabase (snake_case DB columns).
-// user_flower_overrides is a nested one-to-many join — we select image_url and care_instructions,
-// and there will be at most one row per flower per user (UNIQUE constraint on user_id, flower_id).
+// user_flower_overrides is a nested one-to-many join — we select image_url, care_instructions,
+// and notes; there will be at most one row per flower per user (UNIQUE constraint on user_id, flower_id).
 // flower_suppliers is a one-to-many join returning all of the current user's supplier entries.
 interface FlowerRow {
   id: string;
@@ -27,6 +27,7 @@ interface FlowerRow {
   user_flower_overrides: Array<{
     image_url: string | null;
     care_instructions: string | null;
+    notes: string | null;
   }>;
   // Nested select result: all supplier entries for the current user
   flower_suppliers: Array<{
@@ -63,7 +64,7 @@ function rowToFlower(row: FlowerRow): Flower {
     availability: row.availability as Flower['availability'],
     climate: row.climate as Flower['climate'],
     careInstructions: override?.care_instructions ?? row.care_instructions ?? '',
-    notes: row.notes ?? '',
+    notes: override?.notes ?? row.notes ?? '',
     complementaryFlowerIds: row.complementary_flower_ids,
   };
 
@@ -84,7 +85,7 @@ function rowToFlower(row: FlowerRow): Flower {
 export async function fetchFlowers(_signal?: AbortSignal): Promise<Flower[]> {
   const { data, error } = await supabase
     .from('flowers')
-    .select('*, user_flower_overrides(image_url, care_instructions), flower_suppliers(id, name, wholesale_price)')
+    .select('*, user_flower_overrides(image_url, care_instructions, notes), flower_suppliers(id, name, wholesale_price)')
     .order('name');
 
   if (error) {

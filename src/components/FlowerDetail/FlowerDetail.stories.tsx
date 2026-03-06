@@ -13,12 +13,15 @@ const meta: Meta<typeof FlowerDetail> = {
     supplierError: null,
     savingCare: false,
     saveCareError: null,
+    savingNotes: false,
+    saveNotesError: null,
     onBack: () => undefined,
     onImageUpload: () => undefined,
     onAddSupplier: () => undefined,
     onUpdateSupplier: () => undefined,
     onRemoveSupplier: () => undefined,
     onCareSave: () => undefined,
+    onNotesSave: () => undefined,
   },
 };
 
@@ -207,5 +210,23 @@ export const SaveCareError: Story = {
     flower: MOCK_FLOWER,
     complementaryFlowers: [],
     saveCareError: 'Failed to save care instructions: network error',
+  },
+};
+
+export const SavingNotes: Story = {
+  name: 'Sourcing notes saving in progress',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: [],
+    savingNotes: true,
+  },
+};
+
+export const SaveNotesError: Story = {
+  name: 'Sourcing notes save failed',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: [],
+    saveNotesError: 'Failed to save sourcing notes: network error',
   },
 };
