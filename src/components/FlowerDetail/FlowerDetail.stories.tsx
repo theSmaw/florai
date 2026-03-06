@@ -24,6 +24,10 @@ const meta: Meta<typeof FlowerDetail> = {
     onCareSave: () => undefined,
     onNotesSave: () => undefined,
     onFlowerSelect: () => undefined,
+    allFlowers: [...MOCK_COMPLEMENTARY],
+    savingPairings: false,
+    savePairingsError: null,
+    onPairingsSave: () => undefined,
   },
 };
 
@@ -221,6 +225,24 @@ export const SavingNotes: Story = {
     flower: MOCK_FLOWER,
     complementaryFlowers: [],
     savingNotes: true,
+  },
+};
+
+export const SavingPairings: Story = {
+  name: 'Pairings saving in progress',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: MOCK_COMPLEMENTARY,
+    savingPairings: true,
+  },
+};
+
+export const SavePairingsError: Story = {
+  name: 'Pairings save failed',
+  args: {
+    flower: MOCK_FLOWER,
+    complementaryFlowers: MOCK_COMPLEMENTARY,
+    savePairingsError: 'Failed to save pairings: network error',
   },
 };
 

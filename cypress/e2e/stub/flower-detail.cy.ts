@@ -171,6 +171,68 @@ describe('Flower detail page', () => {
     });
   });
 
+  describe('Pairs Well With editing', () => {
+    beforeEach(() => {
+      cy.intercept('POST', '**/rest/v1/user_flower_overrides**', {
+        statusCode: 200,
+        body: {},
+      }).as('savePairings');
+      cy.visitFlowerDetail('1');
+    });
+
+    it('shows the Edit button', () => {
+      cy.get('[data-cy="edit-pairings-button"]').should('be.visible');
+    });
+
+    it('clicking Edit shows the current pairings with remove buttons', () => {
+      cy.get('[data-cy="edit-pairings-button"]').click();
+      cy.contains('Blue Hydrangea').should('be.visible');
+      cy.contains('English Lavender').should('be.visible');
+      cy.get('[data-cy="pairings-remove-button"]').should('have.length', 2);
+    });
+
+    it('removing a pairing removes it from the list', () => {
+      cy.get('[data-cy="edit-pairings-button"]').click();
+      cy.contains('Blue Hydrangea')
+        .closest('li')
+        .find('[data-cy="pairings-remove-button"]')
+        .click();
+      cy.contains('Blue Hydrangea').should('not.exist');
+      cy.contains('English Lavender').should('be.visible');
+    });
+
+    it('add dropdown shows flowers not already in the list', () => {
+      cy.get('[data-cy="edit-pairings-button"]').click();
+      cy.get('[data-cy="pairings-add-select"] option').should('have.length.gt', 1);
+      cy.get('[data-cy="pairings-add-select"] option').should('not.contain', 'Blue Hydrangea');
+      cy.get('[data-cy="pairings-add-select"] option').should('not.contain', 'English Lavender');
+    });
+
+    it('selecting from the dropdown adds the flower to the list', () => {
+      cy.get('[data-cy="edit-pairings-button"]').click();
+      cy.get('[data-cy="pairings-add-select"]').select('Explorer Red Rose');
+      cy.contains('Explorer Red Rose').should('be.visible');
+    });
+
+    it('saving calls the intercept', () => {
+      cy.get('[data-cy="edit-pairings-button"]').click();
+      cy.get('[data-cy="save-pairings-button"]').click();
+      cy.wait('@savePairings');
+      cy.get('[data-cy="pairings-add-select"]').should('not.exist');
+    });
+
+    it('cancelling restores the original pairings without saving', () => {
+      cy.get('[data-cy="edit-pairings-button"]').click();
+      cy.contains('Blue Hydrangea')
+        .closest('li')
+        .find('[data-cy="pairings-remove-button"]')
+        .click();
+      cy.get('[data-cy="cancel-pairings-button"]').click();
+      cy.contains('Blue Hydrangea').should('be.visible');
+      cy.get('@savePairings.all').should('have.length', 0);
+    });
+  });
+
   describe('Sourcing Notes editing', () => {
     beforeEach(() => {
       cy.intercept('POST', '**/rest/v1/user_flower_overrides**', {

@@ -12,6 +12,7 @@ import { updateFlowerSupplier } from '../../stores/flowers/asyncActions/updateFl
 import { removeFlowerSupplier } from '../../stores/flowers/asyncActions/removeFlowerSupplier';
 import { updateCareInstructions } from '../../stores/flowers/asyncActions/updateCareInstructions';
 import { updateSourcingNotes } from '../../stores/flowers/asyncActions/updateSourcingNotes';
+import { updateComplementaryFlowers } from '../../stores/flowers/asyncActions/updateComplementaryFlowers';
 import type { AppDispatch, RootState } from '../../stores/store';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
 
@@ -49,6 +50,12 @@ export function FlowerDetailContainer() {
     const s = state.flowers.updateSourcingNotesStatus;
     return s.status === 'rejected' ? s.errorMessage : null;
   });
+  const savingPairings =
+    useSelector((state: RootState) => state.flowers.updateComplementaryFlowersStatus.status) === 'pending';
+  const savePairingsError = useSelector((state: RootState) => {
+    const s = state.flowers.updateComplementaryFlowersStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
 
   // Ensure flowers are loaded if this page is visited directly via URL.
   // loadStatus.status is intentionally read at mount time only — including it
@@ -66,6 +73,7 @@ export function FlowerDetailContainer() {
   const complementaryFlowers = flower
     ? flowers.filter((f) => flower.complementaryFlowerIds.includes(f.id))
     : [];
+  const allFlowers = flowers.filter((f) => f.id !== flowerId);
 
   const handleBack = () =>
     locationState?.backLabel ? navigate(-1) : navigate('/catalogue');
@@ -108,6 +116,12 @@ export function FlowerDetailContainer() {
     }
   }
 
+  function handlePairingsSave(complementaryFlowerIds: string[]) {
+    if (flowerId) {
+      void dispatch(updateComplementaryFlowers({ flowerId, complementaryFlowerIds }));
+    }
+  }
+
   if (!flower) {
     return null;
   }
@@ -133,6 +147,10 @@ export function FlowerDetailContainer() {
       onCareSave={handleCareSave}
       onNotesSave={handleNotesSave}
       onFlowerSelect={handleFlowerSelect}
+      allFlowers={allFlowers}
+      savingPairings={savingPairings}
+      savePairingsError={savePairingsError}
+      onPairingsSave={handlePairingsSave}
     />
   );
 }

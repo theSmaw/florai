@@ -28,6 +28,7 @@ interface FlowerRow {
     image_url: string | null;
     care_instructions: string | null;
     notes: string | null;
+    complementary_flower_ids: string[] | null;
   }>;
   // Nested select result: all supplier entries for the current user
   flower_suppliers: Array<{
@@ -65,7 +66,7 @@ function rowToFlower(row: FlowerRow): Flower {
     climate: row.climate as Flower['climate'],
     careInstructions: override?.care_instructions ?? row.care_instructions ?? '',
     notes: override?.notes ?? row.notes ?? '',
-    complementaryFlowerIds: row.complementary_flower_ids,
+    complementaryFlowerIds: override?.complementary_flower_ids ?? row.complementary_flower_ids,
   };
 
   // Spread optional fields only when non-null (required by exactOptionalPropertyTypes)
@@ -85,7 +86,7 @@ function rowToFlower(row: FlowerRow): Flower {
 export async function fetchFlowers(_signal?: AbortSignal): Promise<Flower[]> {
   const { data, error } = await supabase
     .from('flowers')
-    .select('*, user_flower_overrides(image_url, care_instructions, notes), flower_suppliers(id, name, wholesale_price)')
+    .select('*, user_flower_overrides(image_url, care_instructions, notes, complementary_flower_ids), flower_suppliers(id, name, wholesale_price)')
     .order('name');
 
   if (error) {
