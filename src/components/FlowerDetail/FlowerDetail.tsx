@@ -505,7 +505,7 @@ export function FlowerDetail({
             {isPairingsEditing ? (
               <div>
                 {draftPairingIds.length > 0 ? (
-                  <ul className={styles.pairingsEditList}>
+                  <ul data-cy="pairings-edit-list" className={styles.pairingsEditList}>
                     {draftPairingIds.map((id) => {
                       const pairedFlower = allFlowers.find((f) => f.id === id);
                       if (!pairedFlower) return null;

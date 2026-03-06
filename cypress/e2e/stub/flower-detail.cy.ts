@@ -194,12 +194,13 @@ describe('Flower detail page', () => {
 
     it('removing a pairing removes it from the list', () => {
       cy.get('[data-cy="edit-pairings-button"]').click();
-      cy.contains('Blue Hydrangea')
+      cy.get('[data-cy="pairings-edit-list"]')
+        .contains('Blue Hydrangea')
         .closest('li')
         .find('[data-cy="pairings-remove-button"]')
         .click();
-      cy.contains('Blue Hydrangea').should('not.exist');
-      cy.contains('English Lavender').should('be.visible');
+      cy.get('[data-cy="pairings-edit-list"]').should('not.contain', 'Blue Hydrangea');
+      cy.get('[data-cy="pairings-edit-list"]').should('contain', 'English Lavender');
     });
 
     it('add dropdown shows flowers not already in the list', () => {
