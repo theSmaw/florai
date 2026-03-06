@@ -13,7 +13,6 @@ interface FlowerRow {
   type: string;
   wholesale_price: number;
   supplier: string | null;
-  origin: string | null;
   season: string[];
   availability: string;
   climate: string;
@@ -48,7 +47,6 @@ function rowToFlower(row: FlowerRow): Flower {
     type: row.type,
     wholesalePrice: effectiveWholesalePrice,
     supplier: row.supplier ?? '',
-    origin: row.origin ?? '',
     season: row.season as Flower['season'],
     availability: row.availability as Flower['availability'],
     climate: row.climate as Flower['climate'],

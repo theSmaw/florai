@@ -82,10 +82,6 @@ describe('Flower detail page', () => {
       cy.contains('Holland Flowers').should('be.visible');
     });
 
-    it('displays the origin', () => {
-      cy.contains('Netherlands').should('be.visible');
-    });
-
   });
 
   describe('complementary flowers', () => {

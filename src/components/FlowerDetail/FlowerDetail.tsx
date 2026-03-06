@@ -259,10 +259,6 @@ export function FlowerDetail({
                 <span className={styles.statLabel}>Supplier</span>
                 <span className={styles.statValue}>{flower.supplier}</span>
               </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Origin</span>
-                <span className={styles.statValue}>{flower.origin}</span>
-              </div>
             </div>
             {isPriceEditing && (
               <>

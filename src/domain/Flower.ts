@@ -44,7 +44,6 @@ export interface Flower {
 
   // Sourcing
   supplier: string;
-  origin: string; // Country/region
   season: Season[]; // Spring, Summer, etc.
   availability: Availability;
   climate: Climate; // Growing climate (tropical, mediterranean, etc.)
