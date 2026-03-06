@@ -152,6 +152,45 @@ describe('Flower detail page', () => {
     });
   });
 
+  describe('Sourcing Notes editing', () => {
+    beforeEach(() => {
+      cy.intercept('POST', '**/rest/v1/user_flower_overrides**', {
+        statusCode: 200,
+        body: {},
+      }).as('saveNotes');
+      cy.visitFlowerDetail('1');
+    });
+
+    it('shows the Edit button', () => {
+      cy.get('[data-cy="edit-notes-button"]').should('be.visible');
+    });
+
+    it('clicking Edit shows textarea pre-filled with existing notes', () => {
+      cy.get('[data-cy="edit-notes-button"]').click();
+      cy.get('[data-cy="sourcing-notes-textarea"]')
+        .should('be.visible')
+        .and('have.value', 'Beautiful full bloom, long lasting');
+    });
+
+    it('typing and saving calls the intercept and shows updated text', () => {
+      cy.get('[data-cy="edit-notes-button"]').click();
+      cy.get('[data-cy="sourcing-notes-textarea"]').clear().type('New sourcing notes');
+      cy.get('[data-cy="save-notes-button"]').click();
+      cy.wait('@saveNotes');
+      cy.get('[data-cy="sourcing-notes-textarea"]').should('not.exist');
+      cy.contains('New sourcing notes').should('be.visible');
+    });
+
+    it('clicking Cancel restores original text without saving', () => {
+      cy.get('[data-cy="edit-notes-button"]').click();
+      cy.get('[data-cy="sourcing-notes-textarea"]').clear().type('Should not be saved');
+      cy.get('[data-cy="cancel-notes-button"]').click();
+      cy.get('[data-cy="sourcing-notes-textarea"]').should('not.exist');
+      cy.contains('Beautiful full bloom, long lasting').should('be.visible');
+      cy.get('@saveNotes.all').should('have.length', 0);
+    });
+  });
+
   describe('Supplier management', () => {
     beforeEach(() => {
       cy.intercept('POST', '**/rest/v1/flower_suppliers**', {

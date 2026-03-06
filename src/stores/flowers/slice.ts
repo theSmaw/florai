@@ -6,6 +6,7 @@ import { addFlowerSupplier } from './asyncActions/addFlowerSupplier';
 import { updateFlowerSupplier } from './asyncActions/updateFlowerSupplier';
 import { removeFlowerSupplier } from './asyncActions/removeFlowerSupplier';
 import { updateCareInstructions } from './asyncActions/updateCareInstructions';
+import { updateSourcingNotes } from './asyncActions/updateSourcingNotes';
 import type { Flower, FlowerFilter } from '../../domain/Flower';
 import type { AsyncAction } from '../AsyncAction';
 
@@ -20,6 +21,7 @@ const initialState = {
   overrideImageStatus: { status: 'idle' } as AsyncAction,
   supplierOperationStatus: { status: 'idle' } as AsyncAction,
   updateCareInstructionsStatus: { status: 'idle' } as AsyncAction,
+  updateSourcingNotesStatus: { status: 'idle' } as AsyncAction,
 };
 
 export const flowersSlice = createSlice({
@@ -164,6 +166,24 @@ export const flowersSlice = createSlice({
         state.updateCareInstructionsStatus = {
           status: 'rejected',
           errorMessage: action.error.message ?? 'Failed to update care instructions',
+        };
+      })
+      // Update sourcing notes
+      .addCase(updateSourcingNotes.pending, (state) => {
+        state.updateSourcingNotesStatus = { status: 'pending' };
+      })
+      .addCase(updateSourcingNotes.fulfilled, (state, action) => {
+        state.updateSourcingNotesStatus = { status: 'fulfilled' };
+        const { flowerId, notes } = action.payload;
+        const flower = state.flowers.find((f) => f.id === flowerId);
+        if (flower) {
+          flower.notes = notes;
+        }
+      })
+      .addCase(updateSourcingNotes.rejected, (state, action) => {
+        state.updateSourcingNotesStatus = {
+          status: 'rejected',
+          errorMessage: action.error.message ?? 'Failed to update sourcing notes',
         };
       });
   },

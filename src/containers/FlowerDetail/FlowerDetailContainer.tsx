@@ -11,6 +11,7 @@ import { addFlowerSupplier } from '../../stores/flowers/asyncActions/addFlowerSu
 import { updateFlowerSupplier } from '../../stores/flowers/asyncActions/updateFlowerSupplier';
 import { removeFlowerSupplier } from '../../stores/flowers/asyncActions/removeFlowerSupplier';
 import { updateCareInstructions } from '../../stores/flowers/asyncActions/updateCareInstructions';
+import { updateSourcingNotes } from '../../stores/flowers/asyncActions/updateSourcingNotes';
 import type { AppDispatch, RootState } from '../../stores/store';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
 
@@ -38,6 +39,12 @@ export function FlowerDetailContainer() {
     'pending';
   const saveCareError = useSelector((state: RootState) => {
     const s = state.flowers.updateCareInstructionsStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
+  const savingNotes =
+    useSelector((state: RootState) => state.flowers.updateSourcingNotesStatus.status) === 'pending';
+  const saveNotesError = useSelector((state: RootState) => {
+    const s = state.flowers.updateSourcingNotesStatus;
     return s.status === 'rejected' ? s.errorMessage : null;
   });
 
@@ -90,6 +97,12 @@ export function FlowerDetailContainer() {
     }
   }
 
+  function handleNotesSave(notes: string) {
+    if (flowerId) {
+      void dispatch(updateSourcingNotes({ flowerId, notes }));
+    }
+  }
+
   if (!flower) {
     return null;
   }
@@ -104,12 +117,15 @@ export function FlowerDetailContainer() {
       supplierError={supplierError}
       savingCare={savingCare}
       saveCareError={saveCareError}
+      savingNotes={savingNotes}
+      saveNotesError={saveNotesError}
       onBack={handleBack}
       onImageUpload={handleImageUpload}
       onAddSupplier={handleAddSupplier}
       onUpdateSupplier={handleUpdateSupplier}
       onRemoveSupplier={handleRemoveSupplier}
       onCareSave={handleCareSave}
+      onNotesSave={handleNotesSave}
     />
   );
 }
