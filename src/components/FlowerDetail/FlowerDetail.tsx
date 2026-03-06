@@ -449,21 +449,21 @@ export function FlowerDetail({
             <div className={styles.section}>
               <SectionHeader label="Pairs Well With" />
               <div className={styles.pairings}>
-                {complementaryFlowers.map((f) => (
+                {complementaryFlowers.map((complementaryFlower) => (
                   <button
-                    key={f.id}
+                    key={complementaryFlower.id}
                     type="button"
                     className={styles.pairingCard}
-                    onClick={() => onFlowerSelect(f.id)}
-                    aria-label={`View ${f.name}`}
+                    onClick={() => onFlowerSelect(complementaryFlower.id)}
+                    aria-label={`View ${complementaryFlower.name}`}
                   >
                     <img
-                      src={f.imageUrl ?? '/images/placeholder.svg'}
-                      alt={f.name}
+                      src={complementaryFlower.imageUrl ?? '/images/placeholder.svg'}
+                      alt={complementaryFlower.name}
                       className={styles.pairingImage}
                       onError={handleImgError}
                     />
-                    <span className={styles.pairingName}>{f.name}</span>
+                    <span className={styles.pairingName}>{complementaryFlower.name}</span>
                   </button>
                 ))}
               </div>
