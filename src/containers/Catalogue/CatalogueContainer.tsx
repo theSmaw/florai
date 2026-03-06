@@ -157,7 +157,7 @@ export function CatalogueContainer() {
 
   const handleCardClick = (flowerId: string) => {
     dispatch(flowerSelected(flowerId));
-    navigate(`/catalogue/${flowerId}`);
+    navigate(`/catalogue/${flowerId}`, { state: { backLabel: 'Catalogue' } });
   };
 
   const handleAddFlowerClick = () => {};

@@ -50,6 +50,7 @@ export interface FlowerDetailProps {
   saveCareError: string | null;
   savingNotes: boolean;
   saveNotesError: string | null;
+  backLabel: string;
   onBack: () => void;
   onImageUpload: (file: File) => void;
   onAddSupplier: (name: string, wholesalePrice: number | null) => void;
@@ -71,6 +72,7 @@ export function FlowerDetail({
   saveCareError,
   savingNotes,
   saveNotesError,
+  backLabel,
   onBack,
   onImageUpload,
   onAddSupplier,
@@ -165,10 +167,10 @@ export function FlowerDetail({
             data-cy="back-button"
             className={styles.backButton}
             onClick={onBack}
-            aria-label="Back to catalogue"
+            aria-label={`Back to ${backLabel}`}
           >
             <ChevronLeftIcon width={14} height={14} aria-hidden="true" />
-            Catalogue
+            {backLabel}
           </button>
           <div className={styles.headerDivider} />
           <span className={styles.headerContext}>Flower Details</span>
