@@ -57,6 +57,7 @@ export interface FlowerDetailProps {
   onRemoveSupplier: (id: string) => void;
   onCareSave: (careInstructions: string) => void;
   onNotesSave: (notes: string) => void;
+  onFlowerSelect: (flowerId: string) => void;
 }
 
 export function FlowerDetail({
@@ -77,6 +78,7 @@ export function FlowerDetail({
   onRemoveSupplier,
   onCareSave,
   onNotesSave,
+  onFlowerSelect,
 }: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -446,7 +448,13 @@ export function FlowerDetail({
               <SectionHeader label="Pairs Well With" />
               <div className={styles.pairings}>
                 {complementaryFlowers.map((f) => (
-                  <div key={f.id} className={styles.pairingCard}>
+                  <button
+                    key={f.id}
+                    type="button"
+                    className={styles.pairingCard}
+                    onClick={() => onFlowerSelect(f.id)}
+                    aria-label={`View ${f.name}`}
+                  >
                     <img
                       src={f.imageUrl ?? '/images/placeholder.svg'}
                       alt={f.name}
@@ -454,7 +462,7 @@ export function FlowerDetail({
                       onError={handleImgError}
                     />
                     <span className={styles.pairingName}>{f.name}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>

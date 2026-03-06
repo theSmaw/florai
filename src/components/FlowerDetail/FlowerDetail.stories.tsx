@@ -22,6 +22,7 @@ const meta: Meta<typeof FlowerDetail> = {
     onRemoveSupplier: () => undefined,
     onCareSave: () => undefined,
     onNotesSave: () => undefined,
+    onFlowerSelect: () => undefined,
   },
 };
 

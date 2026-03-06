@@ -66,6 +66,7 @@ export function FlowerDetailContainer() {
     : [];
 
   const handleBack = () => navigate('/catalogue');
+  const handleFlowerSelect = (id: string) => navigate(`/catalogue/${id}`);
 
   function handleImageUpload(file: File) {
     if (flowerId) {
@@ -126,6 +127,7 @@ export function FlowerDetailContainer() {
       onRemoveSupplier={handleRemoveSupplier}
       onCareSave={handleCareSave}
       onNotesSave={handleNotesSave}
+      onFlowerSelect={handleFlowerSelect}
     />
   );
 }
