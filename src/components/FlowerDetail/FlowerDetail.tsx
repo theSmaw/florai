@@ -1,7 +1,7 @@
 // FlowerDetail — pure presentational component
 // Receives all data via props from FlowerDetailContainer.
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeftIcon, Pencil1Icon, UploadIcon } from '@radix-ui/react-icons';
+import { ChevronLeftIcon, UploadIcon } from '@radix-ui/react-icons';
 import type { Availability, Flower, Toxicity } from '../../domain/Flower';
 import {
   AVAILABILITY_LABEL,
@@ -13,6 +13,9 @@ import {
 } from '../../domain/flowerDisplayMeta';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { FlowerSupplierList } from '../FlowerSupplierList/FlowerSupplierList';
+import { EditButton } from '../EditButton/EditButton';
+import { SaveButton } from '../SaveButton/SaveButton';
+import { CancelButton } from '../CancelButton/CancelButton';
 import styles from './FlowerDetail.module.css';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -313,17 +316,12 @@ export function FlowerDetail({
             <div className={styles.careHeader}>
               <SectionHeader label="Botanical Care" />
               {!isCareEditing && (
-                <button
+                <EditButton
                   data-cy="edit-care-button"
-                  type="button"
-                  className={styles.iconButton}
                   onClick={handleCareEditClick}
                   disabled={savingCare}
                   aria-label="Edit care instructions"
-                >
-                  <Pencil1Icon width={13} height={13} aria-hidden="true" />
-                  Edit
-                </button>
+                />
               )}
             </div>
             {isCareEditing ? (
@@ -340,24 +338,16 @@ export function FlowerDetail({
                   <p data-cy="save-care-error" className={styles.careError}>{saveCareError}</p>
                 )}
                 <div className={styles.careEditActions}>
-                  <button
+                  <SaveButton
                     data-cy="save-care-button"
-                    type="button"
-                    className={styles.saveButton}
+                    saving={savingCare}
                     onClick={handleCareSave}
-                    disabled={savingCare}
-                  >
-                    {savingCare ? 'Saving…' : 'Save'}
-                  </button>
-                  <button
+                  />
+                  <CancelButton
                     data-cy="cancel-care-button"
-                    type="button"
-                    className={styles.cancelButton}
                     onClick={handleCareCancel}
                     disabled={savingCare}
-                  >
-                    Cancel
-                  </button>
+                  />
                 </div>
               </div>
             ) : (
