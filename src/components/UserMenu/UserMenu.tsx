@@ -1,6 +1,7 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ExitIcon, PersonIcon } from '@radix-ui/react-icons';
 import type { User } from '../../domain/User';
+import { IconButton } from '../IconButton/IconButton';
 import styles from './UserMenu.module.css';
 
 interface UserMenuProps {
@@ -13,14 +14,13 @@ export function UserMenu({ user, onSignOut }: UserMenuProps) {
     <div className={styles.wrapper}>
       <DropdownMenu.Root modal={false}>
         <DropdownMenu.Trigger asChild>
-          <button
+          <IconButton
             data-cy="user-menu-trigger"
-            className={styles.iconButton}
             aria-haspopup="true"
             aria-label="Open user menu"
           >
             <PersonIcon width={20} height={20} aria-hidden="true" />
-          </button>
+          </IconButton>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>

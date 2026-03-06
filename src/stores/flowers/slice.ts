@@ -76,10 +76,11 @@ export const flowersSlice = createSlice({
       })
       .addCase(overrideFlowerImage.fulfilled, (state, action) => {
         state.overrideImageStatus = { status: 'fulfilled' };
-        // Replace temp blob URL with the real storage URL
+        // Replace temp blob URL with the real storage URL; revoke the blob to free memory
         const { flowerId } = action.meta.arg;
         const flower = state.flowers.find((f) => f.id === flowerId);
         if (flower) {
+          if (flower.imageUrl?.startsWith('blob:')) URL.revokeObjectURL(flower.imageUrl);
           flower.imageUrl = action.payload;
         }
       })

@@ -2,6 +2,7 @@ import type { Preview } from 'storybook';
 import React from 'react';
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
+import '../src/style.css';
 
 export const decorators = [
   (Story: any) =>

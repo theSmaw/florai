@@ -11,6 +11,10 @@
   transition: opacity 150ms ease;
 }
 
+.saveButton:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
 .saveButton:disabled {
   opacity: 0.6;
   cursor: not-allowed;

@@ -5,6 +5,7 @@ import {
   BookmarkFilledIcon,
   HeartFilledIcon,
 } from '@radix-ui/react-icons';
+import { IconButton } from '../IconButton/IconButton';
 import styles from './HeaderMenu.module.css';
 
 interface HeaderMenuProps {
@@ -26,14 +27,13 @@ export function HeaderMenu({
     <div className={styles.wrapper}>
       <DropdownMenu.Root modal={false}>
         <DropdownMenu.Trigger asChild>
-          <button
+          <IconButton
             data-cy="hamburger-menu-trigger"
-            className={styles.iconButton}
             aria-haspopup="true"
             aria-label="Open main menu"
           >
             <HamburgerMenuIcon className={styles.triggerIcon} aria-hidden="true" />
-          </button>
+          </IconButton>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>

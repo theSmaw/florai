@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 import { BellIcon } from '@radix-ui/react-icons';
 import { HeaderMenuContainer } from '../../containers/HeaderMenu/HeaderMenuContainer';
 import { UserMenuContainer } from '../../containers/UserMenu/UserMenuContainer';
+import { IconButton } from '../../components/IconButton/IconButton';
 import styles from './AppLayout.module.css';
 
 export function AppLayout() {
@@ -9,9 +10,9 @@ export function AppLayout() {
     <>
       <div className={styles.iconButtons}>
         <HeaderMenuContainer />
-        <button className={styles.iconButton} aria-label="Notifications">
+        <IconButton aria-label="Notifications">
           <BellIcon width={20} height={20} aria-hidden="true" />
-        </button>
+        </IconButton>
         <UserMenuContainer />
       </div>
       <Outlet />

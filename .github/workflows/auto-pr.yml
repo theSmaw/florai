@@ -53,13 +53,23 @@ jobs:
               'Please review and update the title/description as needed.'
             ].join('\n');
 
-            const { data: pr } = await github.rest.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              base,
-              head: branch,
-              title,
-              body
-            });
+            let pr;
+            try {
+              const { data } = await github.rest.pulls.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                base,
+                head: branch,
+                title,
+                body
+              });
+              pr = data;
+            } catch (err) {
+              if (err.status === 422) {
+                core.info(`PR already exists for ${branch} -> ${base} (created concurrently). Nothing to do.`);
+                return;
+              }
+              throw err;
+            }
 
             core.info(`Created PR #${pr.number}: ${pr.html_url}`);

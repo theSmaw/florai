@@ -2,20 +2,6 @@
   position: relative;
 }
 
-.iconButton {
-  padding: 0.5rem;
-  background: transparent;
-  color: var(--color-text-subtle);
-  border: none;
-  border-radius: var(--radius-full);
-  cursor: pointer;
-  transition: color 150ms ease-in-out;
-}
-
-.iconButton:hover {
-  color: var(--color-text-primary);
-}
-
 .menuPanel {
   display: flex;
   flex-direction: column;
