@@ -1,10 +1,10 @@
 import { supabase } from '../lib/supabase';
-import type { Flower } from '../domain/Flower';
+import type { Flower, FlowerSupplier } from '../domain/Flower';
 
 // Row shape returned by Supabase (snake_case DB columns).
-// user_flower_overrides is a nested one-to-many join — we only select
-// image_url and wholesale_price, and there will be at most one row per flower
-// per user (UNIQUE constraint on user_id, flower_id).
+// user_flower_overrides is a nested one-to-many join — we only select image_url,
+// and there will be at most one row per flower per user (UNIQUE constraint on user_id, flower_id).
+// flower_suppliers is a one-to-many join returning all of the current user's supplier entries.
 interface FlowerRow {
   id: string;
   name: string;
@@ -26,6 +26,11 @@ interface FlowerRow {
   // Nested select result: one row when the signed-in user has an override, empty otherwise
   user_flower_overrides: Array<{
     image_url: string | null;
+  }>;
+  // Nested select result: all supplier entries for the current user
+  flower_suppliers: Array<{
+    id: string;
+    name: string;
     wholesale_price: number | null;
   }>;
 }
@@ -35,18 +40,24 @@ interface FlowerRow {
 // Optional fields (stem length, vase life, etc.) are omitted entirely when
 // null rather than being set to undefined, satisfying exactOptionalPropertyTypes.
 function rowToFlower(row: FlowerRow): Flower {
-  // Use the user's custom image/price if they have an override, otherwise the global default
+  // Use the user's custom image if they have an override, otherwise the global default
   const override = row.user_flower_overrides[0];
   const effectiveImageUrl = override?.image_url ?? row.image_url ?? null;
-  const effectiveWholesalePrice = override?.wholesale_price ?? row.wholesale_price;
+
+  const suppliers: FlowerSupplier[] = row.flower_suppliers.map((s) => ({
+    id: s.id,
+    name: s.name,
+    wholesalePrice: s.wholesale_price,
+  }));
 
   const flower: Flower = {
     id: row.id,
     name: row.name,
     colors: row.colors as Flower['colors'],
     type: row.type,
-    wholesalePrice: effectiveWholesalePrice,
+    wholesalePrice: row.wholesale_price,
     supplier: row.supplier ?? '',
+    suppliers,
     season: row.season as Flower['season'],
     availability: row.availability as Flower['availability'],
     climate: row.climate as Flower['climate'],
@@ -67,13 +78,12 @@ function rowToFlower(row: FlowerRow): Flower {
 }
 
 // Fetches all flowers for the current user.
-// Uses a PostgREST nested select to join user_flower_overrides in a single
-// round-trip. RLS on user_flower_overrides ensures each user only sees their
-// own overrides — no extra filtering needed here.
+// Uses a PostgREST nested select to join user_flower_overrides and flower_suppliers in a single
+// round-trip. RLS on both tables ensures each user only sees their own data.
 export async function fetchFlowers(_signal?: AbortSignal): Promise<Flower[]> {
   const { data, error } = await supabase
     .from('flowers')
-    .select('*, user_flower_overrides(image_url, wholesale_price)')
+    .select('*, user_flower_overrides(image_url), flower_suppliers(id, name, wholesale_price)')
     .order('name');
 
   if (error) {

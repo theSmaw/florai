@@ -1,7 +1,7 @@
 // FlowerDetail — pure presentational component
 // Receives all data via props from FlowerDetailContainer.
-import { useRef, useState } from 'react';
-import { ChevronLeftIcon, Pencil1Icon, UploadIcon } from '@radix-ui/react-icons';
+import { useRef } from 'react';
+import { ChevronLeftIcon, UploadIcon } from '@radix-ui/react-icons';
 import type { Availability, Flower, Toxicity } from '../../domain/Flower';
 import {
   AVAILABILITY_LABEL,
@@ -12,6 +12,7 @@ import {
   TOXICITY_LABEL,
 } from '../../domain/flowerDisplayMeta';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
+import { FlowerSupplierList } from '../FlowerSupplierList/FlowerSupplierList';
 import styles from './FlowerDetail.module.css';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -40,11 +41,13 @@ export interface FlowerDetailProps {
   complementaryFlowers: Flower[];
   uploadingImage: boolean;
   uploadError: string | null;
-  savingPrices: boolean;
-  savePricesError: string | null;
+  savingSupplier: boolean;
+  supplierError: string | null;
   onBack: () => void;
   onImageUpload: (file: File) => void;
-  onPricesSave: (wholesalePrice: number) => void;
+  onAddSupplier: (name: string, wholesalePrice: number | null) => void;
+  onUpdateSupplier: (id: string, name: string, wholesalePrice: number | null) => void;
+  onRemoveSupplier: (id: string) => void;
 }
 
 export function FlowerDetail({
@@ -52,31 +55,16 @@ export function FlowerDetail({
   complementaryFlowers,
   uploadingImage,
   uploadError,
-  savingPrices,
-  savePricesError,
+  savingSupplier,
+  supplierError,
   onBack,
   onImageUpload,
-  onPricesSave,
+  onAddSupplier,
+  onUpdateSupplier,
+  onRemoveSupplier,
 }: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const [isPriceEditing, setIsPriceEditing] = useState(false);
-  const [draftWholesale, setDraftWholesale] = useState(flower.wholesalePrice);
-
-  function handleEditPricesClick() {
-    setDraftWholesale(flower.wholesalePrice);
-    setIsPriceEditing(true);
-  }
-
-  function handleCancelPriceEdit() {
-    setIsPriceEditing(false);
-  }
-
-  function handleSavePrices() {
-    onPricesSave(draftWholesale);
-    setIsPriceEditing(false);
-  }
 
   function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
     const img = e.currentTarget;
@@ -218,77 +206,19 @@ export function FlowerDetail({
             </div>
           </div>
 
-          {/* Sourcing (includes wholesale price) */}
+          {/* Sourcing */}
           <div className={styles.section}>
-            <div className={styles.sectionHeaderRow}>
-              <SectionHeader label="Sourcing" />
-              {!isPriceEditing && (
-                <button
-                  data-cy="edit-prices-button"
-                  type="button"
-                  className={styles.editPricesButton}
-                  onClick={handleEditPricesClick}
-                  aria-label="Edit wholesale price"
-                >
-                  <Pencil1Icon width={12} height={12} aria-hidden="true" />
-                  Edit
-                </button>
-              )}
-            </div>
-            <div className={styles.statList}>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Wholesale</span>
-                {isPriceEditing ? (
-                  <input
-                    data-cy="wholesale-price-input"
-                    type="number"
-                    min={0}
-                    step={0.01}
-                    className={styles.priceInput}
-                    value={draftWholesale}
-                    onChange={(e) => setDraftWholesale(parseFloat(e.target.value) || 0)}
-                    disabled={savingPrices}
-                  />
-                ) : (
-                  <span data-cy="wholesale-price-value" className={styles.statValue}>
-                    ${flower.wholesalePrice.toFixed(2)}
-                  </span>
-                )}
-              </div>
-              <div className={styles.statItem}>
-                <span className={styles.statLabel}>Supplier</span>
-                <span className={styles.statValue}>{flower.supplier}</span>
-              </div>
-            </div>
-            {isPriceEditing && (
-              <>
-                <div className={styles.priceEditActions}>
-                  <button
-                    data-cy="save-prices-button"
-                    type="button"
-                    className={styles.savePricesButton}
-                    onClick={handleSavePrices}
-                    disabled={savingPrices}
-                  >
-                    {savingPrices ? 'Saving…' : 'Save'}
-                  </button>
-                  <button
-                    data-cy="cancel-price-edit-button"
-                    type="button"
-                    className={styles.cancelPriceEditButton}
-                    onClick={handleCancelPriceEdit}
-                    disabled={savingPrices}
-                  >
-                    Cancel
-                  </button>
-                </div>
-                {savePricesError && (
-                  <p data-cy="save-prices-error" className={styles.priceSaveError}>
-                    {savePricesError}
-                  </p>
-                )}
-              </>
-            )}
+            <SectionHeader label="Sourcing" />
+            <FlowerSupplierList
+              suppliers={flower.suppliers}
+              defaultSupplier={flower.supplier}
+              defaultWholesalePrice={flower.wholesalePrice}
+              saving={savingSupplier}
+              error={supplierError}
+              onAdd={onAddSupplier}
+              onUpdate={onUpdateSupplier}
+              onRemove={onRemoveSupplier}
+            />
           </div>
 
           {/* Physical characteristics */}

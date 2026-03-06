@@ -9,11 +9,13 @@ const meta: Meta<typeof FlowerDetail> = {
   args: {
     uploadingImage: false,
     uploadError: null,
-    savingPrices: false,
-    savePricesError: null,
+    savingSupplier: false,
+    supplierError: null,
     onBack: () => undefined,
     onImageUpload: () => undefined,
-    onPricesSave: (_wholesalePrice: number) => undefined,
+    onAddSupplier: () => undefined,
+    onUpdateSupplier: () => undefined,
+    onRemoveSupplier: () => undefined,
   },
 };
 
@@ -32,6 +34,7 @@ const MOCK_FLOWER: Flower = {
   type: 'Peony',
   wholesalePrice: 4.5,
   supplier: 'Holland Flowers',
+  suppliers: [],
   season: ['Spring'],
   availability: 'seasonal',
   climate: 'temperate',
@@ -44,6 +47,14 @@ const MOCK_FLOWER: Flower = {
   complementaryFlowerIds: ['2', '3'],
 };
 
+const MOCK_FLOWER_WITH_SUPPLIERS: Flower = {
+  ...MOCK_FLOWER,
+  suppliers: [
+    { id: 's1', name: 'Holland Flowers', wholesalePrice: 4.5 },
+    { id: 's2', name: 'Kenya Blooms', wholesalePrice: 3.75 },
+  ],
+};
+
 const MOCK_COMPLEMENTARY: Flower[] = [
   {
     id: '2',
@@ -52,6 +63,7 @@ const MOCK_COMPLEMENTARY: Flower[] = [
     type: 'Rose',
     wholesalePrice: 2.25,
     supplier: 'Kenya Blooms',
+    suppliers: [],
     season: ['Year-round'],
     availability: 'always',
     climate: 'subtropical',
@@ -66,6 +78,7 @@ const MOCK_COMPLEMENTARY: Flower[] = [
     type: 'Hydrangea',
     wholesalePrice: 3.75,
     supplier: 'Dutch Garden',
+    suppliers: [],
     season: ['Summer'],
     availability: 'seasonal',
     climate: 'temperate',
@@ -80,9 +93,17 @@ const MOCK_COMPLEMENTARY: Flower[] = [
 // ---------------------------------------------------------------------------
 
 export const Default: Story = {
-  name: 'Full details',
+  name: 'Full details (no suppliers yet)',
   args: {
     flower: MOCK_FLOWER,
+    complementaryFlowers: MOCK_COMPLEMENTARY,
+  },
+};
+
+export const WithSuppliers: Story = {
+  name: 'With suppliers',
+  args: {
+    flower: MOCK_FLOWER_WITH_SUPPLIERS,
     complementaryFlowers: MOCK_COMPLEMENTARY,
   },
 };
@@ -115,6 +136,7 @@ export const NoOptionalFields: Story = {
       type: 'Tulip',
       wholesalePrice: 1.5,
       supplier: 'Spring Co.',
+      suppliers: [],
       season: ['Spring'],
       availability: 'limited',
       climate: 'mediterranean',
@@ -149,20 +171,20 @@ export const ToxicFlower: Story = {
   },
 };
 
-export const SavingPrices: Story = {
-  name: 'Saving prices in progress',
+export const SavingSupplier: Story = {
+  name: 'Saving supplier in progress',
   args: {
-    flower: MOCK_FLOWER,
+    flower: MOCK_FLOWER_WITH_SUPPLIERS,
     complementaryFlowers: [],
-    savingPrices: true,
+    savingSupplier: true,
   },
 };
 
-export const SavePricesError: Story = {
-  name: 'Save prices failed',
+export const SupplierError: Story = {
+  name: 'Supplier operation failed',
   args: {
-    flower: MOCK_FLOWER,
+    flower: MOCK_FLOWER_WITH_SUPPLIERS,
     complementaryFlowers: [],
-    savePricesError: 'Failed to save price override: network error',
+    supplierError: 'Failed to save supplier: network error',
   },
 };

@@ -7,7 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectFlowersList, selectLoadFlowersStatus } from '../../stores/flowers/selectors';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import { overrideFlowerImage } from '../../stores/flowers/asyncActions/overrideFlowerImage';
-import { updateFlowerPrices } from '../../stores/flowers/asyncActions/updateFlowerPrices';
+import { addFlowerSupplier } from '../../stores/flowers/asyncActions/addFlowerSupplier';
+import { updateFlowerSupplier } from '../../stores/flowers/asyncActions/updateFlowerSupplier';
+import { removeFlowerSupplier } from '../../stores/flowers/asyncActions/removeFlowerSupplier';
 import type { AppDispatch, RootState } from '../../stores/store';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
 
@@ -24,10 +26,10 @@ export function FlowerDetailContainer() {
     const s = state.flowers.overrideImageStatus;
     return s.status === 'rejected' ? s.errorMessage : null;
   });
-  const savingPrices =
-    useSelector((state: RootState) => state.flowers.updatePricesStatus.status) === 'pending';
-  const savePricesError = useSelector((state: RootState) => {
-    const s = state.flowers.updatePricesStatus;
+  const savingSupplier =
+    useSelector((state: RootState) => state.flowers.supplierOperationStatus.status) === 'pending';
+  const supplierError = useSelector((state: RootState) => {
+    const s = state.flowers.supplierOperationStatus;
     return s.status === 'rejected' ? s.errorMessage : null;
   });
 
@@ -52,14 +54,25 @@ export function FlowerDetailContainer() {
 
   function handleImageUpload(file: File) {
     if (flowerId) {
-      // void discards the returned Promise — we track status via Redux state instead
       void dispatch(overrideFlowerImage({ flowerId, file }));
     }
   }
 
-  function handlePricesSave(wholesalePrice: number) {
+  function handleAddSupplier(name: string, wholesalePrice: number | null) {
     if (flowerId) {
-      void dispatch(updateFlowerPrices({ flowerId, wholesalePrice }));
+      void dispatch(addFlowerSupplier({ flowerId, name, wholesalePrice }));
+    }
+  }
+
+  function handleUpdateSupplier(id: string, name: string, wholesalePrice: number | null) {
+    if (flowerId) {
+      void dispatch(updateFlowerSupplier({ flowerId, id, name, wholesalePrice }));
+    }
+  }
+
+  function handleRemoveSupplier(supplierId: string) {
+    if (flowerId) {
+      void dispatch(removeFlowerSupplier({ flowerId, supplierId }));
     }
   }
 
@@ -73,11 +86,13 @@ export function FlowerDetailContainer() {
       complementaryFlowers={complementaryFlowers}
       uploadingImage={uploadingImage}
       uploadError={uploadError}
-      savingPrices={savingPrices}
-      savePricesError={savePricesError}
+      savingSupplier={savingSupplier}
+      supplierError={supplierError}
       onBack={handleBack}
       onImageUpload={handleImageUpload}
-      onPricesSave={handlePricesSave}
+      onAddSupplier={handleAddSupplier}
+      onUpdateSupplier={handleUpdateSupplier}
+      onRemoveSupplier={handleRemoveSupplier}
     />
   );
 }
