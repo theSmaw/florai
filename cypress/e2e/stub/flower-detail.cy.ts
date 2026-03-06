@@ -71,6 +71,25 @@ describe('Flower detail page', () => {
       cy.contains('English Lavender').should('be.visible');
     });
 
+    it('clicking a complementary flower navigates to its detail page', () => {
+      cy.visitFlowerDetail('1');
+      // Peony (id 1) pairs with Blue Hydrangea (id 3) and English Lavender (id 6)
+      cy.contains('Blue Hydrangea').click();
+      cy.url().should('match', /\/catalogue\/3$/);
+      cy.get('[data-cy="flower-name"]').should('contain.text', 'Blue Hydrangea');
+    });
+
+    it('back button shows the source flower name after navigating via a pairing', () => {
+      cy.visitFlowerDetail('1');
+      cy.contains('Blue Hydrangea').click();
+      cy.get('[data-cy="back-button"]').should('contain.text', 'Peony Sarah Bernhardt');
+    });
+
+    it('back button shows Catalogue when arriving via direct URL', () => {
+      cy.visitFlowerDetail('1');
+      cy.get('[data-cy="back-button"]').should('contain.text', 'Catalogue');
+    });
+
     it('does not show the Pairs Well With section when there are no complementary flowers', () => {
       // This test needs a custom fixture variant (flower id=1 with no complementary
       // flower IDs), so it sets up its own intercept rather than using cy.stubFlowers().

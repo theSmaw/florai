@@ -50,6 +50,7 @@ export interface FlowerDetailProps {
   saveCareError: string | null;
   savingNotes: boolean;
   saveNotesError: string | null;
+  backLabel: string;
   onBack: () => void;
   onImageUpload: (file: File) => void;
   onAddSupplier: (name: string, wholesalePrice: number | null) => void;
@@ -57,6 +58,7 @@ export interface FlowerDetailProps {
   onRemoveSupplier: (id: string) => void;
   onCareSave: (careInstructions: string) => void;
   onNotesSave: (notes: string) => void;
+  onFlowerSelect: (flowerId: string) => void;
 }
 
 export function FlowerDetail({
@@ -70,6 +72,7 @@ export function FlowerDetail({
   saveCareError,
   savingNotes,
   saveNotesError,
+  backLabel,
   onBack,
   onImageUpload,
   onAddSupplier,
@@ -77,6 +80,7 @@ export function FlowerDetail({
   onRemoveSupplier,
   onCareSave,
   onNotesSave,
+  onFlowerSelect,
 }: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -163,10 +167,10 @@ export function FlowerDetail({
             data-cy="back-button"
             className={styles.backButton}
             onClick={onBack}
-            aria-label="Back to catalogue"
+            aria-label={`Back to ${backLabel}`}
           >
             <ChevronLeftIcon width={14} height={14} aria-hidden="true" />
-            Catalogue
+            {backLabel}
           </button>
           <div className={styles.headerDivider} />
           <span className={styles.headerContext}>Flower Details</span>
@@ -445,16 +449,22 @@ export function FlowerDetail({
             <div className={styles.section}>
               <SectionHeader label="Pairs Well With" />
               <div className={styles.pairings}>
-                {complementaryFlowers.map((f) => (
-                  <div key={f.id} className={styles.pairingCard}>
+                {complementaryFlowers.map((complementaryFlower) => (
+                  <button
+                    key={complementaryFlower.id}
+                    type="button"
+                    className={styles.pairingCard}
+                    onClick={() => onFlowerSelect(complementaryFlower.id)}
+                    aria-label={`View ${complementaryFlower.name}`}
+                  >
                     <img
-                      src={f.imageUrl ?? '/images/placeholder.svg'}
-                      alt={f.name}
+                      src={complementaryFlower.imageUrl ?? '/images/placeholder.svg'}
+                      alt={complementaryFlower.name}
                       className={styles.pairingImage}
                       onError={handleImgError}
                     />
-                    <span className={styles.pairingName}>{f.name}</span>
-                  </div>
+                    <span className={styles.pairingName}>{complementaryFlower.name}</span>
+                  </button>
                 ))}
               </div>
             </div>

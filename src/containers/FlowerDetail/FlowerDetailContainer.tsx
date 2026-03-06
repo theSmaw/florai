@@ -2,7 +2,7 @@
 // Connects the Redux store to the FlowerDetail component.
 // Handles navigation and resolves the flower from the URL param.
 import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFlowersList, selectLoadFlowersStatus } from '../../stores/flowers/selectors';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
@@ -19,6 +19,8 @@ export function FlowerDetailContainer() {
   const { flowerId } = useParams<{ flowerId: string }>();
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const locationState = useLocation().state as { backLabel?: string } | null;
+  const backLabel = locationState?.backLabel ?? 'Catalogue';
 
   const flowers = useSelector(selectFlowersList);
   const loadStatus = useSelector(selectLoadFlowersStatus);
@@ -65,7 +67,10 @@ export function FlowerDetailContainer() {
     ? flowers.filter((f) => flower.complementaryFlowerIds.includes(f.id))
     : [];
 
-  const handleBack = () => navigate('/catalogue');
+  const handleBack = () =>
+    locationState?.backLabel ? navigate(-1) : navigate('/catalogue');
+  const handleFlowerSelect = (id: string) =>
+    navigate(`/catalogue/${id}`, { state: { backLabel: flower?.name ?? 'Flower' } });
 
   function handleImageUpload(file: File) {
     if (flowerId) {
@@ -119,6 +124,7 @@ export function FlowerDetailContainer() {
       saveCareError={saveCareError}
       savingNotes={savingNotes}
       saveNotesError={saveNotesError}
+      backLabel={backLabel}
       onBack={handleBack}
       onImageUpload={handleImageUpload}
       onAddSupplier={handleAddSupplier}
@@ -126,6 +132,7 @@ export function FlowerDetailContainer() {
       onRemoveSupplier={handleRemoveSupplier}
       onCareSave={handleCareSave}
       onNotesSave={handleNotesSave}
+      onFlowerSelect={handleFlowerSelect}
     />
   );
 }

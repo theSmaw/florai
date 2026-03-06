@@ -7,6 +7,7 @@ const meta: Meta<typeof FlowerDetail> = {
   component: FlowerDetail,
   tags: ['autodocs'],
   args: {
+    backLabel: 'Catalogue',
     uploadingImage: false,
     uploadError: null,
     savingSupplier: false,
@@ -22,6 +23,7 @@ const meta: Meta<typeof FlowerDetail> = {
     onRemoveSupplier: () => undefined,
     onCareSave: () => undefined,
     onNotesSave: () => undefined,
+    onFlowerSelect: () => undefined,
   },
 };
 
