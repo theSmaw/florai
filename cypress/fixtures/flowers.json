@@ -9,7 +9,6 @@
     "imageUrl": "/images/flowers/peony.png",
     "wholesalePrice": 4.5,
     "supplier": "Holland Flowers",
-    "origin": "Netherlands",
     "season": [
       "Spring"
     ],
@@ -36,7 +35,6 @@
     "imageUrl": "/images/flowers/explorer-red-rose.png",
     "wholesalePrice": 2.25,
     "supplier": "Ecuador Flowers",
-    "origin": "Ecuador",
     "season": [
       "Year-round"
     ],
@@ -63,7 +61,6 @@
     "imageUrl": "/images/flowers/blue-hydrangea.png",
     "wholesalePrice": 8.9,
     "supplier": "Domestic Grower",
-    "origin": "California",
     "season": [
       "Summer"
     ],
@@ -90,7 +87,6 @@
     "imageUrl": "/images/flowers/lush-calla-lilly.png",
     "wholesalePrice": 3.75,
     "supplier": "Holland Flowers",
-    "origin": "Netherlands",
     "season": [
       "Winter"
     ],
@@ -116,7 +112,6 @@
     "imageUrl": "/images/flowers/sunbeam-sunflower.png",
     "wholesalePrice": 1.5,
     "supplier": "Domestic Grower",
-    "origin": "Texas",
     "season": [
       "Summer"
     ],
@@ -143,7 +138,6 @@
     "imageUrl": "/images/flowers/english-lavender.png",
     "wholesalePrice": 0.85,
     "supplier": "UK Grower",
-    "origin": "United Kingdom",
     "season": [
       "Spring"
     ],
