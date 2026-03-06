@@ -1,6 +1,6 @@
 // FlowerDetail — pure presentational component
 // Receives all data via props from FlowerDetailContainer.
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ChevronLeftIcon, UploadIcon } from '@radix-ui/react-icons';
 import type { Availability, Flower, Toxicity } from '../../domain/Flower';
 import {
@@ -13,6 +13,9 @@ import {
 } from '../../domain/flowerDisplayMeta';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { FlowerSupplierList } from '../FlowerSupplierList/FlowerSupplierList';
+import { EditButton } from '../EditButton/EditButton';
+import { SaveButton } from '../SaveButton/SaveButton';
+import { CancelButton } from '../CancelButton/CancelButton';
 import styles from './FlowerDetail.module.css';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -43,11 +46,14 @@ export interface FlowerDetailProps {
   uploadError: string | null;
   savingSupplier: boolean;
   supplierError: string | null;
+  savingCare: boolean;
+  saveCareError: string | null;
   onBack: () => void;
   onImageUpload: (file: File) => void;
   onAddSupplier: (name: string, wholesalePrice: number | null) => void;
   onUpdateSupplier: (id: string, name: string, wholesalePrice: number | null) => void;
   onRemoveSupplier: (id: string) => void;
+  onCareSave: (careInstructions: string) => void;
 }
 
 export function FlowerDetail({
@@ -57,14 +63,30 @@ export function FlowerDetail({
   uploadError,
   savingSupplier,
   supplierError,
+  savingCare,
+  saveCareError,
   onBack,
   onImageUpload,
   onAddSupplier,
   onUpdateSupplier,
   onRemoveSupplier,
+  onCareSave,
 }: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isCareEditing, setIsCareEditing] = useState(false);
+  const [draftCare, setDraftCare] = useState('');
+  const careSaveInitiated = useRef(false);
+
+  // Close edit mode after a save completes (success only; keep open on error so the user sees it)
+  useEffect(() => {
+    if (careSaveInitiated.current && !savingCare) {
+      careSaveInitiated.current = false;
+      if (!saveCareError) {
+        setIsCareEditing(false);
+      }
+    }
+  }, [savingCare, saveCareError]);
 
   function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
     const img = e.currentTarget;
@@ -83,6 +105,20 @@ export function FlowerDetail({
       // Reset input so the same file can be picked again if needed
       e.target.value = '';
     }
+  }
+
+  function handleCareEditClick() {
+    setDraftCare(flower.careInstructions);
+    setIsCareEditing(true);
+  }
+
+  function handleCareCancel() {
+    setIsCareEditing(false);
+  }
+
+  function handleCareSave() {
+    careSaveInitiated.current = true;
+    onCareSave(draftCare);
   }
 
   return (
@@ -275,15 +311,53 @@ export function FlowerDetail({
             </div>
           )}
 
-          {/* Care instructions */}
-          {flower.careInstructions && (
-            <div className={styles.section}>
+          {/* Care instructions — always rendered so users can add notes */}
+          <div className={styles.section}>
+            <div className={styles.careHeader}>
               <SectionHeader label="Botanical Care" />
-              <div className={styles.textBlock}>
-                <p className={styles.textBlockContent}>{flower.careInstructions}</p>
-              </div>
+              {!isCareEditing && (
+                <EditButton
+                  data-cy="edit-care-button"
+                  onClick={handleCareEditClick}
+                  disabled={savingCare}
+                  aria-label="Edit care instructions"
+                />
+              )}
             </div>
-          )}
+            {isCareEditing ? (
+              <div>
+                <textarea
+                  data-cy="care-instructions-textarea"
+                  className={styles.careTextarea}
+                  value={draftCare}
+                  onChange={(e) => setDraftCare(e.target.value)}
+                  disabled={savingCare}
+                  rows={5}
+                />
+                {saveCareError && (
+                  <p data-cy="save-care-error" className={styles.careError}>{saveCareError}</p>
+                )}
+                <div className={styles.careEditActions}>
+                  <SaveButton
+                    data-cy="save-care-button"
+                    saving={savingCare}
+                    onClick={handleCareSave}
+                  />
+                  <CancelButton
+                    data-cy="cancel-care-button"
+                    onClick={handleCareCancel}
+                    disabled={savingCare}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className={styles.textBlock}>
+                <p className={styles.textBlockContent}>
+                  {flower.careInstructions || <span className={styles.careEmpty}>No care instructions yet. Click Edit to add your notes.</span>}
+                </p>
+              </div>
+            )}
+          </div>
 
           {/* Notes */}
           {flower.notes && (

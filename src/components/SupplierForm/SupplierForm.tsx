@@ -1,5 +1,7 @@
 // SupplierForm — inline add/edit form for a single flower supplier entry.
 import { useState } from 'react';
+import { SaveButton } from '../SaveButton/SaveButton';
+import { CancelButton } from '../CancelButton/CancelButton';
 import styles from './SupplierForm.module.css';
 
 export interface SupplierFormProps {
@@ -50,24 +52,17 @@ export function SupplierForm({
         disabled={saving}
       />
       <div className={styles.formActions}>
-        <button
+        <SaveButton
           data-cy="save-supplier-button"
-          type="button"
-          className={styles.saveButton}
-          onClick={handleSave}
+          saving={saving}
           disabled={saving || name.trim() === ''}
-        >
-          {saving ? 'Saving…' : 'Save'}
-        </button>
-        <button
+          onClick={handleSave}
+        />
+        <CancelButton
           data-cy="cancel-supplier-button"
-          type="button"
-          className={styles.cancelButton}
           onClick={onCancel}
           disabled={saving}
-        >
-          Cancel
-        </button>
+        />
       </div>
     </div>
   );

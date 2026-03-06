@@ -370,6 +370,66 @@
   color: var(--color-text-primary);
 }
 
+/* ─── Care inline edit ────────────────────────────────── */
+
+.careHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+/* SectionHeader's root div must fill the remaining width so its internal
+   horizontal rule spans the full row (it normally takes 100% as a block,
+   but needs explicit flex: 1 here because it's a flex child). */
+.careHeader > div:first-child {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.careTextarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  line-height: 1.75;
+  resize: vertical;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.careTextarea:focus {
+  border-color: var(--color-brand);
+}
+
+.careTextarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.careEditActions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.careError {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}
+
+.careEmpty {
+  color: var(--color-text-subtle);
+  font-style: italic;
+}
+
 /* ─── Care / Notes block ──────────────────────────────── */
 
 .textBlock {

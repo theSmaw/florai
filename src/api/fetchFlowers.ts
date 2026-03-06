@@ -2,7 +2,7 @@ import { supabase } from '../lib/supabase';
 import type { Flower, FlowerSupplier } from '../domain/Flower';
 
 // Row shape returned by Supabase (snake_case DB columns).
-// user_flower_overrides is a nested one-to-many join — we only select image_url,
+// user_flower_overrides is a nested one-to-many join — we select image_url and care_instructions,
 // and there will be at most one row per flower per user (UNIQUE constraint on user_id, flower_id).
 // flower_suppliers is a one-to-many join returning all of the current user's supplier entries.
 interface FlowerRow {
@@ -26,6 +26,7 @@ interface FlowerRow {
   // Nested select result: one row when the signed-in user has an override, empty otherwise
   user_flower_overrides: Array<{
     image_url: string | null;
+    care_instructions: string | null;
   }>;
   // Nested select result: all supplier entries for the current user
   flower_suppliers: Array<{
@@ -40,7 +41,7 @@ interface FlowerRow {
 // Optional fields (stem length, vase life, etc.) are omitted entirely when
 // null rather than being set to undefined, satisfying exactOptionalPropertyTypes.
 function rowToFlower(row: FlowerRow): Flower {
-  // Use the user's custom image if they have an override, otherwise the global default
+  // Use the user's overrides when present, otherwise fall back to global defaults
   const override = row.user_flower_overrides[0];
   const effectiveImageUrl = override?.image_url ?? row.image_url ?? null;
 
@@ -61,7 +62,7 @@ function rowToFlower(row: FlowerRow): Flower {
     season: row.season as Flower['season'],
     availability: row.availability as Flower['availability'],
     climate: row.climate as Flower['climate'],
-    careInstructions: row.care_instructions ?? '',
+    careInstructions: override?.care_instructions ?? row.care_instructions ?? '',
     notes: row.notes ?? '',
     complementaryFlowerIds: row.complementary_flower_ids,
   };
@@ -83,7 +84,7 @@ function rowToFlower(row: FlowerRow): Flower {
 export async function fetchFlowers(_signal?: AbortSignal): Promise<Flower[]> {
   const { data, error } = await supabase
     .from('flowers')
-    .select('*, user_flower_overrides(image_url), flower_suppliers(id, name, wholesale_price)')
+    .select('*, user_flower_overrides(image_url, care_instructions), flower_suppliers(id, name, wholesale_price)')
     .order('name');
 
   if (error) {
