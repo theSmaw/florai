@@ -2,7 +2,10 @@ declare global {
   namespace Cypress {
     interface Chainable {
       stubFlowers(): Chainable<void>;
+      stubArrangements(): Chainable<void>;
       visitCatalogue(): Chainable<void>;
+      visitCollection(): Chainable<void>;
+      visitArrangementDetail(id: string): Chainable<void>;
       visitFlowerDetail(flowerId: string): Chainable<void>;
       visitWithFakeAuth(url: string): Chainable<void>;
       navigateTo(item: 'catalogue' | 'collection' | 'weddings'): Chainable<void>;
@@ -106,6 +109,31 @@ Cypress.Commands.add('visitFlowerDetail', (flowerId: string) => {
   cy.visitWithFakeAuth(`/catalogue/${flowerId}`);
   cy.wait('@getFlowers');
   cy.get('[data-cy="flower-detail-view"]').should('be.visible');
+});
+
+/**
+ * Intercepts the Supabase PostgREST arrangements query and returns fixture data.
+ */
+Cypress.Commands.add('stubArrangements', () => {
+  cy.fixture('arrangements.json').then((arrangements) => {
+    cy.intercept('GET', '**/rest/v1/arrangements*', {
+      body: arrangements,
+      statusCode: 200,
+    }).as('getArrangements');
+  });
+});
+
+Cypress.Commands.add('visitCollection', () => {
+  cy.visitWithFakeAuth('/collection');
+  cy.wait('@getFlowers');
+  cy.wait('@getArrangements');
+});
+
+Cypress.Commands.add('visitArrangementDetail', (id: string) => {
+  cy.visitWithFakeAuth(`/collection/${id}`);
+  cy.wait('@getFlowers');
+  cy.wait('@getArrangements');
+  cy.get('[data-cy="arrangement-detail-view"]').should('be.visible');
 });
 
 /**

@@ -11,6 +11,7 @@ import { CatalogueView } from './views/Catalogue/CatalogueView';
 import { CollectionView } from './views/Collection/CollectionView';
 import { WeddingsView } from './views/Weddings/WeddingsView';
 import { FlowerDetailView } from './views/FlowerDetail/FlowerDetailView';
+import { ArrangementDetailView } from './views/ArrangementDetail/ArrangementDetailView';
 import { AuthView } from './views/Auth/AuthView';
 import { RequireAuthContainer } from './containers/RequireAuth/RequireAuthContainer';
 
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
         element: (
           <RequireAuthContainer>
             <CollectionView />
+          </RequireAuthContainer>
+        ),
+      },
+      {
+        path: 'collection/:arrangementId',
+        element: (
+          <RequireAuthContainer>
+            <ArrangementDetailView />
           </RequireAuthContainer>
         ),
       },
