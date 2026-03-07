@@ -27,7 +27,9 @@ export async function uploadArrangementImage(
     .from('arrangement-images')
     .getPublicUrl(storagePath);
 
-  const imageUrl = urlData.publicUrl;
+  // Append a timestamp so the browser doesn't serve the cached previous image
+  // when the same storage path is upserted with a new file.
+  const imageUrl = `${urlData.publicUrl}?t=${Date.now()}`;
 
   const { error: patchError } = await supabase
     .from('arrangements')
