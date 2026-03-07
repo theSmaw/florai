@@ -1,34 +1,34 @@
-describe('Collection page', () => {
+describe('Arrangements page', () => {
   beforeEach(() => {
     cy.stubFlowers();
     cy.stubArrangements();
   });
 
   describe('navigation', () => {
-    it('loads at /collection via direct URL', () => {
-      cy.visitCollection();
-      cy.get('[data-cy="collection-view"]').should('be.visible');
-      cy.url().should('include', '/collection');
+    it('loads at /arrangements via direct URL', () => {
+      cy.visitArrangements();
+      cy.get('[data-cy="arrangements-view"]').should('be.visible');
+      cy.url().should('include', '/arrangements');
     });
 
     it('clicking an arrangement card navigates to its detail page', () => {
-      cy.visitCollection();
+      cy.visitArrangements();
       cy.get('[data-cy="arrangement-card"]').first().click();
       cy.get('[data-cy="arrangement-detail-view"]').should('be.visible');
-      cy.url().should('match', /\/collection\/a\d/);
+      cy.url().should('match', /\/arrangements\/a\d/);
     });
 
-    it('back button from detail returns to /collection', () => {
+    it('back button from detail returns to /arrangements', () => {
       cy.visitArrangementDetail('a1');
       cy.get('[data-cy="back-button"]').click();
-      cy.get('[data-cy="collection-view"]').should('be.visible');
-      cy.url().should('match', /\/collection$/);
+      cy.get('[data-cy="arrangements-view"]').should('be.visible');
+      cy.url().should('match', /\/arrangements$/);
     });
   });
 
-  describe('collection list', () => {
+  describe('arrangement list', () => {
     beforeEach(() => {
-      cy.visitCollection();
+      cy.visitArrangements();
     });
 
     it('displays arrangement names from fixture', () => {
@@ -42,46 +42,45 @@ describe('Collection page', () => {
     });
 
     it('shows empty state when no arrangements match', () => {
-      // Set a search that matches nothing
-      cy.get('[data-cy="collection-search-input"]').type('xyzxyzxyz');
-      cy.get('[data-cy="collection-empty"]').should('be.visible');
+      cy.get('[data-cy="arrangements-search-input"]').type('xyzxyzxyz');
+      cy.get('[data-cy="arrangements-empty"]').should('be.visible');
     });
   });
 
   describe('filters', () => {
     beforeEach(() => {
-      cy.visitCollection();
+      cy.visitArrangements();
     });
 
     it('search filters arrangements by name', () => {
-      cy.get('[data-cy="collection-search-input"]').type('Spring');
+      cy.get('[data-cy="arrangements-search-input"]').type('Spring');
       cy.get('[data-cy="arrangement-card"]').should('have.length', 1);
       cy.contains('Spring Romance').should('be.visible');
       cy.contains('Wild Garden Posy').should('not.exist');
     });
 
     it('clearing search restores full list', () => {
-      cy.get('[data-cy="collection-search-input"]').type('Spring');
+      cy.get('[data-cy="arrangements-search-input"]').type('Spring');
       cy.get('[data-cy="arrangement-card"]').should('have.length', 1);
-      cy.get('[data-cy="collection-search-input"]').clear();
+      cy.get('[data-cy="arrangements-search-input"]').clear();
       cy.get('[data-cy="arrangement-card"]').should('have.length', 3);
     });
 
     it('filter button is visible', () => {
-      cy.get('[data-cy="collection-filter-button"]').should('be.visible');
+      cy.get('[data-cy="arrangements-filter-button"]').should('be.visible');
     });
   });
 
   describe('add arrangement', () => {
     beforeEach(() => {
-      cy.visitCollection();
+      cy.visitArrangements();
     });
 
-    it('shows FAB button', () => {
+    it('shows add button', () => {
       cy.get('[data-cy="add-arrangement-button"]').should('be.visible');
     });
 
-    it('clicking FAB opens the add modal', () => {
+    it('clicking add button opens the add modal', () => {
       cy.get('[data-cy="add-arrangement-button"]').click();
       cy.get('[data-cy="arrangement-name-input"]').should('be.visible');
       cy.get('[data-cy="arrangement-size-select"]').should('be.visible');
@@ -190,8 +189,8 @@ describe('Collection page', () => {
       cy.get('@saveNotes.all').should('have.length', 0);
     });
 
-    it('shows the back button with Collection label when arriving directly', () => {
-      cy.get('[data-cy="back-button"]').should('contain.text', 'Collection');
+    it('shows the back button with Arrangements label when arriving directly', () => {
+      cy.get('[data-cy="back-button"]').should('contain.text', 'Arrangements');
     });
   });
 });

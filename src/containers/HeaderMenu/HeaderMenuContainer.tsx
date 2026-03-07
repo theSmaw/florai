@@ -6,7 +6,7 @@ export function HeaderMenuContainer() {
   return (
     <HeaderMenu
       onCatalogueClick={() => navigate('/catalogue')}
-      onCollectionClick={() => navigate('/collection')}
+      onArrangementsClick={() => navigate('/arrangements')}
       onWeddingsClick={() => navigate('/weddings')}
     />
   );

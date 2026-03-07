@@ -7,14 +7,15 @@ describe('Navigation', () => {
   it('opens the hamburger menu', () => {
     cy.get('[data-cy="hamburger-menu-trigger"]').click();
     cy.get('[data-cy="nav-catalogue"]').should('be.visible');
-    cy.get('[data-cy="nav-collection"]').should('be.visible');
+    cy.get('[data-cy="nav-arrangements"]').should('be.visible');
     cy.get('[data-cy="nav-weddings"]').should('be.visible');
   });
 
-  it('navigates to the Collection page', () => {
-    cy.navigateTo('collection');
-    cy.get('[data-cy="collection-view"]').should('be.visible');
-    cy.get('[data-cy="page-title"]').should('contain.text', 'Collection');
+  it('navigates to the Arrangements page', () => {
+    cy.stubArrangements();
+    cy.navigateTo('arrangements');
+    cy.get('[data-cy="arrangements-view"]').should('be.visible');
+    cy.get('[data-cy="page-title"]').should('contain.text', 'Arrangements');
   });
 
   it('navigates to the Weddings page', () => {
@@ -24,8 +25,9 @@ describe('Navigation', () => {
   });
 
   it('navigates back to Catalogue from another page', () => {
-    cy.navigateTo('collection');
-    cy.get('[data-cy="collection-view"]').should('be.visible');
+    cy.stubArrangements();
+    cy.navigateTo('arrangements');
+    cy.get('[data-cy="arrangements-view"]').should('be.visible');
     cy.navigateTo('catalogue');
     cy.get('[data-cy="catalogue-view"]').should('be.visible');
   });

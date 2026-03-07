@@ -20,7 +20,7 @@ export function ArrangementDetailContainer() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const locationState = useLocation().state as { backLabel?: string } | null;
-  const backLabel = locationState?.backLabel ?? 'Collection';
+  const backLabel = locationState?.backLabel ?? 'Arrangements';
 
   const flowers = useSelector(selectFlowersList);
   const arrangementsLoadStatus = useSelector(selectLoadArrangementsStatus);
@@ -49,7 +49,7 @@ export function ArrangementDetailContainer() {
   }, [dispatch]);
 
   const handleBack = () =>
-    locationState?.backLabel ? navigate(-1) : navigate('/collection');
+    locationState?.backLabel ? navigate(-1) : navigate('/arrangements');
 
   function handleImageUpload(file: File) {
     if (arrangementId) {

@@ -102,26 +102,10 @@
   border-bottom: 1px solid var(--color-border);
 }
 
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
 .fieldGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-4);
-}
-
-.label {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-muted);
-}
-
-.required {
-  color: var(--color-danger);
 }
 
 .input,
@@ -251,48 +235,4 @@
   gap: var(--space-3);
   padding: var(--space-4) var(--space-6);
   border-top: 1px solid var(--color-border);
-}
-
-.cancelButton {
-  padding: var(--space-2) var(--space-5);
-  background: transparent;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  font-family: var(--font-family);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
-  cursor: pointer;
-  transition: all 150ms ease;
-}
-
-.cancelButton:hover:not(:disabled) {
-  background: var(--color-bg-subtle);
-}
-
-.cancelButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.saveButton {
-  padding: var(--space-2) var(--space-6);
-  background: var(--color-brand);
-  border: none;
-  border-radius: var(--radius-sm);
-  font-family: var(--font-family);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: #fff;
-  cursor: pointer;
-  transition: opacity 150ms ease;
-}
-
-.saveButton:hover:not(:disabled) {
-  opacity: 0.9;
-}
-
-.saveButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }

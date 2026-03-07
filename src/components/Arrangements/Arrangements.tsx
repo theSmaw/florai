@@ -6,7 +6,14 @@ import {
   MixerVerticalIcon,
   PlusIcon,
 } from '@radix-ui/react-icons';
-import type { Arrangement, ArrangementFilter, ArrangementOccasion, ArrangementSize, ArrangementStyle, NewArrangement } from '../../domain/Arrangement';
+import type {
+  Arrangement,
+  ArrangementFilter,
+  ArrangementOccasion,
+  ArrangementSize,
+  ArrangementStyle,
+  NewArrangement,
+} from '../../domain/Arrangement';
 import {
   OCCASION_LABEL,
   SIZE_LABEL,
@@ -15,10 +22,11 @@ import {
 import type { Flower } from '../../domain/Flower';
 import { ArrangementCard } from '../ArrangementCard/ArrangementCard';
 import { FilterChip } from '../FilterChip/FilterChip';
+import { FilterChipSection } from '../FilterChipSection/FilterChipSection';
 import { AddArrangementModal } from '../AddArrangementModal/AddArrangementModal';
-import styles from './Collection.module.css';
+import styles from './Arrangements.module.css';
 
-export interface CollectionProps {
+export interface ArrangementsProps {
   arrangements: Arrangement[];
   groupedArrangements: Record<string, Arrangement[]>;
   currentFilter: ArrangementFilter;
@@ -38,7 +46,31 @@ const SIZES: ArrangementSize[] = ['small', 'medium', 'large', 'extra-large'];
 const STYLES: ArrangementStyle[] = ['romantic', 'rustic', 'modern', 'wild', 'classic', 'contemporary'];
 const OCCASIONS: ArrangementOccasion[] = ['wedding', 'birthday', 'funeral', 'everyday', 'sympathy', 'anniversary'];
 
-export function Collection({
+const SIZE_OPTIONS: ReadonlyArray<{ value: ArrangementSize | undefined; label: string }> = [
+  { value: undefined, label: 'All' },
+  ...SIZES.map((s) => ({ value: s, label: SIZE_LABEL[s] })),
+];
+
+const STYLE_OPTIONS: ReadonlyArray<{ value: ArrangementStyle | undefined; label: string }> = [
+  { value: undefined, label: 'All' },
+  ...STYLES.map((s) => ({ value: s, label: STYLE_LABEL[s] })),
+];
+
+const OCCASION_OPTIONS: ReadonlyArray<{ value: ArrangementOccasion | undefined; label: string }> = [
+  { value: undefined, label: 'All' },
+  ...OCCASIONS.map((occ) => ({ value: occ, label: OCCASION_LABEL[occ] })),
+];
+
+const GROUP_BY_OPTIONS: ReadonlyArray<{
+  value: 'size' | 'occasion' | undefined;
+  label: string;
+}> = [
+  { value: undefined, label: 'None' },
+  { value: 'size', label: 'Size' },
+  { value: 'occasion', label: 'Occasion' },
+];
+
+export function Arrangements({
   arrangements,
   groupedArrangements,
   currentFilter,
@@ -52,7 +84,7 @@ export function Collection({
   saveError,
   isAddOpen,
   onAddOpenChange,
-}: CollectionProps) {
+}: ArrangementsProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   const hasActiveFilters = filterPills.length > 0;
@@ -68,38 +100,22 @@ export function Collection({
 
   function handleSizeChange(size?: ArrangementSize) {
     const { size: _omit, ...rest } = currentFilter;
-    if (size) {
-      onFilterChange({ ...rest, size });
-    } else {
-      onFilterChange(rest);
-    }
+    onFilterChange(size ? { ...rest, size } : rest);
   }
 
   function handleStyleChange(style?: ArrangementStyle) {
     const { style: _omit, ...rest } = currentFilter;
-    if (style) {
-      onFilterChange({ ...rest, style });
-    } else {
-      onFilterChange(rest);
-    }
+    onFilterChange(style ? { ...rest, style } : rest);
   }
 
   function handleOccasionChange(occasion?: ArrangementOccasion) {
     const { occasion: _omit, ...rest } = currentFilter;
-    if (occasion) {
-      onFilterChange({ ...rest, occasion });
-    } else {
-      onFilterChange(rest);
-    }
+    onFilterChange(occasion ? { ...rest, occasion } : rest);
   }
 
-  function handleGroupByChange(groupBy?: ArrangementFilter['groupBy']) {
+  function handleGroupByChange(groupBy?: 'size' | 'occasion') {
     const { groupBy: _omit, ...rest } = currentFilter;
-    if (groupBy) {
-      onFilterChange({ ...rest, groupBy });
-    } else {
-      onFilterChange(rest);
-    }
+    onFilterChange(groupBy ? { ...rest, groupBy } : rest);
   }
 
   function handleAddSave(data: NewArrangement) {
@@ -115,7 +131,7 @@ export function Collection({
       {/* Header */}
       <header className={styles.header}>
         <div className={styles.headerRow}>
-          <h1 data-cy="page-title" className={styles.title}>Collection</h1>
+          <h1 data-cy="page-title" className={styles.title}>Arrangements</h1>
         </div>
 
         {/* Search + Filter trigger */}
@@ -128,7 +144,7 @@ export function Collection({
               aria-hidden="true"
             />
             <input
-              data-cy="collection-search-input"
+              data-cy="arrangements-search-input"
               type="text"
               value={currentFilter.searchTerm ?? ''}
               onChange={(e) => handleSearchChange(e.target.value)}
@@ -139,7 +155,7 @@ export function Collection({
 
           <Dialog.Root open={isFilterOpen} onOpenChange={setIsFilterOpen}>
             <Dialog.Trigger asChild>
-              <button data-cy="collection-filter-button" className={styles.filterButton}>
+              <button data-cy="arrangements-filter-button" className={styles.filterButton}>
                 <MixerVerticalIcon width={16} height={16} aria-hidden="true" />
                 <span>Filter</span>
                 {hasActiveFilters && <span className={styles.filterBadge} />}
@@ -159,94 +175,34 @@ export function Collection({
                 </div>
 
                 <div className={styles.filterBody}>
-                  {/* Size */}
-                  <div className={styles.filterSection}>
-                    <span className={styles.filterLabel}>Size</span>
-                    <div className={styles.filterOptions}>
-                      <button
-                        type="button"
-                        className={!currentFilter.size ? `${styles.filterOption} ${styles.filterOptionActive}` : styles.filterOption}
-                        onClick={() => handleSizeChange(undefined)}
-                      >
-                        All
-                      </button>
-                      {SIZES.map((s) => (
-                        <button
-                          key={s}
-                          type="button"
-                          className={currentFilter.size === s ? `${styles.filterOption} ${styles.filterOptionActive}` : styles.filterOption}
-                          onClick={() => handleSizeChange(s)}
-                        >
-                          {SIZE_LABEL[s]}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Style */}
-                  <div className={styles.filterSection}>
-                    <span className={styles.filterLabel}>Style</span>
-                    <div className={styles.filterOptions}>
-                      <button
-                        type="button"
-                        className={!currentFilter.style ? `${styles.filterOption} ${styles.filterOptionActive}` : styles.filterOption}
-                        onClick={() => handleStyleChange(undefined)}
-                      >
-                        All
-                      </button>
-                      {STYLES.map((s) => (
-                        <button
-                          key={s}
-                          type="button"
-                          className={currentFilter.style === s ? `${styles.filterOption} ${styles.filterOptionActive}` : styles.filterOption}
-                          onClick={() => handleStyleChange(s)}
-                        >
-                          {STYLE_LABEL[s]}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Occasion */}
-                  <div className={styles.filterSection}>
-                    <span className={styles.filterLabel}>Occasion</span>
-                    <div className={styles.filterOptions}>
-                      <button
-                        type="button"
-                        className={!currentFilter.occasion ? `${styles.filterOption} ${styles.filterOptionActive}` : styles.filterOption}
-                        onClick={() => handleOccasionChange(undefined)}
-                      >
-                        All
-                      </button>
-                      {OCCASIONS.map((occ) => (
-                        <button
-                          key={occ}
-                          type="button"
-                          className={currentFilter.occasion === occ ? `${styles.filterOption} ${styles.filterOptionActive}` : styles.filterOption}
-                          onClick={() => handleOccasionChange(occ)}
-                        >
-                          {OCCASION_LABEL[occ]}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Group by */}
-                  <div className={styles.filterSection}>
-                    <span className={styles.filterLabel}>Group by</span>
-                    <div className={styles.filterOptions}>
-                      {(['none', 'size', 'occasion'] as const).map((g) => (
-                        <button
-                          key={g}
-                          type="button"
-                          className={(currentFilter.groupBy ?? 'none') === g ? `${styles.filterOption} ${styles.filterOptionActive}` : styles.filterOption}
-                          onClick={() => handleGroupByChange(g === 'none' ? undefined : g)}
-                        >
-                          {g === 'none' ? 'None' : g === 'size' ? 'Size' : 'Occasion'}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                  <FilterChipSection
+                    title="Size"
+                    options={SIZE_OPTIONS}
+                    currentValue={currentFilter.size}
+                    onChange={handleSizeChange}
+                    dataCy="arrangements-size-chip"
+                  />
+                  <FilterChipSection
+                    title="Style"
+                    options={STYLE_OPTIONS}
+                    currentValue={currentFilter.style}
+                    onChange={handleStyleChange}
+                    dataCy="arrangements-style-chip"
+                  />
+                  <FilterChipSection
+                    title="Occasion"
+                    options={OCCASION_OPTIONS}
+                    currentValue={currentFilter.occasion}
+                    onChange={handleOccasionChange}
+                    dataCy="arrangements-occasion-chip"
+                  />
+                  <FilterChipSection
+                    title="Group by"
+                    options={GROUP_BY_OPTIONS}
+                    currentValue={currentFilter.groupBy === 'none' ? undefined : currentFilter.groupBy}
+                    onChange={handleGroupByChange}
+                    dataCy="arrangements-groupby-chip"
+                  />
 
                   <Dialog.Close asChild>
                     <button className={styles.applyButton}>Apply</button>
@@ -259,7 +215,7 @@ export function Collection({
 
         {/* Active filter pills */}
         {hasActiveFilters && (
-          <div data-cy="collection-active-filters" className={styles.activeFilters}>
+          <div data-cy="arrangements-active-filters" className={styles.activeFilters}>
             {filterPills.map((pill) => (
               <FilterChip
                 key={pill.label}
@@ -267,7 +223,7 @@ export function Collection({
                 selected
                 showClearIcon
                 onClick={pill.onClear}
-                dataCy="collection-filter-pill"
+                dataCy="arrangements-filter-pill"
               />
             ))}
           </div>
@@ -275,13 +231,13 @@ export function Collection({
       </header>
 
       {/* Main content */}
-      <main data-cy="collection-main" className={styles.main}>
+      <main data-cy="arrangements-main" className={styles.main}>
         {isLoading ? (
-          <div data-cy="collection-loading" className={styles.loading}>
+          <div data-cy="arrangements-loading" className={styles.loading}>
             <span className={styles.loadingText}>Loading…</span>
           </div>
         ) : arrangements.length === 0 ? (
-          <div data-cy="collection-empty" className={styles.empty}>
+          <div data-cy="arrangements-empty" className={styles.empty}>
             <p className={styles.emptyText}>No arrangements yet. Tap + to add your first.</p>
           </div>
         ) : (
@@ -318,10 +274,10 @@ export function Collection({
         )}
       </main>
 
-      {/* FAB */}
+      {/* Floating action button */}
       <button
         data-cy="add-arrangement-button"
-        className={styles.fab}
+        className={styles.addButton}
         onClick={() => onAddOpenChange(true)}
         aria-label="Add arrangement"
       >

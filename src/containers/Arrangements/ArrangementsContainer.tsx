@@ -26,7 +26,7 @@ import {
   SIZE_LABEL,
   STYLE_LABEL,
 } from '../../domain/Arrangement';
-import { Collection } from '../../components/Collection/Collection';
+import { Arrangements } from '../../components/Arrangements/Arrangements';
 
 type Pill = { label: string; onClear: () => void };
 
@@ -34,7 +34,7 @@ function pill<T>(value: T | undefined, label: (v: T) => string, onClear: () => v
   return value !== undefined ? [{ label: label(value), onClear }] : [];
 }
 
-export function CollectionContainer() {
+export function ArrangementsContainer() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -84,7 +84,7 @@ export function CollectionContainer() {
   }
 
   function handleCardClick(id: string) {
-    navigate(`/collection/${id}`, { state: { backLabel: 'Collection' } });
+    navigate(`/arrangements/${id}`, { state: { backLabel: 'Arrangements' } });
   }
 
   function handleAddClick(data: NewArrangement) {
@@ -112,7 +112,7 @@ export function CollectionContainer() {
   ];
 
   return (
-    <Collection
+    <Arrangements
       arrangements={arrangements}
       groupedArrangements={groupedArrangements}
       currentFilter={currentFilter}

@@ -4,11 +4,11 @@ declare global {
       stubFlowers(): Chainable<void>;
       stubArrangements(): Chainable<void>;
       visitCatalogue(): Chainable<void>;
-      visitCollection(): Chainable<void>;
+      visitArrangements(): Chainable<void>;
       visitArrangementDetail(id: string): Chainable<void>;
       visitFlowerDetail(flowerId: string): Chainable<void>;
       visitWithFakeAuth(url: string): Chainable<void>;
-      navigateTo(item: 'catalogue' | 'collection' | 'weddings'): Chainable<void>;
+      navigateTo(item: 'catalogue' | 'arrangements' | 'weddings'): Chainable<void>;
       fakeSignIn(): Chainable<void>;
       signUp(email: string, password: string): Chainable<void>;
       signIn(email: string, password: string): Chainable<void>;
@@ -123,14 +123,14 @@ Cypress.Commands.add('stubArrangements', () => {
   });
 });
 
-Cypress.Commands.add('visitCollection', () => {
-  cy.visitWithFakeAuth('/collection');
+Cypress.Commands.add('visitArrangements', () => {
+  cy.visitWithFakeAuth('/arrangements');
   cy.wait('@getFlowers');
   cy.wait('@getArrangements');
 });
 
 Cypress.Commands.add('visitArrangementDetail', (id: string) => {
-  cy.visitWithFakeAuth(`/collection/${id}`);
+  cy.visitWithFakeAuth(`/arrangements/${id}`);
   cy.wait('@getFlowers');
   cy.wait('@getArrangements');
   cy.get('[data-cy="arrangement-detail-view"]').should('be.visible');
@@ -149,7 +149,7 @@ Cypress.Commands.add('setRangeValue', { prevSubject: 'element' }, (subject, valu
   return subject as unknown as Cypress.Chainable<JQuery<HTMLInputElement>>;
 });
 
-Cypress.Commands.add('navigateTo', (item: 'catalogue' | 'collection' | 'weddings') => {
+Cypress.Commands.add('navigateTo', (item: 'catalogue' | 'arrangements' | 'weddings') => {
   cy.get('[data-cy="hamburger-menu-trigger"]').click();
   cy.get(`[data-cy="nav-${item}"]`).click();
 });

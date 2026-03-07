@@ -13,6 +13,9 @@ import {
   SIZE_LABEL,
   STYLE_LABEL,
 } from '../../domain/Arrangement';
+import { FormField } from '../FormField/FormField';
+import { SaveButton } from '../SaveButton/SaveButton';
+import { CancelButton } from '../CancelButton/CancelButton';
 import styles from './AddArrangementModal.module.css';
 
 export interface AddArrangementModalProps {
@@ -130,10 +133,7 @@ export function AddArrangementModal({
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>Basic Info</h3>
 
-              <div className={styles.field}>
-                <label htmlFor="arr-name" className={styles.label}>
-                  Name <span className={styles.required}>*</span>
-                </label>
+              <FormField label="Name" htmlFor="arr-name" required>
                 <input
                   id="arr-name"
                   data-cy="arrangement-name-input"
@@ -144,12 +144,9 @@ export function AddArrangementModal({
                   disabled={saving}
                   placeholder="e.g. Spring Romance Bouquet"
                 />
-              </div>
+              </FormField>
 
-              <div className={styles.field}>
-                <label htmlFor="arr-size" className={styles.label}>
-                  Size <span className={styles.required}>*</span>
-                </label>
+              <FormField label="Size" htmlFor="arr-size" required>
                 <select
                   id="arr-size"
                   data-cy="arrangement-size-select"
@@ -163,10 +160,9 @@ export function AddArrangementModal({
                     <option key={s} value={s}>{SIZE_LABEL[s]}</option>
                   ))}
                 </select>
-              </div>
+              </FormField>
 
-              <div className={styles.field}>
-                <label htmlFor="arr-style" className={styles.label}>Style</label>
+              <FormField label="Style" htmlFor="arr-style">
                 <select
                   id="arr-style"
                   data-cy="arrangement-style-select"
@@ -180,10 +176,9 @@ export function AddArrangementModal({
                     <option key={s} value={s}>{STYLE_LABEL[s]}</option>
                   ))}
                 </select>
-              </div>
+              </FormField>
 
-              <div className={styles.field}>
-                <span className={styles.label}>Occasion</span>
+              <FormField label="Occasion">
                 <div data-cy="occasion-chips" className={styles.chipGroup}>
                   {OCCASIONS.map((occ) => (
                     <button
@@ -202,10 +197,9 @@ export function AddArrangementModal({
                     </button>
                   ))}
                 </div>
-              </div>
+              </FormField>
 
-              <div className={styles.field}>
-                <label htmlFor="arr-description" className={styles.label}>Description</label>
+              <FormField label="Description" htmlFor="arr-description">
                 <textarea
                   id="arr-description"
                   data-cy="arrangement-description-textarea"
@@ -216,7 +210,7 @@ export function AddArrangementModal({
                   rows={3}
                   placeholder="Short description…"
                 />
-              </div>
+              </FormField>
             </div>
 
             {/* Flowers */}
@@ -246,8 +240,7 @@ export function AddArrangementModal({
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>Physical</h3>
               <div className={styles.fieldGrid}>
-                <div className={styles.field}>
-                  <label htmlFor="arr-stem-count" className={styles.label}>Stem count</label>
+                <FormField label="Stem count" htmlFor="arr-stem-count">
                   <input
                     id="arr-stem-count"
                     data-cy="arrangement-stem-count-input"
@@ -258,9 +251,8 @@ export function AddArrangementModal({
                     disabled={saving}
                     min={0}
                   />
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="arr-weight" className={styles.label}>Weight (g)</label>
+                </FormField>
+                <FormField label="Weight (g)" htmlFor="arr-weight">
                   <input
                     id="arr-weight"
                     data-cy="arrangement-weight-input"
@@ -271,9 +263,8 @@ export function AddArrangementModal({
                     disabled={saving}
                     min={0}
                   />
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="arr-time" className={styles.label}>Time to build (min)</label>
+                </FormField>
+                <FormField label="Time to build (min)" htmlFor="arr-time">
                   <input
                     id="arr-time"
                     data-cy="arrangement-time-input"
@@ -284,9 +275,8 @@ export function AddArrangementModal({
                     disabled={saving}
                     min={0}
                   />
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="arr-vase-life" className={styles.label}>Vase life (days)</label>
+                </FormField>
+                <FormField label="Vase life (days)" htmlFor="arr-vase-life">
                   <input
                     id="arr-vase-life"
                     data-cy="arrangement-vase-life-input"
@@ -297,7 +287,7 @@ export function AddArrangementModal({
                     disabled={saving}
                     min={0}
                   />
-                </div>
+                </FormField>
               </div>
             </div>
 
@@ -305,8 +295,7 @@ export function AddArrangementModal({
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>Pricing</h3>
               <div className={styles.fieldGrid}>
-                <div className={styles.field}>
-                  <label htmlFor="arr-wholesale" className={styles.label}>Wholesale cost ($)</label>
+                <FormField label="Wholesale cost ($)" htmlFor="arr-wholesale">
                   <input
                     id="arr-wholesale"
                     data-cy="arrangement-wholesale-input"
@@ -318,9 +307,8 @@ export function AddArrangementModal({
                     min={0}
                     step="0.01"
                   />
-                </div>
-                <div className={styles.field}>
-                  <label htmlFor="arr-retail" className={styles.label}>Retail price ($)</label>
+                </FormField>
+                <FormField label="Retail price ($)" htmlFor="arr-retail">
                   <input
                     id="arr-retail"
                     data-cy="arrangement-retail-input"
@@ -332,24 +320,22 @@ export function AddArrangementModal({
                     min={0}
                     step="0.01"
                   />
-                </div>
+                </FormField>
               </div>
             </div>
 
             {/* Notes */}
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>Notes</h3>
-              <div className={styles.field}>
-                <textarea
-                  data-cy="arrangement-notes-textarea"
-                  className={styles.textarea}
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  disabled={saving}
-                  rows={4}
-                  placeholder="Internal notes…"
-                />
-              </div>
+              <textarea
+                data-cy="arrangement-notes-textarea"
+                className={styles.textarea}
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                disabled={saving}
+                rows={4}
+                placeholder="Internal notes…"
+              />
             </div>
 
             {error && <p className={styles.error}>{error}</p>}
@@ -357,24 +343,14 @@ export function AddArrangementModal({
 
           <div className={styles.footer}>
             <Dialog.Close asChild>
-              <button
-                type="button"
-                data-cy="cancel-arrangement-button"
-                className={styles.cancelButton}
-                disabled={saving}
-              >
-                Cancel
-              </button>
+              <CancelButton data-cy="cancel-arrangement-button" disabled={saving} />
             </Dialog.Close>
-            <button
-              type="button"
+            <SaveButton
               data-cy="save-arrangement-button"
-              className={styles.saveButton}
-              onClick={handleSave}
+              saving={saving}
               disabled={saving || !isValid}
-            >
-              {saving ? 'Saving…' : 'Save'}
-            </button>
+              onClick={handleSave}
+            />
           </div>
         </Dialog.Content>
       </Dialog.Portal>

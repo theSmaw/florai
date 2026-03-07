@@ -177,8 +177,8 @@
   text-align: center;
 }
 
-/* FAB */
-.fab {
+/* Floating action button */
+.addButton {
   position: fixed;
   right: var(--space-6);
   bottom: var(--space-6);
@@ -199,11 +199,11 @@
   z-index: var(--z-fixed);
 }
 
-.fab:active {
+.addButton:active {
   transform: scale(0.96);
 }
 
-.fab:hover {
+.addButton:hover {
   background: var(--color-surface-inverse-hover);
 }
 
@@ -285,49 +285,6 @@
   gap: var(--space-6);
 }
 
-.filterSection {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.filterLabel {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-}
-
-.filterOptions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.filterOption {
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-subtle);
-  font-family: var(--font-family);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-muted);
-  cursor: pointer;
-  transition: all 150ms ease;
-}
-
-.filterOption:hover {
-  border-color: var(--color-brand);
-  color: var(--color-brand);
-}
-
-.filterOptionActive {
-  background: rgba(16, 185, 129, 0.08);
-  border-color: var(--color-brand);
-  color: var(--color-brand);
-}
 
 .applyButton {
   width: 100%;

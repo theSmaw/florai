@@ -8,7 +8,7 @@ import { sessionChanged } from './stores/auth/slice';
 import { supabase } from './lib/supabase';
 import { AppLayout } from './layouts/AppLayout/AppLayout';
 import { CatalogueView } from './views/Catalogue/CatalogueView';
-import { CollectionView } from './views/Collection/CollectionView';
+import { ArrangementsView } from './views/Arrangements/ArrangementsView';
 import { WeddingsView } from './views/Weddings/WeddingsView';
 import { FlowerDetailView } from './views/FlowerDetail/FlowerDetailView';
 import { ArrangementDetailView } from './views/ArrangementDetail/ArrangementDetailView';
@@ -42,15 +42,15 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'collection',
+        path: 'arrangements',
         element: (
           <RequireAuthContainer>
-            <CollectionView />
+            <ArrangementsView />
           </RequireAuthContainer>
         ),
       },
       {
-        path: 'collection/:arrangementId',
+        path: 'arrangements/:arrangementId',
         element: (
           <RequireAuthContainer>
             <ArrangementDetailView />

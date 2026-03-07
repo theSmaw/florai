@@ -10,7 +10,7 @@ import styles from './HeaderMenu.module.css';
 
 interface HeaderMenuProps {
   onCatalogueClick: () => void;
-  onCollectionClick: () => void;
+  onArrangementsClick: () => void;
   onWeddingsClick: () => void;
 }
 
@@ -20,7 +20,7 @@ interface HeaderMenuProps {
  */
 export function HeaderMenu({
   onCatalogueClick,
-  onCollectionClick,
+  onArrangementsClick,
   onWeddingsClick,
 }: HeaderMenuProps) {
   return (
@@ -55,15 +55,15 @@ export function HeaderMenu({
                 <span>Catalogue</span>
               </button>
             </DropdownMenu.Item>
-            <DropdownMenu.Item asChild onSelect={onCollectionClick}>
+            <DropdownMenu.Item asChild onSelect={onArrangementsClick}>
               <button
-                data-cy="nav-collection"
+                data-cy="nav-arrangements"
                 type="button"
                 className={styles.menuItem}
                 role="menuitem"
               >
                 <BookmarkFilledIcon className={styles.menuIcon} aria-hidden="true" />
-                <span>Collection</span>
+                <span>Arrangements</span>
               </button>
             </DropdownMenu.Item>
             <DropdownMenu.Item asChild onSelect={onWeddingsClick}>

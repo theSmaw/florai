@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Collection } from './Collection';
-import type { CollectionProps } from './Collection';
+import { Arrangements } from './Arrangements';
+import type { ArrangementsProps } from './Arrangements';
 import type { Arrangement, ArrangementFilter } from '../../domain/Arrangement';
 import type { Flower } from '../../domain/Flower';
 
-const meta: Meta<typeof Collection> = {
-  title: 'Components/Collection',
-  component: Collection,
+const meta: Meta<typeof Arrangements> = {
+  title: 'Components/Arrangements',
+  component: Arrangements,
   tags: ['autodocs'],
 };
 
@@ -56,7 +56,7 @@ const MOCK_ARRANGEMENTS: Arrangement[] = [
 const EMPTY_FILTER: ArrangementFilter = { groupBy: 'none' };
 const NO_OP = () => {};
 
-function defaultProps(overrides?: Partial<CollectionProps>): CollectionProps {
+function defaultProps(overrides?: Partial<ArrangementsProps>): ArrangementsProps {
   return {
     arrangements: MOCK_ARRANGEMENTS,
     groupedArrangements: { All: MOCK_ARRANGEMENTS },
@@ -77,13 +77,13 @@ function defaultProps(overrides?: Partial<CollectionProps>): CollectionProps {
 
 export const Default: Story = {
   name: 'With arrangements',
-  render: () => <Collection {...defaultProps()} />,
+  render: () => <Arrangements {...defaultProps()} />,
 };
 
 export const Loading: Story = {
   name: 'Loading',
   render: () => (
-    <Collection
+    <Arrangements
       {...defaultProps({
         isLoading: true,
         arrangements: [],
@@ -96,7 +96,7 @@ export const Loading: Story = {
 export const Empty: Story = {
   name: 'Empty state',
   render: () => (
-    <Collection
+    <Arrangements
       {...defaultProps({
         arrangements: [],
         groupedArrangements: { All: [] },
@@ -108,7 +108,7 @@ export const Empty: Story = {
 export const WithActiveFilters: Story = {
   name: 'With active filters',
   render: () => (
-    <Collection
+    <Arrangements
       {...defaultProps({
         currentFilter: { size: 'medium', groupBy: 'none' },
         filterPills: [{ label: 'Medium', onClear: NO_OP }],
