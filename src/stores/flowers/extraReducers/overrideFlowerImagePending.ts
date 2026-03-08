@@ -8,7 +8,7 @@ export function overrideFlowerImagePending(builder: ActionReducerMapBuilder<Flow
     const { flowerId } = action.meta.arg;
     const flower = state.flowers.find((f) => f.id === flowerId);
     if (flower) {
-      flower.imageUrl = URL.createObjectURL(action.meta.arg.file);
+      flower.imageUrl = action.meta.arg.blobUrl;
     }
   });
 }

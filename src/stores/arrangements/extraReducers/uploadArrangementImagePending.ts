@@ -10,7 +10,7 @@ export function uploadArrangementImagePending(
     const { arrangementId } = action.meta.arg;
     const arrangement = state.arrangements.find((a) => a.id === arrangementId);
     if (arrangement) {
-      arrangement.imageUrl = URL.createObjectURL(action.meta.arg.file);
+      arrangement.imageUrl = action.meta.arg.blobUrl;
     }
   });
 }

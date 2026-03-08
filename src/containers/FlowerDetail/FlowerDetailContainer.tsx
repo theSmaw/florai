@@ -82,7 +82,7 @@ export function FlowerDetailContainer() {
 
   function handleImageUpload(file: File) {
     if (flowerId) {
-      void dispatch(overrideFlowerImage({ flowerId, file }));
+      void dispatch(overrideFlowerImage({ flowerId, file, blobUrl: URL.createObjectURL(file) }));
     }
   }
 

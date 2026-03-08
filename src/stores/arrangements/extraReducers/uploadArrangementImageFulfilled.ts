@@ -10,7 +10,6 @@ export function uploadArrangementImageFulfilled(
     const { arrangementId } = action.meta.arg;
     const arrangement = state.arrangements.find((a) => a.id === arrangementId);
     if (arrangement) {
-      if (arrangement.imageUrl?.startsWith('blob:')) URL.revokeObjectURL(arrangement.imageUrl);
       arrangement.imageUrl = action.payload;
     }
   });

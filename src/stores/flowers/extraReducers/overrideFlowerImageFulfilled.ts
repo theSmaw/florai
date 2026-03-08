@@ -8,7 +8,6 @@ export function overrideFlowerImageFulfilled(builder: ActionReducerMapBuilder<Fl
     const { flowerId } = action.meta.arg;
     const flower = state.flowers.find((f) => f.id === flowerId);
     if (flower) {
-      if (flower.imageUrl?.startsWith('blob:')) URL.revokeObjectURL(flower.imageUrl);
       flower.imageUrl = action.payload;
     }
   });
