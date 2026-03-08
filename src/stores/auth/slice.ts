@@ -3,24 +3,16 @@ import type { Session } from '@supabase/supabase-js';
 import { signIn } from './asyncActions/signIn';
 import { signUp } from './asyncActions/signUp';
 import { signOut } from './asyncActions/signOut';
+import { initialState } from './state';
+import { signInPending } from './signInPending';
+import { signInFulfilled } from './signInFulfilled';
+import { signInRejected } from './signInRejected';
+import { signUpPending } from './signUpPending';
+import { signUpFulfilled } from './signUpFulfilled';
+import { signUpRejected } from './signUpRejected';
+import { signOutFulfilled } from './signOutFulfilled';
 
 export { signIn, signUp, signOut };
-
-// ── Slice ─────────────────────────────────────────────────────────────────────
-
-interface AuthState {
-  session: Session | null;
-  initialized: boolean; // true once the initial Supabase session check completes
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: AuthState = {
-  session: null,
-  initialized: false,
-  loading: false,
-  error: null,
-};
 
 export const authSlice = createSlice({
   name: 'auth',
@@ -33,39 +25,13 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      // signIn
-      .addCase(signIn.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(signIn.fulfilled, (state, action) => {
-        state.loading = false;
-        state.session = action.payload;
-      })
-      .addCase(signIn.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message ?? 'Sign-in failed';
-      })
-      // signUp
-      .addCase(signUp.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(signUp.fulfilled, (state, action) => {
-        state.loading = false;
-        state.session = action.payload;
-      })
-      .addCase(signUp.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message ?? 'Sign-up failed';
-      })
-      // signOut
-      .addCase(signOut.fulfilled, (state) => {
-        state.session = null;
-        state.loading = false;
-        state.error = null;
-      });
+    signInPending(builder);
+    signInFulfilled(builder);
+    signInRejected(builder);
+    signUpPending(builder);
+    signUpFulfilled(builder);
+    signUpRejected(builder);
+    signOutFulfilled(builder);
   },
 });
 
