@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './state';
-import { loadUserPending } from './loadUserPending';
-import { loadUserFulfilled } from './loadUserFulfilled';
-import { loadUserRejected } from './loadUserRejected';
+import { loadUserPending } from './extraReducers/loadUserPending';
+import { loadUserFulfilled } from './extraReducers/loadUserFulfilled';
+import { loadUserRejected } from './extraReducers/loadUserRejected';
 
 export const userSlice = createSlice({
   name: 'user',

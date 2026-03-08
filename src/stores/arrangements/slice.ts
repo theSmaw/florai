@@ -1,29 +1,26 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Arrangement, ArrangementFilter } from '../../domain/Arrangement';
+import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './state';
-import { loadArrangementsPending } from './loadArrangementsPending';
-import { loadArrangementsFulfilled } from './loadArrangementsFulfilled';
-import { loadArrangementsRejected } from './loadArrangementsRejected';
-import { createArrangementPending } from './createArrangementPending';
-import { createArrangementFulfilled } from './createArrangementFulfilled';
-import { createArrangementRejected } from './createArrangementRejected';
-import { uploadArrangementImagePending } from './uploadArrangementImagePending';
-import { uploadArrangementImageFulfilled } from './uploadArrangementImageFulfilled';
-import { uploadArrangementImageRejected } from './uploadArrangementImageRejected';
-import { updateArrangementNotesPending } from './updateArrangementNotesPending';
-import { updateArrangementNotesFulfilled } from './updateArrangementNotesFulfilled';
-import { updateArrangementNotesRejected } from './updateArrangementNotesRejected';
+import { arrangementFilterApplied as arrangementFilterAppliedReducer } from './reducers/arrangementFilterApplied';
+import { arrangementAdded as arrangementAddedReducer } from './reducers/arrangementAdded';
+import { loadArrangementsPending } from './extraReducers/loadArrangementsPending';
+import { loadArrangementsFulfilled } from './extraReducers/loadArrangementsFulfilled';
+import { loadArrangementsRejected } from './extraReducers/loadArrangementsRejected';
+import { createArrangementPending } from './extraReducers/createArrangementPending';
+import { createArrangementFulfilled } from './extraReducers/createArrangementFulfilled';
+import { createArrangementRejected } from './extraReducers/createArrangementRejected';
+import { uploadArrangementImagePending } from './extraReducers/uploadArrangementImagePending';
+import { uploadArrangementImageFulfilled } from './extraReducers/uploadArrangementImageFulfilled';
+import { uploadArrangementImageRejected } from './extraReducers/uploadArrangementImageRejected';
+import { updateArrangementNotesPending } from './extraReducers/updateArrangementNotesPending';
+import { updateArrangementNotesFulfilled } from './extraReducers/updateArrangementNotesFulfilled';
+import { updateArrangementNotesRejected } from './extraReducers/updateArrangementNotesRejected';
 
 export const arrangementsSlice = createSlice({
   name: 'arrangements',
   initialState,
   reducers: {
-    arrangementFilterApplied(state, action: PayloadAction<ArrangementFilter>) {
-      state.filter = action.payload;
-    },
-    arrangementAdded(state, action: PayloadAction<Arrangement>) {
-      state.arrangements.unshift(action.payload);
-    },
+    arrangementFilterApplied: arrangementFilterAppliedReducer,
+    arrangementAdded: arrangementAddedReducer,
   },
   extraReducers: (builder) => {
     loadArrangementsPending(builder);
