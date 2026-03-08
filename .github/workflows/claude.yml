@@ -38,6 +38,7 @@ jobs:
       - uses: anthropics/claude-code-action@v1.0.69
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          exclude_comments_by_actor: 'claude'
 
   # ─── Auto-review: review every non-draft PR when it's opened ──────────────
   claude-review:
