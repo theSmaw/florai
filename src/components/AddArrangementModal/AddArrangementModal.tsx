@@ -14,6 +14,8 @@ import {
   STYLE_LABEL,
 } from '../../domain/Arrangement';
 import { FormField } from '../FormField/FormField';
+import { SectionHeader } from '../SectionHeader/SectionHeader';
+import { SheetTitle } from '../SheetTitle/SheetTitle';
 import { SaveButton } from '../SaveButton/SaveButton';
 import { CancelButton } from '../CancelButton/CancelButton';
 import styles from './AddArrangementModal.module.css';
@@ -120,7 +122,7 @@ export function AddArrangementModal({
           aria-describedby={undefined}
         >
           <div className={styles.header}>
-            <Dialog.Title className={styles.title}>New Arrangement</Dialog.Title>
+            <Dialog.Title asChild><SheetTitle>New Arrangement</SheetTitle></Dialog.Title>
             <Dialog.Close asChild>
               <button className={styles.closeButton} aria-label="Close" disabled={saving}>
                 <Cross2Icon width={15} height={15} aria-hidden="true" />
@@ -131,7 +133,7 @@ export function AddArrangementModal({
           <div className={styles.body}>
             {/* Basic info */}
             <div className={styles.section}>
-              <h3 className={styles.sectionTitle}>Basic Info</h3>
+              <SectionHeader label="Basic Info" as="h3" />
 
               <FormField label="Name" htmlFor="arr-name" required>
                 <input
@@ -215,7 +217,7 @@ export function AddArrangementModal({
 
             {/* Flowers */}
             <div className={styles.section}>
-              <h3 className={styles.sectionTitle}>Flowers</h3>
+              <SectionHeader label="Flowers" as="h3" />
               <div data-cy="flower-checklist" className={styles.flowerList}>
                 {flowers.map((flower) => (
                   <label key={flower.id} className={styles.flowerItem}>
@@ -238,7 +240,7 @@ export function AddArrangementModal({
 
             {/* Physical */}
             <div className={styles.section}>
-              <h3 className={styles.sectionTitle}>Physical</h3>
+              <SectionHeader label="Physical" as="h3" />
               <div className={styles.fieldGrid}>
                 <FormField label="Stem count" htmlFor="arr-stem-count">
                   <input
@@ -293,7 +295,7 @@ export function AddArrangementModal({
 
             {/* Pricing */}
             <div className={styles.section}>
-              <h3 className={styles.sectionTitle}>Pricing</h3>
+              <SectionHeader label="Pricing" as="h3" />
               <div className={styles.fieldGrid}>
                 <FormField label="Wholesale cost ($)" htmlFor="arr-wholesale">
                   <input
@@ -326,7 +328,7 @@ export function AddArrangementModal({
 
             {/* Notes */}
             <div className={styles.section}>
-              <h3 className={styles.sectionTitle}>Notes</h3>
+              <SectionHeader label="Notes" as="h3" />
               <textarea
                 data-cy="arrangement-notes-textarea"
                 className={styles.textarea}

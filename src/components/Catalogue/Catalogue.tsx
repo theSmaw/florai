@@ -24,6 +24,7 @@ import type {
 import { FilterChip } from '../FilterChip/FilterChip';
 import { FlowerList } from '../FlowerList/FlowerList';
 import { FilterPanel } from '../FilterPanel/FilterPanel';
+import { SheetTitle } from '../SheetTitle/SheetTitle';
 import styles from './Catalogue.module.css';
 
 export interface CatalogueProps {
@@ -125,7 +126,7 @@ export function Catalogue({
               <Dialog.Content className={styles.sheet} aria-describedby={undefined}>
                 {/* Sheet header */}
                 <div className={styles.sheetHeader}>
-                  <Dialog.Title className={styles.sheetTitle}>Filters</Dialog.Title>
+                  <Dialog.Title asChild><SheetTitle>Filters</SheetTitle></Dialog.Title>
                   <Dialog.Close asChild>
                     <button className={styles.closeButton} aria-label="Close filters">
                       <Cross2Icon width={15} height={15} aria-hidden="true" />

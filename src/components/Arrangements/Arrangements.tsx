@@ -23,6 +23,7 @@ import type { Flower } from '../../domain/Flower';
 import { ArrangementCard } from '../ArrangementCard/ArrangementCard';
 import { FilterChip } from '../FilterChip/FilterChip';
 import { FilterChipSection } from '../FilterChipSection/FilterChipSection';
+import { SheetTitle } from '../SheetTitle/SheetTitle';
 import { AddArrangementModal } from '../AddArrangementModal/AddArrangementModal';
 import styles from './Arrangements.module.css';
 
@@ -166,7 +167,7 @@ export function Arrangements({
               <Dialog.Overlay className={styles.overlay} />
               <Dialog.Content className={styles.sheet} aria-describedby={undefined}>
                 <div className={styles.sheetHeader}>
-                  <Dialog.Title className={styles.sheetTitle}>Filters</Dialog.Title>
+                  <Dialog.Title asChild><SheetTitle>Filters</SheetTitle></Dialog.Title>
                   <Dialog.Close asChild>
                     <button className={styles.closeButton} aria-label="Close filters">
                       <Cross2Icon width={15} height={15} aria-hidden="true" />
