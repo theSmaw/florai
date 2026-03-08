@@ -53,7 +53,7 @@ export function ArrangementDetailContainer() {
 
   function handleImageUpload(file: File) {
     if (arrangementId) {
-      void dispatch(uploadArrangementImage({ arrangementId, file }));
+      void dispatch(uploadArrangementImage({ arrangementId, file, blobUrl: URL.createObjectURL(file) }));
     }
   }
 
