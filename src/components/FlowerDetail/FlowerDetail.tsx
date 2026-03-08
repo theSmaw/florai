@@ -1,7 +1,6 @@
 // FlowerDetail — pure presentational component
 // Receives all data via props from FlowerDetailContainer.
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeftIcon, UploadIcon } from '@radix-ui/react-icons';
 import type { Availability, Flower, Toxicity } from '../../domain/Flower';
 import {
   AVAILABILITY_LABEL,
@@ -11,6 +10,7 @@ import {
   FRAGRANCE_PIPS,
   TOXICITY_LABEL,
 } from '../../domain/flowerDisplayMeta';
+import { DetailLayout } from '../DetailLayout/DetailLayout';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { FlowerSupplierList } from '../FlowerSupplierList/FlowerSupplierList';
 import { EditButton } from '../EditButton/EditButton';
@@ -91,7 +91,13 @@ export function FlowerDetail({
   onPairingsSave,
 }: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
-  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
+    const img = e.currentTarget;
+    const fallback = '/images/placeholder.svg';
+    if (!img.src.endsWith(fallback)) img.src = fallback;
+  }
+
   const [isCareEditing, setIsCareEditing] = useState(false);
   const [draftCare, setDraftCare] = useState('');
   const careSaveInitiated = useRef(false);
@@ -131,25 +137,6 @@ export function FlowerDetail({
       }
     }
   }, [savingPairings, savePairingsError]);
-
-  function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
-    const img = e.currentTarget;
-    const fallback = '/images/placeholder.svg';
-    if (!img.src.endsWith(fallback)) img.src = fallback;
-  }
-
-  function handleUploadClick() {
-    fileInputRef.current?.click();
-  }
-
-  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0];
-    if (file) {
-      onImageUpload(file);
-      // Reset input so the same file can be picked again if needed
-      e.target.value = '';
-    }
-  }
 
   function handleCareEditClick() {
     setDraftCare(flower.careInstructions);
@@ -204,67 +191,17 @@ export function FlowerDetail({
   }
 
   return (
-    <div className={styles.root}>
-      {/* ── Header ── */}
-      <header className={styles.header}>
-        <div className={styles.headerLeft}>
-          <button
-            data-cy="back-button"
-            className={styles.backButton}
-            onClick={onBack}
-            aria-label={`Back to ${backLabel}`}
-          >
-            <ChevronLeftIcon width={14} height={14} aria-hidden="true" />
-            {backLabel}
-          </button>
-          <div className={styles.headerDivider} />
-          <span className={styles.headerContext}>Flower Details</span>
-        </div>
-      </header>
-
-      {/* ── Body ── */}
-      <div className={styles.body}>
-
-        {/* ── Left: image ── */}
-        <section className={styles.imagePanel} aria-label="Flower image">
-          <div className={styles.imageWrapper}>
-            <img
-              data-cy="flower-image"
-              src={flower.imageUrl ?? '/images/placeholder.svg'}
-              alt={flower.name}
-              className={styles.image}
-              onError={handleImgError}
-            />
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              className={styles.hiddenInput}
-              onChange={handleFileChange}
-              aria-label="Upload flower image"
-            />
-            <button
-              data-cy="upload-image-button"
-              type="button"
-              className={styles.uploadButton}
-              onClick={handleUploadClick}
-              disabled={uploadingImage}
-              aria-label="Upload new flower image"
-            >
-              <UploadIcon width={14} height={14} aria-hidden="true" />
-              {uploadingImage ? 'Uploading…' : 'Replace image'}
-            </button>
-            {uploadError && (
-              <p data-cy="upload-error" className={styles.uploadError}>{uploadError}</p>
-            )}
-          </div>
-        </section>
-
-        {/* ── Right: details ── */}
-        <section
-          className={styles.detailsPanel}
-          aria-label="Flower details"
-        >
+    <DetailLayout
+      backLabel={backLabel}
+      onBack={onBack}
+      contextLabel="Flower Details"
+      {...(flower.imageUrl ? { imageUrl: flower.imageUrl } : {})}
+      imageAlt={flower.name}
+      imageCy="flower-image"
+      uploadingImage={uploadingImage}
+      uploadError={uploadError}
+      onImageUpload={onImageUpload}
+    >
           {/* Identity */}
           <div className={styles.identity}>
             <h1 data-cy="flower-name" className={styles.nameDisplay}>{flower.name}</h1>
@@ -590,8 +527,6 @@ export function FlowerDetail({
               )
             )}
           </div>
-        </section>
-      </div>
-    </div>
+    </DetailLayout>
   );
 }
