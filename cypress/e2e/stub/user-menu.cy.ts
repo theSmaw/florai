@@ -28,9 +28,10 @@ describe('User Menu', () => {
     cy.get('[data-cy="user-menu-profile"]').should('not.exist');
   });
 
-  it('shows the user menu trigger on the Collection page', () => {
-    cy.navigateTo('collection');
-    cy.get('[data-cy="collection-view"]').should('be.visible');
+  it('shows the user menu trigger on the Arrangements page', () => {
+    cy.stubArrangements();
+    cy.navigateTo('arrangements');
+    cy.get('[data-cy="arrangements-view"]').should('be.visible');
     cy.get('[data-cy="user-menu-trigger"]').should('be.visible');
   });
 

@@ -2,10 +2,13 @@ declare global {
   namespace Cypress {
     interface Chainable {
       stubFlowers(): Chainable<void>;
+      stubArrangements(): Chainable<void>;
       visitCatalogue(): Chainable<void>;
+      visitArrangements(): Chainable<void>;
+      visitArrangementDetail(id: string): Chainable<void>;
       visitFlowerDetail(flowerId: string): Chainable<void>;
       visitWithFakeAuth(url: string): Chainable<void>;
-      navigateTo(item: 'catalogue' | 'collection' | 'weddings'): Chainable<void>;
+      navigateTo(item: 'catalogue' | 'arrangements' | 'weddings'): Chainable<void>;
       fakeSignIn(): Chainable<void>;
       signUp(email: string, password: string): Chainable<void>;
       signIn(email: string, password: string): Chainable<void>;
@@ -109,6 +112,31 @@ Cypress.Commands.add('visitFlowerDetail', (flowerId: string) => {
 });
 
 /**
+ * Intercepts the Supabase PostgREST arrangements query and returns fixture data.
+ */
+Cypress.Commands.add('stubArrangements', () => {
+  cy.fixture('arrangements.json').then((arrangements) => {
+    cy.intercept('GET', '**/rest/v1/arrangements*', {
+      body: arrangements,
+      statusCode: 200,
+    }).as('getArrangements');
+  });
+});
+
+Cypress.Commands.add('visitArrangements', () => {
+  cy.visitWithFakeAuth('/arrangements');
+  cy.wait('@getFlowers');
+  cy.wait('@getArrangements');
+});
+
+Cypress.Commands.add('visitArrangementDetail', (id: string) => {
+  cy.visitWithFakeAuth(`/arrangements/${id}`);
+  cy.wait('@getFlowers');
+  cy.wait('@getArrangements');
+  cy.get('[data-cy="arrangement-detail-view"]').should('be.visible');
+});
+
+/**
  * Sets the value of a range input in a way that triggers React's synthetic onChange.
  * React 17+ maps onChange to the native `input` event; using the native input value
  * setter ensures React detects the change (bypassing React's internal tracking).
@@ -121,7 +149,7 @@ Cypress.Commands.add('setRangeValue', { prevSubject: 'element' }, (subject, valu
   return subject as unknown as Cypress.Chainable<JQuery<HTMLInputElement>>;
 });
 
-Cypress.Commands.add('navigateTo', (item: 'catalogue' | 'collection' | 'weddings') => {
+Cypress.Commands.add('navigateTo', (item: 'catalogue' | 'arrangements' | 'weddings') => {
   cy.get('[data-cy="hamburger-menu-trigger"]').click();
   cy.get(`[data-cy="nav-${item}"]`).click();
 });

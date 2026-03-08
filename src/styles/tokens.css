@@ -4,6 +4,7 @@
   --color-brand-dark: #059669; /* emerald-600 — hover/active */
   --color-brand-shadow: rgba(16, 185, 129, 0.3);
   --color-brand-shadow-strong: rgba(16, 185, 129, 0.45);
+  --color-brand-border: rgba(16, 185, 129, 0.25); /* emerald border — brand-tinted chip outlines */
 
   /* Semantic / state */
   --color-error: #ef4444;

@@ -24,6 +24,7 @@ import type {
 import { FilterChip } from '../FilterChip/FilterChip';
 import { FlowerList } from '../FlowerList/FlowerList';
 import { FilterPanel } from '../FilterPanel/FilterPanel';
+import { SheetTitle } from '../SheetTitle/SheetTitle';
 import styles from './Catalogue.module.css';
 
 export interface CatalogueProps {
@@ -125,7 +126,7 @@ export function Catalogue({
               <Dialog.Content className={styles.sheet} aria-describedby={undefined}>
                 {/* Sheet header */}
                 <div className={styles.sheetHeader}>
-                  <Dialog.Title className={styles.sheetTitle}>Filters</Dialog.Title>
+                  <Dialog.Title asChild><SheetTitle>Filters</SheetTitle></Dialog.Title>
                   <Dialog.Close asChild>
                     <button className={styles.closeButton} aria-label="Close filters">
                       <Cross2Icon width={15} height={15} aria-hidden="true" />
@@ -183,8 +184,8 @@ export function Catalogue({
         onCardClick={onCardClick}
       />
 
-      {/* FAB */}
-      <button data-cy="add-flower-button" onClick={onAddFlowerClick} className={styles.fab}>
+      {/* Floating action button */}
+      <button data-cy="add-flower-button" onClick={onAddFlowerClick} className={styles.addButton}>
         <PlusIcon width={24} height={24} aria-hidden="true" />
       </button>
     </div>
