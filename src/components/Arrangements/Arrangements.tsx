@@ -14,15 +14,10 @@ import type {
   ArrangementStyle,
   NewArrangement,
 } from '../../domain/Arrangement';
-import {
-  OCCASION_LABEL,
-  SIZE_LABEL,
-  STYLE_LABEL,
-} from '../../domain/Arrangement';
 import type { Flower } from '../../domain/Flower';
 import { ArrangementCard } from '../ArrangementCard/ArrangementCard';
+import { ArrangementFilterPanel } from '../ArrangementFilterPanel/ArrangementFilterPanel';
 import { FilterChip } from '../FilterChip/FilterChip';
-import { FilterChipSection } from '../FilterChipSection/FilterChipSection';
 import { SheetTitle } from '../SheetTitle/SheetTitle';
 import { AddArrangementModal } from '../AddArrangementModal/AddArrangementModal';
 import styles from './Arrangements.module.css';
@@ -43,33 +38,6 @@ export interface ArrangementsProps {
   onAddOpenChange: (open: boolean) => void;
 }
 
-const SIZES: ArrangementSize[] = ['small', 'medium', 'large', 'extra-large'];
-const STYLES: ArrangementStyle[] = ['romantic', 'rustic', 'modern', 'wild', 'classic', 'contemporary'];
-const OCCASIONS: ArrangementOccasion[] = ['wedding', 'birthday', 'funeral', 'everyday', 'sympathy', 'anniversary'];
-
-const SIZE_OPTIONS: ReadonlyArray<{ value: ArrangementSize | undefined; label: string }> = [
-  { value: undefined, label: 'All' },
-  ...SIZES.map((s) => ({ value: s, label: SIZE_LABEL[s] })),
-];
-
-const STYLE_OPTIONS: ReadonlyArray<{ value: ArrangementStyle | undefined; label: string }> = [
-  { value: undefined, label: 'All' },
-  ...STYLES.map((s) => ({ value: s, label: STYLE_LABEL[s] })),
-];
-
-const OCCASION_OPTIONS: ReadonlyArray<{ value: ArrangementOccasion | undefined; label: string }> = [
-  { value: undefined, label: 'All' },
-  ...OCCASIONS.map((occ) => ({ value: occ, label: OCCASION_LABEL[occ] })),
-];
-
-const GROUP_BY_OPTIONS: ReadonlyArray<{
-  value: 'size' | 'occasion' | undefined;
-  label: string;
-}> = [
-  { value: undefined, label: 'None' },
-  { value: 'size', label: 'Size' },
-  { value: 'occasion', label: 'Occasion' },
-];
 
 export function Arrangements({
   arrangements,
@@ -175,40 +143,14 @@ export function Arrangements({
                   </Dialog.Close>
                 </div>
 
-                <div className={styles.filterBody}>
-                  <FilterChipSection
-                    title="Size"
-                    options={SIZE_OPTIONS}
-                    currentValue={currentFilter.size}
-                    onChange={handleSizeChange}
-                    dataCy="arrangements-size-chip"
-                  />
-                  <FilterChipSection
-                    title="Style"
-                    options={STYLE_OPTIONS}
-                    currentValue={currentFilter.style}
-                    onChange={handleStyleChange}
-                    dataCy="arrangements-style-chip"
-                  />
-                  <FilterChipSection
-                    title="Occasion"
-                    options={OCCASION_OPTIONS}
-                    currentValue={currentFilter.occasion}
-                    onChange={handleOccasionChange}
-                    dataCy="arrangements-occasion-chip"
-                  />
-                  <FilterChipSection
-                    title="Group by"
-                    options={GROUP_BY_OPTIONS}
-                    currentValue={currentFilter.groupBy === 'none' ? undefined : currentFilter.groupBy}
-                    onChange={handleGroupByChange}
-                    dataCy="arrangements-groupby-chip"
-                  />
-
-                  <Dialog.Close asChild>
-                    <button className={styles.applyButton}>Apply</button>
-                  </Dialog.Close>
-                </div>
+                <ArrangementFilterPanel
+                  currentFilter={currentFilter}
+                  onSizeChange={handleSizeChange}
+                  onStyleChange={handleStyleChange}
+                  onOccasionChange={handleOccasionChange}
+                  onGroupByChange={handleGroupByChange}
+                  onApply={() => setIsFilterOpen(false)}
+                />
               </Dialog.Content>
             </Dialog.Portal>
           </Dialog.Root>

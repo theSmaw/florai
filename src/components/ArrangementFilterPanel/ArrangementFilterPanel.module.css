@@ -1,0 +1,33 @@
+/* ArrangementFilterPanel — content rendered inside the arrangements filter sheet */
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-5) var(--space-5) var(--space-7);
+}
+
+.applyButton {
+  width: 100%;
+  background: var(--color-brand);
+  color: var(--color-text-on-brand);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: none;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+  box-shadow: var(--shadow-filter-badge);
+  transition:
+    background 150ms,
+    transform 120ms;
+  margin-top: var(--space-1);
+}
+
+.applyButton:hover {
+  background: var(--color-brand-dark);
+}
+
+.applyButton:active {
+  transform: scale(0.98);
+}

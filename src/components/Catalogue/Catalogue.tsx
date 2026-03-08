@@ -184,8 +184,8 @@ export function Catalogue({
         onCardClick={onCardClick}
       />
 
-      {/* FAB */}
-      <button data-cy="add-flower-button" onClick={onAddFlowerClick} className={styles.fab}>
+      {/* Floating action button */}
+      <button data-cy="add-flower-button" onClick={onAddFlowerClick} className={styles.addButton}>
         <PlusIcon width={24} height={24} aria-hidden="true" />
       </button>
     </div>

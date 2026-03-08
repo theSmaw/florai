@@ -109,7 +109,7 @@
 }
 
 
-.fab {
+.addButton {
   position: fixed;
   right: var(--space-6);
   bottom: var(--space-6);
@@ -130,11 +130,11 @@
   z-index: var(--z-fixed);
 }
 
-.fab:active {
+.addButton:active {
   transform: scale(0.96);
 }
 
-.fab:hover {
+.addButton:hover {
   background: var(--color-surface-inverse-hover);
 }
 

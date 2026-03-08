@@ -28,8 +28,8 @@
 }
 
 .tagBrand {
-  background: rgba(16, 185, 129, 0.08);
-  border-color: rgba(16, 185, 129, 0.25);
+  background: var(--color-brand-surface);
+  border-color: var(--color-brand-border);
   color: var(--color-brand);
 }
 

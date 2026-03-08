@@ -70,7 +70,7 @@ function defaultProps(overrides?: Partial<ArrangementDetailProps>): ArrangementD
   return {
     arrangement: MOCK_ARRANGEMENT,
     flowers: MOCK_FLOWERS,
-    backLabel: 'Collection',
+    backLabel: 'Arrangements',
     onBack: NO_OP,
     onImageUpload: NO_OP,
     uploadingImage: false,
