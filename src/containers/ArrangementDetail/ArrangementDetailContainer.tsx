@@ -1,16 +1,15 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectArrangementById,
-  selectLoadArrangementsStatus,
-  selectUploadImageStatus,
-  selectUpdateNotesStatus,
-} from '../../stores/arrangements/selectors';
+import { selectArrangementById } from '../../stores/arrangements/selectors/selectArrangementById';
+import { selectLoadArrangementsStatus } from '../../stores/arrangements/selectors/selectLoadArrangementsStatus';
+import { selectUploadImageStatus } from '../../stores/arrangements/selectors/selectUploadImageStatus';
+import { selectUpdateNotesStatus } from '../../stores/arrangements/selectors/selectUpdateNotesStatus';
 import { loadArrangements } from '../../stores/arrangements/asyncActions/loadArrangements';
 import { uploadArrangementImage } from '../../stores/arrangements/asyncActions/uploadArrangementImage';
 import { updateArrangementNotes } from '../../stores/arrangements/asyncActions/updateArrangementNotes';
-import { selectFlowersList, selectLoadFlowersStatus } from '../../stores/flowers/selectors';
+import { selectFlowersList } from '../../stores/flowers/selectors/selectFlowersList';
+import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch } from '../../stores/store';
 import { ArrangementDetail } from '../../components/ArrangementDetail/ArrangementDetail';

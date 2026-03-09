@@ -1,14 +1,12 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { updateArrangementNotes } from '../asyncActions/updateArrangementNotes';
+import type { Draft, SerializedError } from '@reduxjs/toolkit';
 import type { ArrangementsState } from '../state';
 
 export function updateArrangementNotesRejected(
-  builder: ActionReducerMapBuilder<ArrangementsState>,
+  state: Draft<ArrangementsState>,
+  action: { error: SerializedError },
 ): void {
-  builder.addCase(updateArrangementNotes.rejected, (state, action) => {
-    state.updateNotesStatus = {
-      status: 'rejected',
-      errorMessage: action.error.message ?? 'Failed to update notes',
-    };
-  });
+  state.updateNotesStatus = {
+    status: 'rejected',
+    errorMessage: action.error.message ?? 'Failed to update notes',
+  };
 }

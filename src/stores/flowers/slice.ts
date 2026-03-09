@@ -6,6 +6,14 @@ import { flowerDeselected as flowerDeselectedReducer } from './reducers/flowerDe
 import { flowerUpdated as flowerUpdatedReducer } from './reducers/flowerUpdated';
 import { flowerAdded as flowerAddedReducer } from './reducers/flowerAdded';
 import { flowerRemoved as flowerRemovedReducer } from './reducers/flowerRemoved';
+import { loadFlowers } from './asyncActions/loadFlowers';
+import { overrideFlowerImage } from './asyncActions/overrideFlowerImage';
+import { addFlowerSupplier } from './asyncActions/addFlowerSupplier';
+import { updateFlowerSupplier } from './asyncActions/updateFlowerSupplier';
+import { removeFlowerSupplier } from './asyncActions/removeFlowerSupplier';
+import { updateCareInstructions } from './asyncActions/updateCareInstructions';
+import { updateSourcingNotes } from './asyncActions/updateSourcingNotes';
+import { updateComplementaryFlowers } from './asyncActions/updateComplementaryFlowers';
 import { loadFlowersPending } from './extraReducers/loadFlowersPending';
 import { loadFlowersFulfilled } from './extraReducers/loadFlowersFulfilled';
 import { loadFlowersRejected } from './extraReducers/loadFlowersRejected';
@@ -43,30 +51,31 @@ export const flowersSlice = createSlice({
     flowerRemoved: flowerRemovedReducer,
   },
   extraReducers: (builder) => {
-    loadFlowersPending(builder);
-    loadFlowersFulfilled(builder);
-    loadFlowersRejected(builder);
-    overrideFlowerImagePending(builder);
-    overrideFlowerImageFulfilled(builder);
-    overrideFlowerImageRejected(builder);
-    addFlowerSupplierPending(builder);
-    addFlowerSupplierFulfilled(builder);
-    addFlowerSupplierRejected(builder);
-    updateFlowerSupplierPending(builder);
-    updateFlowerSupplierFulfilled(builder);
-    updateFlowerSupplierRejected(builder);
-    removeFlowerSupplierPending(builder);
-    removeFlowerSupplierFulfilled(builder);
-    removeFlowerSupplierRejected(builder);
-    updateCareInstructionsPending(builder);
-    updateCareInstructionsFulfilled(builder);
-    updateCareInstructionsRejected(builder);
-    updateSourcingNotesPending(builder);
-    updateSourcingNotesFulfilled(builder);
-    updateSourcingNotesRejected(builder);
-    updateComplementaryFlowersPending(builder);
-    updateComplementaryFlowersFulfilled(builder);
-    updateComplementaryFlowersRejected(builder);
+    builder
+      .addCase(loadFlowers.pending, loadFlowersPending)
+      .addCase(loadFlowers.fulfilled, loadFlowersFulfilled)
+      .addCase(loadFlowers.rejected, loadFlowersRejected)
+      .addCase(overrideFlowerImage.pending, overrideFlowerImagePending)
+      .addCase(overrideFlowerImage.fulfilled, overrideFlowerImageFulfilled)
+      .addCase(overrideFlowerImage.rejected, overrideFlowerImageRejected)
+      .addCase(addFlowerSupplier.pending, addFlowerSupplierPending)
+      .addCase(addFlowerSupplier.fulfilled, addFlowerSupplierFulfilled)
+      .addCase(addFlowerSupplier.rejected, addFlowerSupplierRejected)
+      .addCase(updateFlowerSupplier.pending, updateFlowerSupplierPending)
+      .addCase(updateFlowerSupplier.fulfilled, updateFlowerSupplierFulfilled)
+      .addCase(updateFlowerSupplier.rejected, updateFlowerSupplierRejected)
+      .addCase(removeFlowerSupplier.pending, removeFlowerSupplierPending)
+      .addCase(removeFlowerSupplier.fulfilled, removeFlowerSupplierFulfilled)
+      .addCase(removeFlowerSupplier.rejected, removeFlowerSupplierRejected)
+      .addCase(updateCareInstructions.pending, updateCareInstructionsPending)
+      .addCase(updateCareInstructions.fulfilled, updateCareInstructionsFulfilled)
+      .addCase(updateCareInstructions.rejected, updateCareInstructionsRejected)
+      .addCase(updateSourcingNotes.pending, updateSourcingNotesPending)
+      .addCase(updateSourcingNotes.fulfilled, updateSourcingNotesFulfilled)
+      .addCase(updateSourcingNotes.rejected, updateSourcingNotesRejected)
+      .addCase(updateComplementaryFlowers.pending, updateComplementaryFlowersPending)
+      .addCase(updateComplementaryFlowers.fulfilled, updateComplementaryFlowersFulfilled)
+      .addCase(updateComplementaryFlowers.rejected, updateComplementaryFlowersRejected);
   },
 });
 

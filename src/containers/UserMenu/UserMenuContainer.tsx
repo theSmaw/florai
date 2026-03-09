@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { UserMenu } from '../../components/UserMenu/UserMenu';
 import { signOut } from '../../stores/auth/slice';
-import { selectSession } from '../../stores/auth/selectors';
+import { selectSession } from '../../stores/auth/selectors/selectSession';
 import type { AppDispatch } from '../../stores/store';
 
 export function UserMenuContainer() {

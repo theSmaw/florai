@@ -4,18 +4,16 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  selectFilteredFlowers,
-  selectGroupedFlowers,
-  selectFlowersFilter,
-  selectLoadFlowersStatus,
-  selectAllColors,
-  selectAllSeasons,
-  selectAllTypes,
-  selectAllClimates,
-  selectStemLengthBounds,
-  selectVaseLifeBounds,
-} from '../../stores/flowers/selectors';
+import { selectFilteredFlowers } from '../../stores/flowers/selectors/selectFilteredFlowers';
+import { selectGroupedFlowers } from '../../stores/flowers/selectors/selectGroupedFlowers';
+import { selectFlowersFilter } from '../../stores/flowers/selectors/selectFlowersFilter';
+import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
+import { selectAllColors } from '../../stores/flowers/selectors/selectAllColors';
+import { selectAllSeasons } from '../../stores/flowers/selectors/selectAllSeasons';
+import { selectAllTypes } from '../../stores/flowers/selectors/selectAllTypes';
+import { selectAllClimates } from '../../stores/flowers/selectors/selectAllClimates';
+import { selectStemLengthBounds } from '../../stores/flowers/selectors/selectStemLengthBounds';
+import { selectVaseLifeBounds } from '../../stores/flowers/selectors/selectVaseLifeBounds';
 import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch } from '../../stores/store';

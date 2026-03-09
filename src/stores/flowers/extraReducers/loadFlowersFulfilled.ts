@@ -1,10 +1,11 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { loadFlowers } from '../asyncActions/loadFlowers';
+import type { Draft, PayloadAction } from '@reduxjs/toolkit';
 import type { FlowersState } from '../state';
+import type { Flower } from '../../../domain/Flower';
 
-export function loadFlowersFulfilled(builder: ActionReducerMapBuilder<FlowersState>): void {
-  builder.addCase(loadFlowers.fulfilled, (state, action) => {
-    state.flowers = action.payload;
-    state.loadFlowersStatus = { status: 'fulfilled' };
-  });
+export function loadFlowersFulfilled(
+  state: Draft<FlowersState>,
+  action: PayloadAction<Flower[]>,
+): void {
+  state.flowers = action.payload;
+  state.loadFlowersStatus = { status: 'fulfilled' };
 }

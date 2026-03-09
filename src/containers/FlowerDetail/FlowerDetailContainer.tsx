@@ -4,7 +4,8 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFlowersList, selectLoadFlowersStatus } from '../../stores/flowers/selectors';
+import { selectFlowersList } from '../../stores/flowers/selectors/selectFlowersList';
+import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import { overrideFlowerImage } from '../../stores/flowers/asyncActions/overrideFlowerImage';
 import { addFlowerSupplier } from '../../stores/flowers/asyncActions/addFlowerSupplier';

@@ -2,6 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from './state';
 import { arrangementFilterApplied as arrangementFilterAppliedReducer } from './reducers/arrangementFilterApplied';
 import { arrangementAdded as arrangementAddedReducer } from './reducers/arrangementAdded';
+import { loadArrangements } from './asyncActions/loadArrangements';
+import { createArrangement } from './asyncActions/createArrangement';
+import { uploadArrangementImage } from './asyncActions/uploadArrangementImage';
+import { updateArrangementNotes } from './asyncActions/updateArrangementNotes';
 import { loadArrangementsPending } from './extraReducers/loadArrangementsPending';
 import { loadArrangementsFulfilled } from './extraReducers/loadArrangementsFulfilled';
 import { loadArrangementsRejected } from './extraReducers/loadArrangementsRejected';
@@ -23,18 +27,19 @@ export const arrangementsSlice = createSlice({
     arrangementAdded: arrangementAddedReducer,
   },
   extraReducers: (builder) => {
-    loadArrangementsPending(builder);
-    loadArrangementsFulfilled(builder);
-    loadArrangementsRejected(builder);
-    createArrangementPending(builder);
-    createArrangementFulfilled(builder);
-    createArrangementRejected(builder);
-    uploadArrangementImagePending(builder);
-    uploadArrangementImageFulfilled(builder);
-    uploadArrangementImageRejected(builder);
-    updateArrangementNotesPending(builder);
-    updateArrangementNotesFulfilled(builder);
-    updateArrangementNotesRejected(builder);
+    builder
+      .addCase(loadArrangements.pending, loadArrangementsPending)
+      .addCase(loadArrangements.fulfilled, loadArrangementsFulfilled)
+      .addCase(loadArrangements.rejected, loadArrangementsRejected)
+      .addCase(createArrangement.pending, createArrangementPending)
+      .addCase(createArrangement.fulfilled, createArrangementFulfilled)
+      .addCase(createArrangement.rejected, createArrangementRejected)
+      .addCase(uploadArrangementImage.pending, uploadArrangementImagePending)
+      .addCase(uploadArrangementImage.fulfilled, uploadArrangementImageFulfilled)
+      .addCase(uploadArrangementImage.rejected, uploadArrangementImageRejected)
+      .addCase(updateArrangementNotes.pending, updateArrangementNotesPending)
+      .addCase(updateArrangementNotes.fulfilled, updateArrangementNotesFulfilled)
+      .addCase(updateArrangementNotes.rejected, updateArrangementNotesRejected);
   },
 });
 

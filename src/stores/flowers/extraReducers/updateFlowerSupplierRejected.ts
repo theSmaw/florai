@@ -1,14 +1,12 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { updateFlowerSupplier } from '../asyncActions/updateFlowerSupplier';
+import type { Draft, SerializedError } from '@reduxjs/toolkit';
 import type { FlowersState } from '../state';
 
 export function updateFlowerSupplierRejected(
-  builder: ActionReducerMapBuilder<FlowersState>,
+  state: Draft<FlowersState>,
+  action: { error: SerializedError },
 ): void {
-  builder.addCase(updateFlowerSupplier.rejected, (state, action) => {
-    state.supplierOperationStatus = {
-      status: 'rejected',
-      errorMessage: action.error.message ?? 'Failed to update supplier',
-    };
-  });
+  state.supplierOperationStatus = {
+    status: 'rejected',
+    errorMessage: action.error.message ?? 'Failed to update supplier',
+  };
 }

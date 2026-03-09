@@ -1,9 +1,6 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { loadArrangements } from '../asyncActions/loadArrangements';
+import type { Draft } from '@reduxjs/toolkit';
 import type { ArrangementsState } from '../state';
 
-export function loadArrangementsPending(builder: ActionReducerMapBuilder<ArrangementsState>): void {
-  builder.addCase(loadArrangements.pending, (state) => {
-    state.loadStatus = { status: 'pending' };
-  });
+export function loadArrangementsPending(state: Draft<ArrangementsState>): void {
+  state.loadStatus = { status: 'pending' };
 }

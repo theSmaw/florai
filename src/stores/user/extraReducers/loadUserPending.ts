@@ -1,9 +1,6 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { loadUser } from '../asyncActions/loadUser';
+import type { Draft } from '@reduxjs/toolkit';
 import type { UserState } from '../state';
 
-export function loadUserPending(builder: ActionReducerMapBuilder<UserState>): void {
-  builder.addCase(loadUser.pending, (state) => {
-    state.loadUserStatus = { status: 'pending' };
-  });
+export function loadUserPending(state: Draft<UserState>): void {
+  state.loadUserStatus = { status: 'pending' };
 }
