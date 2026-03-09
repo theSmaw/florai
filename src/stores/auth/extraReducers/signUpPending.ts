@@ -1,10 +1,7 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { signUp } from '../asyncActions/signUp';
+import type { Draft } from '@reduxjs/toolkit';
 import type { AuthState } from '../state';
 
-export function signUpPending(builder: ActionReducerMapBuilder<AuthState>): void {
-  builder.addCase(signUp.pending, (state) => {
-    state.loading = true;
-    state.error = null;
-  });
+export function signUpPending(state: Draft<AuthState>): void {
+  state.loading = true;
+  state.error = null;
 }

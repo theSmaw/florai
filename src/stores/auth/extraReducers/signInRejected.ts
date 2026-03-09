@@ -1,10 +1,10 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { signIn } from '../asyncActions/signIn';
+import type { Draft, SerializedError } from '@reduxjs/toolkit';
 import type { AuthState } from '../state';
 
-export function signInRejected(builder: ActionReducerMapBuilder<AuthState>): void {
-  builder.addCase(signIn.rejected, (state, action) => {
-    state.loading = false;
-    state.error = action.error.message ?? 'Sign-in failed';
-  });
+export function signInRejected(
+  state: Draft<AuthState>,
+  action: { error: SerializedError },
+): void {
+  state.loading = false;
+  state.error = action.error.message ?? 'Sign-in failed';
 }

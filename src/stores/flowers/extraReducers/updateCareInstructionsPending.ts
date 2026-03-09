@@ -1,11 +1,6 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { updateCareInstructions } from '../asyncActions/updateCareInstructions';
+import type { Draft } from '@reduxjs/toolkit';
 import type { FlowersState } from '../state';
 
-export function updateCareInstructionsPending(
-  builder: ActionReducerMapBuilder<FlowersState>,
-): void {
-  builder.addCase(updateCareInstructions.pending, (state) => {
-    state.updateCareInstructionsStatus = { status: 'pending' };
-  });
+export function updateCareInstructionsPending(state: Draft<FlowersState>): void {
+  state.updateCareInstructionsStatus = { status: 'pending' };
 }

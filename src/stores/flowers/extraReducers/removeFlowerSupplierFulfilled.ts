@@ -1,16 +1,14 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { removeFlowerSupplier } from '../asyncActions/removeFlowerSupplier';
+import type { Draft, PayloadAction } from '@reduxjs/toolkit';
 import type { FlowersState } from '../state';
 
 export function removeFlowerSupplierFulfilled(
-  builder: ActionReducerMapBuilder<FlowersState>,
+  state: Draft<FlowersState>,
+  action: PayloadAction<{ flowerId: string; supplierId: string }>,
 ): void {
-  builder.addCase(removeFlowerSupplier.fulfilled, (state, action) => {
-    state.supplierOperationStatus = { status: 'fulfilled' };
-    const { flowerId, supplierId } = action.payload;
-    const flower = state.flowers.find((f) => f.id === flowerId);
-    if (flower) {
-      flower.suppliers = flower.suppliers.filter((s) => s.id !== supplierId);
-    }
-  });
+  state.supplierOperationStatus = { status: 'fulfilled' };
+  const { flowerId, supplierId } = action.payload;
+  const flower = state.flowers.find((f) => f.id === flowerId);
+  if (flower) {
+    flower.suppliers = flower.suppliers.filter((s) => s.id !== supplierId);
+  }
 }

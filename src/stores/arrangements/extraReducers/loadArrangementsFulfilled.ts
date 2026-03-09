@@ -1,12 +1,11 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { loadArrangements } from '../asyncActions/loadArrangements';
+import type { Draft, PayloadAction } from '@reduxjs/toolkit';
 import type { ArrangementsState } from '../state';
+import type { Arrangement } from '../../../domain/Arrangement';
 
 export function loadArrangementsFulfilled(
-  builder: ActionReducerMapBuilder<ArrangementsState>,
+  state: Draft<ArrangementsState>,
+  action: PayloadAction<Arrangement[]>,
 ): void {
-  builder.addCase(loadArrangements.fulfilled, (state, action) => {
-    state.arrangements = action.payload;
-    state.loadStatus = { status: 'fulfilled' };
-  });
+  state.arrangements = action.payload;
+  state.loadStatus = { status: 'fulfilled' };
 }

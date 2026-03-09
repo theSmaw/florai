@@ -1,15 +1,13 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { loadArrangements } from '../asyncActions/loadArrangements';
+import type { Draft, SerializedError } from '@reduxjs/toolkit';
 import type { ArrangementsState } from '../state';
 
 export function loadArrangementsRejected(
-  builder: ActionReducerMapBuilder<ArrangementsState>,
+  state: Draft<ArrangementsState>,
+  action: { error: SerializedError; meta: { aborted: boolean } },
 ): void {
-  builder.addCase(loadArrangements.rejected, (state, action) => {
-    if (action.meta.aborted) return;
-    state.loadStatus = {
-      status: 'rejected',
-      errorMessage: action.error.message ?? 'Failed to load arrangements',
-    };
-  });
+  if (action.meta.aborted) return;
+  state.loadStatus = {
+    status: 'rejected',
+    errorMessage: action.error.message ?? 'Failed to load arrangements',
+  };
 }

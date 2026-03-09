@@ -1,11 +1,8 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { signOut } from '../asyncActions/signOut';
+import type { Draft } from '@reduxjs/toolkit';
 import type { AuthState } from '../state';
 
-export function signOutFulfilled(builder: ActionReducerMapBuilder<AuthState>): void {
-  builder.addCase(signOut.fulfilled, (state) => {
-    state.session = null;
-    state.loading = false;
-    state.error = null;
-  });
+export function signOutFulfilled(state: Draft<AuthState>): void {
+  state.session = null;
+  state.loading = false;
+  state.error = null;
 }

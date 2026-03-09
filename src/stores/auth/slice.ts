@@ -19,13 +19,14 @@ export const authSlice = createSlice({
   initialState,
   reducers: { sessionChanged: sessionChangedReducer },
   extraReducers: (builder) => {
-    signInPending(builder);
-    signInFulfilled(builder);
-    signInRejected(builder);
-    signUpPending(builder);
-    signUpFulfilled(builder);
-    signUpRejected(builder);
-    signOutFulfilled(builder);
+    builder
+      .addCase(signIn.pending, signInPending)
+      .addCase(signIn.fulfilled, signInFulfilled)
+      .addCase(signIn.rejected, signInRejected)
+      .addCase(signUp.pending, signUpPending)
+      .addCase(signUp.fulfilled, signUpFulfilled)
+      .addCase(signUp.rejected, signUpRejected)
+      .addCase(signOut.fulfilled, signOutFulfilled);
   },
 });
 

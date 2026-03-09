@@ -1,10 +1,8 @@
-import type { ActionReducerMapBuilder } from '@reduxjs/toolkit';
-import { loadUser } from '../asyncActions/loadUser';
+import type { Draft, PayloadAction } from '@reduxjs/toolkit';
 import type { UserState } from '../state';
+import type { User } from '../../../domain/User';
 
-export function loadUserFulfilled(builder: ActionReducerMapBuilder<UserState>): void {
-  builder.addCase(loadUser.fulfilled, (state, action) => {
-    state.user = action.payload;
-    state.loadUserStatus = { status: 'fulfilled' };
-  });
+export function loadUserFulfilled(state: Draft<UserState>, action: PayloadAction<User>): void {
+  state.user = action.payload;
+  state.loadUserStatus = { status: 'fulfilled' };
 }
