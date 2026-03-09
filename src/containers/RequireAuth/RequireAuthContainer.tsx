@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
-import { selectAuthInitialized, selectIsAuthenticated } from '../../stores/auth/selectors';
+import { selectAuthInitialized } from '../../stores/auth/selectors/selectAuthInitialized';
+import { selectIsAuthenticated } from '../../stores/auth/selectors/selectIsAuthenticated';
 import { RequireAuth } from '../../components/RequireAuth/RequireAuth';
 
 interface RequireAuthContainerProps {

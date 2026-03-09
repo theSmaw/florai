@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn, signUp } from '../../stores/auth/slice';
-import { selectAuthLoading, selectAuthError } from '../../stores/auth/selectors';
+import { selectAuthLoading } from '../../stores/auth/selectors/selectAuthLoading';
+import { selectAuthError } from '../../stores/auth/selectors/selectAuthError';
 import type { AppDispatch } from '../../stores/store';
 import { AuthForm } from '../../components/AuthForm/AuthForm';
 

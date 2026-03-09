@@ -1,17 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-  selectArrangementsFilter,
-  selectFilteredArrangements,
-  selectGroupedArrangements,
-  selectLoadArrangementsStatus,
-  selectCreateStatus,
-} from '../../stores/arrangements/selectors';
+import { selectArrangementsFilter } from '../../stores/arrangements/selectors/selectArrangementsFilter';
+import { selectFilteredArrangements } from '../../stores/arrangements/selectors/selectFilteredArrangements';
+import { selectGroupedArrangements } from '../../stores/arrangements/selectors/selectGroupedArrangements';
+import { selectLoadArrangementsStatus } from '../../stores/arrangements/selectors/selectLoadArrangementsStatus';
+import { selectCreateStatus } from '../../stores/arrangements/selectors/selectCreateStatus';
 import { arrangementFilterApplied } from '../../stores/arrangements/slice';
 import { loadArrangements } from '../../stores/arrangements/asyncActions/loadArrangements';
 import { createArrangement } from '../../stores/arrangements/asyncActions/createArrangement';
-import { selectFlowersList, selectLoadFlowersStatus } from '../../stores/flowers/selectors';
+import { selectFlowersList } from '../../stores/flowers/selectors/selectFlowersList';
+import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch, RootState } from '../../stores/store';
 import type {
