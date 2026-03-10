@@ -1,11 +1,10 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { ExitIcon, PersonIcon } from '@radix-ui/react-icons';
-import type { User } from '../../domain/User';
 import { IconButton } from '../IconButton/IconButton';
 import styles from './UserMenu.module.css';
 
 interface UserMenuProps {
-  user: User | null;
+  user: { id: string; name: string; email: string } | null;
   onSignOut?: () => void;
 }
 

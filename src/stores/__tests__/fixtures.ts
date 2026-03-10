@@ -1,21 +1,17 @@
 import type { Flower } from '../../domain/Flower';
 import type { Arrangement } from '../../domain/Arrangement';
-import type { User } from '../../domain/User';
 import type { Session } from '@supabase/supabase-js';
 import type { FlowersState } from '../flowers/state';
 import type { AuthState } from '../auth/state';
-import type { UserState } from '../user/state';
 import type { ArrangementsState } from '../arrangements/state';
 import { initialState as flowersInitial } from '../flowers/state';
 import { initialState as authInitial } from '../auth/state';
-import { initialState as userInitial } from '../user/state';
 import { initialState as arrangementsInitial } from '../arrangements/state';
 
 // RootState shape mirrored here to avoid importing store.ts (which initialises Supabase)
 export interface TestRootState {
   flowers: FlowersState;
   auth: AuthState;
-  user: UserState;
   arrangements: ArrangementsState;
 }
 
@@ -58,10 +54,6 @@ export function makeArrangement(overrides: { id?: string; name?: string; imageUr
   return base;
 }
 
-export function makeUser(): User {
-  return { id: 'u1', name: 'Test User', email: 'test@example.com' };
-}
-
 export function makeSession(): Session {
   return {
     access_token: 'test-access-token',
@@ -83,13 +75,11 @@ export function makeSession(): Session {
 export function makeRootState(overrides: {
   flowers?: FlowersState;
   auth?: AuthState;
-  user?: UserState;
   arrangements?: ArrangementsState;
 } = {}): TestRootState {
   return {
     flowers: overrides.flowers ?? flowersInitial,
     auth: overrides.auth ?? authInitial,
-    user: overrides.user ?? userInitial,
     arrangements: overrides.arrangements ?? arrangementsInitial,
   };
 }
