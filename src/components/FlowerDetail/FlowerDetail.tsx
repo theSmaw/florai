@@ -16,6 +16,7 @@ import { FlowerSupplierList } from '../FlowerSupplierList/FlowerSupplierList';
 import { EditButton } from '../EditButton/EditButton';
 import { SaveButton } from '../SaveButton/SaveButton';
 import { CancelButton } from '../CancelButton/CancelButton';
+import { FlowerThumbnailList } from '../FlowerThumbnailList/FlowerThumbnailList';
 import styles from './FlowerDetail.module.css';
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
@@ -91,12 +92,6 @@ export function FlowerDetail({
   onPairingsSave,
 }: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
-
-  function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
-    const img = e.currentTarget;
-    const fallback = '/images/placeholder.svg';
-    if (!img.src.endsWith(fallback)) img.src = fallback;
-  }
 
   const [isCareEditing, setIsCareEditing] = useState(false);
   const [draftCare, setDraftCare] = useState('');
@@ -500,31 +495,11 @@ export function FlowerDetail({
                 </div>
               </div>
             ) : (
-              complementaryFlowers.length > 0 ? (
-                <div className={styles.pairings}>
-                  {complementaryFlowers.map((complementaryFlower) => (
-                    <button
-                      key={complementaryFlower.id}
-                      type="button"
-                      className={styles.pairingCard}
-                      onClick={() => onFlowerSelect(complementaryFlower.id)}
-                      aria-label={`View ${complementaryFlower.name}`}
-                    >
-                      <img
-                        src={complementaryFlower.imageUrl ?? '/images/placeholder.svg'}
-                        alt={complementaryFlower.name}
-                        className={styles.pairingImage}
-                        onError={handleImgError}
-                      />
-                      <span className={styles.pairingName}>{complementaryFlower.name}</span>
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <div className={styles.pairingsHint}>
-                  <span className={styles.pairingsHintText}>No pairings added yet.</span>
-                </div>
-              )
+              <FlowerThumbnailList
+                flowers={complementaryFlowers}
+                emptyText="No pairings added yet."
+                onFlowerSelect={onFlowerSelect}
+              />
             )}
           </div>
     </DetailLayout>
