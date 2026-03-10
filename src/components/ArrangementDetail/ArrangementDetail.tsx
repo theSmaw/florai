@@ -11,6 +11,7 @@ import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { EditButton } from '../EditButton/EditButton';
 import { SaveButton } from '../SaveButton/SaveButton';
 import { CancelButton } from '../CancelButton/CancelButton';
+import { FlowerThumbnailList } from '../FlowerThumbnailList/FlowerThumbnailList';
 import styles from './ArrangementDetail.module.css';
 
 const tag = styles.tag ?? '';
@@ -115,24 +116,14 @@ export function ArrangementDetail({
       </div>
 
       {/* Flowers */}
-      {arrangementFlowers.length > 0 && (
-        <div className={styles.section}>
-          <SectionHeader label="Flowers" />
-          <div className={styles.flowerChips}>
-            {arrangementFlowers.map((flower) => (
-              <button
-                key={flower.id}
-                type="button"
-                className={styles.flowerChip}
-                onClick={() => onFlowerSelect(flower.id)}
-                aria-label={`View ${flower.name}`}
-              >
-                {flower.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <div className={styles.section}>
+        <SectionHeader label="Flowers" />
+        <FlowerThumbnailList
+          flowers={arrangementFlowers}
+          emptyText="No flowers in this arrangement."
+          onFlowerSelect={onFlowerSelect}
+        />
+      </div>
 
       {/* Physical */}
       {hasPhysical && (
