@@ -1,6 +1,7 @@
 describe('Flower detail page', () => {
   beforeEach(() => {
     cy.stubFlowers();
+    cy.stubArrangements();
   });
 
   describe('navigation', () => {
@@ -271,6 +272,42 @@ describe('Flower detail page', () => {
       cy.get('[data-cy="sourcing-notes-textarea"]').should('not.exist');
       cy.contains('Beautiful full bloom, long lasting').should('be.visible');
       cy.get('@saveNotes.all').should('have.length', 0);
+    });
+  });
+
+  describe('Appears In', () => {
+    it('shows arrangements that contain the flower', () => {
+      // Peony (id 1) is in "Spring Romance" (a1, flower_ids: ["1", "6", "8", "3"])
+      cy.visitFlowerDetail('1');
+      cy.contains('Appears In').should('be.visible');
+      cy.contains('Spring Romance').should('be.visible');
+    });
+
+    it('does not show arrangements that do not contain the flower', () => {
+      // Peony (id 1) is NOT in "Wild Garden Posy" (a2) or "Modern White Centerpiece" (a3)
+      cy.visitFlowerDetail('1');
+      cy.contains('Wild Garden Posy').should('not.exist');
+      cy.contains('Modern White Centerpiece').should('not.exist');
+    });
+
+    it('clicking an arrangement thumbnail navigates to its detail page', () => {
+      cy.visitFlowerDetail('1');
+      cy.contains('Spring Romance').click();
+      cy.url().should('match', /\/arrangements\/a1$/);
+      cy.get('[data-cy="arrangement-detail-view"]').should('be.visible');
+    });
+
+    it('back button shows the flower name after navigating via Appears In', () => {
+      cy.visitFlowerDetail('1');
+      cy.contains('Spring Romance').click();
+      cy.get('[data-cy="back-button"]').should('contain.text', 'Peony Sarah Bernhardt');
+    });
+
+    it('shows the empty state when the flower is not in any arrangement', () => {
+      // Explorer Red Rose (id 2) is not in any arrangement in the fixture
+      cy.visitFlowerDetail('2');
+      cy.contains('Appears In').should('be.visible');
+      cy.contains('Not used in any arrangements yet.').should('be.visible');
     });
   });
 

@@ -108,6 +108,7 @@ Cypress.Commands.add('visitCatalogue', () => {
 Cypress.Commands.add('visitFlowerDetail', (flowerId: string) => {
   cy.visitWithFakeAuth(`/catalogue/${flowerId}`);
   cy.wait('@getFlowers');
+  cy.wait('@getArrangements');
   cy.get('[data-cy="flower-detail-view"]').should('be.visible');
 });
 
