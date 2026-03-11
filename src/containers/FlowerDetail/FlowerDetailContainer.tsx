@@ -4,8 +4,10 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectFlowersList } from '../../stores/flowers/selectors/selectFlowersList';
 import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
+import { selectFlowerById } from '../../stores/flowers/selectors/selectFlowerById';
+import { selectComplementaryFlowersByFlowerId } from '../../stores/flowers/selectors/selectComplementaryFlowersByFlowerId';
+import { selectFlowersExcluding } from '../../stores/flowers/selectors/selectFlowersExcluding';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import { overrideFlowerImage } from '../../stores/flowers/asyncActions/overrideFlowerImage';
 import { addFlowerSupplier } from '../../stores/flowers/asyncActions/addFlowerSupplier';
@@ -14,8 +16,8 @@ import { removeFlowerSupplier } from '../../stores/flowers/asyncActions/removeFl
 import { updateCareInstructions } from '../../stores/flowers/asyncActions/updateCareInstructions';
 import { updateSourcingNotes } from '../../stores/flowers/asyncActions/updateSourcingNotes';
 import { updateComplementaryFlowers } from '../../stores/flowers/asyncActions/updateComplementaryFlowers';
-import { selectArrangementsList } from '../../stores/arrangements/selectors/selectArrangementsList';
 import { selectLoadArrangementsStatus } from '../../stores/arrangements/selectors/selectLoadArrangementsStatus';
+import { selectArrangementsForFlower } from '../../stores/arrangements/selectors/selectArrangementsForFlower';
 import { loadArrangements } from '../../stores/arrangements/asyncActions/loadArrangements';
 import type { AppDispatch, RootState } from '../../stores/store';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
@@ -27,9 +29,12 @@ export function FlowerDetailContainer() {
   const locationState = useLocation().state as { backLabel?: string } | null;
   const backLabel = locationState?.backLabel ?? 'Catalogue';
 
-  const flowers = useSelector(selectFlowersList);
+  const id = flowerId ?? '';
+  const flower = useSelector(selectFlowerById(id));
+  const complementaryFlowers = useSelector(selectComplementaryFlowersByFlowerId(id));
+  const allFlowers = useSelector(selectFlowersExcluding(id));
+  const appearingInArrangements = useSelector(selectArrangementsForFlower(id));
   const loadStatus = useSelector(selectLoadFlowersStatus);
-  const arrangements = useSelector(selectArrangementsList);
   const loadArrangementsStatus = useSelector(selectLoadArrangementsStatus);
   const uploadingImage =
     useSelector((state: RootState) => state.flowers.overrideImageStatus.status) === 'pending';
@@ -63,9 +68,8 @@ export function FlowerDetailContainer() {
     return s.status === 'rejected' ? s.errorMessage : null;
   });
 
-  // Ensure flowers and arrangements are loaded if this page is visited directly via URL.
-  // Status values are intentionally read at mount time only — including them
-  // in deps would abort the in-flight request when status changes to 'pending'.
+  // loadStatus and loadArrangementsStatus are intentionally read at mount time only —
+  // including them in deps would abort the in-flight request when status changes to 'pending'.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (loadStatus.status === 'idle') {
@@ -84,21 +88,12 @@ export function FlowerDetailContainer() {
     return undefined;
   }, [dispatch]);
 
-  const flower = flowers.find((f) => f.id === flowerId) ?? null;
-  const complementaryFlowers = flower
-    ? flowers.filter((f) => flower.complementaryFlowerIds.includes(f.id))
-    : [];
-  const allFlowers = flowers.filter((f) => f.id !== flowerId);
-  const appearingInArrangements = arrangements.filter((a) =>
-    flowerId ? a.flowerIds.includes(flowerId) : false,
-  );
-
   const handleBack = () =>
     locationState?.backLabel ? navigate(-1) : navigate('/catalogue');
-  const handleFlowerSelect = (id: string) =>
-    navigate(`/catalogue/${id}`, { state: { backLabel: flower?.name ?? 'Flower' } });
-  const handleArrangementSelect = (id: string) =>
-    navigate(`/arrangements/${id}`, { state: { backLabel: flower?.name ?? 'Flower' } });
+  const handleFlowerSelect = (fid: string) =>
+    navigate(`/catalogue/${fid}`, { state: { backLabel: flower?.name ?? 'Flower' } });
+  const handleArrangementSelect = (aid: string) =>
+    navigate(`/arrangements/${aid}`, { state: { backLabel: flower?.name ?? 'Flower' } });
 
   function handleImageUpload(file: File) {
     if (flowerId) {
@@ -112,9 +107,9 @@ export function FlowerDetailContainer() {
     }
   }
 
-  function handleUpdateSupplier(id: string, name: string, wholesalePrice: number | null) {
+  function handleUpdateSupplier(sid: string, name: string, wholesalePrice: number | null) {
     if (flowerId) {
-      void dispatch(updateFlowerSupplier({ flowerId, id, name, wholesalePrice }));
+      void dispatch(updateFlowerSupplier({ flowerId, id: sid, name, wholesalePrice }));
     }
   }
 
