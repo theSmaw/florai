@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import type { Flower } from '../../domain/Flower';
+import type { Arrangement } from '../../domain/Arrangement';
 import { FlowerDetail } from './FlowerDetail';
 
 const meta: Meta<typeof FlowerDetail> = {
@@ -28,6 +29,8 @@ const meta: Meta<typeof FlowerDetail> = {
     savingPairings: false,
     savePairingsError: null,
     onPairingsSave: () => undefined,
+    appearingInArrangements: [],
+    onArrangementSelect: () => undefined,
   },
 };
 
@@ -66,6 +69,24 @@ const MOCK_FLOWER_WITH_SUPPLIERS: Flower = {
     { id: 's2', name: 'Kenya Blooms', wholesalePrice: 3.75 },
   ],
 };
+
+const MOCK_ARRANGEMENTS: Arrangement[] = [
+  {
+    id: 'a1',
+    name: 'Spring Wedding Bouquet',
+    flowerIds: ['1'],
+    size: 'large',
+    style: 'romantic',
+    createdAt: '2024-01-01T00:00:00Z',
+  },
+  {
+    id: 'a2',
+    name: 'Table Centrepiece',
+    flowerIds: ['1'],
+    size: 'medium',
+    createdAt: '2024-02-01T00:00:00Z',
+  },
+];
 
 const MOCK_COMPLEMENTARY: Flower[] = [
   {
@@ -109,6 +130,7 @@ export const Default: Story = {
   args: {
     flower: MOCK_FLOWER,
     complementaryFlowers: MOCK_COMPLEMENTARY,
+    appearingInArrangements: MOCK_ARRANGEMENTS,
   },
 };
 

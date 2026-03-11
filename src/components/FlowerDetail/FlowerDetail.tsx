@@ -2,6 +2,7 @@
 // Receives all data via props from FlowerDetailContainer.
 import { useEffect, useRef, useState } from 'react';
 import type { Availability, Flower, Toxicity } from '../../domain/Flower';
+import type { Arrangement } from '../../domain/Arrangement';
 import {
   AVAILABILITY_LABEL,
   CLIMATE_LABEL,
@@ -64,6 +65,8 @@ export interface FlowerDetailProps {
   savingPairings: boolean;
   savePairingsError: string | null;
   onPairingsSave: (flowerIds: string[]) => void;
+  appearingInArrangements: Arrangement[];
+  onArrangementSelect: (arrangementId: string) => void;
 }
 
 export function FlowerDetail({
@@ -90,6 +93,8 @@ export function FlowerDetail({
   savingPairings,
   savePairingsError,
   onPairingsSave,
+  appearingInArrangements,
+  onArrangementSelect,
 }: FlowerDetailProps) {
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
 
@@ -496,11 +501,20 @@ export function FlowerDetail({
               </div>
             ) : (
               <FlowerThumbnailList
-                flowers={complementaryFlowers}
+                items={complementaryFlowers}
                 emptyText="No pairings added yet."
-                onFlowerSelect={onFlowerSelect}
+                onSelect={onFlowerSelect}
               />
             )}
+          </div>
+          {/* Appears in */}
+          <div className={styles.section}>
+            <SectionHeader label="Appears In" />
+            <FlowerThumbnailList
+              items={appearingInArrangements}
+              emptyText="Not used in any arrangements yet."
+              onSelect={onArrangementSelect}
+            />
           </div>
     </DetailLayout>
   );
