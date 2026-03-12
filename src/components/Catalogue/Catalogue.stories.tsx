@@ -106,7 +106,6 @@ function defaultProps(overrides?: Partial<CatalogueProps>): CatalogueProps {
     onVaseLifeChange: NO_OP,
     onGroupByChange: NO_OP,
     onCardClick: NO_OP,
-    onAddFlowerClick: NO_OP,
     filterPills: [],
     ...overrides,
   };

@@ -158,8 +158,6 @@ export function CatalogueContainer() {
     navigate(`/catalogue/${flowerId}`, { state: { backLabel: 'Catalogue' } });
   };
 
-  const handleAddFlowerClick = () => {};
-
   const filterPills: Pill[] = [
     ...currentFilter.colors.map((c) => ({ label: c, onClear: () => handleColorToggle(c) })),
     ...pill(currentFilter.season, (s) => s, () => handleSeasonChange(undefined)),
@@ -197,7 +195,6 @@ export function CatalogueContainer() {
       onVaseLifeChange={handleVaseLifeChange}
       onGroupByChange={handleGroupByChange}
       onCardClick={handleCardClick}
-      onAddFlowerClick={handleAddFlowerClick}
       filterPills={filterPills}
     />
   );
