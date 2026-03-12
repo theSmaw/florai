@@ -1,3 +1,15 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
 .flowerList {
   display: flex;
   flex-direction: column;
@@ -42,4 +54,9 @@
   font-style: italic;
   margin: 0;
   padding: var(--space-2);
+}
+
+.error {
+  color: var(--color-danger);
+  font-size: var(--font-size-sm);
 }

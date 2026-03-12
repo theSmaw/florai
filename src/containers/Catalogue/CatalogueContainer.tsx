@@ -1,7 +1,7 @@
 // Catalogue container
 // Connects the Redux store to the catalogue page UI.
 // Rendered by CatalogueView (the route target).
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectFilteredFlowers } from '../../stores/flowers/selectors/selectFilteredFlowers';
@@ -9,6 +9,7 @@ import { selectGroupedFlowers } from '../../stores/flowers/selectors/selectGroup
 import { selectFlowersFilter } from '../../stores/flowers/selectors/selectFlowersFilter';
 import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
 import { selectCreateFlowerStatus } from '../../stores/flowers/selectors/selectCreateFlowerStatus';
+import { selectCreateFlowerError } from '../../stores/flowers/selectors/selectCreateFlowerError';
 import { selectAllColors } from '../../stores/flowers/selectors/selectAllColors';
 import { selectAllSeasons } from '../../stores/flowers/selectors/selectAllSeasons';
 import { selectAllTypes } from '../../stores/flowers/selectors/selectAllTypes';
@@ -18,7 +19,7 @@ import { selectVaseLifeBounds } from '../../stores/flowers/selectors/selectVaseL
 import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import { createUserFlower } from '../../stores/flowers/asyncActions/createUserFlower';
-import type { AppDispatch, RootState } from '../../stores/store';
+import type { AppDispatch } from '../../stores/store';
 import type {
   Climate,
   Color,
@@ -47,12 +48,9 @@ export function CatalogueContainer() {
   const currentFilter = useSelector(selectFlowersFilter);
   const loadFlowersStatus = useSelector(selectLoadFlowersStatus);
   const createFlowerStatus = useSelector(selectCreateFlowerStatus);
+  const saveError = useSelector(selectCreateFlowerError);
   const isLoading = loadFlowersStatus.status === 'pending';
   const saving = createFlowerStatus.status === 'pending';
-  const saveError = useSelector((state: RootState) => {
-    const s = state.flowers.createFlowerStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
   const availableColors = useSelector(selectAllColors);
   const availableSeasons = useSelector(selectAllSeasons);
   const availableTypes = useSelector(selectAllTypes);
@@ -61,18 +59,6 @@ export function CatalogueContainer() {
   const vaseLifeBounds = useSelector(selectVaseLifeBounds);
 
   const [isAddOpen, setIsAddOpen] = useState(false);
-  const saveInitiated = useRef(false);
-
-  useEffect(() => {
-    if (!saveInitiated.current) return;
-    if (createFlowerStatus.status === 'fulfilled') {
-      saveInitiated.current = false;
-      setIsAddOpen(false);
-    } else if (createFlowerStatus.status === 'rejected') {
-      saveInitiated.current = false;
-      // modal stays open so the user sees the error
-    }
-  }, [createFlowerStatus]);
 
   useEffect(() => {
     const promise = dispatch(loadFlowers());
@@ -181,9 +167,13 @@ export function CatalogueContainer() {
     navigate(`/catalogue/${flowerId}`, { state: { backLabel: 'Catalogue' } });
   };
 
-  const handleAddFlower = (data: NewFlower) => {
-    saveInitiated.current = true;
-    void dispatch(createUserFlower(data));
+  const handleAddFlower = async (data: NewFlower) => {
+    try {
+      await dispatch(createUserFlower(data)).unwrap();
+      setIsAddOpen(false);
+    } catch {
+      // modal stays open so the user sees the error via saveError selector
+    }
   };
 
   const filterPills: Pill[] = [

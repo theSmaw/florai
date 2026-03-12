@@ -1,7 +1,7 @@
 // Flower list component
 // Pure UI - displays flowers in a grid, no business logic
-import type { ReactNode } from 'react';
 import type { Flower } from '../../domain/Flower';
+import { AddFlowerCard } from '../AddFlowerCard/AddFlowerCard';
 import { FlowerCard } from '../FlowerCard/FlowerCard';
 import styles from './FlowerList.module.css';
 
@@ -10,11 +10,10 @@ interface FlowerListProps {
   groupedFlowers?: Record<string, Flower[]>;
   onCardClick: (flowerId: string) => void;
   isLoading?: boolean;
-  /** Optional card rendered as the last item in the grid (e.g. AddFlowerCard). */
-  addCard?: ReactNode;
+  onAddClick?: () => void;
 }
 
-export function FlowerList({ flowers, groupedFlowers, onCardClick, isLoading, addCard }: FlowerListProps) {
+export function FlowerList({ flowers, groupedFlowers, onCardClick, isLoading, onAddClick }: FlowerListProps) {
   if (isLoading) {
     return (
       <div className={styles.center}>
@@ -24,6 +23,8 @@ export function FlowerList({ flowers, groupedFlowers, onCardClick, isLoading, ad
       </div>
     );
   }
+
+  const addCard = onAddClick ? <AddFlowerCard onClick={onAddClick} /> : null;
 
   // If grouped, show groups; otherwise show flat list
   if (groupedFlowers) {

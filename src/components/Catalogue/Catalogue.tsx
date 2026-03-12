@@ -4,7 +4,6 @@
 import { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import {
-  Cross2Icon,
   MagnifyingGlassIcon,
   MixerVerticalIcon,
 } from '@radix-ui/react-icons';
@@ -21,8 +20,8 @@ import type {
   Season,
   Toxicity,
 } from '../../domain/Flower';
-import { AddFlowerCard } from '../AddFlowerCard/AddFlowerCard';
 import { AddFlowerModal } from '../AddFlowerModal/AddFlowerModal';
+import { CloseButton } from '../CloseButton/CloseButton';
 import { FilterChip } from '../FilterChip/FilterChip';
 import { FlowerList } from '../FlowerList/FlowerList';
 import { FilterPanel } from '../FilterPanel/FilterPanel';
@@ -138,9 +137,7 @@ export function Catalogue({
                 <div className={styles.sheetHeader}>
                   <Dialog.Title asChild><SheetTitle>Filters</SheetTitle></Dialog.Title>
                   <Dialog.Close asChild>
-                    <button className={styles.closeButton} aria-label="Close filters">
-                      <Cross2Icon width={15} height={15} aria-hidden="true" />
-                    </button>
+                    <CloseButton aria-label="Close filters" />
                   </Dialog.Close>
                 </div>
 
@@ -192,7 +189,7 @@ export function Catalogue({
         groupedFlowers={groupedFlowers}
         isLoading={isLoading}
         onCardClick={onCardClick}
-        addCard={<AddFlowerCard onClick={() => onAddOpenChange(true)} />}
+        onAddClick={() => onAddOpenChange(true)}
       />
 
       <AddFlowerModal
