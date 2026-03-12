@@ -4,7 +4,6 @@
 import { useState } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import {
-  Cross2Icon,
   MagnifyingGlassIcon,
   MixerVerticalIcon,
 } from '@radix-ui/react-icons';
@@ -17,9 +16,12 @@ import type {
   FlowerType,
   FragranceLevel,
   GroupBy,
+  NewFlower,
   Season,
   Toxicity,
 } from '../../domain/Flower';
+import { AddFlowerModal } from '../AddFlowerModal/AddFlowerModal';
+import { CloseButton } from '../CloseButton/CloseButton';
 import { FilterChip } from '../FilterChip/FilterChip';
 import { FlowerList } from '../FlowerList/FlowerList';
 import { FilterPanel } from '../FilterPanel/FilterPanel';
@@ -50,6 +52,11 @@ export interface CatalogueProps {
   onGroupByChange: (groupBy?: GroupBy) => void;
   onCardClick: (flowerId: string) => void;
   filterPills: Array<{ label: string; onClear: () => void }>;
+  isAddOpen: boolean;
+  onAddOpenChange: (open: boolean) => void;
+  saving: boolean;
+  saveError: string | null;
+  onAddFlower: (data: NewFlower) => void;
 }
 
 export function Catalogue({
@@ -76,6 +83,11 @@ export function Catalogue({
   onGroupByChange,
   onCardClick,
   filterPills,
+  isAddOpen,
+  onAddOpenChange,
+  saving,
+  saveError,
+  onAddFlower,
 }: CatalogueProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -125,9 +137,7 @@ export function Catalogue({
                 <div className={styles.sheetHeader}>
                   <Dialog.Title asChild><SheetTitle>Filters</SheetTitle></Dialog.Title>
                   <Dialog.Close asChild>
-                    <button className={styles.closeButton} aria-label="Close filters">
-                      <Cross2Icon width={15} height={15} aria-hidden="true" />
-                    </button>
+                    <CloseButton aria-label="Close filters" />
                   </Dialog.Close>
                 </div>
 
@@ -179,8 +189,16 @@ export function Catalogue({
         groupedFlowers={groupedFlowers}
         isLoading={isLoading}
         onCardClick={onCardClick}
+        onAddClick={() => onAddOpenChange(true)}
       />
 
+      <AddFlowerModal
+        open={isAddOpen}
+        onOpenChange={onAddOpenChange}
+        saving={saving}
+        error={saveError}
+        onSave={onAddFlower}
+      />
     </div>
   );
 }

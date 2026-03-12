@@ -1,6 +1,7 @@
 // Flower list component
 // Pure UI - displays flowers in a grid, no business logic
 import type { Flower } from '../../domain/Flower';
+import { AddFlowerCard } from '../AddFlowerCard/AddFlowerCard';
 import { FlowerCard } from '../FlowerCard/FlowerCard';
 import styles from './FlowerList.module.css';
 
@@ -9,9 +10,10 @@ interface FlowerListProps {
   groupedFlowers?: Record<string, Flower[]>;
   onCardClick: (flowerId: string) => void;
   isLoading?: boolean;
+  onAddClick?: () => void;
 }
 
-export function FlowerList({ flowers, groupedFlowers, onCardClick, isLoading }: FlowerListProps) {
+export function FlowerList({ flowers, groupedFlowers, onCardClick, isLoading, onAddClick }: FlowerListProps) {
   if (isLoading) {
     return (
       <div className={styles.center}>
@@ -22,23 +24,27 @@ export function FlowerList({ flowers, groupedFlowers, onCardClick, isLoading }: 
     );
   }
 
+  const addCard = onAddClick ? <AddFlowerCard onClick={onAddClick} /> : null;
+
   // If grouped, show groups; otherwise show flat list
   if (groupedFlowers) {
+    const groupKeys = Object.keys(groupedFlowers);
     return (
       <main data-cy="flower-list" className={styles.main}>
-        {Object.entries(groupedFlowers).map(([groupName, groupFlowers]) => (
+        {groupKeys.map((groupName, i) => (
           <div data-cy="flower-group" key={groupName} className={styles.group}>
             <h2 data-cy="group-title" className={styles.groupTitle}>
               {groupName}
             </h2>
             <div className={styles.grid}>
-              {groupFlowers.map((flower) => (
+              {(groupedFlowers[groupName] ?? []).map((flower) => (
                 <FlowerCard key={flower.id} flower={flower} onCardClick={onCardClick} />
               ))}
+              {i === groupKeys.length - 1 && addCard}
             </div>
           </div>
         ))}
-        {Object.keys(groupedFlowers).length === 0 && (
+        {groupKeys.length === 0 && (
           <div className={styles.empty}>
             <p className={styles.mutedText}>No flowers found</p>
           </div>
@@ -48,22 +54,13 @@ export function FlowerList({ flowers, groupedFlowers, onCardClick, isLoading }: 
   }
 
   // Flat list
-  if (flowers.length === 0) {
-    return (
-      <main className={styles.main}>
-        <div className={styles.empty}>
-          <p className={styles.mutedText}>No flowers found</p>
-        </div>
-      </main>
-    );
-  }
-
   return (
     <main data-cy="flower-list" className={styles.main}>
       <div className={styles.grid}>
         {flowers.map((flower) => (
           <FlowerCard key={flower.id} flower={flower} onCardClick={onCardClick} />
         ))}
+        {addCard}
       </div>
     </main>
   );

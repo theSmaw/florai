@@ -69,6 +69,12 @@ export interface Flower {
   complementaryFlowerIds: string[]; // IDs of flowers that pair well
 }
 
+// Data needed to create a new user flower. Omits server-assigned id, suppliers (managed
+// separately after creation), and complementaryFlowerIds (defaults to []).
+export type NewFlower = Omit<Flower, 'id' | 'suppliers' | 'complementaryFlowerIds'> & {
+  complementaryFlowerIds?: string[];
+};
+
 export interface FlowerFilter {
   colors: Color[]; // Empty = no filter
   availability?: Availability;

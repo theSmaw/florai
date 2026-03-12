@@ -12,6 +12,7 @@ describe('Flower card click', () => {
 
   it('shows the correct flower on the detail page', () => {
     cy.get('[data-cy="flower-card"]').first().click();
-    cy.get('[data-cy="flower-name"]').should('contain.text', 'Peony Sarah Bernhardt');
+    // Flowers are sorted alphabetically — "Blue Hydrangea" is first in the fixture
+    cy.get('[data-cy="flower-name"]').should('contain.text', 'Blue Hydrangea');
   });
 });
