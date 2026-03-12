@@ -3,41 +3,6 @@ import type { Flower } from '../../domain/Flower';
 import type { Arrangement } from '../../domain/Arrangement';
 import { FlowerDetail } from './FlowerDetail';
 
-const meta: Meta<typeof FlowerDetail> = {
-  title: 'Components/FlowerDetail',
-  component: FlowerDetail,
-  tags: ['autodocs'],
-  args: {
-    backLabel: 'Catalogue',
-    uploadingImage: false,
-    uploadError: null,
-    savingSupplier: false,
-    supplierError: null,
-    savingCare: false,
-    saveCareError: null,
-    savingNotes: false,
-    saveNotesError: null,
-    onBack: () => undefined,
-    onImageUpload: () => undefined,
-    onAddSupplier: () => undefined,
-    onUpdateSupplier: () => undefined,
-    onRemoveSupplier: () => undefined,
-    onCareSave: () => undefined,
-    onNotesSave: () => undefined,
-    onFlowerSelect: () => undefined,
-    allFlowers: [...MOCK_COMPLEMENTARY],
-    savingPairings: false,
-    savePairingsError: null,
-    onPairingsSave: () => undefined,
-    appearingInArrangements: [],
-    onArrangementSelect: () => undefined,
-  },
-};
-
-export default meta;
-
-type Story = StoryObj<typeof meta>;
-
 // ---------------------------------------------------------------------------
 // Mock data
 // ---------------------------------------------------------------------------
@@ -120,6 +85,41 @@ const MOCK_COMPLEMENTARY: Flower[] = [
     notes: '',
   },
 ];
+
+const meta: Meta<typeof FlowerDetail> = {
+  title: 'Components/FlowerDetail',
+  component: FlowerDetail,
+  tags: ['autodocs'],
+  args: {
+    backLabel: 'Catalogue',
+    uploadingImage: false,
+    uploadError: null,
+    savingSupplier: false,
+    supplierError: null,
+    savingCare: false,
+    saveCareError: null,
+    savingNotes: false,
+    saveNotesError: null,
+    onBack: () => undefined,
+    onImageUpload: () => undefined,
+    onAddSupplier: () => undefined,
+    onUpdateSupplier: () => undefined,
+    onRemoveSupplier: () => undefined,
+    onCareSave: () => undefined,
+    onNotesSave: () => undefined,
+    onFlowerSelect: () => undefined,
+    allFlowers: [...MOCK_COMPLEMENTARY],
+    savingPairings: false,
+    savePairingsError: null,
+    onPairingsSave: () => undefined,
+    appearingInArrangements: [],
+    onArrangementSelect: () => undefined,
+  },
+};
+
+export default meta;
+
+type Story = StoryObj<typeof meta>;
 
 // ---------------------------------------------------------------------------
 // Stories
