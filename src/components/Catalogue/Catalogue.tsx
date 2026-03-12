@@ -195,7 +195,6 @@ export function Catalogue({
         addCard={<AddFlowerCard onClick={() => onAddOpenChange(true)} />}
       />
 
-      {/* Add flower modal */}
       <AddFlowerModal
         open={isAddOpen}
         onOpenChange={onAddOpenChange}

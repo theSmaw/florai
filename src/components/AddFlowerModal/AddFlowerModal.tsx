@@ -15,12 +15,13 @@ import {
   SEASONS,
 } from '../../domain/Flower';
 import type { NewFlower } from '../../domain/Flower';
+import { ChipGroup } from '../ChipGroup/ChipGroup';
 import { FormField } from '../FormField/FormField';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { SheetTitle } from '../SheetTitle/SheetTitle';
 import { SaveButton } from '../SaveButton/SaveButton';
 import { CancelButton } from '../CancelButton/CancelButton';
-import styles from './AddFlowerModal.module.css';
+import styles from '../../styles/dialogModal.module.css';
 
 const FRAGRANCE_LEVELS: FragranceLevel[] = ['none', 'light', 'moderate', 'strong'];
 const TOXICITY_LEVELS: Toxicity[] = ['safe', 'mild', 'toxic'];
@@ -165,24 +166,14 @@ export function AddFlowerModal({
               </FormField>
 
               <FormField label="Colors" required>
-                <div data-cy="color-chips" className={styles.chipGroup}>
-                  {COLORS.map((color) => (
-                    <button
-                      key={color}
-                      type="button"
-                      data-cy={`color-chip-${color}`}
-                      className={
-                        selectedColors.includes(color)
-                          ? `${styles.chip} ${styles.chipActive}`
-                          : styles.chip
-                      }
-                      onClick={() => toggleColor(color)}
-                      disabled={saving}
-                    >
-                      {color}
-                    </button>
-                  ))}
-                </div>
+                <ChipGroup
+                  options={COLORS}
+                  selected={selectedColors}
+                  onToggle={toggleColor}
+                  disabled={saving}
+                  dataCy="color-chips"
+                  getOptionDataCy={(color) => `color-chip-${color}`}
+                />
               </FormField>
 
               <FormField label="Availability" htmlFor="flower-availability">
@@ -207,24 +198,14 @@ export function AddFlowerModal({
               <SectionHeader label="Growing" as="h3" />
 
               <FormField label="Season">
-                <div data-cy="season-chips" className={styles.chipGroup}>
-                  {SEASONS.map((season) => (
-                    <button
-                      key={season}
-                      type="button"
-                      data-cy={`season-chip-${season}`}
-                      className={
-                        selectedSeasons.includes(season)
-                          ? `${styles.chip} ${styles.chipActive}`
-                          : styles.chip
-                      }
-                      onClick={() => toggleSeason(season)}
-                      disabled={saving}
-                    >
-                      {season}
-                    </button>
-                  ))}
-                </div>
+                <ChipGroup
+                  options={SEASONS}
+                  selected={selectedSeasons}
+                  onToggle={toggleSeason}
+                  disabled={saving}
+                  dataCy="season-chips"
+                  getOptionDataCy={(season) => `season-chip-${season}`}
+                />
               </FormField>
 
               <FormField label="Climate" htmlFor="flower-climate">

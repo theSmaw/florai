@@ -1,5 +1,4 @@
-import { PlusIcon } from '@radix-ui/react-icons';
-import styles from './AddFlowerCard.module.css';
+import { AddCard } from '../AddCard/AddCard';
 
 export interface AddFlowerCardProps {
   onClick: () => void;
@@ -7,17 +6,11 @@ export interface AddFlowerCardProps {
 
 export function AddFlowerCard({ onClick }: AddFlowerCardProps) {
   return (
-    <button
-      data-cy="add-flower-card"
-      type="button"
-      className={styles.card}
+    <AddCard
       onClick={onClick}
-      aria-label="New flower"
-    >
-      <span className={styles.icon}>
-        <PlusIcon width={28} height={28} aria-hidden="true" />
-      </span>
-      <span className={styles.label}>New flower</span>
-    </button>
+      label="New flower"
+      dataCy="add-flower-card"
+      ariaLabel="New flower"
+    />
   );
 }

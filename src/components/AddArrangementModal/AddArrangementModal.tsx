@@ -13,11 +13,13 @@ import {
   SIZE_LABEL,
   STYLE_LABEL,
 } from '../../domain/Arrangement';
+import { ChipGroup } from '../ChipGroup/ChipGroup';
 import { FormField } from '../FormField/FormField';
 import { SectionHeader } from '../SectionHeader/SectionHeader';
 import { SheetTitle } from '../SheetTitle/SheetTitle';
 import { SaveButton } from '../SaveButton/SaveButton';
 import { CancelButton } from '../CancelButton/CancelButton';
+import baseStyles from '../../styles/dialogModal.module.css';
 import styles from './AddArrangementModal.module.css';
 
 export interface AddArrangementModalProps {
@@ -116,23 +118,23 @@ export function AddArrangementModal({
   return (
     <Dialog.Root open={open} onOpenChange={handleOpenChange}>
       <Dialog.Portal>
-        <Dialog.Overlay className={styles.overlay} />
+        <Dialog.Overlay className={baseStyles.overlay} />
         <Dialog.Content
-          className={styles.content}
+          className={baseStyles.content}
           aria-describedby={undefined}
         >
-          <div className={styles.header}>
+          <div className={baseStyles.header}>
             <Dialog.Title asChild><SheetTitle>New Arrangement</SheetTitle></Dialog.Title>
             <Dialog.Close asChild>
-              <button className={styles.closeButton} aria-label="Close" disabled={saving}>
+              <button className={baseStyles.closeButton} aria-label="Close" disabled={saving}>
                 <Cross2Icon width={15} height={15} aria-hidden="true" />
               </button>
             </Dialog.Close>
           </div>
 
-          <div className={styles.body}>
+          <div className={baseStyles.body}>
             {/* Basic info */}
-            <div className={styles.section}>
+            <div className={baseStyles.section}>
               <SectionHeader label="Basic Info" as="h3" />
 
               <FormField label="Name" htmlFor="arr-name" required>
@@ -140,7 +142,7 @@ export function AddArrangementModal({
                   id="arr-name"
                   data-cy="arrangement-name-input"
                   type="text"
-                  className={styles.input}
+                  className={baseStyles.input}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={saving}
@@ -152,7 +154,7 @@ export function AddArrangementModal({
                 <select
                   id="arr-size"
                   data-cy="arrangement-size-select"
-                  className={styles.select}
+                  className={baseStyles.select}
                   value={size}
                   onChange={(e) => setSize(e.target.value as ArrangementSize | '')}
                   disabled={saving}
@@ -168,7 +170,7 @@ export function AddArrangementModal({
                 <select
                   id="arr-style"
                   data-cy="arrangement-style-select"
-                  className={styles.select}
+                  className={baseStyles.select}
                   value={style}
                   onChange={(e) => setStyle(e.target.value as ArrangementStyle | '')}
                   disabled={saving}
@@ -181,31 +183,22 @@ export function AddArrangementModal({
               </FormField>
 
               <FormField label="Occasion">
-                <div data-cy="occasion-chips" className={styles.chipGroup}>
-                  {OCCASIONS.map((occ) => (
-                    <button
-                      key={occ}
-                      type="button"
-                      data-cy={`occasion-chip-${occ}`}
-                      className={
-                        selectedOccasions.includes(occ)
-                          ? `${styles.chip} ${styles.chipActive}`
-                          : styles.chip
-                      }
-                      onClick={() => toggleOccasion(occ)}
-                      disabled={saving}
-                    >
-                      {OCCASION_LABEL[occ]}
-                    </button>
-                  ))}
-                </div>
+                <ChipGroup
+                  options={OCCASIONS}
+                  selected={selectedOccasions}
+                  onToggle={toggleOccasion}
+                  disabled={saving}
+                  dataCy="occasion-chips"
+                  getLabel={(occ) => OCCASION_LABEL[occ]}
+                  getOptionDataCy={(occ) => `occasion-chip-${occ}`}
+                />
               </FormField>
 
               <FormField label="Description" htmlFor="arr-description">
                 <textarea
                   id="arr-description"
                   data-cy="arrangement-description-textarea"
-                  className={styles.textarea}
+                  className={baseStyles.textarea}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   disabled={saving}
@@ -216,7 +209,7 @@ export function AddArrangementModal({
             </div>
 
             {/* Flowers */}
-            <div className={styles.section}>
+            <div className={baseStyles.section}>
               <SectionHeader label="Flowers" as="h3" />
               <div data-cy="flower-checklist" className={styles.flowerList}>
                 {flowers.map((flower) => (
@@ -239,15 +232,15 @@ export function AddArrangementModal({
             </div>
 
             {/* Physical */}
-            <div className={styles.section}>
+            <div className={baseStyles.section}>
               <SectionHeader label="Physical" as="h3" />
-              <div className={styles.fieldGrid}>
+              <div className={baseStyles.fieldGrid}>
                 <FormField label="Stem count" htmlFor="arr-stem-count">
                   <input
                     id="arr-stem-count"
                     data-cy="arrangement-stem-count-input"
                     type="number"
-                    className={styles.input}
+                    className={baseStyles.input}
                     value={stemCount}
                     onChange={(e) => setStemCount(e.target.value)}
                     disabled={saving}
@@ -259,7 +252,7 @@ export function AddArrangementModal({
                     id="arr-weight"
                     data-cy="arrangement-weight-input"
                     type="number"
-                    className={styles.input}
+                    className={baseStyles.input}
                     value={weight}
                     onChange={(e) => setWeight(e.target.value)}
                     disabled={saving}
@@ -271,7 +264,7 @@ export function AddArrangementModal({
                     id="arr-time"
                     data-cy="arrangement-time-input"
                     type="number"
-                    className={styles.input}
+                    className={baseStyles.input}
                     value={timeToBuild}
                     onChange={(e) => setTimeToBuild(e.target.value)}
                     disabled={saving}
@@ -283,7 +276,7 @@ export function AddArrangementModal({
                     id="arr-vase-life"
                     data-cy="arrangement-vase-life-input"
                     type="number"
-                    className={styles.input}
+                    className={baseStyles.input}
                     value={vaseLife}
                     onChange={(e) => setVaseLife(e.target.value)}
                     disabled={saving}
@@ -294,15 +287,15 @@ export function AddArrangementModal({
             </div>
 
             {/* Pricing */}
-            <div className={styles.section}>
+            <div className={baseStyles.section}>
               <SectionHeader label="Pricing" as="h3" />
-              <div className={styles.fieldGrid}>
+              <div className={baseStyles.fieldGrid}>
                 <FormField label="Wholesale cost ($)" htmlFor="arr-wholesale">
                   <input
                     id="arr-wholesale"
                     data-cy="arrangement-wholesale-input"
                     type="number"
-                    className={styles.input}
+                    className={baseStyles.input}
                     value={wholesaleCost}
                     onChange={(e) => setWholesaleCost(e.target.value)}
                     disabled={saving}
@@ -315,7 +308,7 @@ export function AddArrangementModal({
                     id="arr-retail"
                     data-cy="arrangement-retail-input"
                     type="number"
-                    className={styles.input}
+                    className={baseStyles.input}
                     value={retailPrice}
                     onChange={(e) => setRetailPrice(e.target.value)}
                     disabled={saving}
@@ -327,11 +320,11 @@ export function AddArrangementModal({
             </div>
 
             {/* Notes */}
-            <div className={styles.section}>
+            <div className={baseStyles.section}>
               <SectionHeader label="Notes" as="h3" />
               <textarea
                 data-cy="arrangement-notes-textarea"
-                className={styles.textarea}
+                className={baseStyles.textarea}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 disabled={saving}
@@ -340,10 +333,10 @@ export function AddArrangementModal({
               />
             </div>
 
-            {error && <p className={styles.error}>{error}</p>}
+            {error && <p className={baseStyles.error}>{error}</p>}
           </div>
 
-          <div className={styles.footer}>
+          <div className={baseStyles.footer}>
             <Dialog.Close asChild>
               <CancelButton data-cy="cancel-arrangement-button" disabled={saving} />
             </Dialog.Close>
