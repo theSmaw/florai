@@ -119,9 +119,9 @@ export function ArrangementDetail({
       <div className={styles.section}>
         <SectionHeader label="Flowers" />
         <FlowerThumbnailList
-          flowers={arrangementFlowers}
+          items={arrangementFlowers}
           emptyText="No flowers in this arrangement."
-          onFlowerSelect={onFlowerSelect}
+          onSelect={onFlowerSelect}
         />
       </div>
 

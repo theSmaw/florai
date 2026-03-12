@@ -1,20 +1,25 @@
-import type { Flower } from '../../domain/Flower';
 import styles from './FlowerThumbnailList.module.css';
 
-interface FlowerThumbnailListProps {
-  flowers: Flower[];
-  emptyText: string;
-  onFlowerSelect: (flowerId: string) => void;
+interface ThumbnailItem {
+  id: string;
+  name: string;
+  imageUrl?: string;
 }
 
-export function FlowerThumbnailList({ flowers, emptyText, onFlowerSelect }: FlowerThumbnailListProps) {
+interface FlowerThumbnailListProps {
+  items: ThumbnailItem[];
+  emptyText: string;
+  onSelect: (id: string) => void;
+}
+
+export function FlowerThumbnailList({ items, emptyText, onSelect }: FlowerThumbnailListProps) {
   function handleImgError(e: React.SyntheticEvent<HTMLImageElement>) {
     const img = e.currentTarget;
     const fallback = '/images/placeholder.svg';
     if (!img.src.endsWith(fallback)) img.src = fallback;
   }
 
-  if (flowers.length === 0) {
+  if (items.length === 0) {
     return (
       <div className={styles.hint}>
         <span className={styles.hintText}>{emptyText}</span>
@@ -24,21 +29,21 @@ export function FlowerThumbnailList({ flowers, emptyText, onFlowerSelect }: Flow
 
   return (
     <div className={styles.list}>
-      {flowers.map((flower) => (
+      {items.map((item) => (
         <button
-          key={flower.id}
+          key={item.id}
           type="button"
           className={styles.card}
-          onClick={() => onFlowerSelect(flower.id)}
-          aria-label={`View ${flower.name}`}
+          onClick={() => onSelect(item.id)}
+          aria-label={`View ${item.name}`}
         >
           <img
-            src={flower.imageUrl ?? '/images/placeholder.svg'}
-            alt={flower.name}
+            src={item.imageUrl ?? '/images/placeholder.svg'}
+            alt={item.name}
             className={styles.image}
             onError={handleImgError}
           />
-          <span className={styles.name}>{flower.name}</span>
+          <span className={styles.name}>{item.name}</span>
         </button>
       ))}
     </div>
