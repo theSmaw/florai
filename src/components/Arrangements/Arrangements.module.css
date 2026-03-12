@@ -164,48 +164,6 @@
   color: var(--color-text-subtle);
 }
 
-.empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--space-20) var(--space-4);
-}
-
-.emptyText {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-subtle);
-  text-align: center;
-}
-
-/* Floating action button */
-.addButton {
-  position: fixed;
-  right: var(--space-6);
-  bottom: var(--space-6);
-  width: 3.5rem;
-  height: 3.5rem;
-  background: var(--color-text-primary);
-  color: var(--color-text-on-brand);
-  border-radius: var(--radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  box-shadow: var(--shadow-fab);
-  transition:
-    transform 120ms ease-in-out,
-    background-color 150ms ease-in-out;
-  z-index: var(--z-fixed);
-}
-
-.addButton:active {
-  transform: scale(0.96);
-}
-
-.addButton:hover {
-  background: var(--color-surface-inverse-hover);
-}
 
 /* Filter sheet */
 .overlay {

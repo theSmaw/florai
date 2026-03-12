@@ -41,9 +41,18 @@ describe('Arrangements page', () => {
       cy.get('[data-cy="arrangement-card"]').should('have.length', 3);
     });
 
-    it('shows empty state when no arrangements match', () => {
+    it('shows the add card at the end of the list', () => {
+      cy.get('[data-cy="add-arrangement-card"]').should('be.visible');
+      cy.get('[data-cy="arrangement-grid"]').within(() => {
+        cy.get('[data-cy="arrangement-card"], [data-cy="add-arrangement-card"]').last()
+          .should('have.attr', 'data-cy', 'add-arrangement-card');
+      });
+    });
+
+    it('shows only the add card when no arrangements match search', () => {
       cy.get('[data-cy="arrangements-search-input"]').type('xyzxyzxyz');
-      cy.get('[data-cy="arrangements-empty"]').should('be.visible');
+      cy.get('[data-cy="arrangement-card"]').should('not.exist');
+      cy.get('[data-cy="add-arrangement-card"]').should('be.visible');
     });
   });
 
@@ -76,18 +85,18 @@ describe('Arrangements page', () => {
       cy.visitArrangements();
     });
 
-    it('shows add button', () => {
-      cy.get('[data-cy="add-arrangement-button"]').should('be.visible');
+    it('shows add arrangement card', () => {
+      cy.get('[data-cy="add-arrangement-card"]').should('be.visible');
     });
 
     it('clicking add button opens the add modal', () => {
-      cy.get('[data-cy="add-arrangement-button"]').click();
+      cy.get('[data-cy="add-arrangement-card"]').click();
       cy.get('[data-cy="arrangement-name-input"]').should('be.visible');
       cy.get('[data-cy="arrangement-size-select"]').should('be.visible');
     });
 
     it('filling name and size enables the save button', () => {
-      cy.get('[data-cy="add-arrangement-button"]').click();
+      cy.get('[data-cy="add-arrangement-card"]').click();
       cy.get('[data-cy="save-arrangement-button"]').should('be.disabled');
       cy.get('[data-cy="arrangement-name-input"]').type('Test Bouquet');
       cy.get('[data-cy="arrangement-size-select"]').select('medium');
@@ -118,7 +127,7 @@ describe('Arrangements page', () => {
         },
       }).as('createArrangement');
 
-      cy.get('[data-cy="add-arrangement-button"]').click();
+      cy.get('[data-cy="add-arrangement-card"]').click();
       cy.get('[data-cy="arrangement-name-input"]').type('Test Bouquet');
       cy.get('[data-cy="arrangement-size-select"]').select('medium');
       cy.get('[data-cy="save-arrangement-button"]').click();
@@ -128,7 +137,7 @@ describe('Arrangements page', () => {
     it('Cancel dismisses the modal without saving', () => {
       cy.intercept('POST', '**/rest/v1/arrangements*').as('createArrangement');
 
-      cy.get('[data-cy="add-arrangement-button"]').click();
+      cy.get('[data-cy="add-arrangement-card"]').click();
       cy.get('[data-cy="arrangement-name-input"]').type('Should Not Save');
       cy.get('[data-cy="cancel-arrangement-button"]').click();
       cy.get('[data-cy="arrangement-name-input"]').should('not.exist');

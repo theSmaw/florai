@@ -4,7 +4,6 @@ import {
   Cross2Icon,
   MagnifyingGlassIcon,
   MixerVerticalIcon,
-  PlusIcon,
 } from '@radix-ui/react-icons';
 import type {
   Arrangement,
@@ -15,6 +14,7 @@ import type {
   NewArrangement,
 } from '../../domain/Arrangement';
 import type { Flower } from '../../domain/Flower';
+import { AddArrangementCard } from '../AddArrangementCard/AddArrangementCard';
 import { ArrangementCard } from '../ArrangementCard/ArrangementCard';
 import { ArrangementFilterPanel } from '../ArrangementFilterPanel/ArrangementFilterPanel';
 import { FilterChip } from '../FilterChip/FilterChip';
@@ -179,14 +179,10 @@ export function Arrangements({
           <div data-cy="arrangements-loading" className={styles.loading}>
             <span className={styles.loadingText}>Loading…</span>
           </div>
-        ) : arrangements.length === 0 ? (
-          <div data-cy="arrangements-empty" className={styles.empty}>
-            <p className={styles.emptyText}>No arrangements yet. Tap + to add your first.</p>
-          </div>
         ) : (
           <div className={styles.content}>
             {showGroups
-              ? groupKeys.map((groupKey) => (
+              ? groupKeys.map((groupKey, i) => (
                   <div key={groupKey} className={styles.group}>
                     <h2 className={styles.groupTitle}>{groupKey}</h2>
                     <div data-cy="arrangement-grid" className={styles.grid}>
@@ -198,12 +194,15 @@ export function Arrangements({
                           onClick={onCardClick}
                         />
                       ))}
+                      {i === groupKeys.length - 1 && (
+                        <AddArrangementCard onClick={() => onAddOpenChange(true)} />
+                      )}
                     </div>
                   </div>
                 ))
-              : groupKeys.map((groupKey) => (
-                  <div key={groupKey} data-cy="arrangement-grid" className={styles.grid}>
-                    {(groupedArrangements[groupKey] ?? []).map((arr) => (
+              : (
+                  <div data-cy="arrangement-grid" className={styles.grid}>
+                    {arrangements.map((arr) => (
                       <ArrangementCard
                         key={arr.id}
                         arrangement={arr}
@@ -211,21 +210,12 @@ export function Arrangements({
                         onClick={onCardClick}
                       />
                     ))}
+                    <AddArrangementCard onClick={() => onAddOpenChange(true)} />
                   </div>
-                ))}
+                )}
           </div>
         )}
       </main>
-
-      {/* Floating action button */}
-      <button
-        data-cy="add-arrangement-button"
-        className={styles.addButton}
-        onClick={() => onAddOpenChange(true)}
-        aria-label="Add arrangement"
-      >
-        <PlusIcon width={24} height={24} aria-hidden="true" />
-      </button>
 
       {/* Add arrangement modal */}
       <AddArrangementModal
