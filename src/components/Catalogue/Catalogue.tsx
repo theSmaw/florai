@@ -7,7 +7,6 @@ import {
   Cross2Icon,
   MagnifyingGlassIcon,
   MixerVerticalIcon,
-  PlusIcon,
 } from '@radix-ui/react-icons';
 import type {
   Availability,
@@ -50,7 +49,6 @@ export interface CatalogueProps {
   onVaseLifeChange: (min: number, max: number) => void;
   onGroupByChange: (groupBy?: GroupBy) => void;
   onCardClick: (flowerId: string) => void;
-  onAddFlowerClick: () => void;
   filterPills: Array<{ label: string; onClear: () => void }>;
 }
 
@@ -77,7 +75,6 @@ export function Catalogue({
   onVaseLifeChange,
   onGroupByChange,
   onCardClick,
-  onAddFlowerClick,
   filterPills,
 }: CatalogueProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -184,10 +181,6 @@ export function Catalogue({
         onCardClick={onCardClick}
       />
 
-      {/* Floating action button */}
-      <button data-cy="add-flower-button" onClick={onAddFlowerClick} className={styles.addButton}>
-        <PlusIcon width={24} height={24} aria-hidden="true" />
-      </button>
     </div>
   );
 }
