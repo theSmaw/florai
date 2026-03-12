@@ -60,6 +60,9 @@ const FAKE_SESSION = {
  * Intercepts the Supabase PostgREST flowers query and returns fixture data.
  */
 Cypress.Commands.add('stubFlowers', () => {
+  // Stub user_flowers first (empty — no user-created flowers in stub tests)
+  cy.intercept('GET', '**/rest/v1/user_flowers*', { body: [], statusCode: 200 }).as('getUserFlowers');
+
   cy.fixture('flowers.json').then((flowers) => {
     const rows = (flowers as Record<string, unknown>[]).map((f) => ({
       ...Object.fromEntries(
@@ -101,6 +104,7 @@ Cypress.Commands.add('visitWithFakeAuth', (url: string) => {
 Cypress.Commands.add('visitCatalogue', () => {
   cy.visitWithFakeAuth('/catalogue');
   cy.wait('@getFlowers');
+  cy.wait('@getUserFlowers');
   cy.get('[data-cy="loading-indicator"]').should('not.exist');
   cy.get('[data-cy="flower-list"]').should('be.visible');
 });
@@ -108,6 +112,7 @@ Cypress.Commands.add('visitCatalogue', () => {
 Cypress.Commands.add('visitFlowerDetail', (flowerId: string) => {
   cy.visitWithFakeAuth(`/catalogue/${flowerId}`);
   cy.wait('@getFlowers');
+  cy.wait('@getUserFlowers');
   cy.wait('@getArrangements');
   cy.get('[data-cy="flower-detail-view"]').should('be.visible');
 });
@@ -127,12 +132,14 @@ Cypress.Commands.add('stubArrangements', () => {
 Cypress.Commands.add('visitArrangements', () => {
   cy.visitWithFakeAuth('/arrangements');
   cy.wait('@getFlowers');
+  cy.wait('@getUserFlowers');
   cy.wait('@getArrangements');
 });
 
 Cypress.Commands.add('visitArrangementDetail', (id: string) => {
   cy.visitWithFakeAuth(`/arrangements/${id}`);
   cy.wait('@getFlowers');
+  cy.wait('@getUserFlowers');
   cy.wait('@getArrangements');
   cy.get('[data-cy="arrangement-detail-view"]').should('be.visible');
 });

@@ -1,13 +1,14 @@
 // Catalogue container
 // Connects the Redux store to the catalogue page UI.
 // Rendered by CatalogueView (the route target).
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectFilteredFlowers } from '../../stores/flowers/selectors/selectFilteredFlowers';
 import { selectGroupedFlowers } from '../../stores/flowers/selectors/selectGroupedFlowers';
 import { selectFlowersFilter } from '../../stores/flowers/selectors/selectFlowersFilter';
 import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
+import { selectCreateFlowerStatus } from '../../stores/flowers/selectors/selectCreateFlowerStatus';
 import { selectAllColors } from '../../stores/flowers/selectors/selectAllColors';
 import { selectAllSeasons } from '../../stores/flowers/selectors/selectAllSeasons';
 import { selectAllTypes } from '../../stores/flowers/selectors/selectAllTypes';
@@ -16,13 +17,15 @@ import { selectStemLengthBounds } from '../../stores/flowers/selectors/selectSte
 import { selectVaseLifeBounds } from '../../stores/flowers/selectors/selectVaseLifeBounds';
 import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
-import type { AppDispatch } from '../../stores/store';
+import { createUserFlower } from '../../stores/flowers/asyncActions/createUserFlower';
+import type { AppDispatch, RootState } from '../../stores/store';
 import type {
   Climate,
   Color,
   FlowerType,
   FragranceLevel,
   GroupBy,
+  NewFlower,
   Season,
   Toxicity,
 } from '../../domain/Flower';
@@ -43,13 +46,33 @@ export function CatalogueContainer() {
   const groupedFlowers = useSelector(selectGroupedFlowers);
   const currentFilter = useSelector(selectFlowersFilter);
   const loadFlowersStatus = useSelector(selectLoadFlowersStatus);
+  const createFlowerStatus = useSelector(selectCreateFlowerStatus);
   const isLoading = loadFlowersStatus.status === 'pending';
+  const saving = createFlowerStatus.status === 'pending';
+  const saveError = useSelector((state: RootState) => {
+    const s = state.flowers.createFlowerStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
   const availableColors = useSelector(selectAllColors);
   const availableSeasons = useSelector(selectAllSeasons);
   const availableTypes = useSelector(selectAllTypes);
   const availableClimates = useSelector(selectAllClimates);
   const stemLengthBounds = useSelector(selectStemLengthBounds);
   const vaseLifeBounds = useSelector(selectVaseLifeBounds);
+
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const saveInitiated = useRef(false);
+
+  useEffect(() => {
+    if (!saveInitiated.current) return;
+    if (createFlowerStatus.status === 'fulfilled') {
+      saveInitiated.current = false;
+      setIsAddOpen(false);
+    } else if (createFlowerStatus.status === 'rejected') {
+      saveInitiated.current = false;
+      // modal stays open so the user sees the error
+    }
+  }, [createFlowerStatus]);
 
   useEffect(() => {
     const promise = dispatch(loadFlowers());
@@ -158,6 +181,11 @@ export function CatalogueContainer() {
     navigate(`/catalogue/${flowerId}`, { state: { backLabel: 'Catalogue' } });
   };
 
+  const handleAddFlower = (data: NewFlower) => {
+    saveInitiated.current = true;
+    void dispatch(createUserFlower(data));
+  };
+
   const filterPills: Pill[] = [
     ...currentFilter.colors.map((c) => ({ label: c, onClear: () => handleColorToggle(c) })),
     ...pill(currentFilter.season, (s) => s, () => handleSeasonChange(undefined)),
@@ -196,6 +224,11 @@ export function CatalogueContainer() {
       onGroupByChange={handleGroupByChange}
       onCardClick={handleCardClick}
       filterPills={filterPills}
+      isAddOpen={isAddOpen}
+      onAddOpenChange={setIsAddOpen}
+      saving={saving}
+      saveError={saveError}
+      onAddFlower={handleAddFlower}
     />
   );
 }

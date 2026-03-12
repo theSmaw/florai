@@ -17,9 +17,12 @@ import type {
   FlowerType,
   FragranceLevel,
   GroupBy,
+  NewFlower,
   Season,
   Toxicity,
 } from '../../domain/Flower';
+import { AddFlowerCard } from '../AddFlowerCard/AddFlowerCard';
+import { AddFlowerModal } from '../AddFlowerModal/AddFlowerModal';
 import { FilterChip } from '../FilterChip/FilterChip';
 import { FlowerList } from '../FlowerList/FlowerList';
 import { FilterPanel } from '../FilterPanel/FilterPanel';
@@ -50,6 +53,11 @@ export interface CatalogueProps {
   onGroupByChange: (groupBy?: GroupBy) => void;
   onCardClick: (flowerId: string) => void;
   filterPills: Array<{ label: string; onClear: () => void }>;
+  isAddOpen: boolean;
+  onAddOpenChange: (open: boolean) => void;
+  saving: boolean;
+  saveError: string | null;
+  onAddFlower: (data: NewFlower) => void;
 }
 
 export function Catalogue({
@@ -76,6 +84,11 @@ export function Catalogue({
   onGroupByChange,
   onCardClick,
   filterPills,
+  isAddOpen,
+  onAddOpenChange,
+  saving,
+  saveError,
+  onAddFlower,
 }: CatalogueProps) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
 
@@ -179,8 +192,17 @@ export function Catalogue({
         groupedFlowers={groupedFlowers}
         isLoading={isLoading}
         onCardClick={onCardClick}
+        addCard={<AddFlowerCard onClick={() => onAddOpenChange(true)} />}
       />
 
+      {/* Add flower modal */}
+      <AddFlowerModal
+        open={isAddOpen}
+        onOpenChange={onAddOpenChange}
+        saving={saving}
+        error={saveError}
+        onSave={onAddFlower}
+      />
     </div>
   );
 }

@@ -21,6 +21,8 @@ export interface FlowersState {
   updateSourcingNotesStatus: AsyncAction;
   /** Tracks the lifecycle of the most recent updateComplementaryFlowers operation. */
   updateComplementaryFlowersStatus: AsyncAction;
+  /** Tracks the lifecycle of the most recent createUserFlower operation. */
+  createFlowerStatus: AsyncAction;
 }
 
 export const initialState: FlowersState = {
@@ -36,4 +38,5 @@ export const initialState: FlowersState = {
   updateCareInstructionsStatus: { status: 'idle' },
   updateSourcingNotesStatus: { status: 'idle' },
   updateComplementaryFlowersStatus: { status: 'idle' },
+  createFlowerStatus: { status: 'idle' },
 };
