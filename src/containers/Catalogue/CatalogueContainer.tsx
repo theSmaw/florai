@@ -16,7 +16,7 @@ import { selectAllTypes } from '../../stores/flowers/selectors/selectAllTypes';
 import { selectAllClimates } from '../../stores/flowers/selectors/selectAllClimates';
 import { selectStemLengthBounds } from '../../stores/flowers/selectors/selectStemLengthBounds';
 import { selectVaseLifeBounds } from '../../stores/flowers/selectors/selectVaseLifeBounds';
-import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
+import { filterApplied, flowerSelected, createUserFlowerStatusReset } from '../../stores/flowers/slice';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import { createUserFlower } from '../../stores/flowers/asyncActions/createUserFlower';
 import type { AppDispatch } from '../../stores/store';
@@ -59,6 +59,17 @@ export function CatalogueContainer() {
   const vaseLifeBounds = useSelector(selectVaseLifeBounds);
 
   const [isAddOpen, setIsAddOpen] = useState(false);
+
+  const handleAddOpenChange = (open: boolean) => {
+    if (open) dispatch(createUserFlowerStatusReset());
+    setIsAddOpen(open);
+  };
+
+  useEffect(() => {
+    if (createFlowerStatus.status === 'fulfilled') {
+      setIsAddOpen(false);
+    }
+  }, [createFlowerStatus.status]);
 
   useEffect(() => {
     const promise = dispatch(loadFlowers());
@@ -167,13 +178,8 @@ export function CatalogueContainer() {
     navigate(`/catalogue/${flowerId}`, { state: { backLabel: 'Catalogue' } });
   };
 
-  const handleAddFlower = async (data: NewFlower) => {
-    try {
-      await dispatch(createUserFlower(data)).unwrap();
-      setIsAddOpen(false);
-    } catch {
-      // modal stays open so the user sees the error via saveError selector
-    }
+  const handleAddFlower = (data: NewFlower) => {
+    void dispatch(createUserFlower(data));
   };
 
   const filterPills: Pill[] = [
@@ -215,7 +221,7 @@ export function CatalogueContainer() {
       onCardClick={handleCardClick}
       filterPills={filterPills}
       isAddOpen={isAddOpen}
-      onAddOpenChange={setIsAddOpen}
+      onAddOpenChange={handleAddOpenChange}
       saving={saving}
       saveError={saveError}
       onAddFlower={handleAddFlower}

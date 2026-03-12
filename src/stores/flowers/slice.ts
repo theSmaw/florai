@@ -6,6 +6,7 @@ import { flowerDeselected as flowerDeselectedReducer } from './reducers/flowerDe
 import { flowerUpdated as flowerUpdatedReducer } from './reducers/flowerUpdated';
 import { flowerAdded as flowerAddedReducer } from './reducers/flowerAdded';
 import { flowerRemoved as flowerRemovedReducer } from './reducers/flowerRemoved';
+import { createUserFlowerStatusReset as createUserFlowerStatusResetReducer } from './reducers/createUserFlowerStatusReset';
 import { loadFlowers } from './asyncActions/loadFlowers';
 import { overrideFlowerImage } from './asyncActions/overrideFlowerImage';
 import { addFlowerSupplier } from './asyncActions/addFlowerSupplier';
@@ -53,6 +54,7 @@ export const flowersSlice = createSlice({
     flowerUpdated: flowerUpdatedReducer,
     flowerAdded: flowerAddedReducer,
     flowerRemoved: flowerRemovedReducer,
+    createUserFlowerStatusReset: createUserFlowerStatusResetReducer,
   },
   extraReducers: (builder) => {
     builder
@@ -93,6 +95,7 @@ export const {
   flowerUpdated,
   flowerAdded,
   flowerRemoved,
+  createUserFlowerStatusReset,
 } = flowersSlice.actions;
 
 export default flowersSlice.reducer;
