@@ -6,6 +6,7 @@ import { flowerDeselected as flowerDeselectedReducer } from './reducers/flowerDe
 import { flowerUpdated as flowerUpdatedReducer } from './reducers/flowerUpdated';
 import { flowerAdded as flowerAddedReducer } from './reducers/flowerAdded';
 import { flowerRemoved as flowerRemovedReducer } from './reducers/flowerRemoved';
+import { createUserFlowerStatusReset as createUserFlowerStatusResetReducer } from './reducers/createUserFlowerStatusReset';
 import { loadFlowers } from './asyncActions/loadFlowers';
 import { overrideFlowerImage } from './asyncActions/overrideFlowerImage';
 import { addFlowerSupplier } from './asyncActions/addFlowerSupplier';
@@ -38,6 +39,10 @@ import { updateSourcingNotesRejected } from './extraReducers/updateSourcingNotes
 import { updateComplementaryFlowersPending } from './extraReducers/updateComplementaryFlowersPending';
 import { updateComplementaryFlowersFulfilled } from './extraReducers/updateComplementaryFlowersFulfilled';
 import { updateComplementaryFlowersRejected } from './extraReducers/updateComplementaryFlowersRejected';
+import { createUserFlower } from './asyncActions/createUserFlower';
+import { createUserFlowerPending } from './extraReducers/createUserFlowerPending';
+import { createUserFlowerFulfilled } from './extraReducers/createUserFlowerFulfilled';
+import { createUserFlowerRejected } from './extraReducers/createUserFlowerRejected';
 
 export const flowersSlice = createSlice({
   name: 'flowers',
@@ -49,6 +54,7 @@ export const flowersSlice = createSlice({
     flowerUpdated: flowerUpdatedReducer,
     flowerAdded: flowerAddedReducer,
     flowerRemoved: flowerRemovedReducer,
+    createUserFlowerStatusReset: createUserFlowerStatusResetReducer,
   },
   extraReducers: (builder) => {
     builder
@@ -75,7 +81,10 @@ export const flowersSlice = createSlice({
       .addCase(updateSourcingNotes.rejected, updateSourcingNotesRejected)
       .addCase(updateComplementaryFlowers.pending, updateComplementaryFlowersPending)
       .addCase(updateComplementaryFlowers.fulfilled, updateComplementaryFlowersFulfilled)
-      .addCase(updateComplementaryFlowers.rejected, updateComplementaryFlowersRejected);
+      .addCase(updateComplementaryFlowers.rejected, updateComplementaryFlowersRejected)
+      .addCase(createUserFlower.pending, createUserFlowerPending)
+      .addCase(createUserFlower.fulfilled, createUserFlowerFulfilled)
+      .addCase(createUserFlower.rejected, createUserFlowerRejected);
   },
 });
 
@@ -86,6 +95,7 @@ export const {
   flowerUpdated,
   flowerAdded,
   flowerRemoved,
+  createUserFlowerStatusReset,
 } = flowersSlice.actions;
 
 export default flowersSlice.reducer;

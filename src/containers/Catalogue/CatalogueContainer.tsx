@@ -1,21 +1,24 @@
 // Catalogue container
 // Connects the Redux store to the catalogue page UI.
 // Rendered by CatalogueView (the route target).
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { selectFilteredFlowers } from '../../stores/flowers/selectors/selectFilteredFlowers';
 import { selectGroupedFlowers } from '../../stores/flowers/selectors/selectGroupedFlowers';
 import { selectFlowersFilter } from '../../stores/flowers/selectors/selectFlowersFilter';
 import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
+import { selectCreateFlowerStatus } from '../../stores/flowers/selectors/selectCreateFlowerStatus';
+import { selectCreateFlowerError } from '../../stores/flowers/selectors/selectCreateFlowerError';
 import { selectAllColors } from '../../stores/flowers/selectors/selectAllColors';
 import { selectAllSeasons } from '../../stores/flowers/selectors/selectAllSeasons';
 import { selectAllTypes } from '../../stores/flowers/selectors/selectAllTypes';
 import { selectAllClimates } from '../../stores/flowers/selectors/selectAllClimates';
 import { selectStemLengthBounds } from '../../stores/flowers/selectors/selectStemLengthBounds';
 import { selectVaseLifeBounds } from '../../stores/flowers/selectors/selectVaseLifeBounds';
-import { filterApplied, flowerSelected } from '../../stores/flowers/slice';
+import { filterApplied, flowerSelected, createUserFlowerStatusReset } from '../../stores/flowers/slice';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
+import { createUserFlower } from '../../stores/flowers/asyncActions/createUserFlower';
 import type { AppDispatch } from '../../stores/store';
 import type {
   Climate,
@@ -23,6 +26,7 @@ import type {
   FlowerType,
   FragranceLevel,
   GroupBy,
+  NewFlower,
   Season,
   Toxicity,
 } from '../../domain/Flower';
@@ -43,13 +47,29 @@ export function CatalogueContainer() {
   const groupedFlowers = useSelector(selectGroupedFlowers);
   const currentFilter = useSelector(selectFlowersFilter);
   const loadFlowersStatus = useSelector(selectLoadFlowersStatus);
+  const createFlowerStatus = useSelector(selectCreateFlowerStatus);
+  const saveError = useSelector(selectCreateFlowerError);
   const isLoading = loadFlowersStatus.status === 'pending';
+  const saving = createFlowerStatus.status === 'pending';
   const availableColors = useSelector(selectAllColors);
   const availableSeasons = useSelector(selectAllSeasons);
   const availableTypes = useSelector(selectAllTypes);
   const availableClimates = useSelector(selectAllClimates);
   const stemLengthBounds = useSelector(selectStemLengthBounds);
   const vaseLifeBounds = useSelector(selectVaseLifeBounds);
+
+  const [isAddOpen, setIsAddOpen] = useState(false);
+
+  const handleAddOpenChange = (open: boolean) => {
+    if (open) dispatch(createUserFlowerStatusReset());
+    setIsAddOpen(open);
+  };
+
+  useEffect(() => {
+    if (createFlowerStatus.status === 'fulfilled') {
+      setIsAddOpen(false);
+    }
+  }, [createFlowerStatus.status]);
 
   useEffect(() => {
     const promise = dispatch(loadFlowers());
@@ -158,6 +178,10 @@ export function CatalogueContainer() {
     navigate(`/catalogue/${flowerId}`, { state: { backLabel: 'Catalogue' } });
   };
 
+  const handleAddFlower = (data: NewFlower) => {
+    void dispatch(createUserFlower(data));
+  };
+
   const filterPills: Pill[] = [
     ...currentFilter.colors.map((c) => ({ label: c, onClear: () => handleColorToggle(c) })),
     ...pill(currentFilter.season, (s) => s, () => handleSeasonChange(undefined)),
@@ -196,6 +220,11 @@ export function CatalogueContainer() {
       onGroupByChange={handleGroupByChange}
       onCardClick={handleCardClick}
       filterPills={filterPills}
+      isAddOpen={isAddOpen}
+      onAddOpenChange={handleAddOpenChange}
+      saving={saving}
+      saveError={saveError}
+      onAddFlower={handleAddFlower}
     />
   );
 }
