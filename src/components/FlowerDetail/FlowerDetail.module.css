@@ -3,7 +3,7 @@
 /* ─── Flower identity (top of details panel) ─────────── */
 
 .identity {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
 
 .nameDisplay {
