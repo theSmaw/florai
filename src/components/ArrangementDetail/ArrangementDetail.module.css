@@ -11,7 +11,7 @@
 .nameDisplay {
   font-family: var(--font-family-display);
   font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-light);
+  font-weight: var(--font-weight-medium);
   font-style: italic;
   color: var(--color-text-primary);
   line-height: 1.1;
@@ -159,7 +159,7 @@
 }
 
 .notesEmpty {
-  color: var(--color-text-subtle);
+  color: var(--color-text-muted);
   font-style: italic;
 }
 
