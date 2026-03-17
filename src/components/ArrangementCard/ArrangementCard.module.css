@@ -35,5 +35,5 @@
 
 .flowerCount {
   font-size: var(--font-size-2xs);
-  color: var(--color-text-subtle);
+  color: var(--color-text-muted);
 }

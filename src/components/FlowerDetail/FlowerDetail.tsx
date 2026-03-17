@@ -1,7 +1,7 @@
 // FlowerDetail — pure presentational component
 // Receives all data via props from FlowerDetailContainer.
 import { useEffect, useRef, useState } from 'react';
-import type { Availability, Flower, Toxicity } from '../../domain/Flower';
+import type { Flower, Toxicity } from '../../domain/Flower';
 import type { Arrangement } from '../../domain/Arrangement';
 import {
   AVAILABILITY_LABEL,
@@ -26,12 +26,6 @@ const tag = styles.tag ?? '';
 const tagBrand = styles.tagBrand ?? '';
 const tagWarning = styles.tagWarning ?? '';
 const tagDanger = styles.tagDanger ?? '';
-
-function availabilityTagClass(availability: Availability): string {
-  if (availability === 'always') return `${tag} ${tagBrand}`;
-  if (availability === 'limited') return `${tag} ${tagWarning}`;
-  return tag;
-}
 
 function toxicityTagClass(toxicity: Toxicity): string {
   if (toxicity === 'safe') return `${tag} ${tagBrand}`;
@@ -218,15 +212,14 @@ export function FlowerDetail({
               {/* Colors */}
               <div className={styles.field}>
                 <span className={styles.fieldLabel}>Colors</span>
-                <div className={styles.colorList}>
+                <div className={styles.colorSwatches}>
                   {flower.colors.map((color) => (
-                    <div key={color} className={styles.colorChip}>
-                      <div
-                        className={styles.colorDot}
-                        style={{ backgroundColor: COLOR_HEX[color] ?? '#e2e8f0' }}
-                      />
-                      {color}
-                    </div>
+                    <span
+                      key={color}
+                      className={styles.colorSwatch}
+                      style={{ backgroundColor: COLOR_HEX[color] ?? '#e2e8f0' }}
+                      title={color}
+                    />
                   ))}
                 </div>
               </div>
@@ -235,27 +228,23 @@ export function FlowerDetail({
               <div className={styles.fieldGrid}>
                 <div className={styles.field}>
                   <span className={styles.fieldLabel}>Availability</span>
-                  <div className={styles.tagList}>
-                    <span className={availabilityTagClass(flower.availability)}>
-                      {AVAILABILITY_LABEL[flower.availability]}
-                    </span>
-                  </div>
+                  <span className={styles.plainValue}>
+                    {AVAILABILITY_LABEL[flower.availability]}
+                  </span>
                 </div>
 
                 <div className={styles.field}>
                   <span className={styles.fieldLabel}>Season</span>
-                  <div className={styles.tagList}>
-                    {flower.season.map((s) => (
-                      <span key={s} className={styles.tag}>{s}</span>
-                    ))}
-                  </div>
+                  <span className={styles.plainValue}>
+                    {flower.season.join(', ')}
+                  </span>
                 </div>
 
                 <div className={styles.field}>
                   <span className={styles.fieldLabel}>Climate</span>
-                  <div className={styles.tagList}>
-                    <span data-cy="flower-climate" className={styles.tag}>{CLIMATE_LABEL[flower.climate]}</span>
-                  </div>
+                  <span data-cy="flower-climate" className={styles.plainValue}>
+                    {CLIMATE_LABEL[flower.climate]}
+                  </span>
                 </div>
               </div>
             </div>

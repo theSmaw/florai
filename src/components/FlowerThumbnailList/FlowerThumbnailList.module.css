@@ -51,6 +51,6 @@
 
 .hintText {
   font-size: var(--font-size-sm);
-  color: var(--color-text-subtle);
+  color: var(--color-text-muted);
   font-style: italic;
 }
