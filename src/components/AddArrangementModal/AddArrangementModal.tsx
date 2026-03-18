@@ -12,6 +12,7 @@ import {
   SIZE_LABEL,
   STYLE_LABEL,
 } from '../../domain/Arrangement';
+import { ImageUploadField } from '../ImageUploadField/ImageUploadField';
 import { ChipGroup } from '../ChipGroup/ChipGroup';
 import { FormField } from '../FormField/FormField';
 import { ModalShell } from '../ModalShell/ModalShell';
@@ -29,7 +30,7 @@ export interface AddArrangementModalProps {
   flowers: Flower[];
   saving: boolean;
   error: string | null;
-  onSave: (data: NewArrangement) => void;
+  onSave: (data: NewArrangement, imageFile: File | null) => void;
 }
 
 const SIZES: ArrangementSize[] = ['small', 'medium', 'large', 'extra-large'];
@@ -44,6 +45,7 @@ export function AddArrangementModal({
   error,
   onSave,
 }: AddArrangementModalProps) {
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [name, setName] = useState('');
   const [selectedFlowerIds, setSelectedFlowerIds] = useState<string[]>([]);
   const [size, setSize] = useState<ArrangementSize | ''>('');
@@ -59,6 +61,7 @@ export function AddArrangementModal({
   const [notes, setNotes] = useState('');
 
   function resetForm() {
+    setImageFile(null);
     setName('');
     setSelectedFlowerIds([]);
     setSize('');
@@ -111,7 +114,7 @@ export function AddArrangementModal({
     if (description.trim()) data.description = description.trim();
     if (notes.trim()) data.notes = notes.trim();
 
-    onSave(data);
+    onSave(data, imageFile);
   }
 
   const isValid = name.trim().length > 0 && size !== '';
@@ -141,6 +144,8 @@ export function AddArrangementModal({
       {/* Basic info */}
       <div className={styles.section}>
         <SectionHeader label="Basic Info" as="h3" />
+
+        <ImageUploadField file={imageFile} onChange={setImageFile} disabled={saving} />
 
         <FormField label="Name" htmlFor="arr-name" required>
           <TextInput

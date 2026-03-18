@@ -86,9 +86,9 @@ export function ArrangementsContainer() {
     navigate(`/arrangements/${id}`, { state: { backLabel: 'Arrangements' } });
   }
 
-  function handleAddClick(data: NewArrangement) {
+  function handleAddClick(data: NewArrangement, imageFile: File | null) {
     saveInitiated.current = true;
-    void dispatch(createArrangement(data));
+    void dispatch(createArrangement(imageFile ? { arrangement: data, imageFile } : { arrangement: data }));
   }
 
   const filterPills: Pill[] = [

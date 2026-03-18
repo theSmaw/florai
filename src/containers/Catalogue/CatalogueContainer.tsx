@@ -178,8 +178,8 @@ export function CatalogueContainer() {
     navigate(`/catalogue/${flowerId}`, { state: { backLabel: 'Catalogue' } });
   };
 
-  const handleAddFlower = (data: NewFlower) => {
-    void dispatch(createUserFlower(data));
+  const handleAddFlower = (data: NewFlower, imageFile: File | null) => {
+    void dispatch(createUserFlower(imageFile ? { flower: data, imageFile } : { flower: data }));
   };
 
   const filterPills: Pill[] = [

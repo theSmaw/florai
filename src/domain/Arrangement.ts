@@ -58,4 +58,4 @@ export interface Arrangement {
   createdAt: string;
 }
 
-export type NewArrangement = Omit<Arrangement, 'id' | 'createdAt' | 'imageUrl'>;
+export type NewArrangement = Omit<Arrangement, 'id' | 'createdAt'>;

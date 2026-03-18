@@ -25,6 +25,7 @@ export async function createArrangement(data: NewArrangement): Promise<Arrangeme
       vase_life_days: data.vaseLifeDays ?? null,
       wholesale_cost: data.wholesaleCost ?? null,
       retail_price: data.retailPrice ?? null,
+      image_url: data.imageUrl ?? null,
       description: data.description ?? null,
       notes: data.notes ?? null,
     })
