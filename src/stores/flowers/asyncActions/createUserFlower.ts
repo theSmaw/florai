@@ -1,9 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { createUserFlower as createUserFlowerApi } from '../../../api/createUserFlower';
-import type { Flower } from '../../../domain/Flower';
-import type { NewFlower } from '../../../domain/Flower';
+import { uploadNewEntityImage } from '../../../api/uploadNewEntityImage';
+import type { Flower, NewFlower } from '../../../domain/Flower';
 
-export const createUserFlower = createAsyncThunk<Flower, NewFlower>(
+export const createUserFlower = createAsyncThunk<Flower, { flower: NewFlower; imageFile?: File }>(
   'flowers/createUserFlower',
-  (data: NewFlower) => createUserFlowerApi(data),
+  async ({ flower, imageFile }) => {
+    if (imageFile) {
+      const imageUrl = await uploadNewEntityImage('flower-images', imageFile);
+      return createUserFlowerApi({ ...flower, imageUrl });
+    }
+    return createUserFlowerApi(flower);
+  },
 );

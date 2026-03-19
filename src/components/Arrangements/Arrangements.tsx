@@ -30,7 +30,7 @@ export interface ArrangementsProps {
   flowers: Flower[];
   onFilterChange: (filter: ArrangementFilter) => void;
   onCardClick: (id: string) => void;
-  onAddClick: (data: NewArrangement) => void;
+  onAddClick: (data: NewArrangement, imageFile: File | null) => void;
   filterPills: Array<{ label: string; onClear: () => void }>;
   saving: boolean;
   saveError: string | null;
@@ -87,8 +87,8 @@ export function Arrangements({
     onFilterChange(groupBy ? { ...rest, groupBy } : rest);
   }
 
-  function handleAddSave(data: NewArrangement) {
-    onAddClick(data);
+  function handleAddSave(data: NewArrangement, imageFile: File | null) {
+    onAddClick(data, imageFile);
     // Modal stays open while saving — container closes it on fulfilled
   }
 

@@ -56,7 +56,7 @@ export interface CatalogueProps {
   onAddOpenChange: (open: boolean) => void;
   saving: boolean;
   saveError: string | null;
-  onAddFlower: (data: NewFlower) => void;
+  onAddFlower: (data: NewFlower, imageFile: File | null) => void;
 }
 
 export function Catalogue({

@@ -14,6 +14,7 @@ import {
   SEASONS,
 } from '../../domain/Flower';
 import type { NewFlower } from '../../domain/Flower';
+import { ImageUploadField } from '../ImageUploadField/ImageUploadField';
 import { ChipGroup } from '../ChipGroup/ChipGroup';
 import { FormField } from '../FormField/FormField';
 import { ModalShell } from '../ModalShell/ModalShell';
@@ -34,7 +35,7 @@ export interface AddFlowerModalProps {
   onOpenChange: (open: boolean) => void;
   saving: boolean;
   error: string | null;
-  onSave: (data: NewFlower) => void;
+  onSave: (data: NewFlower, imageFile: File | null) => void;
 }
 
 export function AddFlowerModal({
@@ -44,6 +45,7 @@ export function AddFlowerModal({
   error,
   onSave,
 }: AddFlowerModalProps) {
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [name, setName] = useState('');
   const [type, setType] = useState('');
   const [selectedColors, setSelectedColors] = useState<Color[]>([]);
@@ -60,6 +62,7 @@ export function AddFlowerModal({
   const [notes, setNotes] = useState('');
 
   function resetForm() {
+    setImageFile(null);
     setName('');
     setType('');
     setSelectedColors([]);
@@ -114,7 +117,7 @@ export function AddFlowerModal({
     if (fragranceLevel) data.fragranceLevel = fragranceLevel;
     if (toxicity) data.toxicity = toxicity;
 
-    onSave(data);
+    onSave(data, imageFile);
   }
 
   const isValid = name.trim().length > 0 && type.trim().length > 0 && selectedColors.length > 0;
@@ -144,6 +147,8 @@ export function AddFlowerModal({
       {/* Basic Info */}
       <div className={styles.section}>
         <SectionHeader label="Basic Info" as="h3" />
+
+        <ImageUploadField file={imageFile} onChange={setImageFile} disabled={saving} />
 
         <FormField label="Name" htmlFor="flower-name" required>
           <TextInput
