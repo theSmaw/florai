@@ -60,11 +60,11 @@
 }
 
 .removeButton:hover {
-  color: #dc2626;
+  color: var(--color-danger);
 }
 
 .error {
-  color: #dc2626;
+  color: var(--color-danger);
   font-size: var(--font-size-sm);
   margin-top: var(--space-2);
 }

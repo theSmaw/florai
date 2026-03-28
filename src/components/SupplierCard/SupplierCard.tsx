@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import {
-  Pencil1Icon,
   TrashIcon,
   EnvelopeClosedIcon,
   MobileIcon,
   GlobeIcon,
 } from '@radix-ui/react-icons';
 import type { Supplier } from '../../domain/Supplier';
+import { EditButton } from '../EditButton/EditButton';
+import { CancelButton } from '../CancelButton/CancelButton';
 import styles from './SupplierCard.module.css';
 
 export interface SupplierCardProps {
@@ -66,26 +67,18 @@ export function SupplierCard({ supplier, onEdit, onDelete }: SupplierCardProps) 
           >
             Confirm
           </button>
-          <button
-            type="button"
-            className={styles.cancelButton}
+          <CancelButton
             data-cy="delete-cancel-button"
             onClick={() => setConfirmDelete(false)}
-          >
-            Cancel
-          </button>
+          />
         </div>
       ) : (
         <div className={styles.actions}>
-          <button
-            type="button"
-            className={styles.editButton}
+          <EditButton
             data-cy="edit-supplier-button"
             aria-label={`Edit ${supplier.name}`}
             onClick={() => onEdit(supplier)}
-          >
-            <Pencil1Icon aria-hidden="true" />
-          </button>
+          />
           <button
             type="button"
             className={styles.deleteButton}
@@ -94,6 +87,7 @@ export function SupplierCard({ supplier, onEdit, onDelete }: SupplierCardProps) 
             onClick={() => setConfirmDelete(true)}
           >
             <TrashIcon aria-hidden="true" />
+            Delete
           </button>
         </div>
       )}
