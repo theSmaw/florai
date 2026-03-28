@@ -8,6 +8,7 @@ export function HeaderMenuContainer() {
       onCatalogueClick={() => navigate('/catalogue')}
       onArrangementsClick={() => navigate('/arrangements')}
       onWeddingsClick={() => navigate('/weddings')}
+      onSuppliersClick={() => navigate('/suppliers')}
     />
   );
 }

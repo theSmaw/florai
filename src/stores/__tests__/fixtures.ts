@@ -1,18 +1,22 @@
 import type { Flower } from '../../domain/Flower';
 import type { Arrangement } from '../../domain/Arrangement';
+import type { Supplier } from '../../domain/Supplier';
 import type { Session } from '@supabase/supabase-js';
 import type { FlowersState } from '../flowers/state';
 import type { AuthState } from '../auth/state';
 import type { ArrangementsState } from '../arrangements/state';
+import type { SuppliersState } from '../suppliers/state';
 import { initialState as flowersInitial } from '../flowers/state';
 import { initialState as authInitial } from '../auth/state';
 import { initialState as arrangementsInitial } from '../arrangements/state';
+import { initialState as suppliersInitial } from '../suppliers/state';
 
 // RootState shape mirrored here to avoid importing store.ts (which initialises Supabase)
 export interface TestRootState {
   flowers: FlowersState;
   auth: AuthState;
   arrangements: ArrangementsState;
+  suppliers: SuppliersState;
 }
 
 export function makeFlower(overrides: { id?: string; name?: string; imageUrl?: string } = {}): Flower {
@@ -54,6 +58,21 @@ export function makeArrangement(overrides: { id?: string; name?: string; imageUr
   return base;
 }
 
+export function makeSupplier(overrides: { id?: string; name?: string } = {}): Supplier {
+  return {
+    id: overrides.id ?? 's1',
+    name: overrides.name ?? 'Holland Flowers',
+    emails: ['info@holland.com'],
+    phones: ['+31 20 000 0000'],
+    website: 'https://holland-flowers.com',
+    address: '123 Tulip Lane, Amsterdam',
+    contactPerson: 'Jan de Vries',
+    paymentTerms: 'Net 30',
+    notes: 'Primary supplier',
+    createdAt: '2024-01-01T00:00:00Z',
+  };
+}
+
 export function makeSession(): Session {
   return {
     access_token: 'test-access-token',
@@ -76,10 +95,12 @@ export function makeRootState(overrides: {
   flowers?: FlowersState;
   auth?: AuthState;
   arrangements?: ArrangementsState;
+  suppliers?: SuppliersState;
 } = {}): TestRootState {
   return {
     flowers: overrides.flowers ?? flowersInitial,
     auth: overrides.auth ?? authInitial,
     arrangements: overrides.arrangements ?? arrangementsInitial,
+    suppliers: overrides.suppliers ?? suppliersInitial,
   };
 }
