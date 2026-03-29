@@ -4,6 +4,7 @@ import {
   GridIcon,
   BookmarkFilledIcon,
   HeartFilledIcon,
+  PersonIcon,
 } from '@radix-ui/react-icons';
 import { IconButton } from '../IconButton/IconButton';
 import styles from './HeaderMenu.module.css';
@@ -12,6 +13,7 @@ interface HeaderMenuProps {
   onCatalogueClick: () => void;
   onArrangementsClick: () => void;
   onWeddingsClick: () => void;
+  onSuppliersClick: () => void;
 }
 
 /**
@@ -22,6 +24,7 @@ export function HeaderMenu({
   onCatalogueClick,
   onArrangementsClick,
   onWeddingsClick,
+  onSuppliersClick,
 }: HeaderMenuProps) {
   return (
     <div className={styles.wrapper}>
@@ -75,6 +78,17 @@ export function HeaderMenu({
               >
                 <HeartFilledIcon className={styles.menuIcon} aria-hidden="true" />
                 <span>Weddings</span>
+              </button>
+            </DropdownMenu.Item>
+            <DropdownMenu.Item asChild onSelect={onSuppliersClick}>
+              <button
+                data-cy="nav-suppliers"
+                type="button"
+                className={styles.menuItem}
+                role="menuitem"
+              >
+                <PersonIcon className={styles.menuIcon} aria-hidden="true" />
+                <span>Suppliers</span>
               </button>
             </DropdownMenu.Item>
           </DropdownMenu.Content>

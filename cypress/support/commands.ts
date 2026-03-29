@@ -3,12 +3,14 @@ declare global {
     interface Chainable {
       stubFlowers(): Chainable<void>;
       stubArrangements(): Chainable<void>;
+      stubSuppliers(): Chainable<void>;
       visitCatalogue(): Chainable<void>;
       visitArrangements(): Chainable<void>;
       visitArrangementDetail(id: string): Chainable<void>;
       visitFlowerDetail(flowerId: string): Chainable<void>;
+      visitSuppliers(): Chainable<void>;
       visitWithFakeAuth(url: string): Chainable<void>;
-      navigateTo(item: 'catalogue' | 'arrangements' | 'weddings'): Chainable<void>;
+      navigateTo(item: 'catalogue' | 'arrangements' | 'weddings' | 'suppliers'): Chainable<void>;
       fakeSignIn(): Chainable<void>;
       signUp(email: string, password: string): Chainable<void>;
       signIn(email: string, password: string): Chainable<void>;
@@ -145,6 +147,25 @@ Cypress.Commands.add('visitArrangementDetail', (id: string) => {
 });
 
 /**
+ * Intercepts the Supabase PostgREST suppliers query and returns fixture data.
+ */
+Cypress.Commands.add('stubSuppliers', () => {
+  cy.fixture('suppliers.json').then((suppliers) => {
+    cy.intercept('GET', '**/rest/v1/suppliers*', {
+      body: suppliers,
+      statusCode: 200,
+    }).as('getSuppliers');
+  });
+});
+
+Cypress.Commands.add('visitSuppliers', () => {
+  cy.stubSuppliers();
+  cy.visitWithFakeAuth('/suppliers');
+  cy.wait('@getSuppliers');
+  cy.get('[data-cy="suppliers-view"]').should('be.visible');
+});
+
+/**
  * Sets the value of a range input in a way that triggers React's synthetic onChange.
  * React 17+ maps onChange to the native `input` event; using the native input value
  * setter ensures React detects the change (bypassing React's internal tracking).
@@ -157,7 +178,7 @@ Cypress.Commands.add('setRangeValue', { prevSubject: 'element' }, (subject, valu
   return subject as unknown as Cypress.Chainable<JQuery<HTMLInputElement>>;
 });
 
-Cypress.Commands.add('navigateTo', (item: 'catalogue' | 'arrangements' | 'weddings') => {
+Cypress.Commands.add('navigateTo', (item: 'catalogue' | 'arrangements' | 'weddings' | 'suppliers') => {
   cy.get('[data-cy="hamburger-menu-trigger"]').click();
   cy.get(`[data-cy="nav-${item}"]`).click();
 });

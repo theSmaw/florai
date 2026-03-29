@@ -13,6 +13,7 @@ import { WeddingsView } from './views/Weddings/WeddingsView';
 import { FlowerDetailView } from './views/FlowerDetail/FlowerDetailView';
 import { ArrangementDetailView } from './views/ArrangementDetail/ArrangementDetailView';
 import { AuthView } from './views/Auth/AuthView';
+import { SuppliersView } from './views/Suppliers/SuppliersView';
 import { RequireAuthContainer } from './containers/RequireAuth/RequireAuthContainer';
 
 const router = createBrowserRouter([
@@ -62,6 +63,14 @@ const router = createBrowserRouter([
         element: (
           <RequireAuthContainer>
             <WeddingsView />
+          </RequireAuthContainer>
+        ),
+      },
+      {
+        path: 'suppliers',
+        element: (
+          <RequireAuthContainer>
+            <SuppliersView />
           </RequireAuthContainer>
         ),
       },
