@@ -1,0 +1,26 @@
+.removeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-7);
+  height: var(--space-7);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-lg);
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color 150ms ease;
+}
+
+.removeButton:hover:not(:disabled) {
+  color: var(--color-danger);
+}
+
+.removeButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

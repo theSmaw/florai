@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import {
-  TrashIcon,
   EnvelopeClosedIcon,
   MobileIcon,
   GlobeIcon,
 } from '@radix-ui/react-icons';
 import type { Supplier } from '../../domain/Supplier';
 import { EditButton } from '../EditButton/EditButton';
+import { DeleteButton } from '../DeleteButton/DeleteButton';
 import { CancelButton } from '../CancelButton/CancelButton';
 import styles from './SupplierCard.module.css';
 
@@ -56,21 +56,23 @@ export function SupplierCard({ supplier, onEdit, onDelete }: SupplierCardProps) 
           <span className={styles.deleteQuestion} data-cy="delete-confirm-question">
             Delete {supplier.name}?
           </span>
-          <button
-            type="button"
-            className={styles.confirmButton}
-            data-cy="delete-confirm-button"
-            onClick={() => {
-              setConfirmDelete(false);
-              onDelete(supplier.id);
-            }}
-          >
-            Confirm
-          </button>
-          <CancelButton
-            data-cy="delete-cancel-button"
-            onClick={() => setConfirmDelete(false)}
-          />
+          <div className={styles.confirmActions}>
+            <button
+              type="button"
+              className={styles.confirmButton}
+              data-cy="delete-confirm-button"
+              onClick={() => {
+                setConfirmDelete(false);
+                onDelete(supplier.id);
+              }}
+            >
+              Confirm
+            </button>
+            <CancelButton
+              data-cy="delete-cancel-button"
+              onClick={() => setConfirmDelete(false)}
+            />
+          </div>
         </div>
       ) : (
         <div className={styles.actions}>
@@ -79,16 +81,11 @@ export function SupplierCard({ supplier, onEdit, onDelete }: SupplierCardProps) 
             aria-label={`Edit ${supplier.name}`}
             onClick={() => onEdit(supplier)}
           />
-          <button
-            type="button"
-            className={styles.deleteButton}
+          <DeleteButton
             data-cy="delete-supplier-button"
             aria-label={`Delete ${supplier.name}`}
             onClick={() => setConfirmDelete(true)}
-          >
-            <TrashIcon aria-hidden="true" />
-            Delete
-          </button>
+          />
         </div>
       )}
     </div>

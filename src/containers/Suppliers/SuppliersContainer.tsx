@@ -3,10 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectSuppliersList } from '../../stores/suppliers/selectors/selectSuppliersList';
 import { selectLoadSuppliersStatus } from '../../stores/suppliers/selectors/selectLoadSuppliersStatus';
 import { selectSaveSupplierStatus } from '../../stores/suppliers/selectors/selectSaveSupplierStatus';
+import { selectSaveSupplierError } from '../../stores/suppliers/selectors/selectSaveSupplierError';
 import { loadSuppliers } from '../../stores/suppliers/asyncActions/loadSuppliers';
 import { saveSupplier } from '../../stores/suppliers/asyncActions/saveSupplier';
 import { deleteSupplier } from '../../stores/suppliers/asyncActions/deleteSupplier';
-import type { AppDispatch, RootState } from '../../stores/store';
+import type { AppDispatch } from '../../stores/store';
 import type { Supplier, NewSupplier } from '../../domain/Supplier';
 import { Suppliers } from '../../components/Suppliers/Suppliers';
 
@@ -19,10 +20,7 @@ export function SuppliersContainer() {
 
   const isLoading = loadStatus.status === 'pending';
   const isSaving = saveStatus.status === 'pending';
-  const saveError = useSelector((state: RootState) => {
-    const s = state.suppliers.saveStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
+  const saveError = useSelector(selectSaveSupplierError);
 
   const [modalSupplier, setModalSupplier] = useState<Supplier | 'new' | null>(null);
   const saveInitiated = useRef(false);

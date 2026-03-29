@@ -25,43 +25,6 @@
   min-width: 0;
 }
 
-.addLink {
-  background: none;
-  border: none;
-  padding: 0;
-  color: var(--color-brand);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  cursor: pointer;
-  text-align: left;
-  margin-top: var(--space-1);
-}
-
-.addLink:hover {
-  text-decoration: underline;
-}
-
-.removeButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  background: transparent;
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  color: var(--color-text-muted);
-  font-size: var(--font-size-lg);
-  line-height: 1;
-  padding: 0;
-  flex-shrink: 0;
-  transition: color 150ms ease;
-}
-
-.removeButton:hover {
-  color: var(--color-danger);
-}
 
 .error {
   color: var(--color-danger);

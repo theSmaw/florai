@@ -7,6 +7,8 @@ import { TextInput } from '../TextInput/TextInput';
 import { TextArea } from '../TextArea/TextArea';
 import { SaveButton } from '../SaveButton/SaveButton';
 import { CancelButton } from '../CancelButton/CancelButton';
+import { RemoveButton } from '../RemoveButton/RemoveButton';
+import { AddFieldButton } from '../AddFieldButton/AddFieldButton';
 import styles from './SupplierModal.module.css';
 
 export interface SupplierModalProps {
@@ -148,25 +150,18 @@ export function SupplierModal({
                     data-cy="supplier-email-input"
                   />
                   {emails.length > 1 && (
-                    <button
-                      type="button"
-                      className={styles.removeButton}
+                    <RemoveButton
                       aria-label="Remove email"
                       onClick={() => setEmails(emails.filter((_, j) => j !== i))}
-                    >
-                      ×
-                    </button>
+                    />
                   )}
                 </div>
               ))}
-              <button
-                type="button"
-                className={styles.addLink}
+              <AddFieldButton
+                label="Add email"
                 data-cy="add-email-button"
                 onClick={() => setEmails([...emails, ''])}
-              >
-                + Add email
-              </button>
+              />
             </div>
           </FormField>
 
@@ -187,25 +182,18 @@ export function SupplierModal({
                     data-cy="supplier-phone-input"
                   />
                   {phones.length > 1 && (
-                    <button
-                      type="button"
-                      className={styles.removeButton}
+                    <RemoveButton
                       aria-label="Remove phone"
                       onClick={() => setPhones(phones.filter((_, j) => j !== i))}
-                    >
-                      ×
-                    </button>
+                    />
                   )}
                 </div>
               ))}
-              <button
-                type="button"
-                className={styles.addLink}
+              <AddFieldButton
+                label="Add phone"
                 data-cy="add-phone-button"
                 onClick={() => setPhones([...phones, ''])}
-              >
-                + Add phone
-              </button>
+              />
             </div>
           </FormField>
 
