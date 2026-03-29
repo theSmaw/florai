@@ -54,7 +54,7 @@ export function Suppliers({
                 onDelete={onDelete}
               />
             ))}
-            <AddSupplierCard onClick={onAddClick} />
+            <AddSupplierCard onClick={onAddClick} className={styles.addButton ?? ''} />
           </div>
         )}
       </div>

@@ -22,7 +22,7 @@ export function SupplierCard({ supplier, onEdit, onDelete }: SupplierCardProps) 
   return (
     <div className={styles.card} data-cy="supplier-card">
       <div className={styles.info}>
-        <p className={styles.name}>{supplier.name}</p>
+        <h3 className={styles.name}>{supplier.name}</h3>
         {supplier.contactPerson && (
           <p className={styles.contactPerson}>{supplier.contactPerson}</p>
         )}

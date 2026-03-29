@@ -1,15 +1,15 @@
 import { PlusIcon } from '@radix-ui/react-icons';
-import styles from './AddSupplierCard.module.css';
 
 export interface AddSupplierCardProps {
   onClick: () => void;
+  className: string;
 }
 
-export function AddSupplierCard({ onClick }: AddSupplierCardProps) {
+export function AddSupplierCard({ onClick, className }: AddSupplierCardProps) {
   return (
     <button
       type="button"
-      className={styles.button}
+      className={className}
       data-cy="add-supplier-card"
       aria-label="New supplier"
       onClick={onClick}

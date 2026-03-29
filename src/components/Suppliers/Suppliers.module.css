@@ -48,3 +48,31 @@
   color: var(--color-text-secondary);
   font-size: var(--font-size-md);
 }
+
+.addButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border: 1.5px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: border-color 150ms ease, color 150ms ease, background-color 150ms ease;
+}
+
+.addButton:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+  background: var(--color-brand-surface);
+}
+
+.addButton:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
