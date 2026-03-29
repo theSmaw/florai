@@ -1,8 +1,8 @@
 import { supabase } from '../lib/supabase';
 import type { Flower } from '../domain/Flower';
 import type { NewFlower } from '../domain/Flower';
-import { userFlowerRowToFlower } from './transformers/UserFlowerRow';
-import type { UserFlowerRow } from './transformers/UserFlowerRow';
+import { userFlowerRowToFlower } from './transformers/userFlowerRowToFlower';
+import type { UserFlowerRow } from './transformers/userFlowerRowToFlower';
 
 export async function createUserFlower(data: NewFlower): Promise<Flower> {
   const {

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { rowToFlower } from './FlowerRow';
-import type { FlowerRow } from './FlowerRow';
+import { rowToFlower } from './rowToFlower';
+import type { FlowerRow } from './rowToFlower';
 
 function makeRow(overrides: Partial<FlowerRow> = {}): FlowerRow {
   return {

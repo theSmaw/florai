@@ -1,7 +1,7 @@
 import { supabase } from '../lib/supabase';
 import type { Supplier, NewSupplier } from '../domain/Supplier';
-import { rowToSupplier } from './transformers/SupplierRow';
-import type { SupplierRow } from './transformers/SupplierRow';
+import { rowToSupplier } from './transformers/rowToSupplier';
+import type { SupplierRow } from './transformers/rowToSupplier';
 
 export async function updateSupplier(id: string, data: NewSupplier): Promise<Supplier> {
   const { data: row, error } = await supabase

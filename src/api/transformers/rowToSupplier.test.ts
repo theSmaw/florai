@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { rowToSupplier } from './SupplierRow';
-import type { SupplierRow } from './SupplierRow';
+import { rowToSupplier } from './rowToSupplier';
+import type { SupplierRow } from './rowToSupplier';
 
 function makeRow(overrides: Partial<SupplierRow> = {}): SupplierRow {
   return {
