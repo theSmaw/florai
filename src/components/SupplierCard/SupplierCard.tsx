@@ -7,7 +7,6 @@ import {
 import type { Supplier } from '../../domain/Supplier';
 import { EditButton } from '../EditButton/EditButton';
 import { DeleteButton } from '../DeleteButton/DeleteButton';
-import { CancelButton } from '../CancelButton/CancelButton';
 import styles from './SupplierCard.module.css';
 
 export interface SupplierCardProps {
@@ -68,10 +67,14 @@ export function SupplierCard({ supplier, onEdit, onDelete }: SupplierCardProps) 
             >
               Confirm
             </button>
-            <CancelButton
+            <button
+              type="button"
+              className={styles.confirmCancelButton}
               data-cy="delete-cancel-button"
               onClick={() => setConfirmDelete(false)}
-            />
+            >
+              Cancel
+            </button>
           </div>
         </div>
       ) : (
