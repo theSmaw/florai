@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CancelButton } from './CancelButton';
+import { ConfirmButton } from './ConfirmButton';
 
-const meta: Meta<typeof CancelButton> = {
-  title: 'Components/CancelButton',
-  component: CancelButton,
+const meta: Meta<typeof ConfirmButton> = {
+  title: 'Components/ConfirmButton',
+  component: ConfirmButton,
   tags: ['autodocs'],
   args: {
     onClick: () => undefined,
@@ -21,9 +21,4 @@ export const Default: Story = {
 export const Disabled: Story = {
   name: 'Disabled',
   args: { disabled: true },
-};
-
-export const Compact: Story = {
-  name: 'Compact (xs)',
-  args: { size: 'xs' },
 };

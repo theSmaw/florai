@@ -7,6 +7,7 @@ import {
 import type { Supplier } from '../../domain/Supplier';
 import { EditButton } from '../EditButton/EditButton';
 import { DeleteButton } from '../DeleteButton/DeleteButton';
+import { ConfirmButton } from '../ConfirmButton/ConfirmButton';
 import { CancelButton } from '../CancelButton/CancelButton';
 import styles from './SupplierCard.module.css';
 
@@ -57,18 +58,15 @@ export function SupplierCard({ supplier, onEdit, onDelete }: SupplierCardProps) 
             Delete {supplier.name}?
           </span>
           <div className={styles.confirmActions}>
-            <button
-              type="button"
-              className={styles.confirmButton}
+            <ConfirmButton
               data-cy="delete-confirm-button"
               onClick={() => {
                 setConfirmDelete(false);
                 onDelete(supplier.id);
               }}
-            >
-              Confirm
-            </button>
+            />
             <CancelButton
+              size="xs"
               data-cy="delete-cancel-button"
               onClick={() => setConfirmDelete(false)}
             />
