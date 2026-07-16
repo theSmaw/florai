@@ -217,31 +217,6 @@
   margin-bottom: 0;
 }
 
-.careTextarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: var(--space-3) var(--space-4);
-  background: var(--color-bg-subtle);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  font-family: var(--font-family);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-primary);
-  line-height: 1.75;
-  resize: vertical;
-  outline: none;
-  transition: border-color 150ms ease;
-}
-
-.careTextarea:focus {
-  border-color: var(--color-brand);
-}
-
-.careTextarea:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 .careEditActions {
   display: flex;
   gap: var(--space-2);
@@ -264,24 +239,6 @@
 .careEmpty {
   color: var(--color-text-muted);
   font-style: italic;
-}
-
-/* ─── Care / Notes block ──────────────────────────────── */
-
-.textBlock {
-  background: var(--color-bg-subtle);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5) var(--space-6);
-}
-
-.textBlockContent {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  line-height: 1.75;
-  white-space: pre-wrap;
-  margin: 0;
-  font-family: var(--font-family);
 }
 
 /* ─── Pairings inline edit ────────────────────────────── */

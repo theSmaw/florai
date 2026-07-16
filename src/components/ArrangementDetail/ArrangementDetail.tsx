@@ -8,7 +8,7 @@ import { ArrangementDescriptionSection } from './sections/ArrangementDescription
 import { ArrangementFlowersSection } from './sections/ArrangementFlowersSection';
 import { ArrangementPhysicalSection } from './sections/ArrangementPhysicalSection';
 import { ArrangementPricingSection } from './sections/ArrangementPricingSection';
-import { ArrangementNotesSection } from './sections/ArrangementNotesSection';
+import { TextSection } from '../TextSection/TextSection';
 
 // Field sections persist through a single updateArrangement status, so only one
 // may be edited at a time; Notes has its own endpoint and manages itself.
@@ -81,11 +81,19 @@ export function ArrangementDetail({
       />
       <ArrangementPhysicalSection arrangement={arrangement} {...fieldProps('physical')} />
       <ArrangementPricingSection arrangement={arrangement} {...fieldProps('pricing')} />
-      <ArrangementNotesSection
-        arrangement={arrangement}
-        onNotesSave={onNotesSave}
-        savingNotes={savingNotes}
-        saveNotesError={saveNotesError}
+      <TextSection
+        label="Notes"
+        value={arrangement.notes ?? ''}
+        emptyText="No notes yet. Click Edit to add."
+        saving={savingNotes}
+        error={saveNotesError}
+        onSave={onNotesSave}
+        editCy="edit-notes-button"
+        textareaCy="notes-textarea"
+        saveCy="save-notes-button"
+        cancelCy="cancel-notes-button"
+        errorCy="save-notes-error"
+        editAriaLabel="Edit notes"
       />
     </DetailLayout>
   );

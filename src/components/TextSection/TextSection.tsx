@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { EditableSection } from '../../EditableSection/EditableSection';
-import styles from '../FlowerDetail.module.css';
+import { EditableSection } from '../EditableSection/EditableSection';
+import styles from './TextSection.module.css';
 
-interface Props {
+export interface TextSectionProps {
   label: string;
   value: string;
+  /** Placeholder shown in the read view when the value is empty. */
   emptyText: string;
   saving: boolean;
   error: string | null;
@@ -15,13 +16,14 @@ interface Props {
   cancelCy: string;
   errorCy: string;
   editAriaLabel: string;
+  rows?: number;
 }
 
 /**
- * A free-text section (Botanical Care, Sourcing Notes). Each persists through
- * its own endpoint, so it manages its own open/closed state.
+ * A detail-page section wrapping a single free-text field (e.g. Notes, Care).
+ * Persists through its own endpoint, so it manages its own open/closed state.
  */
-export function FlowerTextSection({
+export function TextSection({
   label,
   value,
   emptyText,
@@ -34,7 +36,8 @@ export function FlowerTextSection({
   cancelCy,
   errorCy,
   editAriaLabel,
-}: Props) {
+  rows = 5,
+}: TextSectionProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState('');
 
@@ -61,17 +64,17 @@ export function FlowerTextSection({
       editView={
         <textarea
           data-cy={textareaCy}
-          className={styles.careTextarea}
+          className={styles.textarea}
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           disabled={saving}
-          rows={5}
+          rows={rows}
         />
       }
       readView={
         <div className={styles.textBlock}>
           <p className={styles.textBlockContent}>
-            {value || <span className={styles.careEmpty}>{emptyText}</span>}
+            {value || <span className={styles.empty}>{emptyText}</span>}
           </p>
         </div>
       }

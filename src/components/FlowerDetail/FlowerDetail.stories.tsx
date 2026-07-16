@@ -115,6 +115,9 @@ const meta: Meta<typeof FlowerDetail> = {
     onPairingsSave: () => undefined,
     appearingInArrangements: [],
     onArrangementSelect: () => undefined,
+    onFieldsUpdate: () => undefined,
+    savingFields: false,
+    fieldsError: null,
   },
 };
 

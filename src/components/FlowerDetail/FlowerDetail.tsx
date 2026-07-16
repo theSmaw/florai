@@ -11,7 +11,7 @@ import { FlowerIdentitySection } from './sections/FlowerIdentitySection';
 import { FlowerGeneralSection } from './sections/FlowerGeneralSection';
 import { FlowerSourcingSection } from './sections/FlowerSourcingSection';
 import { FlowerPhysicalSection } from './sections/FlowerPhysicalSection';
-import { FlowerTextSection } from './sections/FlowerTextSection';
+import { TextSection } from '../TextSection/TextSection';
 import { FlowerPairingsSection } from './sections/FlowerPairingsSection';
 import styles from './FlowerDetail.module.css';
 
@@ -121,7 +121,7 @@ export function FlowerDetail({
       />
       <FlowerPhysicalSection flower={flower} {...fieldProps('physical')} />
 
-      <FlowerTextSection
+      <TextSection
         label="Botanical Care"
         value={flower.careInstructions}
         emptyText="No care instructions yet. Click Edit to add your notes."
@@ -135,7 +135,7 @@ export function FlowerDetail({
         errorCy="save-care-error"
         editAriaLabel="Edit care instructions"
       />
-      <FlowerTextSection
+      <TextSection
         label="Sourcing Notes"
         value={flower.notes}
         emptyText="No sourcing notes yet. Click Edit to add your notes."
