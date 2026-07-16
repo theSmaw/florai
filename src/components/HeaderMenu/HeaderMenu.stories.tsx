@@ -13,6 +13,13 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const handlers = {
+  onCatalogueClick: action('catalogue'),
+  onArrangementsClick: action('arrangements'),
+  onWeddingsClick: action('weddings'),
+  onSuppliersClick: action('suppliers'),
+};
+
 function Shell(props: { children: React.ReactNode }) {
   // Provide some space so the popover is visible and not clipped
   return (
@@ -23,7 +30,7 @@ function Shell(props: { children: React.ReactNode }) {
 export const Default: Story = {
   render: () => (
     <Shell>
-      <HeaderMenu />
+      <HeaderMenu {...handlers} />
     </Shell>
   ),
 };
@@ -36,7 +43,7 @@ function AutoOpen() {
   }, []);
   return (
     <Shell>
-      <HeaderMenu />
+      <HeaderMenu {...handlers} />
     </Shell>
   );
 }
@@ -63,7 +70,7 @@ function AutoNavigateCatalogue() {
   }, []);
   return (
     <Shell>
-      <HeaderMenu />
+      <HeaderMenu {...handlers} />
     </Shell>
   );
 }
