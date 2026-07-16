@@ -67,6 +67,10 @@ export interface Flower {
 
   // Relationships
   complementaryFlowerIds: string[]; // IDs of flowers that pair well
+
+  // Ownership — true for user-created flowers (user_flowers), which are fully
+  // editable. Global catalogue flowers omit this and support only per-user overrides.
+  isCustom?: boolean;
 }
 
 // Data needed to create a new user flower. Omits server-assigned id, suppliers (managed

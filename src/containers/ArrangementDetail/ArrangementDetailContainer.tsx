@@ -5,9 +5,12 @@ import { selectArrangementById } from '../../stores/arrangements/selectors/selec
 import { selectLoadArrangementsStatus } from '../../stores/arrangements/selectors/selectLoadArrangementsStatus';
 import { selectUploadImageStatus } from '../../stores/arrangements/selectors/selectUploadImageStatus';
 import { selectUpdateNotesStatus } from '../../stores/arrangements/selectors/selectUpdateNotesStatus';
+import { selectUpdateArrangementStatus } from '../../stores/arrangements/selectors/selectUpdateArrangementStatus';
 import { loadArrangements } from '../../stores/arrangements/asyncActions/loadArrangements';
 import { uploadArrangementImage } from '../../stores/arrangements/asyncActions/uploadArrangementImage';
 import { updateArrangementNotes } from '../../stores/arrangements/asyncActions/updateArrangementNotes';
+import { updateArrangement } from '../../stores/arrangements/asyncActions/updateArrangement';
+import type { ArrangementUpdate } from '../../api/updateArrangement';
 import { selectFlowersList } from '../../stores/flowers/selectors/selectFlowersList';
 import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
@@ -33,6 +36,10 @@ export function ArrangementDetailContainer() {
   const savingNotes = notesStatus.status === 'pending';
   const saveNotesError = notesStatus.status === 'rejected' ? notesStatus.errorMessage : null;
 
+  const updateStatus = useSelector(selectUpdateArrangementStatus);
+  const saving = updateStatus.status === 'pending';
+  const saveError = updateStatus.status === 'rejected' ? updateStatus.errorMessage : null;
+
   const arrangement = useSelector(selectArrangementById(arrangementId ?? ''));
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -47,18 +54,25 @@ export function ArrangementDetailContainer() {
     return undefined;
   }, [dispatch]);
 
-  const handleBack = () =>
-    locationState?.backLabel ? navigate(-1) : navigate('/arrangements');
+  const handleBack = () => (locationState?.backLabel ? navigate(-1) : navigate('/arrangements'));
 
   function handleImageUpload(file: File) {
     if (arrangementId) {
-      void dispatch(uploadArrangementImage({ arrangementId, file, blobUrl: URL.createObjectURL(file) }));
+      void dispatch(
+        uploadArrangementImage({ arrangementId, file, blobUrl: URL.createObjectURL(file) }),
+      );
     }
   }
 
   function handleNotesSave(notes: string) {
     if (arrangementId) {
       void dispatch(updateArrangementNotes({ arrangementId, notes }));
+    }
+  }
+
+  function handleUpdate(updates: ArrangementUpdate) {
+    if (arrangementId) {
+      void dispatch(updateArrangement({ id: arrangementId, updates }));
     }
   }
 
@@ -84,6 +98,9 @@ export function ArrangementDetailContainer() {
       onNotesSave={handleNotesSave}
       savingNotes={savingNotes}
       saveNotesError={saveNotesError}
+      onUpdate={handleUpdate}
+      saving={saving}
+      saveError={saveError}
       onFlowerSelect={handleFlowerSelect}
     />
   );

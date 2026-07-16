@@ -6,6 +6,7 @@ import { loadArrangements } from './asyncActions/loadArrangements';
 import { createArrangement } from './asyncActions/createArrangement';
 import { uploadArrangementImage } from './asyncActions/uploadArrangementImage';
 import { updateArrangementNotes } from './asyncActions/updateArrangementNotes';
+import { updateArrangement } from './asyncActions/updateArrangement';
 import { loadArrangementsPending } from './extraReducers/loadArrangementsPending';
 import { loadArrangementsFulfilled } from './extraReducers/loadArrangementsFulfilled';
 import { loadArrangementsRejected } from './extraReducers/loadArrangementsRejected';
@@ -18,6 +19,9 @@ import { uploadArrangementImageRejected } from './extraReducers/uploadArrangemen
 import { updateArrangementNotesPending } from './extraReducers/updateArrangementNotesPending';
 import { updateArrangementNotesFulfilled } from './extraReducers/updateArrangementNotesFulfilled';
 import { updateArrangementNotesRejected } from './extraReducers/updateArrangementNotesRejected';
+import { updateArrangementPending } from './extraReducers/updateArrangementPending';
+import { updateArrangementFulfilled } from './extraReducers/updateArrangementFulfilled';
+import { updateArrangementRejected } from './extraReducers/updateArrangementRejected';
 
 export const arrangementsSlice = createSlice({
   name: 'arrangements',
@@ -39,7 +43,10 @@ export const arrangementsSlice = createSlice({
       .addCase(uploadArrangementImage.rejected, uploadArrangementImageRejected)
       .addCase(updateArrangementNotes.pending, updateArrangementNotesPending)
       .addCase(updateArrangementNotes.fulfilled, updateArrangementNotesFulfilled)
-      .addCase(updateArrangementNotes.rejected, updateArrangementNotesRejected);
+      .addCase(updateArrangementNotes.rejected, updateArrangementNotesRejected)
+      .addCase(updateArrangement.pending, updateArrangementPending)
+      .addCase(updateArrangement.fulfilled, updateArrangementFulfilled)
+      .addCase(updateArrangement.rejected, updateArrangementRejected);
   },
 });
 
