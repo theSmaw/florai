@@ -193,10 +193,6 @@
   gap: var(--space-4);
 }
 
-.gridActions {
-  grid-column: 1 / -1;
-}
-
 .flowerChecklist {
   display: flex;
   flex-direction: column;
