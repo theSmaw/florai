@@ -2,6 +2,31 @@ import { describe, it, expect } from 'vitest';
 import { rowToFlower } from './rowToFlower';
 import type { FlowerRow } from './rowToFlower';
 
+type OverrideRow = FlowerRow['user_flower_overrides'][number];
+
+// A fully-null override row (no overrides set); spread a partial to set specific fields.
+function makeOverride(fields: Partial<OverrideRow> = {}): OverrideRow {
+  return {
+    image_url: null,
+    care_instructions: null,
+    notes: null,
+    complementary_flower_ids: null,
+    name: null,
+    type: null,
+    colors: null,
+    wholesale_price: null,
+    supplier: null,
+    season: null,
+    availability: null,
+    climate: null,
+    stem_length_cm: null,
+    fragrance_level: null,
+    toxicity: null,
+    vase_life_days: null,
+    ...fields,
+  };
+}
+
 function makeRow(overrides: Partial<FlowerRow> = {}): FlowerRow {
   return {
     id: 'f1',
@@ -79,14 +104,7 @@ describe('rowToFlower', () => {
     const flower = rowToFlower(
       makeRow({
         image_url: '/global.jpg',
-        user_flower_overrides: [
-          {
-            image_url: '/override.jpg',
-            care_instructions: null,
-            notes: null,
-            complementary_flower_ids: null,
-          },
-        ],
+        user_flower_overrides: [makeOverride({ image_url: '/override.jpg' })],
       }),
     );
     expect(flower.imageUrl).toBe('/override.jpg');
@@ -98,12 +116,7 @@ describe('rowToFlower', () => {
         care_instructions: 'Global care',
         notes: 'Global notes',
         user_flower_overrides: [
-          {
-            image_url: null,
-            care_instructions: 'Override care',
-            notes: 'Override notes',
-            complementary_flower_ids: null,
-          },
+          makeOverride({ care_instructions: 'Override care', notes: 'Override notes' }),
         ],
       }),
     );
@@ -123,15 +136,7 @@ describe('rowToFlower', () => {
         vase_life_days: 5,
         toxicity: null,
         user_flower_overrides: [
-          {
-            image_url: null,
-            care_instructions: null,
-            notes: null,
-            complementary_flower_ids: null,
-            name: 'My Rose',
-            vase_life_days: 21,
-            toxicity: 'toxic',
-          },
+          makeOverride({ name: 'My Rose', vase_life_days: 21, toxicity: 'toxic' }),
         ],
       }),
     );
