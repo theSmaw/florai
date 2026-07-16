@@ -48,6 +48,10 @@ import { updateUserFlowerPending } from './extraReducers/updateUserFlowerPending
 import { updateUserFlowerFulfilled } from './extraReducers/updateUserFlowerFulfilled';
 import { updateUserFlowerRejected } from './extraReducers/updateUserFlowerRejected';
 import { uploadUserFlowerImage } from './asyncActions/uploadUserFlowerImage';
+import { updateFlowerOverride } from './asyncActions/updateFlowerOverride';
+import { updateFlowerOverridePending } from './extraReducers/updateFlowerOverridePending';
+import { updateFlowerOverrideFulfilled } from './extraReducers/updateFlowerOverrideFulfilled';
+import { updateFlowerOverrideRejected } from './extraReducers/updateFlowerOverrideRejected';
 
 export const flowersSlice = createSlice({
   name: 'flowers',
@@ -95,7 +99,10 @@ export const flowersSlice = createSlice({
       .addCase(updateUserFlower.rejected, updateUserFlowerRejected)
       .addCase(uploadUserFlowerImage.pending, updateUserFlowerPending)
       .addCase(uploadUserFlowerImage.fulfilled, updateUserFlowerFulfilled)
-      .addCase(uploadUserFlowerImage.rejected, updateUserFlowerRejected);
+      .addCase(uploadUserFlowerImage.rejected, updateUserFlowerRejected)
+      .addCase(updateFlowerOverride.pending, updateFlowerOverridePending)
+      .addCase(updateFlowerOverride.fulfilled, updateFlowerOverrideFulfilled)
+      .addCase(updateFlowerOverride.rejected, updateFlowerOverrideRejected);
   },
 });
 

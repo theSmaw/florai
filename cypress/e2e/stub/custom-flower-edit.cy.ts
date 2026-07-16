@@ -80,18 +80,40 @@ describe('Editing a custom flower', () => {
   });
 });
 
-describe('Global catalogue flower stays read-only for core fields', () => {
+describe('Global catalogue flower is editable via per-user overrides', () => {
   beforeEach(() => {
     cy.stubFlowers();
     cy.stubArrangements();
     cy.visitFlowerDetail('1');
   });
 
-  it('does not show the custom-only field edit buttons', () => {
-    cy.get('[data-cy="edit-identity-button"]').should('not.exist');
-    cy.get('[data-cy="edit-general-button"]').should('not.exist');
-    cy.get('[data-cy="edit-physical-button"]').should('not.exist');
-    // Care/notes/pairings remain editable via overrides.
-    cy.get('[data-cy="edit-care-button"]').should('be.visible');
+  it('shows field edit buttons on global flowers too', () => {
+    cy.get('[data-cy="edit-identity-button"]').should('be.visible');
+    cy.get('[data-cy="edit-general-button"]').should('be.visible');
+    cy.get('[data-cy="edit-physical-button"]').should('be.visible');
+    // The supplier list (global-only feature) is still present.
+    cy.get('[data-cy="edit-sourcing-button"]').should('be.visible');
+  });
+
+  it('editing a physical attribute persists as an override', () => {
+    cy.intercept('POST', '**/rest/v1/user_flower_overrides*', {
+      statusCode: 201,
+      body: {},
+    }).as('saveOverride');
+
+    cy.get('[data-cy="edit-physical-button"]').click();
+    cy.get('[data-cy="flower-vase-life-input"]').clear().type('21');
+    cy.get('[data-cy="save-fields-button"]').click();
+    cy.wait('@saveOverride');
+    cy.contains('21 days').should('be.visible');
+  });
+
+  it('Cancel discards field edits without calling the override endpoint', () => {
+    cy.intercept('POST', '**/rest/v1/user_flower_overrides*').as('saveOverride');
+
+    cy.get('[data-cy="edit-identity-button"]').click();
+    cy.get('[data-cy="flower-name-input"]').clear().type('Renamed');
+    cy.get('[data-cy="cancel-fields-button"]').click();
+    cy.get('@saveOverride.all').should('have.length', 0);
   });
 });

@@ -13,7 +13,9 @@ export type FlowerUpdate = {
     | undefined;
 };
 
-const COLUMN_BY_FIELD: Record<keyof FlowerUpdate, string> = {
+// Maps each editable Flower field to its snake_case column. Shared with the
+// per-user override upsert, whose table mirrors these column names.
+export const FLOWER_COLUMN_BY_FIELD: Record<keyof FlowerUpdate, string> = {
   name: 'name',
   colors: 'colors',
   type: 'type',
@@ -35,7 +37,7 @@ const COLUMN_BY_FIELD: Record<keyof FlowerUpdate, string> = {
 export async function updateUserFlower(id: string, updates: FlowerUpdate): Promise<Flower> {
   const payload: Record<string, unknown> = {};
   for (const key of Object.keys(updates) as (keyof FlowerUpdate)[]) {
-    payload[COLUMN_BY_FIELD[key]] = updates[key] ?? null;
+    payload[FLOWER_COLUMN_BY_FIELD[key]] = updates[key] ?? null;
   }
 
   const { data: row, error } = await supabase

@@ -326,7 +326,9 @@ export function FlowerDetail({
   );
 
   function fieldEditButton(section: FieldSection, label: string) {
-    if (!isCustom || editingSection === section) return null;
+    // Every flower is editable: custom flowers persist to user_flowers, global
+    // catalogue flowers to per-user overrides (routed in the container).
+    if (editingSection === section) return null;
     return (
       <EditButton
         data-cy={`edit-${section}-button`}
@@ -505,7 +507,7 @@ export function FlowerDetail({
           <SectionHeader label="Sourcing" />
           {fieldEditButton('sourcing', 'Edit sourcing')}
         </div>
-        {isCustom && editingSection === 'sourcing' ? (
+        {editingSection === 'sourcing' ? (
           <div className={styles.fieldEditColumn}>
             <FormField label="Supplier" htmlFor="flower-edit-supplier">
               <TextInput
@@ -561,12 +563,8 @@ export function FlowerDetail({
         )}
       </div>
 
-      {/* Physical characteristics */}
-      {(isCustom ||
-        flower.stemLengthCm !== undefined ||
-        flower.vaseLifeDays !== undefined ||
-        flower.fragranceLevel !== undefined ||
-        flower.toxicity !== undefined) && (
+      {/* Physical characteristics — always shown so any flower's stats can be edited */}
+      {
         <div className={styles.section}>
           <div className={styles.careHeader}>
             <SectionHeader label="Physical" />
@@ -679,8 +677,7 @@ export function FlowerDetail({
                   </span>
                 </div>
               )}
-              {isCustom &&
-                flower.stemLengthCm === undefined &&
+              {flower.stemLengthCm === undefined &&
                 flower.vaseLifeDays === undefined &&
                 flower.fragranceLevel === undefined &&
                 flower.toxicity === undefined && (
@@ -689,7 +686,7 @@ export function FlowerDetail({
             </div>
           )}
         </div>
-      )}
+      }
 
       {/* Care instructions — always rendered so users can add notes */}
       <div className={styles.section}>

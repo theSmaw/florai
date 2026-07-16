@@ -25,6 +25,8 @@ export interface FlowersState {
   createFlowerStatus: AsyncAction;
   /** Tracks the lifecycle of the most recent updateUserFlower (custom flower edit) operation. */
   updateUserFlowerStatus: AsyncAction;
+  /** Tracks the lifecycle of the most recent updateFlowerOverride (global flower field override) operation. */
+  updateFlowerOverrideStatus: AsyncAction;
 }
 
 export const initialState: FlowersState = {
@@ -42,4 +44,5 @@ export const initialState: FlowersState = {
   updateComplementaryFlowersStatus: { status: 'idle' },
   createFlowerStatus: { status: 'idle' },
   updateUserFlowerStatus: { status: 'idle' },
+  updateFlowerOverrideStatus: { status: 'idle' },
 };

@@ -50,13 +50,15 @@ describe('rowToFlower', () => {
   });
 
   it('maps optional fields when present', () => {
-    const flower = rowToFlower(makeRow({
-      image_url: '/img/rose.jpg',
-      stem_length_cm: 60,
-      fragrance_level: 'moderate',
-      toxicity: 'safe',
-      vase_life_days: 7,
-    }));
+    const flower = rowToFlower(
+      makeRow({
+        image_url: '/img/rose.jpg',
+        stem_length_cm: 60,
+        fragrance_level: 'moderate',
+        toxicity: 'safe',
+        vase_life_days: 7,
+      }),
+    );
     expect(flower.imageUrl).toBe('/img/rose.jpg');
     expect(flower.stemLengthCm).toBe(60);
     expect(flower.fragranceLevel).toBe('moderate');
@@ -65,36 +67,46 @@ describe('rowToFlower', () => {
   });
 
   it('maps flower_suppliers to FlowerSupplier domain objects', () => {
-    const flower = rowToFlower(makeRow({
-      flower_suppliers: [{ id: 's1', name: 'Kenya Blooms', wholesale_price: 1.5 }],
-    }));
+    const flower = rowToFlower(
+      makeRow({
+        flower_suppliers: [{ id: 's1', name: 'Kenya Blooms', wholesale_price: 1.5 }],
+      }),
+    );
     expect(flower.suppliers).toEqual([{ id: 's1', name: 'Kenya Blooms', wholesalePrice: 1.5 }]);
   });
 
   it('user override image_url wins over global image_url', () => {
-    const flower = rowToFlower(makeRow({
-      image_url: '/global.jpg',
-      user_flower_overrides: [{
-        image_url: '/override.jpg',
-        care_instructions: null,
-        notes: null,
-        complementary_flower_ids: null,
-      }],
-    }));
+    const flower = rowToFlower(
+      makeRow({
+        image_url: '/global.jpg',
+        user_flower_overrides: [
+          {
+            image_url: '/override.jpg',
+            care_instructions: null,
+            notes: null,
+            complementary_flower_ids: null,
+          },
+        ],
+      }),
+    );
     expect(flower.imageUrl).toBe('/override.jpg');
   });
 
   it('user override care_instructions and notes win over global', () => {
-    const flower = rowToFlower(makeRow({
-      care_instructions: 'Global care',
-      notes: 'Global notes',
-      user_flower_overrides: [{
-        image_url: null,
-        care_instructions: 'Override care',
-        notes: 'Override notes',
-        complementary_flower_ids: null,
-      }],
-    }));
+    const flower = rowToFlower(
+      makeRow({
+        care_instructions: 'Global care',
+        notes: 'Global notes',
+        user_flower_overrides: [
+          {
+            image_url: null,
+            care_instructions: 'Override care',
+            notes: 'Override notes',
+            complementary_flower_ids: null,
+          },
+        ],
+      }),
+    );
     expect(flower.careInstructions).toBe('Override care');
     expect(flower.notes).toBe('Override notes');
   });
@@ -102,5 +114,29 @@ describe('rowToFlower', () => {
   it('falls back to empty string when supplier is null', () => {
     const flower = rowToFlower(makeRow({ supplier: null }));
     expect(flower.supplier).toBe('');
+  });
+
+  it('user override of core and physical fields wins over global', () => {
+    const flower = rowToFlower(
+      makeRow({
+        name: 'Global Rose',
+        vase_life_days: 5,
+        toxicity: null,
+        user_flower_overrides: [
+          {
+            image_url: null,
+            care_instructions: null,
+            notes: null,
+            complementary_flower_ids: null,
+            name: 'My Rose',
+            vase_life_days: 21,
+            toxicity: 'toxic',
+          },
+        ],
+      }),
+    );
+    expect(flower.name).toBe('My Rose');
+    expect(flower.vaseLifeDays).toBe(21);
+    expect(flower.toxicity).toBe('toxic');
   });
 });

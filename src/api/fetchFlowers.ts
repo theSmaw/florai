@@ -13,12 +13,11 @@ export async function fetchFlowers(_signal?: AbortSignal): Promise<Flower[]> {
   const [globalResult, userResult] = await Promise.all([
     supabase
       .from('flowers')
-      .select('*, user_flower_overrides(image_url, care_instructions, notes, complementary_flower_ids), flower_suppliers(id, name, wholesale_price)')
+      .select(
+        '*, user_flower_overrides(image_url, care_instructions, notes, complementary_flower_ids, name, type, colors, wholesale_price, supplier, season, availability, climate, stem_length_cm, fragrance_level, toxicity, vase_life_days), flower_suppliers(id, name, wholesale_price)',
+      )
       .order('name'),
-    supabase
-      .from('user_flowers')
-      .select('*')
-      .order('name'),
+    supabase.from('user_flowers').select('*').order('name'),
   ]);
 
   if (globalResult.error) {

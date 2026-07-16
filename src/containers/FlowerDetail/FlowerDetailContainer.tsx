@@ -18,6 +18,7 @@ import { updateSourcingNotes } from '../../stores/flowers/asyncActions/updateSou
 import { updateComplementaryFlowers } from '../../stores/flowers/asyncActions/updateComplementaryFlowers';
 import { updateUserFlower } from '../../stores/flowers/asyncActions/updateUserFlower';
 import { uploadUserFlowerImage } from '../../stores/flowers/asyncActions/uploadUserFlowerImage';
+import { updateFlowerOverride } from '../../stores/flowers/asyncActions/updateFlowerOverride';
 import type { FlowerUpdate } from '../../api/updateUserFlower';
 import { selectLoadArrangementsStatus } from '../../stores/arrangements/selectors/selectLoadArrangementsStatus';
 import { selectArrangementsForFlower } from '../../stores/arrangements/selectors/selectArrangementsForFlower';
@@ -79,8 +80,20 @@ export function FlowerDetailContainer() {
     const s = state.flowers.updateUserFlowerStatus;
     return s.status === 'rejected' ? s.errorMessage : null;
   });
+  // Global catalogue flowers persist field edits as per-user overrides.
+  const savingOverride =
+    useSelector((state: RootState) => state.flowers.updateFlowerOverrideStatus.status) ===
+    'pending';
+  const overrideError = useSelector((state: RootState) => {
+    const s = state.flowers.updateFlowerOverrideStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
 
   const isCustom = flower?.isCustom === true;
+  // Field editors (identity, general, sourcing, physical) route to user_flowers
+  // for custom flowers, or to the per-user override table for global ones.
+  const savingFields = isCustom ? savingCustom : savingOverride;
+  const fieldsError = isCustom ? customError : overrideError;
 
   // loadStatus and loadArrangementsStatus are intentionally read at mount time only —
   // including them in deps would abort the in-flight request when status changes to 'pending'.
@@ -119,8 +132,11 @@ export function FlowerDetailContainer() {
   }
 
   function handleFieldsUpdate(updates: FlowerUpdate) {
-    if (flowerId) {
+    if (!flowerId) return;
+    if (isCustom) {
       void dispatch(updateUserFlower({ id: flowerId, updates }));
+    } else {
+      void dispatch(updateFlowerOverride({ flowerId, updates }));
     }
   }
 
@@ -201,8 +217,8 @@ export function FlowerDetailContainer() {
       appearingInArrangements={appearingInArrangements}
       onArrangementSelect={handleArrangementSelect}
       onFieldsUpdate={handleFieldsUpdate}
-      savingFields={savingCustom}
-      fieldsError={customError}
+      savingFields={savingFields}
+      fieldsError={fieldsError}
     />
   );
 }
