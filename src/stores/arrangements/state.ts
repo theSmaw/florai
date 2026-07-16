@@ -14,6 +14,8 @@ export interface ArrangementsState {
   uploadImageStatus: AsyncAction;
   /** Tracks the lifecycle of the most recent updateArrangementNotes operation. */
   updateNotesStatus: AsyncAction;
+  /** Tracks the lifecycle of the most recent updateArrangement (field edit) operation. */
+  updateStatus: AsyncAction;
 }
 
 export const initialState: ArrangementsState = {
@@ -23,4 +25,5 @@ export const initialState: ArrangementsState = {
   createStatus: { status: 'idle' },
   uploadImageStatus: { status: 'idle' },
   updateNotesStatus: { status: 'idle' },
+  updateStatus: { status: 'idle' },
 };

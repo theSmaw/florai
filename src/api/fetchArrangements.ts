@@ -1,7 +1,12 @@
 import { supabase } from '../lib/supabase';
-import type { Arrangement, ArrangementOccasion, ArrangementSize, ArrangementStyle } from '../domain/Arrangement';
+import type {
+  Arrangement,
+  ArrangementOccasion,
+  ArrangementSize,
+  ArrangementStyle,
+} from '../domain/Arrangement';
 
-interface ArrangementRow {
+export interface ArrangementRow {
   id: string;
   user_id: string;
   name: string;
@@ -21,7 +26,7 @@ interface ArrangementRow {
   created_at: string;
 }
 
-function rowToArrangement(row: ArrangementRow): Arrangement {
+export function rowToArrangement(row: ArrangementRow): Arrangement {
   const arrangement: Arrangement = {
     id: row.id,
     name: row.name,
@@ -36,8 +41,10 @@ function rowToArrangement(row: ArrangementRow): Arrangement {
   if (row.occasion !== null && row.occasion.length > 0)
     arrangement.occasion = row.occasion as ArrangementOccasion[];
   if (row.stem_count !== null) arrangement.stemCount = row.stem_count;
-  if (row.estimated_weight_grams !== null) arrangement.estimatedWeightGrams = row.estimated_weight_grams;
-  if (row.time_to_build_minutes !== null) arrangement.timeToBuildMinutes = row.time_to_build_minutes;
+  if (row.estimated_weight_grams !== null)
+    arrangement.estimatedWeightGrams = row.estimated_weight_grams;
+  if (row.time_to_build_minutes !== null)
+    arrangement.timeToBuildMinutes = row.time_to_build_minutes;
   if (row.vase_life_days !== null) arrangement.vaseLifeDays = row.vase_life_days;
   if (row.wholesale_cost !== null) arrangement.wholesaleCost = row.wholesale_cost;
   if (row.retail_price !== null) arrangement.retailPrice = row.retail_price;

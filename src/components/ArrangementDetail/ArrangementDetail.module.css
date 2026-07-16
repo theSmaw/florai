@@ -179,3 +179,41 @@
   font-family: var(--font-family);
 }
 
+/* ─── Inline field editing ────────────────────────────── */
+
+.editFields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.editFieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.gridActions {
+  grid-column: 1 / -1;
+}
+
+.flowerChecklist {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-height: 260px;
+  overflow-y: auto;
+  padding: var(--space-4);
+  background: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.flowerCheckItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-primary);
+  cursor: pointer;
+}

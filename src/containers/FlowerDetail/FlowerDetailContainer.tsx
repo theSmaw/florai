@@ -16,6 +16,10 @@ import { removeFlowerSupplier } from '../../stores/flowers/asyncActions/removeFl
 import { updateCareInstructions } from '../../stores/flowers/asyncActions/updateCareInstructions';
 import { updateSourcingNotes } from '../../stores/flowers/asyncActions/updateSourcingNotes';
 import { updateComplementaryFlowers } from '../../stores/flowers/asyncActions/updateComplementaryFlowers';
+import { updateUserFlower } from '../../stores/flowers/asyncActions/updateUserFlower';
+import { uploadUserFlowerImage } from '../../stores/flowers/asyncActions/uploadUserFlowerImage';
+import { updateFlowerOverride } from '../../stores/flowers/asyncActions/updateFlowerOverride';
+import type { FlowerUpdate } from '../../api/updateUserFlower';
 import { selectLoadArrangementsStatus } from '../../stores/arrangements/selectors/selectLoadArrangementsStatus';
 import { selectArrangementsForFlower } from '../../stores/arrangements/selectors/selectArrangementsForFlower';
 import { loadArrangements } from '../../stores/arrangements/asyncActions/loadArrangements';
@@ -62,11 +66,34 @@ export function FlowerDetailContainer() {
     return s.status === 'rejected' ? s.errorMessage : null;
   });
   const savingPairings =
-    useSelector((state: RootState) => state.flowers.updateComplementaryFlowersStatus.status) === 'pending';
+    useSelector((state: RootState) => state.flowers.updateComplementaryFlowersStatus.status) ===
+    'pending';
   const savePairingsError = useSelector((state: RootState) => {
     const s = state.flowers.updateComplementaryFlowersStatus;
     return s.status === 'rejected' ? s.errorMessage : null;
   });
+  // Custom flowers persist every edit (fields, care, notes, pairings, image) through
+  // updateUserFlower, so a single status drives all their editors.
+  const savingCustom =
+    useSelector((state: RootState) => state.flowers.updateUserFlowerStatus.status) === 'pending';
+  const customError = useSelector((state: RootState) => {
+    const s = state.flowers.updateUserFlowerStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
+  // Global catalogue flowers persist field edits as per-user overrides.
+  const savingOverride =
+    useSelector((state: RootState) => state.flowers.updateFlowerOverrideStatus.status) ===
+    'pending';
+  const overrideError = useSelector((state: RootState) => {
+    const s = state.flowers.updateFlowerOverrideStatus;
+    return s.status === 'rejected' ? s.errorMessage : null;
+  });
+
+  const isCustom = flower?.isCustom === true;
+  // Field editors (identity, general, sourcing, physical) route to user_flowers
+  // for custom flowers, or to the per-user override table for global ones.
+  const savingFields = isCustom ? savingCustom : savingOverride;
+  const fieldsError = isCustom ? customError : overrideError;
 
   // loadStatus and loadArrangementsStatus are intentionally read at mount time only —
   // including them in deps would abort the in-flight request when status changes to 'pending'.
@@ -88,16 +115,28 @@ export function FlowerDetailContainer() {
     return undefined;
   }, [dispatch]);
 
-  const handleBack = () =>
-    locationState?.backLabel ? navigate(-1) : navigate('/catalogue');
+  const handleBack = () => (locationState?.backLabel ? navigate(-1) : navigate('/catalogue'));
   const handleFlowerSelect = (fid: string) =>
     navigate(`/catalogue/${fid}`, { state: { backLabel: flower?.name ?? 'Flower' } });
   const handleArrangementSelect = (aid: string) =>
     navigate(`/arrangements/${aid}`, { state: { backLabel: flower?.name ?? 'Flower' } });
 
   function handleImageUpload(file: File) {
-    if (flowerId) {
-      void dispatch(overrideFlowerImage({ flowerId, file, blobUrl: URL.createObjectURL(file) }));
+    if (!flowerId) return;
+    const blobUrl = URL.createObjectURL(file);
+    if (isCustom) {
+      void dispatch(uploadUserFlowerImage({ id: flowerId, file, blobUrl }));
+    } else {
+      void dispatch(overrideFlowerImage({ flowerId, file, blobUrl }));
+    }
+  }
+
+  function handleFieldsUpdate(updates: FlowerUpdate) {
+    if (!flowerId) return;
+    if (isCustom) {
+      void dispatch(updateUserFlower({ id: flowerId, updates }));
+    } else {
+      void dispatch(updateFlowerOverride({ flowerId, updates }));
     }
   }
 
@@ -120,19 +159,28 @@ export function FlowerDetailContainer() {
   }
 
   function handleCareSave(careInstructions: string) {
-    if (flowerId) {
+    if (!flowerId) return;
+    if (isCustom) {
+      void dispatch(updateUserFlower({ id: flowerId, updates: { careInstructions } }));
+    } else {
       void dispatch(updateCareInstructions({ flowerId, careInstructions }));
     }
   }
 
   function handleNotesSave(notes: string) {
-    if (flowerId) {
+    if (!flowerId) return;
+    if (isCustom) {
+      void dispatch(updateUserFlower({ id: flowerId, updates: { notes } }));
+    } else {
       void dispatch(updateSourcingNotes({ flowerId, notes }));
     }
   }
 
   function handlePairingsSave(complementaryFlowerIds: string[]) {
-    if (flowerId) {
+    if (!flowerId) return;
+    if (isCustom) {
+      void dispatch(updateUserFlower({ id: flowerId, updates: { complementaryFlowerIds } }));
+    } else {
       void dispatch(updateComplementaryFlowers({ flowerId, complementaryFlowerIds }));
     }
   }
@@ -145,14 +193,14 @@ export function FlowerDetailContainer() {
     <FlowerDetail
       flower={flower}
       complementaryFlowers={complementaryFlowers}
-      uploadingImage={uploadingImage}
-      uploadError={uploadError}
+      uploadingImage={isCustom ? savingCustom : uploadingImage}
+      uploadError={isCustom ? customError : uploadError}
       savingSupplier={savingSupplier}
       supplierError={supplierError}
-      savingCare={savingCare}
-      saveCareError={saveCareError}
-      savingNotes={savingNotes}
-      saveNotesError={saveNotesError}
+      savingCare={isCustom ? savingCustom : savingCare}
+      saveCareError={isCustom ? customError : saveCareError}
+      savingNotes={isCustom ? savingCustom : savingNotes}
+      saveNotesError={isCustom ? customError : saveNotesError}
       backLabel={backLabel}
       onBack={handleBack}
       onImageUpload={handleImageUpload}
@@ -163,11 +211,14 @@ export function FlowerDetailContainer() {
       onNotesSave={handleNotesSave}
       onFlowerSelect={handleFlowerSelect}
       allFlowers={allFlowers}
-      savingPairings={savingPairings}
-      savePairingsError={savePairingsError}
+      savingPairings={isCustom ? savingCustom : savingPairings}
+      savePairingsError={isCustom ? customError : savePairingsError}
       onPairingsSave={handlePairingsSave}
       appearingInArrangements={appearingInArrangements}
       onArrangementSelect={handleArrangementSelect}
+      onFieldsUpdate={handleFieldsUpdate}
+      savingFields={savingFields}
+      fieldsError={fieldsError}
     />
   );
 }

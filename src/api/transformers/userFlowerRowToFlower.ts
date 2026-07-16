@@ -39,6 +39,7 @@ export function userFlowerRowToFlower(row: UserFlowerRow): Flower {
     careInstructions: row.care_instructions ?? '',
     notes: row.notes ?? '',
     complementaryFlowerIds: row.complementary_flower_ids,
+    isCustom: true,
   };
 
   if (row.image_url !== null) flower.imageUrl = row.image_url;

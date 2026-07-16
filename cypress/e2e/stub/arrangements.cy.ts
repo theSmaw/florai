@@ -44,7 +44,8 @@ describe('Arrangements page', () => {
     it('shows the add card at the end of the list', () => {
       cy.get('[data-cy="add-arrangement-card"]').should('be.visible');
       cy.get('[data-cy="arrangement-grid"]').within(() => {
-        cy.get('[data-cy="arrangement-card"], [data-cy="add-arrangement-card"]').last()
+        cy.get('[data-cy="arrangement-card"], [data-cy="add-arrangement-card"]')
+          .last()
           .should('have.attr', 'data-cy', 'add-arrangement-card');
       });
     });
@@ -200,6 +201,78 @@ describe('Arrangements page', () => {
 
     it('shows the back button with Arrangements label when arriving directly', () => {
       cy.get('[data-cy="back-button"]').should('contain.text', 'Arrangements');
+    });
+  });
+
+  describe('editing fields', () => {
+    // Full arrangement row returned by the PATCH intercept (PostgREST .select().single()).
+    const updatedRow = (overrides: Record<string, unknown>) => ({
+      id: 'a1',
+      user_id: '00000000-0000-0000-0000-000000000001',
+      name: 'Spring Romance',
+      image_url: null,
+      description: 'A romantic spring bouquet in blush tones',
+      flower_ids: ['1', '6', '8', '3'],
+      size: 'medium',
+      style: 'romantic',
+      occasion: ['wedding'],
+      stem_count: 24,
+      estimated_weight_grams: 420,
+      time_to_build_minutes: 45,
+      vase_life_days: 7,
+      wholesale_cost: 38.5,
+      retail_price: 120.0,
+      notes: 'Perfect for spring weddings',
+      created_at: '2026-01-15T10:00:00Z',
+      ...overrides,
+    });
+
+    beforeEach(() => {
+      cy.visitArrangementDetail('a1');
+    });
+
+    it('shows edit buttons for every editable section', () => {
+      cy.get('[data-cy="edit-identity-button"]').should('be.visible');
+      cy.get('[data-cy="edit-description-button"]').should('be.visible');
+      cy.get('[data-cy="edit-flowers-button"]').should('be.visible');
+      cy.get('[data-cy="edit-physical-button"]').should('be.visible');
+      cy.get('[data-cy="edit-pricing-button"]').should('be.visible');
+    });
+
+    it('editing the name saves via PATCH and updates the display', () => {
+      cy.intercept('PATCH', '**/rest/v1/arrangements*', {
+        statusCode: 200,
+        body: updatedRow({ name: 'Autumn Romance' }),
+      }).as('updateArrangement');
+
+      cy.get('[data-cy="edit-identity-button"]').click();
+      cy.get('[data-cy="arrangement-name-input"]').clear().type('Autumn Romance');
+      cy.get('[data-cy="save-section-button"]').click();
+      cy.wait('@updateArrangement');
+      cy.get('[data-cy="arrangement-name"]').should('contain.text', 'Autumn Romance');
+    });
+
+    it('editing pricing saves the new retail price', () => {
+      cy.intercept('PATCH', '**/rest/v1/arrangements*', {
+        statusCode: 200,
+        body: updatedRow({ retail_price: 99.99 }),
+      }).as('updateArrangement');
+
+      cy.get('[data-cy="edit-pricing-button"]').click();
+      cy.get('[data-cy="arrangement-retail-input"]').clear().type('99.99');
+      cy.get('[data-cy="save-section-button"]').click();
+      cy.wait('@updateArrangement');
+      cy.contains('$99.99').should('be.visible');
+    });
+
+    it('Cancel discards edits without calling PATCH', () => {
+      cy.intercept('PATCH', '**/rest/v1/arrangements*').as('updateArrangement');
+
+      cy.get('[data-cy="edit-identity-button"]').click();
+      cy.get('[data-cy="arrangement-name-input"]').clear().type('Discarded');
+      cy.get('[data-cy="cancel-section-button"]').click();
+      cy.get('[data-cy="arrangement-name"]').should('contain.text', 'Spring Romance');
+      cy.get('@updateArrangement.all').should('have.length', 0);
     });
   });
 });
