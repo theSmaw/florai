@@ -4,7 +4,7 @@ import { EditableSection } from '../../EditableSection/EditableSection';
 import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
 import type { ArrangementSectionProps } from './types';
-import styles from '../ArrangementDetail.module.css';
+import styles from './ArrangementPricingSection.module.css';
 
 export function ArrangementPricingSection({
   arrangement,

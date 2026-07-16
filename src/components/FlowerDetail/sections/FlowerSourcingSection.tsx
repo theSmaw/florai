@@ -5,7 +5,7 @@ import { FlowerSupplierList } from '../../FlowerSupplierList/FlowerSupplierList'
 import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
 import type { FlowerFieldSectionProps } from './types';
-import styles from '../FlowerDetail.module.css';
+import styles from './FlowerSourcingSection.module.css';
 
 interface Props extends FlowerFieldSectionProps {
   isCustom: boolean;

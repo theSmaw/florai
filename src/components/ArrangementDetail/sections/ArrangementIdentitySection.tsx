@@ -13,7 +13,7 @@ import { TextInput } from '../../TextInput/TextInput';
 import { SelectInput } from '../../SelectInput/SelectInput';
 import { ChipGroup } from '../../ChipGroup/ChipGroup';
 import type { ArrangementSectionProps } from './types';
-import styles from '../ArrangementDetail.module.css';
+import styles from './ArrangementIdentitySection.module.css';
 
 const tag = styles.tag ?? '';
 const tagBrand = styles.tagBrand ?? '';
@@ -92,7 +92,7 @@ export function ArrangementIdentitySection({
 
   return (
     <div className={styles.identity}>
-      <div className={styles.notesHeader}>
+      <div className={styles.header}>
         {isEditing ? (
           <FormField label="Name" htmlFor="arr-edit-name" required>
             <TextInput
@@ -164,11 +164,11 @@ export function ArrangementIdentitySection({
             />
           </FormField>
           {error && (
-            <p data-cy="save-section-error" className={styles.notesError}>
+            <p data-cy="save-section-error" className={styles.error}>
               {error}
             </p>
           )}
-          <div className={styles.notesEditActions}>
+          <div className={styles.editActions}>
             <SaveButton data-cy="save-section-button" saving={saving} onClick={handleSave} />
             <CancelButton data-cy="cancel-section-button" onClick={onEditEnd} disabled={saving} />
           </div>

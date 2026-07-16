@@ -7,7 +7,7 @@ import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
 import { SelectInput } from '../../SelectInput/SelectInput';
 import type { FlowerFieldSectionProps } from './types';
-import styles from '../FlowerDetail.module.css';
+import styles from './FlowerPhysicalSection.module.css';
 
 const tag = styles.tag ?? '';
 const tagBrand = styles.tagBrand ?? '';
@@ -180,7 +180,7 @@ export function FlowerPhysicalSection({
             </div>
           )}
           {hasNoPhysical && (
-            <p className={styles.careEmpty}>No physical details yet. Click Edit to add.</p>
+            <p className={styles.empty}>No physical details yet. Click Edit to add.</p>
           )}
         </div>
       }

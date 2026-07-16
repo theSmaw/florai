@@ -4,7 +4,7 @@ import { EditableSection } from '../../EditableSection/EditableSection';
 import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
 import type { ArrangementSectionProps } from './types';
-import styles from '../ArrangementDetail.module.css';
+import styles from './ArrangementPhysicalSection.module.css';
 
 const statOrDash = (value: number | undefined, suffix = '') =>
   value !== undefined ? `${value}${suffix}` : '—';

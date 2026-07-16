@@ -7,7 +7,7 @@ import { FormField } from '../../FormField/FormField';
 import { SelectInput } from '../../SelectInput/SelectInput';
 import { ChipGroup } from '../../ChipGroup/ChipGroup';
 import type { FlowerFieldSectionProps } from './types';
-import styles from '../FlowerDetail.module.css';
+import styles from './FlowerGeneralSection.module.css';
 
 const AVAILABILITIES: Availability[] = ['always', 'seasonal', 'limited'];
 

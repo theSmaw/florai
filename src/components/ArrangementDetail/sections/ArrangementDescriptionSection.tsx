@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { EditableSection } from '../../EditableSection/EditableSection';
 import type { ArrangementSectionProps } from './types';
-import styles from '../ArrangementDetail.module.css';
+import styles from './ArrangementDescriptionSection.module.css';
 
 export function ArrangementDescriptionSection({
   arrangement,
@@ -42,7 +42,7 @@ export function ArrangementDescriptionSection({
       editView={
         <textarea
           data-cy="description-textarea"
-          className={styles.notesTextarea}
+          className={styles.textarea}
           value={draft}
           onChange={(e) => setDraft(e.target.value)}
           disabled={saving}
@@ -53,7 +53,7 @@ export function ArrangementDescriptionSection({
         <div className={styles.textBlock}>
           <p className={styles.textBlockContent}>
             {arrangement.description || (
-              <span className={styles.notesEmpty}>No description yet. Click Edit to add.</span>
+              <span className={styles.empty}>No description yet. Click Edit to add.</span>
             )}
           </p>
         </div>

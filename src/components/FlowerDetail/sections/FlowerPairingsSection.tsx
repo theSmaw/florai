@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Flower } from '../../../domain/Flower';
 import { EditableSection } from '../../EditableSection/EditableSection';
 import { FlowerThumbnailList } from '../../FlowerThumbnailList/FlowerThumbnailList';
-import styles from '../FlowerDetail.module.css';
+import styles from './FlowerPairingsSection.module.css';
 
 interface Props {
   flower: Flower;
@@ -84,7 +84,7 @@ export function FlowerPairingsSection({
               })}
             </ul>
           ) : (
-            <p className={styles.careEmpty}>No pairings selected.</p>
+            <p className={styles.empty}>No pairings selected.</p>
           )}
           {available.length > 0 && (
             <select

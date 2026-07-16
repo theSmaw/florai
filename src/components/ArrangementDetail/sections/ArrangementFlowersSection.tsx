@@ -3,7 +3,7 @@ import type { Flower } from '../../../domain/Flower';
 import { EditableSection } from '../../EditableSection/EditableSection';
 import { FlowerThumbnailList } from '../../FlowerThumbnailList/FlowerThumbnailList';
 import type { ArrangementSectionProps } from './types';
-import styles from '../ArrangementDetail.module.css';
+import styles from './ArrangementFlowersSection.module.css';
 
 interface Props extends ArrangementSectionProps {
   flowers: Flower[];
@@ -70,9 +70,7 @@ export function ArrangementFlowersSection({
               <span>{flower.name}</span>
             </label>
           ))}
-          {flowers.length === 0 && (
-            <p className={styles.notesEmpty}>No flowers in catalogue yet.</p>
-          )}
+          {flowers.length === 0 && <p className={styles.empty}>No flowers in catalogue yet.</p>}
         </div>
       }
       readView={

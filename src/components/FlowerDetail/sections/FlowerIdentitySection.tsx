@@ -5,7 +5,7 @@ import { CancelButton } from '../../CancelButton/CancelButton';
 import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
 import type { FlowerFieldSectionProps } from './types';
-import styles from '../FlowerDetail.module.css';
+import styles from './FlowerIdentitySection.module.css';
 
 /**
  * Flower identity: name (shown as the page title) and type. Bespoke rather than
@@ -47,7 +47,7 @@ export function FlowerIdentitySection({
 
   return (
     <div className={styles.identity}>
-      <div className={styles.careHeader}>
+      <div className={styles.header}>
         {isEditing ? (
           <div className={styles.fieldEditColumn}>
             <FormField label="Name" htmlFor="flower-edit-name" required>
@@ -71,11 +71,11 @@ export function FlowerIdentitySection({
               />
             </FormField>
             {error && (
-              <p data-cy="save-fields-error" className={styles.careError}>
+              <p data-cy="save-fields-error" className={styles.error}>
                 {error}
               </p>
             )}
-            <div className={styles.careEditActions}>
+            <div className={styles.editActions}>
               <SaveButton data-cy="save-fields-button" saving={saving} onClick={handleSave} />
               <CancelButton data-cy="cancel-fields-button" onClick={onEditEnd} disabled={saving} />
             </div>
