@@ -3,8 +3,9 @@ import { toNumber } from '../../../lib/toNumber';
 import { EditableSection } from '../../EditableSection/EditableSection';
 import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
+import { StatList } from '../../StatList/StatList';
+import { FieldGrid } from '../../FieldGrid/FieldGrid';
 import type { ArrangementSectionProps } from './types';
-import styles from './ArrangementPhysicalSection.module.css';
 
 const statOrDash = (value: number | undefined, suffix = '') =>
   value !== undefined ? `${value}${suffix}` : '—';
@@ -57,7 +58,7 @@ export function ArrangementPhysicalSection({
       errorCy="save-section-error"
       editAriaLabel="Edit physical"
       editView={
-        <div className={styles.editFieldGrid}>
+        <FieldGrid>
           <FormField label="Stem count" htmlFor="arr-edit-stem">
             <TextInput
               id="arr-edit-stem"
@@ -102,33 +103,17 @@ export function ArrangementPhysicalSection({
               disabled={saving}
             />
           </FormField>
-        </div>
+        </FieldGrid>
       }
       readView={
-        <div className={styles.statList}>
-          <div className={styles.statItem}>
-            <span className={styles.statLabel}>Stem Count</span>
-            <span className={styles.statValue}>{statOrDash(arrangement.stemCount)}</span>
-          </div>
-          <div className={styles.statItem}>
-            <span className={styles.statLabel}>Weight</span>
-            <span className={styles.statValue}>
-              {statOrDash(arrangement.estimatedWeightGrams, ' g')}
-            </span>
-          </div>
-          <div className={styles.statItem}>
-            <span className={styles.statLabel}>Time to Build</span>
-            <span className={styles.statValue}>
-              {statOrDash(arrangement.timeToBuildMinutes, ' min')}
-            </span>
-          </div>
-          <div className={styles.statItem}>
-            <span className={styles.statLabel}>Vase Life</span>
-            <span className={styles.statValue}>
-              {statOrDash(arrangement.vaseLifeDays, ' days')}
-            </span>
-          </div>
-        </div>
+        <StatList
+          items={[
+            { label: 'Stem Count', value: statOrDash(arrangement.stemCount) },
+            { label: 'Weight', value: statOrDash(arrangement.estimatedWeightGrams, ' g') },
+            { label: 'Time to Build', value: statOrDash(arrangement.timeToBuildMinutes, ' min') },
+            { label: 'Vase Life', value: statOrDash(arrangement.vaseLifeDays, ' days') },
+          ]}
+        />
       }
     />
   );

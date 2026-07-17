@@ -6,21 +6,20 @@ import { EditableSection } from '../../EditableSection/EditableSection';
 import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
 import { SelectInput } from '../../SelectInput/SelectInput';
+import { StatList } from '../../StatList/StatList';
+import type { Stat } from '../../StatList/StatList';
+import { Tag } from '../../Tag/Tag';
+import type { TagVariant } from '../../Tag/Tag';
 import type { FlowerFieldSectionProps } from './types';
 import styles from './FlowerPhysicalSection.module.css';
-
-const tag = styles.tag ?? '';
-const tagBrand = styles.tagBrand ?? '';
-const tagWarning = styles.tagWarning ?? '';
-const tagDanger = styles.tagDanger ?? '';
 
 const FRAGRANCES: FragranceLevel[] = ['none', 'light', 'moderate', 'strong'];
 const TOXICITIES: Toxicity[] = ['safe', 'mild', 'toxic'];
 
-function toxicityTagClass(toxicity: Toxicity): string {
-  if (toxicity === 'safe') return `${tag} ${tagBrand}`;
-  if (toxicity === 'toxic') return `${tag} ${tagDanger}`;
-  return `${tag} ${tagWarning}`;
+function toxicityVariant(toxicity: Toxicity): TagVariant {
+  if (toxicity === 'safe') return 'brand';
+  if (toxicity === 'toxic') return 'danger';
+  return 'warning';
 }
 
 export function FlowerPhysicalSection({
@@ -56,11 +55,44 @@ export function FlowerPhysicalSection({
   }
 
   const fragrancePips = flower.fragranceLevel ? FRAGRANCE_PIPS[flower.fragranceLevel] : 0;
-  const hasNoPhysical =
-    flower.stemLengthCm === undefined &&
-    flower.vaseLifeDays === undefined &&
-    flower.fragranceLevel === undefined &&
-    flower.toxicity === undefined;
+
+  const items: Stat[] = [];
+  if (flower.stemLengthCm !== undefined) {
+    items.push({ label: 'Stem Length', value: `${flower.stemLengthCm} cm` });
+  }
+  if (flower.vaseLifeDays !== undefined) {
+    items.push({ label: 'Vase Life', value: `${flower.vaseLifeDays} days` });
+  }
+  if (flower.fragranceLevel !== undefined) {
+    items.push({
+      label: 'Fragrance',
+      value: (
+        <span className={styles.fragranceIndicator}>
+          <span className={styles.fragrancePips}>
+            {[1, 2, 3].map((level) => (
+              <span
+                key={level}
+                className={
+                  level <= fragrancePips
+                    ? `${styles.fragrancePip} ${styles.fragrancePipActive}`
+                    : styles.fragrancePip
+                }
+              />
+            ))}
+          </span>
+          <span className={styles.fragranceText}>{FRAGRANCE_LABEL[flower.fragranceLevel]}</span>
+        </span>
+      ),
+    });
+  }
+  if (flower.toxicity !== undefined) {
+    items.push({
+      label: 'Toxicity',
+      value: (
+        <Tag variant={toxicityVariant(flower.toxicity)}>{TOXICITY_LABEL[flower.toxicity]}</Tag>
+      ),
+    });
+  }
 
   return (
     <EditableSection
@@ -136,53 +168,11 @@ export function FlowerPhysicalSection({
         </div>
       }
       readView={
-        <div className={styles.statList}>
-          {flower.stemLengthCm !== undefined && (
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Stem Length</span>
-              <span className={styles.statValue}>{flower.stemLengthCm} cm</span>
-            </div>
-          )}
-          {flower.vaseLifeDays !== undefined && (
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Vase Life</span>
-              <span className={styles.statValue}>{flower.vaseLifeDays} days</span>
-            </div>
-          )}
-          {flower.fragranceLevel !== undefined && (
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Fragrance</span>
-              <div className={styles.fragranceIndicator}>
-                <div className={styles.fragrancePips}>
-                  {[1, 2, 3].map((level) => (
-                    <div
-                      key={level}
-                      className={
-                        level <= fragrancePips
-                          ? `${styles.fragrancePip} ${styles.fragrancePipActive}`
-                          : styles.fragrancePip
-                      }
-                    />
-                  ))}
-                </div>
-                <span className={styles.fragranceText}>
-                  {FRAGRANCE_LABEL[flower.fragranceLevel]}
-                </span>
-              </div>
-            </div>
-          )}
-          {flower.toxicity !== undefined && (
-            <div className={styles.statItem}>
-              <span className={styles.statLabel}>Toxicity</span>
-              <span className={toxicityTagClass(flower.toxicity)}>
-                {TOXICITY_LABEL[flower.toxicity]}
-              </span>
-            </div>
-          )}
-          {hasNoPhysical && (
-            <p className={styles.empty}>No physical details yet. Click Edit to add.</p>
-          )}
-        </div>
+        items.length > 0 ? (
+          <StatList items={items} />
+        ) : (
+          <p className={styles.empty}>No physical details yet. Click Edit to add.</p>
+        )
       }
     />
   );

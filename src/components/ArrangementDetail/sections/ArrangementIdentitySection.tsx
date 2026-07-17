@@ -12,11 +12,9 @@ import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
 import { SelectInput } from '../../SelectInput/SelectInput';
 import { ChipGroup } from '../../ChipGroup/ChipGroup';
+import { Tag } from '../../Tag/Tag';
 import type { ArrangementSectionProps } from './types';
 import styles from './ArrangementIdentitySection.module.css';
-
-const tag = styles.tag ?? '';
-const tagBrand = styles.tagBrand ?? '';
 
 const SIZES: ArrangementSize[] = ['small', 'medium', 'large', 'extra-large'];
 const STYLES: ArrangementStyle[] = [
@@ -176,8 +174,8 @@ export function ArrangementIdentitySection({
       ) : (
         <>
           <div className={styles.identityMeta}>
-            <span className={`${tag} ${tagBrand}`}>{SIZE_LABEL[arrangement.size]}</span>
-            {arrangement.style && <span className={tag}>{STYLE_LABEL[arrangement.style]}</span>}
+            <Tag variant="brand">{SIZE_LABEL[arrangement.size]}</Tag>
+            {arrangement.style && <Tag>{STYLE_LABEL[arrangement.style]}</Tag>}
           </div>
           {arrangement.occasion && arrangement.occasion.length > 0 && (
             <div className={styles.occasionChips}>

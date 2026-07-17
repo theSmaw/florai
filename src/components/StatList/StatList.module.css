@@ -1,15 +1,9 @@
-.editFieldGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-4);
-}
-
-.statList {
+.list {
   display: flex;
   flex-direction: column;
 }
 
-.statItem {
+.item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,17 +11,20 @@
   border-bottom: 1px solid var(--color-bg-subtle);
 }
 
-.statItem:last-child {
+.item:last-child {
   border-bottom: none;
 }
 
-.statLabel {
+.label {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
   font-weight: var(--font-weight-medium);
 }
 
-.statValue {
+.value {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-primary);

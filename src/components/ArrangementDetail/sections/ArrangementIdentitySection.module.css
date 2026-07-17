@@ -36,26 +36,6 @@
   margin-bottom: var(--space-3);
 }
 
-.tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px 10px;
-  border-radius: var(--radius-xs);
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: var(--color-bg-subtle);
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
-}
-
-.tagBrand {
-  background: rgba(16, 185, 129, 0.08);
-  border-color: rgba(16, 185, 129, 0.25);
-  color: var(--color-brand);
-}
-
 .occasionChips {
   display: flex;
   flex-wrap: wrap;

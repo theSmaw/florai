@@ -4,6 +4,7 @@ import { EditableSection } from '../../EditableSection/EditableSection';
 import { FlowerSupplierList } from '../../FlowerSupplierList/FlowerSupplierList';
 import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
+import { StatList } from '../../StatList/StatList';
 import type { FlowerFieldSectionProps } from './types';
 import styles from './FlowerSourcingSection.module.css';
 
@@ -51,16 +52,12 @@ export function FlowerSourcingSection({
   }
 
   const readView = isCustom ? (
-    <div className={styles.statList}>
-      <div className={styles.statItem}>
-        <span className={styles.statLabel}>Supplier</span>
-        <span className={styles.statValue}>{flower.supplier || '—'}</span>
-      </div>
-      <div className={styles.statItem}>
-        <span className={styles.statLabel}>Wholesale Price</span>
-        <span className={styles.statValue}>${flower.wholesalePrice.toFixed(2)}</span>
-      </div>
-    </div>
+    <StatList
+      items={[
+        { label: 'Supplier', value: flower.supplier || '—' },
+        { label: 'Wholesale Price', value: `$${flower.wholesalePrice.toFixed(2)}` },
+      ]}
+    />
   ) : (
     <FlowerSupplierList
       suppliers={flower.suppliers}

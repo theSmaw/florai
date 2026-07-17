@@ -3,8 +3,9 @@ import { toNumber } from '../../../lib/toNumber';
 import { EditableSection } from '../../EditableSection/EditableSection';
 import { FormField } from '../../FormField/FormField';
 import { TextInput } from '../../TextInput/TextInput';
+import { StatList } from '../../StatList/StatList';
+import { FieldGrid } from '../../FieldGrid/FieldGrid';
 import type { ArrangementSectionProps } from './types';
-import styles from './ArrangementPricingSection.module.css';
 
 export function ArrangementPricingSection({
   arrangement,
@@ -48,7 +49,7 @@ export function ArrangementPricingSection({
       errorCy="save-section-error"
       editAriaLabel="Edit pricing"
       editView={
-        <div className={styles.editFieldGrid}>
+        <FieldGrid>
           <FormField label="Wholesale cost ($)" htmlFor="arr-edit-wholesale">
             <TextInput
               id="arr-edit-wholesale"
@@ -73,27 +74,27 @@ export function ArrangementPricingSection({
               disabled={saving}
             />
           </FormField>
-        </div>
+        </FieldGrid>
       }
       readView={
-        <div className={styles.statList}>
-          <div className={styles.statItem}>
-            <span className={styles.statLabel}>Wholesale Cost</span>
-            <span className={styles.statValue}>
-              {arrangement.wholesaleCost !== undefined
-                ? `$${arrangement.wholesaleCost.toFixed(2)}`
-                : '—'}
-            </span>
-          </div>
-          <div className={styles.statItem}>
-            <span className={styles.statLabel}>Retail Price</span>
-            <span className={styles.statValue}>
-              {arrangement.retailPrice !== undefined
-                ? `$${arrangement.retailPrice.toFixed(2)}`
-                : '—'}
-            </span>
-          </div>
-        </div>
+        <StatList
+          items={[
+            {
+              label: 'Wholesale Cost',
+              value:
+                arrangement.wholesaleCost !== undefined
+                  ? `$${arrangement.wholesaleCost.toFixed(2)}`
+                  : '—',
+            },
+            {
+              label: 'Retail Price',
+              value:
+                arrangement.retailPrice !== undefined
+                  ? `$${arrangement.retailPrice.toFixed(2)}`
+                  : '—',
+            },
+          ]}
+        />
       }
     />
   );
