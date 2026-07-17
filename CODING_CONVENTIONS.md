@@ -32,6 +32,12 @@ Use these standard top-level groupings (naming can be adapted, intent must remai
 - Every component, including helpers, gets its own top-level folder under `components/` (e.g. `components/SectionHeader/`), never nested inside another component's folder.
 - Treat all components as first-class — they may be reused elsewhere later.
 
+## CSS Modules (co-location — non-negotiable)
+- A component's styles live in a `.module.css` file co-located with it and named after the component (e.g. `SectionHeader/SectionHeader.module.css`, `ArrangementDetail/sections/ArrangementPhysicalSection.module.css`).
+- A component MUST only import its **own** co-located CSS module. Never import a sibling's or a parent's `.module.css` — e.g. a section under `ArrangementDetail/sections/` must not `import styles from '../ArrangementDetail.module.css'`.
+- If two components need the same visual pattern, either duplicate the small rule in each file, or extract a shared child component that owns that styling (and its own CSS). Do NOT cross-import CSS to share.
+- Always use CSS custom properties from `src/styles/tokens.css` for font sizes (`--font-size-*`) — never hardcode `rem`/`px` font sizes. Prefer the spacing/radius tokens too.
+
 ## File Size / Complexity
 - Prefer small files with single responsibility.
 - Split when a file becomes difficult to scan.

@@ -26,6 +26,7 @@ const MOCK_FLOWERS: Flower[] = [
     type: 'Peony',
     wholesalePrice: 4.5,
     supplier: 'Holland Flowers',
+    suppliers: [],
     season: ['Spring'],
     availability: 'seasonal',
     climate: 'temperate',
@@ -44,6 +45,7 @@ const MOCK_FLOWERS: Flower[] = [
     type: 'Rose',
     wholesalePrice: 2.25,
     supplier: 'Kenya Blooms',
+    suppliers: [],
     season: ['Year-round'],
     availability: 'always',
     climate: 'subtropical',
@@ -62,6 +64,7 @@ const MOCK_FLOWERS: Flower[] = [
     type: 'Hydrangea',
     wholesalePrice: 3.75,
     supplier: 'Dutch Garden',
+    suppliers: [],
     season: ['Summer'],
     availability: 'seasonal',
     climate: 'temperate',
@@ -107,6 +110,11 @@ function defaultProps(overrides?: Partial<CatalogueProps>): CatalogueProps {
     onGroupByChange: NO_OP,
     onCardClick: NO_OP,
     filterPills: [],
+    isAddOpen: false,
+    onAddOpenChange: NO_OP,
+    saving: false,
+    saveError: null,
+    onAddFlower: NO_OP,
     ...overrides,
   };
 }
@@ -151,7 +159,11 @@ export const WithActiveFilters: Story = {
     );
     const clearColor = (color: (typeof filter.colors)[number]) =>
       setFilter((f) => ({ ...f, colors: f.colors.filter((c) => c !== color) }));
-    const clearSeason = () => setFilter((f) => { const { season: _, ...rest } = f; return rest; });
+    const clearSeason = () =>
+      setFilter((f) => {
+        const { season: _, ...rest } = f;
+        return rest;
+      });
     const pills = [
       ...filter.colors.map((c) => ({ label: c, onClear: () => clearColor(c) })),
       ...(filter.season ? [{ label: filter.season, onClear: clearSeason }] : []),

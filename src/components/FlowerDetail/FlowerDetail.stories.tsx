@@ -22,7 +22,8 @@ const MOCK_FLOWER: Flower = {
   fragranceLevel: 'strong',
   toxicity: 'safe',
   vaseLifeDays: 7,
-  careInstructions: 'Keep in cool water, change daily. Remove lower leaves that would sit below the waterline.',
+  careInstructions:
+    'Keep in cool water, change daily. Remove lower leaves that would sit below the waterline.',
   notes: 'Beautiful full bloom. Order 2 weeks in advance for spring weddings.',
   complementaryFlowerIds: ['2', '3'],
 };
@@ -114,6 +115,9 @@ const meta: Meta<typeof FlowerDetail> = {
     onPairingsSave: () => undefined,
     appearingInArrangements: [],
     onArrangementSelect: () => undefined,
+    onFieldsUpdate: () => undefined,
+    savingFields: false,
+    fieldsError: null,
   },
 };
 

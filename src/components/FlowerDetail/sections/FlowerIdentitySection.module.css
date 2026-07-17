@@ -1,0 +1,60 @@
+.identity {
+  margin-bottom: var(--space-5);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.header > div:first-child {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+}
+
+.nameDisplay {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-medium);
+  font-style: italic;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  margin: 0 0 var(--space-2);
+}
+
+.identityMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.typeLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.fieldEditColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.error {
+  margin-top: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: var(--color-danger);
+}
+
+.editActions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}

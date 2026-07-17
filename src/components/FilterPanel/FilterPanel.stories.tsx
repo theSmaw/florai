@@ -18,6 +18,22 @@ const AVAILABLE_CLIMATES: Climate[] = ['temperate', 'mediterranean', 'subtropica
 const STEM_BOUNDS = { min: 30, max: 70 };
 const VASE_BOUNDS = { min: 7, max: 12 };
 
+// Sets an optional filter field, omitting the key entirely when cleared, so the
+// result stays assignable to FlowerFilter under exactOptionalPropertyTypes.
+function setField<K extends keyof FlowerFilter>(
+  filter: FlowerFilter,
+  key: K,
+  value: FlowerFilter[K] | undefined,
+): FlowerFilter {
+  const next = { ...filter };
+  if (value === undefined) {
+    delete next[key];
+  } else {
+    next[key] = value;
+  }
+  return next;
+}
+
 function FilterPanelWrapper(props: { initialFilter?: Partial<FlowerFilter> }) {
   const [filter, setFilter] = useState<FlowerFilter>({
     colors: [],
@@ -50,17 +66,21 @@ function FilterPanelWrapper(props: { initialFilter?: Partial<FlowerFilter> }) {
               : [...f.colors, color],
           }))
         }
-        onAvailabilityChange={(availability) => setFilter((f) => ({ ...f, availability }))}
-        onSeasonChange={(season) => setFilter((f) => ({ ...f, season }))}
-        onTypeChange={(type) => setFilter((f) => ({ ...f, type }))}
-        onClimateChange={(climate) => setFilter((f) => ({ ...f, climate }))}
-        onFragranceLevelChange={(fragranceLevel) => setFilter((f) => ({ ...f, fragranceLevel }))}
-        onToxicityChange={(toxicity) => setFilter((f) => ({ ...f, toxicity }))}
+        onAvailabilityChange={(availability) =>
+          setFilter((f) => setField(f, 'availability', availability))
+        }
+        onSeasonChange={(season) => setFilter((f) => setField(f, 'season', season))}
+        onTypeChange={(type) => setFilter((f) => setField(f, 'type', type))}
+        onClimateChange={(climate) => setFilter((f) => setField(f, 'climate', climate))}
+        onFragranceLevelChange={(fragranceLevel) =>
+          setFilter((f) => setField(f, 'fragranceLevel', fragranceLevel))
+        }
+        onToxicityChange={(toxicity) => setFilter((f) => setField(f, 'toxicity', toxicity))}
         onStemLengthChange={(min, max) =>
           setFilter((f) => ({ ...f, stemLengthRange: { min, max } }))
         }
         onVaseLifeChange={(min, max) => setFilter((f) => ({ ...f, vaseLifeRange: { min, max } }))}
-        onGroupByChange={(groupBy) => setFilter((f) => ({ ...f, groupBy }))}
+        onGroupByChange={(groupBy) => setFilter((f) => setField(f, 'groupBy', groupBy))}
         onApplyFilters={() => {}}
       />
     </div>

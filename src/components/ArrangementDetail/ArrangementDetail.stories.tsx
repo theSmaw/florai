@@ -78,6 +78,9 @@ function defaultProps(overrides?: Partial<ArrangementDetailProps>): ArrangementD
     onNotesSave: NO_OP,
     savingNotes: false,
     saveNotesError: null,
+    onUpdate: NO_OP,
+    saving: false,
+    saveError: null,
     onFlowerSelect: NO_OP,
     ...overrides,
   };
