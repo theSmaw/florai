@@ -1,5 +1,6 @@
 import { supabase } from '../lib/supabase';
 import type { Flower } from '../domain/Flower';
+import { FLOWER_COLUMN_BY_FIELD, partialColumnPayload } from './columnMaps';
 import { userFlowerRowToFlower } from './transformers/userFlowerRowToFlower';
 import type { UserFlowerRow } from './transformers/userFlowerRowToFlower';
 
@@ -13,36 +14,10 @@ export type FlowerUpdate = {
     | undefined;
 };
 
-// Maps each editable Flower field to its snake_case column. Shared with the
-// per-user override upsert, whose table mirrors these column names.
-export const FLOWER_COLUMN_BY_FIELD: Record<keyof FlowerUpdate, string> = {
-  name: 'name',
-  colors: 'colors',
-  type: 'type',
-  imageUrl: 'image_url',
-  wholesalePrice: 'wholesale_price',
-  supplier: 'supplier',
-  season: 'season',
-  availability: 'availability',
-  climate: 'climate',
-  stemLengthCm: 'stem_length_cm',
-  fragranceLevel: 'fragrance_level',
-  toxicity: 'toxicity',
-  vaseLifeDays: 'vase_life_days',
-  careInstructions: 'care_instructions',
-  notes: 'notes',
-  complementaryFlowerIds: 'complementary_flower_ids',
-};
-
 export async function updateUserFlower(id: string, updates: FlowerUpdate): Promise<Flower> {
-  const payload: Record<string, unknown> = {};
-  for (const key of Object.keys(updates) as (keyof FlowerUpdate)[]) {
-    payload[FLOWER_COLUMN_BY_FIELD[key]] = updates[key] ?? null;
-  }
-
   const { data: row, error } = await supabase
     .from('user_flowers')
-    .update(payload)
+    .update(partialColumnPayload(updates, FLOWER_COLUMN_BY_FIELD))
     .eq('id', id)
     .select('*')
     .single();
