@@ -23,7 +23,8 @@ import type { FlowerUpdate } from '../../api/updateUserFlower';
 import { selectLoadArrangementsStatus } from '../../stores/arrangements/selectors/selectLoadArrangementsStatus';
 import { selectArrangementsForFlower } from '../../stores/arrangements/selectors/selectArrangementsForFlower';
 import { loadArrangements } from '../../stores/arrangements/asyncActions/loadArrangements';
-import type { AppDispatch, RootState } from '../../stores/store';
+import type { AppDispatch } from '../../stores/store';
+import { useAsyncStatus } from '../../hooks/useAsyncStatus';
 import { FlowerDetail } from '../../components/FlowerDetail/FlowerDetail';
 
 export function FlowerDetailContainer() {
@@ -40,54 +41,30 @@ export function FlowerDetailContainer() {
   const appearingInArrangements = useSelector(selectArrangementsForFlower(id));
   const loadStatus = useSelector(selectLoadFlowersStatus);
   const loadArrangementsStatus = useSelector(selectLoadArrangementsStatus);
-  const uploadingImage =
-    useSelector((state: RootState) => state.flowers.overrideImageStatus.status) === 'pending';
-  const uploadError = useSelector((state: RootState) => {
-    const s = state.flowers.overrideImageStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
-  const savingSupplier =
-    useSelector((state: RootState) => state.flowers.supplierOperationStatus.status) === 'pending';
-  const supplierError = useSelector((state: RootState) => {
-    const s = state.flowers.supplierOperationStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
-  const savingCare =
-    useSelector((state: RootState) => state.flowers.updateCareInstructionsStatus.status) ===
-    'pending';
-  const saveCareError = useSelector((state: RootState) => {
-    const s = state.flowers.updateCareInstructionsStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
-  const savingNotes =
-    useSelector((state: RootState) => state.flowers.updateSourcingNotesStatus.status) === 'pending';
-  const saveNotesError = useSelector((state: RootState) => {
-    const s = state.flowers.updateSourcingNotesStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
-  const savingPairings =
-    useSelector((state: RootState) => state.flowers.updateComplementaryFlowersStatus.status) ===
-    'pending';
-  const savePairingsError = useSelector((state: RootState) => {
-    const s = state.flowers.updateComplementaryFlowersStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
+  const { pending: uploadingImage, error: uploadError } = useAsyncStatus(
+    (s) => s.flowers.overrideImageStatus,
+  );
+  const { pending: savingSupplier, error: supplierError } = useAsyncStatus(
+    (s) => s.flowers.supplierOperationStatus,
+  );
+  const { pending: savingCare, error: saveCareError } = useAsyncStatus(
+    (s) => s.flowers.updateCareInstructionsStatus,
+  );
+  const { pending: savingNotes, error: saveNotesError } = useAsyncStatus(
+    (s) => s.flowers.updateSourcingNotesStatus,
+  );
+  const { pending: savingPairings, error: savePairingsError } = useAsyncStatus(
+    (s) => s.flowers.updateComplementaryFlowersStatus,
+  );
   // Custom flowers persist every edit (fields, care, notes, pairings, image) through
   // updateUserFlower, so a single status drives all their editors.
-  const savingCustom =
-    useSelector((state: RootState) => state.flowers.updateUserFlowerStatus.status) === 'pending';
-  const customError = useSelector((state: RootState) => {
-    const s = state.flowers.updateUserFlowerStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
+  const { pending: savingCustom, error: customError } = useAsyncStatus(
+    (s) => s.flowers.updateUserFlowerStatus,
+  );
   // Global catalogue flowers persist field edits as per-user overrides.
-  const savingOverride =
-    useSelector((state: RootState) => state.flowers.updateFlowerOverrideStatus.status) ===
-    'pending';
-  const overrideError = useSelector((state: RootState) => {
-    const s = state.flowers.updateFlowerOverrideStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
+  const { pending: savingOverride, error: overrideError } = useAsyncStatus(
+    (s) => s.flowers.updateFlowerOverrideStatus,
+  );
 
   const isCustom = flower?.isCustom === true;
   // Field editors (identity, general, sourcing, physical) route to user_flowers

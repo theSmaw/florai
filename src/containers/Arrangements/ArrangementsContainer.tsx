@@ -12,7 +12,7 @@ import { createArrangement } from '../../stores/arrangements/asyncActions/create
 import { selectFlowersList } from '../../stores/flowers/selectors/selectFlowersList';
 import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
-import type { AppDispatch, RootState } from '../../stores/store';
+import type { AppDispatch } from '../../stores/store';
 import type {
   ArrangementFilter,
   ArrangementOccasion,
@@ -20,11 +20,7 @@ import type {
   ArrangementStyle,
   NewArrangement,
 } from '../../domain/Arrangement';
-import {
-  OCCASION_LABEL,
-  SIZE_LABEL,
-  STYLE_LABEL,
-} from '../../domain/Arrangement';
+import { OCCASION_LABEL, SIZE_LABEL, STYLE_LABEL } from '../../domain/Arrangement';
 import { Arrangements } from '../../components/Arrangements/Arrangements';
 
 type Pill = { label: string; onClear: () => void };
@@ -44,10 +40,9 @@ export function ArrangementsContainer() {
   const createStatus = useSelector(selectCreateStatus);
   const isLoading = loadStatus.status === 'pending';
   const saving = createStatus.status === 'pending';
-  const saveError = useSelector((state: RootState) => {
-    const s = state.arrangements.createStatus;
-    return s.status === 'rejected' ? s.errorMessage : null;
-  });
+  // `createStatus` is already selected (and needed by the close-on-success effect
+  // below), so derive the error from it rather than selecting again.
+  const saveError = createStatus.status === 'rejected' ? createStatus.errorMessage : null;
 
   const flowers = useSelector(selectFlowersList);
   const flowersLoadStatus = useSelector(selectLoadFlowersStatus);
@@ -88,26 +83,44 @@ export function ArrangementsContainer() {
 
   function handleAddClick(data: NewArrangement, imageFile: File | null) {
     saveInitiated.current = true;
-    void dispatch(createArrangement(imageFile ? { arrangement: data, imageFile } : { arrangement: data }));
+    void dispatch(
+      createArrangement(imageFile ? { arrangement: data, imageFile } : { arrangement: data }),
+    );
   }
 
   const filterPills: Pill[] = [
-    ...pill(currentFilter.size, (s: ArrangementSize) => SIZE_LABEL[s], () => {
-      const { size: _omit, ...rest } = currentFilter;
-      handleFilterChange(rest);
-    }),
-    ...pill(currentFilter.style, (s: ArrangementStyle) => STYLE_LABEL[s], () => {
-      const { style: _omit, ...rest } = currentFilter;
-      handleFilterChange(rest);
-    }),
-    ...pill(currentFilter.occasion, (o: ArrangementOccasion) => OCCASION_LABEL[o], () => {
-      const { occasion: _omit, ...rest } = currentFilter;
-      handleFilterChange(rest);
-    }),
-    ...pill(currentFilter.searchTerm, (s) => `"${s}"`, () => {
-      const { searchTerm: _omit, ...rest } = currentFilter;
-      handleFilterChange(rest);
-    }),
+    ...pill(
+      currentFilter.size,
+      (s: ArrangementSize) => SIZE_LABEL[s],
+      () => {
+        const { size: _omit, ...rest } = currentFilter;
+        handleFilterChange(rest);
+      },
+    ),
+    ...pill(
+      currentFilter.style,
+      (s: ArrangementStyle) => STYLE_LABEL[s],
+      () => {
+        const { style: _omit, ...rest } = currentFilter;
+        handleFilterChange(rest);
+      },
+    ),
+    ...pill(
+      currentFilter.occasion,
+      (o: ArrangementOccasion) => OCCASION_LABEL[o],
+      () => {
+        const { occasion: _omit, ...rest } = currentFilter;
+        handleFilterChange(rest);
+      },
+    ),
+    ...pill(
+      currentFilter.searchTerm,
+      (s) => `"${s}"`,
+      () => {
+        const { searchTerm: _omit, ...rest } = currentFilter;
+        handleFilterChange(rest);
+      },
+    ),
   ];
 
   return (
