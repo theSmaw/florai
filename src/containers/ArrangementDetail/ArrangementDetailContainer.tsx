@@ -15,6 +15,7 @@ import { selectFlowersList } from '../../stores/flowers/selectors/selectFlowersL
 import { selectLoadFlowersStatus } from '../../stores/flowers/selectors/selectLoadFlowersStatus';
 import { loadFlowers } from '../../stores/flowers/asyncActions/loadFlowers';
 import type { AppDispatch } from '../../stores/store';
+import { useAsyncStatus } from '../../hooks/useAsyncStatus';
 import { ArrangementDetail } from '../../components/ArrangementDetail/ArrangementDetail';
 
 export function ArrangementDetailContainer() {
@@ -28,17 +29,9 @@ export function ArrangementDetailContainer() {
   const arrangementsLoadStatus = useSelector(selectLoadArrangementsStatus);
   const flowersLoadStatus = useSelector(selectLoadFlowersStatus);
 
-  const uploadStatus = useSelector(selectUploadImageStatus);
-  const uploadingImage = uploadStatus.status === 'pending';
-  const uploadError = uploadStatus.status === 'rejected' ? uploadStatus.errorMessage : null;
-
-  const notesStatus = useSelector(selectUpdateNotesStatus);
-  const savingNotes = notesStatus.status === 'pending';
-  const saveNotesError = notesStatus.status === 'rejected' ? notesStatus.errorMessage : null;
-
-  const updateStatus = useSelector(selectUpdateArrangementStatus);
-  const saving = updateStatus.status === 'pending';
-  const saveError = updateStatus.status === 'rejected' ? updateStatus.errorMessage : null;
+  const { pending: uploadingImage, error: uploadError } = useAsyncStatus(selectUploadImageStatus);
+  const { pending: savingNotes, error: saveNotesError } = useAsyncStatus(selectUpdateNotesStatus);
+  const { pending: saving, error: saveError } = useAsyncStatus(selectUpdateArrangementStatus);
 
   const arrangement = useSelector(selectArrangementById(arrangementId ?? ''));
 
