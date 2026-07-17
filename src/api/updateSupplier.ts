@@ -1,21 +1,13 @@
 import { supabase } from '../lib/supabase';
 import type { Supplier, NewSupplier } from '../domain/Supplier';
+import { SUPPLIER_COLUMN_BY_FIELD, fullColumnPayload } from './columnMaps';
 import { rowToSupplier } from './transformers/rowToSupplier';
 import type { SupplierRow } from './transformers/rowToSupplier';
 
 export async function updateSupplier(id: string, data: NewSupplier): Promise<Supplier> {
   const { data: row, error } = await supabase
     .from('suppliers')
-    .update({
-      name: data.name,
-      emails: data.emails,
-      phones: data.phones,
-      website: data.website ?? null,
-      address: data.address ?? null,
-      contact_person: data.contactPerson ?? null,
-      payment_terms: data.paymentTerms ?? null,
-      notes: data.notes ?? null,
-    })
+    .update(fullColumnPayload(data, SUPPLIER_COLUMN_BY_FIELD))
     .eq('id', id)
     .select('*')
     .single();

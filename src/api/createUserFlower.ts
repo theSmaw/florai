@@ -1,6 +1,7 @@
 import { supabase } from '../lib/supabase';
 import type { Flower } from '../domain/Flower';
 import type { NewFlower } from '../domain/Flower';
+import { FLOWER_COLUMN_BY_FIELD, fullColumnPayload } from './columnMaps';
 import { userFlowerRowToFlower } from './transformers/userFlowerRowToFlower';
 import type { UserFlowerRow } from './transformers/userFlowerRowToFlower';
 
@@ -17,22 +18,10 @@ export async function createUserFlower(data: NewFlower): Promise<Flower> {
     .from('user_flowers')
     .insert({
       user_id: session.user.id,
-      name: data.name,
-      colors: data.colors,
-      type: data.type,
-      wholesale_price: data.wholesalePrice,
-      supplier: data.supplier,
-      season: data.season,
-      availability: data.availability,
-      climate: data.climate,
-      stem_length_cm: data.stemLengthCm ?? null,
-      fragrance_level: data.fragranceLevel ?? null,
-      toxicity: data.toxicity ?? null,
-      vase_life_days: data.vaseLifeDays ?? null,
-      care_instructions: data.careInstructions,
-      notes: data.notes,
+      ...fullColumnPayload(data, FLOWER_COLUMN_BY_FIELD),
+      // complementary_flower_ids is NOT NULL (defaults to {}), so keep [] rather
+      // than the null that fullColumnPayload would write for an absent value.
       complementary_flower_ids: data.complementaryFlowerIds ?? [],
-      image_url: data.imageUrl ?? null,
     })
     .select('*')
     .single();

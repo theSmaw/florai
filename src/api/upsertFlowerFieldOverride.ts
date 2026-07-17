@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase';
-import { FLOWER_COLUMN_BY_FIELD } from './updateUserFlower';
+import { FLOWER_COLUMN_BY_FIELD, partialColumnPayload } from './columnMaps';
 import type { FlowerUpdate } from './updateUserFlower';
 
 /**
@@ -23,13 +23,11 @@ export async function upsertFlowerFieldOverride(
     throw new Error('Not authenticated');
   }
 
-  const payload: Record<string, unknown> = {
+  const payload = {
     user_id: session.user.id,
     flower_id: flowerId,
+    ...partialColumnPayload(updates, FLOWER_COLUMN_BY_FIELD),
   };
-  for (const key of Object.keys(updates) as (keyof FlowerUpdate)[]) {
-    payload[FLOWER_COLUMN_BY_FIELD[key]] = updates[key] ?? null;
-  }
 
   const { error } = await supabase
     .from('user_flower_overrides')
